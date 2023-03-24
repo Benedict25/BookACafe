@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">BookACafe</string>
-    <string name="login">Login</string>
+
+    <!-- General String -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+
+    <!-- Login String -->
+    <string name="loginTitle">Login</string>
+    <string name="loginButton">LOGIN</string>
+    <string name="loginDescription">Doesn\'t have an account? Click Here!</string>
+    <string name="loginAlternative">or sign in with</string>
+
 </resources>
