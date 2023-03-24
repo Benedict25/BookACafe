@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.bookacafe.view.HomePage
+import com.example.bookacafe.view.Login
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         // Pindah dari splash screen ke Home (delay 2 detik)
         Handler().postDelayed({
-            val intent = Intent(this@MainActivity, HomePage::class.java)
+            val intent = Intent(this@MainActivity, Login::class.java)
             startActivity(intent)
         }, 2000)
 

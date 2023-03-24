@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.example.bookacafe.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -28,6 +29,13 @@ class Login : AppCompatActivity() {
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
         gsc = GoogleSignIn.getClient(this,gso)
         googleButton = findViewById(R.id.login_google)
+
+        val signupButton: TextView = findViewById(R.id.login_description)
+
+        signupButton.setOnClickListener {
+            val intent = Intent(this@Login, Register::class.java)
+            startActivity(intent)
+        }
 
         // Kalau udh login, kluar app tapi ga sign out, pas masuk lgi jdnya langsung login otomatis
         var acct: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
@@ -53,7 +61,7 @@ class Login : AppCompatActivity() {
                 task.getResult(ApiException::class.java)
                 navigateToSecondActivity()
             } catch (e: ApiException) {
-                Toast.makeText(applicationContext, "Test Salah", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Something Went Wrong!", Toast.LENGTH_SHORT).show()
             }
         }
     }
