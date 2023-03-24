@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">BookACafe</string>
+
+    <!-- General String -->
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="back">Back</string>
+
+    <!-- Login String -->
+    <string name="loginTitle">Login</string>
+    <string name="loginButton">LOGIN</string>
+    <string name="loginDescription">Doesn\'t have an account? Click Here!</string>
+    <string name="loginAlternative">or sign in with</string>
+
+    <!-- Register String -->
+    <string name="registerTitle">Register</string>
+    <string name="retypePassword">Re-type Password</string>
+    <string name="registerButton">REGISTER</string>
+
 </resources>
