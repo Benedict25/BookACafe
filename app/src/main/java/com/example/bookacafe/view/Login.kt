@@ -1,13 +1,13 @@
 package com.example.bookacafe.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.bookacafe.R
+import com.example.bookacafe.view.adminTransaction.ShowTransactions
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -67,9 +67,10 @@ class Login : AppCompatActivity() {
     }
 
     fun navigateToSecondActivity(){
-        finish()
-//        val intent = Intent(this@MainActivity, Home::class.java)
-        startActivity(intent)
+//        finish()
+        //ini buat direct ke admin yang transactions.. nanti di ganti ganti lagi aja
+        val switchActivityIntent = Intent(this, ShowTransactions::class.java)
+        startActivity(switchActivityIntent)
     }
 
 }

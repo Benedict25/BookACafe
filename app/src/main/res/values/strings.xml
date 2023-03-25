@@ -19,4 +19,13 @@
     <string name="retypePassword">Re-type Password</string>
     <string name="registerButton">REGISTER</string>
 
+    <!-- Admin Menu String -->
+    <string name="disabledUser">Disabled User</string>
+    <string name="showTransactions">Transactions</string>
+    <string name="transactionSeat">Seat</string>
+    <string name="transactionFood">Food</string>
+    <string name="transactionBeverage">Beverage</string>
+    <string name="transactionBook">Book</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
