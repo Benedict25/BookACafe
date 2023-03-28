@@ -18,11 +18,11 @@ class DisabledUserMenu: AppCompatActivity() {
 
         binding.rvUsers.setHasFixedSize(true)
 
-        list.addAll(getListHeroes())
+        list.addAll(getListUsers())
         showRecyclerList()
     }
 
-    fun getListHeroes(): ArrayList<MemberDummy> {
+    fun getListUsers(): ArrayList<MemberDummy> {
         val dataName = resources.getStringArray(R.array.userName)
         val dataDescription = resources.getStringArray(R.array.userOrderHistory)
         val dataPhoto = resources.getStringArray(R.array.user_profile)
@@ -40,7 +40,7 @@ class DisabledUserMenu: AppCompatActivity() {
     }
 
     private fun showRecyclerList() {
-        binding.rvUsers.layoutManager = LinearLayoutManager(this)
+        binding.rvUsers.layoutManager = LinearLayoutManager(this@DisabledUserMenu)
         val listHeroAdapter = ListUserAdapter(list)
         binding.rvUsers.adapter = listHeroAdapter
     }
