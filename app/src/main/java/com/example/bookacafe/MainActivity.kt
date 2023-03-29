@@ -3,19 +3,24 @@ package com.example.bookacafe
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.Button
-import com.example.bookacafe.view.MenuTable
-import com.example.bookacafe.view.MenuBook
+import android.os.Handler
+import com.example.bookacafe.view.HomePage
+import com.example.bookacafe.view.Login
+import com.example.bookacafe.view.adminDisabledUser.DisabledUserMenu
+import com.example.bookacafe.view.adminTransaction.ShowTransactions
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-    }
 
-    override fun onClick(v: View) {
+        // Hide action bar yang di atas aplikasi
+        supportActionBar?.hide()
 
+        // Pindah dari splash screen ke Home (delay 2 detik)
+        Handler().postDelayed({
+            val intent = Intent(this@MainActivity, Login::class.java)
+            startActivity(intent)
+        }, 2000)
     }
 }
