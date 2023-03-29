@@ -7,6 +7,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="back">Back</string>
+    <string name="seeDetails">see details</string>
 
     <!-- Login String -->
     <string name="loginTitle">Login</string>
@@ -18,6 +19,17 @@
     <string name="registerTitle">Register</string>
     <string name="retypePassword">Re-type Password</string>
     <string name="registerButton">REGISTER</string>
+
+    <!-- Cart String -->
+    <string name="cartTitle">Cart</string>
+    <string name="cartSeats">Seats</string>
+    <string name="cartFnb">Food and Beverages</string>
+    <string name="cartBooks">Books</string>
+    <string name="cartTotal">Total</string>
+    <string name="cartOrderConfirm">Sure want to order?</string>
+    <string name="cartOrder">ORDER</string>
+    <string name="cartPayConfirm">Want to pay?</string>
+    <string name="cartPay">SHOW BILL</string>
 
     <!-- Admin Menu String -->
     <string name="disabled_user_menu">Disabled User</string>
@@ -527,6 +539,4 @@
 =======
 
     <!-- Profile Screen String-->
-
->>>>>>> Stashed changes
 </resources>
