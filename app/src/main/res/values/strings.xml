@@ -77,4 +77,151 @@
     <string name="transactionBook">Book</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TABLE -->
+    <string name="tables">Tables</string>
+    <string name="table_text_1">Which table</string>
+    <string name="table_text_2">do you want to choose?</string>
+    <string name="table_a1">A1</string>
+    <string name="table_a2">A2</string>
+    <string name="table_a3">A3</string>
+    <string name="table_a4">A4</string>
+    <string name="table_b1">B1</string>
+    <string name="table_b2">B2</string>
+    <string name="table_b3">B3</string>
+
+    <!-- ROMANCE BOOK -->
+    <string-array name="romance_data_book_title">
+        <item>Summer in Seoul</item>
+        <item>Winter in Tokyo</item>
+        <item>Spring in London</item>
+        <item>Autumn in Paris</item>
+        <item>Sunshine Becomes You</item>
+        <item>In a Blue Moon</item>
+        <item>Autumn Once More</item>
+        <item>The Star and I</item>
+    </string-array>
+
+    <string-array name="romance_data_book_author">
+        <item>Ilana Tan</item>
+        <item>Ilana Tan</item>
+        <item>Ilana Tan</item>
+        <item>Ilana Tan</item>
+        <item>Ilana Tan</item>
+        <item>Ilana Tan</item>
+        <item>Ilana Tan</item>
+        <item>Ilana Tan</item>
+    </string-array>
+
+    <array name="romance_data_book_cover">
+        <item>@drawable/romance_1</item>
+        <item>@drawable/romance_2</item>
+        <item>@drawable/romance_3</item>
+        <item>@drawable/romance_4</item>
+        <item>@drawable/romance_5</item>
+        <item>@drawable/romance_6</item>
+        <item>@drawable/romance_7</item>
+        <item>@drawable/romance_8</item>
+    </array>
+
+    <integer-array name="romance_data_book_stock">
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+    </integer-array>
+
+    <!-- SCIENCE BOOK -->
+    <string-array name="science_data_book_title">
+        <item>Modern Operating System</item>
+        <item>Software Engineering</item>
+        <item>Why Series - Microorganism</item>
+        <item>Why Series - Fossil</item>
+        <item>Why Series - Weather</item>
+        <item>Why Series - Disease</item>
+        <item>Why Series - Anatomy</item>
+        <item>Why Series - Medical and Treatment</item>
+    </string-array>
+
+    <string-array name="science_data_book_author">
+        <item>Andrew S. Tanenbaum</item>
+        <item>Roger S. Pressman</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+    </string-array>
+
+    <array name="science_data_book_cover">
+        <item>@drawable/science_1</item>
+        <item>@drawable/science_2</item>
+        <item>@drawable/science_3</item>
+        <item>@drawable/science_4</item>
+        <item>@drawable/science_5</item>
+        <item>@drawable/science_6</item>
+        <item>@drawable/science_7</item>
+        <item>@drawable/science_8</item>
+    </array>
+
+    <integer-array name="science_data_book_stock">
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+    </integer-array>
+
+    <!-- FANTASY BOOK -->
+    <string-array name="fantasy_data_book_title">
+        <item>Bumi</item>
+        <item>Bulan</item>
+        <item>Matahari</item>
+        <item>Bintang</item>
+        <item>Ceros dan Batozar</item>
+        <item>Komet</item>
+        <item>Komet Minor</item>
+        <item>Selena</item>
+    </string-array>
+
+    <string-array name="fantasy_data_book_author">
+        <item>Tere Liye</item>
+        <item>Tere Liye</item>
+        <item>Tere Liye</item>
+        <item>Tere Liye</item>
+        <item>Tere Liye</item>
+        <item>Tere Liye</item>
+        <item>Tere Liye</item>
+        <item>Tere Liye</item>
+    </string-array>
+
+    <array name="fantasy_data_book_cover">
+        <item>@drawable/fantasy_1</item>
+        <item>@drawable/fantasy_2</item>
+        <item>@drawable/fantasy_3</item>
+        <item>@drawable/fantasy_4</item>
+        <item>@drawable/fantasy_5</item>
+        <item>@drawable/fantasy_6</item>
+        <item>@drawable/fantasy_7</item>
+        <item>@drawable/fantasy_8</item>
+    </array>
+
+    <integer-array name="fantasy_data_book_stock">
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+    </integer-array>
 </resources>
