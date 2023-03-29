@@ -539,4 +539,5 @@
 =======
 
     <!-- Profile Screen String-->
+    <string name="profile">Profile</string>
 </resources>
