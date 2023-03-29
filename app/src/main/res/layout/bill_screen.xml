@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    >
+
+
+    <TextView
+        android:id="@+id/title_bill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bill"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStylse="bold"
+        android:fontFamily="@font/poppins_bold"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:id="@+id/scrollview_bill"
+        android:layout_below="@+id/title_bill"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/seats"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seats"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="22dp"
+                android:fontFamily="@font/poppins_regular"
+                />
+        </LinearLayout>
+
+
+
+
+
+<!--        <FrameLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:src="@drawable/seats"-->
+<!--                />-->
+<!--            -->
+<!--        </FrameLayout>-->
+
+
+
+
+
+
+    </ScrollView>
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="KONTT"
+        android:layout_below="@+id/scrollview_bill"
+        />
+</RelativeLayout>
