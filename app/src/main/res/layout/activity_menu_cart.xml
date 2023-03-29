@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MenuCart"
+    android:padding="40dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/cartTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cartTitle"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="25dp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/cartSeats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/chair_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cartSeats"
+            android:layout_toEndOf="@+id/cartSeats"
+            android:paddingLeft="5dp"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/light_gray_rounded_button"
+        android:layout_marginTop="5dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/cartSeatNumber"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            app:backgroundTint="@null"
+            android:background="@drawable/white_rounded_button"
+            android:text="A4"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/cartSeatNumber"
+            android:text="Kursi A4"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/cartSeatNumber"
+            android:layout_toRightOf="@+id/cartSeatNumber"
+            android:text="Rp10.000,-" />
+
+        <ImageView
+            android:id="@+id/cartSeatCancel"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/cancel_logo"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/cartFnb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fnb_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cartFnb"
+            android:layout_toEndOf="@+id/cartFnb"
+            android:paddingLeft="5dp"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/light_gray_rounded_button"
+        android:layout_marginTop="5dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/cartFnbPic"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:src="@drawable/burgir"/>
+
+        <TextView
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/cartFnbPic"
+            android:text="Burgir"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/cartFnbPic"
+            android:layout_toRightOf="@+id/cartFnbPic"
+            android:text="Rp10.666,-" />
+
+        <ImageView
+            android:id="@+id/cartAddButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/add_logo"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/cartFnbQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_toLeftOf="@+id/cartAddButton"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:id="@+id/cartSubstractButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_toLeftOf="@id/cartFnbQuantity"
+            android:src="@drawable/substract_logo"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/cartBooks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/book_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cartBooks"
+            android:layout_toEndOf="@+id/cartBooks"
+            android:paddingLeft="5dp"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/light_gray_rounded_button"
+        android:layout_marginTop="5dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/cartBooksPic"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:src="@drawable/romance_3"/>
+
+        <TextView
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/cartBooksPic"
+            android:text="Spring in London"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/cartBooksPic"
+            android:layout_toRightOf="@+id/cartBooksPic"
+            android:text="Rp0,-" />
+
+        <ImageView
+            android:id="@+id/cartBookCancel"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/cancel_logo"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/light_gray_rounded_button"
+        android:layout_marginTop="5dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cartTotal"
+            android:textStyle="bold"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp82.666,-"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cartOrderConfirm"
+        android:layout_marginTop="10dp"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/cartOrder"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        app:backgroundTint="@null"
+        android:background="@drawable/white_rounded_button"
+        android:text="@string/cartOrder"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cartPayConfirm"
+        android:layout_marginTop="10dp"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/cartPay"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        app:backgroundTint="@null"
+        android:background="@drawable/white_rounded_button"
+        android:text="@string/cartPay"
+        android:textColor="@color/black" />
+
+</LinearLayout>
