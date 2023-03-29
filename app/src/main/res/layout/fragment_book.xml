@@ -6,13 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".view.adminTransaction.BookFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_books"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:textColor="#000"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="@string/transactionBook"/>
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        tools:listitem="@layout/item_row_book" />
 
 </FrameLayout>
