@@ -6,14 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".view.adminTransaction.BeverageFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_beverages"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:textColor="#000"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"
-        android:text="@string/transactionBeverage"/>
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        tools:listitem="@layout/item_row_beverage" />
 
 </RelativeLayout>

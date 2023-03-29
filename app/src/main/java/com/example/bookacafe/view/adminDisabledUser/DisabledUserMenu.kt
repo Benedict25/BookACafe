@@ -27,16 +27,16 @@ class DisabledUserMenu: AppCompatActivity() {
         val dataDescription = resources.getStringArray(R.array.userOrderHistory)
         val dataPhoto = resources.getStringArray(R.array.user_profile)
 
-        val listHero = ArrayList<MemberDummy>()
+        val listUsers = ArrayList<MemberDummy>()
         for (position in dataName.indices) {
-            val hero = MemberDummy(
+            val user = MemberDummy(
                 dataName[position],
                 dataDescription[position],
                 dataPhoto[position]
             )
-            listHero.add(hero)
+            listUsers.add(user)
         }
-        return listHero
+        return listUsers
     }
 
     private fun showRecyclerList() {

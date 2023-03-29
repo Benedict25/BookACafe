@@ -30,5 +30,14 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewTransactionPage"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"/>
+        android:layout_height="460dp" />
+
+    <TextView
+        android:id="@+id/allIncome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Total Income = Rp1.000.000,-"
+        android:textAlignment="center"
+        android:textSize="20dp" />
 </LinearLayout>

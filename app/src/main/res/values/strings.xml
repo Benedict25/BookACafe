@@ -30,7 +30,7 @@
     <string name="with_cardview">with CardView</string>
     <string name="favorite">Favorite</string>
     <string name="share">Share</string>
-
+    <!-- Disabled User Menu Dummy -->
     <string-array name="userName">
         <item>Ivan Iskandar</item>
         <item>Nicholas John</item>
@@ -89,15 +89,295 @@
     </string-array>
     <string name="disable_button">Disable This User</string>
 
+    <!-- Show Transactions Menu-->
     <string name="showTransactions">Transactions</string>
     <string name="transactionSeat">Seat</string>
     <string name="transactionFood">Food</string>
     <string name="transactionBeverage">Beverage</string>
     <string name="transactionBook">Book</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <!-- Show Transactions Dummy -->
+    <string name="admin_show_transactions">Show Transactions</string>
+    <!-- Seats Transactions -->
+    <string name="seat_number">Num</string>
+    <string name="seat_description">
+        Deskripsi
+    </string>
+    <!-- Dummy Seat -->
+    <string-array name="seatNum">
+        <item>A1</item>
+        <item>A2</item>
+        <item>A3</item>
+        <item>A4</item>
+        <item>B1</item>
+        <item>B2</item>
+        <item>B3</item>
+    </string-array>
+    <string-array name="seatDesc">
+        <item>
+            TotalBooked: 20\nTable Income: Rp200.000,-
+        </item>
+        <item>
+            TotalBooked: 20\nTable Income: Rp200.000,-
+        </item>
+        <item>
+            TotalBooked: 20\nTable Income: Rp200.000,-
+        </item>
+        <item>
+            TotalBooked: 20\nTable Income: Rp200.000,-
+        </item>
+        <item>
+            TotalBooked: 20\nTable Income: Rp200.000,-
+        </item>
+        <item>
+            TotalBooked: 20\nTable Income: Rp200.000,-
+        </item>
+        <item>
+            TotalBooked: 20\nTable Income: Rp200.000,-
+        </item>
+    </string-array>
+
+    <!-- Food Transactions -->
+    <string name="food_name">Food Menu</string>
+    <string name="food_description">
+        Deskripsi
+    </string>
+    <!-- Food Dummy -->
+    <string-array name="foodName">
+        <item>Boiled Potatoes</item>
+        <item>Burgir</item>
+        <item>Fetucina</item>
+        <item>Wonton Cingcong</item>
+        <item>Cow Nugget</item>
+        <item>Charred Rice</item>
+        <item>Hail Salad</item>
+        <item>Malaymie</item>
+    </string-array>
+    <string-array name="foodDesc">
+        <item>
+            Total Ordered: 2\nIncome: Rp 50.000,-
+        </item>
+        <item>
+            Total Ordered: 2\nIncome: Rp 50.000,-
+        </item>
+        <item>
+            Total Ordered: 2\nIncome: Rp 50.000,-
+        </item>
+        <item>
+            Total Ordered: 2\nIncome: Rp 50.000,-
+        </item>
+        <item>
+            Total Ordered: 2\nIncome: Rp 50.000,-
+        </item>
+        <item>
+            Total Ordered: 2\nIncome: Rp 50.000,-
+        </item>
+        <item>
+            Total Ordered: 2\nIncome: Rp 50.000,-
+        </item>
+        <item>
+            Total Ordered: 2\nIncome: Rp 50.000,-
+        </item>
+    </string-array>
+    <string-array name="foodPict">
+        <item>@drawable/food_1</item>
+        <item>@drawable/food_2</item>
+        <item>@drawable/food_3</item>
+        <item>@drawable/food_4</item>
+        <item>@drawable/food_5</item>
+        <item>@drawable/food_6</item>
+        <item>@drawable/food_7</item>
+        <item>@drawable/food_8</item>
+    </string-array>
+
+    <!-- Beverage Transactions -->
+    <string name="beverage_name">Beverage Menu</string>
+    <string name="beverage_description">
+        Deskripsi
+    </string>
+    <!-- Beverage Dummy -->
+    <string-array name="beverageName">
+        <item>Cinamon Coktail</item>
+        <item>Lemon Coktail</item>
+        <item>Melemon Milk</item>
+        <item>Merry Squash</item>
+        <item>Milky Cokelate</item>
+        <item>Orange Juice</item>
+        <item>Sprite and Leaf</item>
+        <item>Strobucat</item>
+    </string-array>
+    <string-array name="beverageDesc">
+        <item>
+            Total Ordered: 2\nIncome: Rp 50.000,-
+        </item>
+        <item>
+            Total Ordered: 2\nIncome: Rp 50.000,-
+        </item>
+        <item>
+            Total Ordered: 2\nIncome: Rp 50.000,-
+        </item>
+        <item>
+            Total Ordered: 2\nIncome: Rp 50.000,-
+        </item>
+        <item>
+            Total Ordered: 2\nIncome: Rp 50.000,-
+        </item>
+        <item>
+            Total Ordered: 2\nIncome: Rp 50.000,-
+        </item>
+        <item>
+            Total Ordered: 2\nIncome: Rp 50.000,-
+        </item>
+        <item>
+            Total Ordered: 2\nIncome: Rp 50.000,-
+        </item>
+    </string-array>
+    <string-array name="beveragePict">
+        <item>@drawable/beverage_1</item>
+        <item>@drawable/beverage_2</item>
+        <item>@drawable/beverage_3</item>
+        <item>@drawable/beverage_4</item>
+        <item>@drawable/beverage_5</item>
+        <item>@drawable/beverage_6</item>
+        <item>@drawable/beverage_7</item>
+        <item>@drawable/beverage_8</item>
+    </string-array>
+
+    <!-- Book Transactions -->
+    <string name="book_name">Book Title</string>
+    <string name="book_description">
+        Deskripsi
+    </string>
+    <!-- Beverage Dummy -->
+    <string-array name="bookName">
+        <item>Bumi</item>
+        <item>Summer in Seoul</item>
+        <item>Modern Operating System</item>
+        <item>Bulan</item>
+        <item>Winter in Tokyo</item>
+        <item>Software Engineering</item>
+        <item>Matahari</item>
+        <item>Spring in London</item>
+        <item>Why Series: Microorganism</item>
+        <item>Bintang</item>
+        <item>Autumn in Paris</item>
+        <item>Why Series: Fossil</item>
+        <item>Ceros dan Batozar</item>
+        <item>Sunshine Becomes You</item>
+        <item>Why Series: Weather</item>
+        <item>Komet</item>
+        <item>In a Blue Ocean</item>
+        <item>Why Series: Disease</item>
+        <item>Komet Minor</item>
+        <item>Autumn Once More</item>
+        <item>Why Series: Anatomy</item>
+        <item>Selena</item>
+        <item>The Star and I</item>
+        <item>Why Series: Medication and Treatment</item>
+    </string-array>
+    <string-array name="bookDesc">
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+        <item>
+            Total Ordered: 5
+        </item>
+    </string-array>
+    <string-array name="bookPict">
+        <item>@drawable/fantasy_1</item>
+        <item>@drawable/romance_1</item>
+        <item>@drawable/science_1</item>
+        <item>@drawable/fantasy_2</item>
+        <item>@drawable/romance_2</item>
+        <item>@drawable/science_2</item>
+        <item>@drawable/fantasy_3</item>
+        <item>@drawable/romance_3</item>
+        <item>@drawable/science_3</item>
+        <item>@drawable/fantasy_4</item>
+        <item>@drawable/romance_4</item>
+        <item>@drawable/science_4</item>
+        <item>@drawable/fantasy_5</item>
+        <item>@drawable/romance_5</item>
+        <item>@drawable/science_5</item>
+        <item>@drawable/fantasy_6</item>
+        <item>@drawable/romance_6</item>
+        <item>@drawable/science_6</item>
+        <item>@drawable/fantasy_7</item>
+        <item>@drawable/romance_7</item>
+        <item>@drawable/science_7</item>
+        <item>@drawable/fantasy_8</item>
+        <item>@drawable/romance_8</item>
+        <item>@drawable/science_8</item>
+    </string-array>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-<<<<<<< Updated upstream
     <!-- TABLE -->
     <string name="tables">Tables</string>
     <string name="table_text_1">Which table</string>
