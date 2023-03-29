@@ -78,6 +78,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+<<<<<<< Updated upstream
     <!-- TABLE -->
     <string name="tables">Tables</string>
     <string name="table_text_1">Which table</string>
@@ -224,4 +225,9 @@
         <item>3</item>
         <item>3</item>
     </integer-array>
+=======
+
+    <!-- Profile Screen String-->
+
+>>>>>>> Stashed changes
 </resources>
