@@ -19,11 +19,22 @@
     <string name="retypePassword">Re-type Password</string>
     <string name="registerButton">REGISTER</string>
 
+    <!-- Cart String -->
+    <string name="cartTitle">Cart</string>
+    <string name="cartSeats">Seats</string>
+    <string name="cartFnb">Food and Beverages</string>
+    <string name="cartBooks">Books</string>
+    <string name="cartTotal">Total</string>
+    <string name="cartOrderConfirm">Sure want to order?</string>
+    <string name="cartOrder">ORDER</string>
+    <string name="cartPayConfirm">Want to pay?</string>
+    <string name="cartPay">SHOW BILL</string>
+
     <!-- Admin Menu String -->
     <string name="disabled_user_menu">Disabled User</string>
     <string name="users_name">Nama User</string>
     <string name="description">
-        Deskripsi<br/>
+        Deskripsi<br />
         Deskripsi
     </string>
     <string name="list">List</string>
@@ -41,23 +52,23 @@
     </string-array>
     <string-array name="userOrderHistory">
         <item>
-            Finished Order: 10<br/>
+            Finished Order: 10<br />
             Canceled Order: 5
         </item>
         <item>
-            Finished Order: 8<br/>
+            Finished Order: 8<br />
             Canceled Order: 7
         </item>
         <item>
-            Finished Order: 12<br/>
+            Finished Order: 12<br />
             Canceled Order: 3
         </item>
         <item>
-            Finished Order: 9<br/>
+            Finished Order: 9<br />
             Canceled Order: 6
         </item>
         <item>
-            Finished Order: 11<br/>
+            Finished Order: 11<br />
             Canceled Order: 4
         </item>
     </string-array>
