@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.bookacafe.R;
-import com.example.bookacafe.model.MenuDummy
+import com.example.bookacafe.model.adminDummy.MenuDummy
 
 class FoodFragment: Fragment() {
 

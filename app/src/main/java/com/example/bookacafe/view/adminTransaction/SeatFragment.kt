@@ -13,8 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.bookacafe.R;
-import com.example.bookacafe.databinding.FragmentSeatBinding
-import com.example.bookacafe.model.TableDummy
+import com.example.bookacafe.model.adminDummy.TableDummy
 
 class SeatFragment: Fragment() {
 
