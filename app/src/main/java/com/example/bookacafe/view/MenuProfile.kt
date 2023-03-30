@@ -16,6 +16,7 @@ class MenuProfile: AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profile_screen)
+        supportActionBar?.hide()
 
         val btnHistory: Button = findViewById(R.id.btn_history)
         val btnLogout: Button = findViewById(R.id.btn_logout)
@@ -47,7 +48,8 @@ class MenuProfile: AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id){
             R.id.btn_history -> {
-                // Pindahin ke transaction ntr
+                val moveIntent = Intent(this@MenuProfile, HistoryActivity::class.java)
+                startActivity(moveIntent)
             }
 
             R.id.btn_logout -> {
