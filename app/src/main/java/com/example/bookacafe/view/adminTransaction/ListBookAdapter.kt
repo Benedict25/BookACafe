@@ -3,10 +3,8 @@ package com.example.bookacafe.view.adminTransaction
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.bookacafe.databinding.ItemRowBookBinding
-import com.example.bookacafe.model.BookDummy
+import com.example.bookacafe.model.adminDummy.BookDummy
 
 class ListBookAdapter(private val listBooks: ArrayList<BookDummy>) :  RecyclerView.Adapter<ListBookAdapter.ListViewHolderBook>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolderBook {

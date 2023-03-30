@@ -1,4 +1,4 @@
-package com.example.bookacafe.model
+package com.example.bookacafe.model.adminDummy
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

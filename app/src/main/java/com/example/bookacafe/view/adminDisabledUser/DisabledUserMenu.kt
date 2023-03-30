@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.R
 import com.example.bookacafe.databinding.AdminDisabledUserBinding
-import com.example.bookacafe.model.MemberDummy
+import com.example.bookacafe.model.adminDummy.MemberDummy
 
 class DisabledUserMenu: AppCompatActivity() {
     private lateinit var binding: AdminDisabledUserBinding

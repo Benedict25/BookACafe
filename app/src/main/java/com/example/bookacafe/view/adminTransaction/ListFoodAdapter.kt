@@ -1,16 +1,12 @@
 package com.example.bookacafe.view.adminTransaction
 
-import android.net.Uri
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.bookacafe.R
 import com.example.bookacafe.databinding.ItemRowFoodBinding
-import com.example.bookacafe.model.MenuDummy
-import java.io.File
+import com.example.bookacafe.model.adminDummy.MenuDummy
 
 class ListFoodAdapter(private val listFood: ArrayList<MenuDummy>) :  RecyclerView.Adapter<ListFoodAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {

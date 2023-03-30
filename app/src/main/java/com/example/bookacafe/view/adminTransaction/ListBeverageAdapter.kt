@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.bookacafe.databinding.ItemRowBeverageBinding
-import com.example.bookacafe.model.MenuDummy
+import com.example.bookacafe.model.adminDummy.MenuDummy
 
 class ListBeverageAdapter(private val listBeverage: ArrayList<MenuDummy>) :  RecyclerView.Adapter<ListBeverageAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {

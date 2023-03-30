@@ -1,6 +1,5 @@
 package com.example.bookacafe.view.adminTransaction;
 
-import android.annotation.SuppressLint
 import android.os.Bundle;
 
 
@@ -13,10 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.bookacafe.R;
-import com.example.bookacafe.databinding.AdminDisabledUserBinding
 import com.example.bookacafe.databinding.AdminTransactionBinding
-import com.example.bookacafe.model.BookDummy
-import com.example.bookacafe.model.MemberDummy
+import com.example.bookacafe.model.adminDummy.BookDummy
+import com.example.bookacafe.model.adminDummy.MemberDummy
 
 class BookFragment: Fragment() {
 

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookacafe.databinding.ItemRowSeatBinding
-import com.example.bookacafe.model.TableDummy
+import com.example.bookacafe.model.adminDummy.TableDummy
 
 class ListSeatAdapter(private val listSeat: ArrayList<TableDummy>) :  RecyclerView.Adapter<ListSeatAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {
