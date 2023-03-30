@@ -13,11 +13,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.bookacafe.R;
+import com.example.bookacafe.databinding.AdminDisabledUserBinding
+import com.example.bookacafe.databinding.AdminTransactionBinding
 import com.example.bookacafe.model.BookDummy
+import com.example.bookacafe.model.MemberDummy
 
 class BookFragment: Fragment() {
 
     private lateinit var recyclerView: RecyclerView;
+    private lateinit var binding: AdminTransactionBinding
+    private val list = ArrayList<MemberDummy>()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -33,12 +38,12 @@ class BookFragment: Fragment() {
     fun getListBooks(): ArrayList<BookDummy> {
         val dataName = resources.getStringArray(R.array.bookName)
         val dataDescription = resources.getStringArray(R.array.bookDesc)
-        val dataPict = resources.getStringArray(R.array.bookPict)
+        val dataPict = resources.obtainTypedArray(R.array.bookPict)
 
         val listBooks = ArrayList<BookDummy>()
         for (position in dataName.indices) {
             val book = BookDummy(
-                dataPict[position],
+                dataPict.getResourceId(position,-1),
                 dataName[position],
                 dataDescription[position]
             )

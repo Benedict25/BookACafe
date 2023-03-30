@@ -8,11 +8,11 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_beverage_photo"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        tools:src="@android:color/darker_gray" />
+        tools:src="@android:color/darker_gray"/>
 
     <LinearLayout
         android:layout_width="match_parent"
