@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class MenuDummy (
-    var menuPict: String,
+    var menuPict: Int,
     var menuName: String,
     var menuDesc: String
 ): Parcelable

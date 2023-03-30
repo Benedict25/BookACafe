@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class BookDummy (
-    var bookPict: String,
+    var bookPict: Int,
     var bookName: String,
     var bookDesc: String
 ): Parcelable

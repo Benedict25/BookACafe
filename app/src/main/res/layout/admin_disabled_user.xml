@@ -6,18 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Toolbar
+    <TextView
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Disabled User"
-            android:textSize="20sp" />
-    </Toolbar>
+        android:layout_height="40dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:text="Disabled User"
+        android:textStyle="bold"
+        android:textSize="20sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_users"
@@ -33,7 +30,9 @@
         android:id="@+id/du_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:layout_alignParentBottom="true"
-        android:text="@string/disable_button" />
+        android:text="@string/disable_button"
+        android:textStyle="bold"/>
 
 </RelativeLayout>

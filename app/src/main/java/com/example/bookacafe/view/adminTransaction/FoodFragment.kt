@@ -31,12 +31,12 @@ class FoodFragment: Fragment() {
     fun getListFoods(): ArrayList<MenuDummy> {
         val dataName = resources.getStringArray(R.array.foodName)
         val dataDescription = resources.getStringArray(R.array.foodDesc)
-        val dataPict = resources.getStringArray(R.array.foodPict)
+        val dataPict = resources.obtainTypedArray(R.array.foodPict)
 
         val listFoods = ArrayList<MenuDummy>()
         for (position in dataName.indices) {
             val food = MenuDummy(
-                dataPict[position],
+                dataPict.getResourceId(position,-1),
                 dataName[position],
                 dataDescription[position]
             )

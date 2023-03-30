@@ -24,7 +24,7 @@ class ListBeverageAdapter(private val listBeverage: ArrayList<MenuDummy>) :  Rec
         fun bind(menu: MenuDummy) {
             with(binding){
                 Glide.with(itemView)
-                    .load(menu.menuPict)
+                    .load(itemView.resources.getDrawable(menu.menuPict))
                     .apply(RequestOptions().override(55, 55))
                     .into(imgBeveragePhoto)
                 tvItemName.text = menu.menuName

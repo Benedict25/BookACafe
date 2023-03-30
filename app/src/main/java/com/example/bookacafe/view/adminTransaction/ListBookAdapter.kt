@@ -8,28 +8,27 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.bookacafe.databinding.ItemRowBookBinding
 import com.example.bookacafe.model.BookDummy
 
-class ListBookAdapter(private val listBooks: ArrayList<BookDummy>) :  RecyclerView.Adapter<ListBookAdapter.ListViewHolder>() {
-    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {
+class ListBookAdapter(private val listBooks: ArrayList<BookDummy>) :  RecyclerView.Adapter<ListBookAdapter.ListViewHolderBook>() {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolderBook {
         val binding = ItemRowBookBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
-        return ListViewHolder(binding)
+        return ListViewHolderBook(binding)
     }
 
     override fun getItemCount(): Int = listBooks.size
 
-    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListViewHolderBook, position: Int) {
         holder.bind(listBooks[position])
     }
 
-    inner class ListViewHolder(private val binding: ItemRowBookBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ListViewHolderBook(private val binding: ItemRowBookBinding) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(book: BookDummy) {
             with(binding){
-                Glide.with(itemView)
-                    .load(book.bookPict)
-                    .apply(RequestOptions().override(55, 55))
-                    .into(imgBookPhoto)
+                imgBookPhoto.setImageResource(book.bookPict)
                 tvItemName.text = book.bookName
                 tvItemDescription.text = book.bookDesc
             }
         }
     }
+
 }

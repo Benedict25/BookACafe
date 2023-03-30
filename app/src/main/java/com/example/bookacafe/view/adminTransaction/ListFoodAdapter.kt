@@ -28,7 +28,7 @@ class ListFoodAdapter(private val listFood: ArrayList<MenuDummy>) :  RecyclerVie
         fun bind(menu: MenuDummy) {
             with(binding){
                 Glide.with(itemView)
-                    .load(menu.menuPict)
+                    .load(itemView.resources.getDrawable(menu.menuPict))
                     .apply(RequestOptions().override(55, 55))
                     .into(imgFoodPhoto)
                 tvItemName.text = menu.menuName
