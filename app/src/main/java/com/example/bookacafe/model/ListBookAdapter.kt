@@ -1,12 +1,13 @@
 package com.example.bookacafe.model
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookacafe.databinding.ItemBookBinding
 
 class ListBookAdapter(private val listBook : ArrayList<Book>) : RecyclerView.Adapter<ListBookAdapter.ListViewHolder>() {
+    var onItemClick: ((Book) -> Unit)? = null
+
     override fun onCreateViewHolder(viewGroup : ViewGroup, i : Int) : ListViewHolder {
         val binding = ItemBookBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return ListViewHolder(binding)
@@ -24,8 +25,10 @@ class ListBookAdapter(private val listBook : ArrayList<Book>) : RecyclerView.Ada
                 tvBookTitle.text = book.title
                 tvBookAuthor.text = book.author
                 tvBookStock.text = "Stock: ${book.stock}"
-                Log.d("IMAGE PATH: ", book.imagePath.toString())
                 imgBookCover.setImageResource(book.imagePath)
+                btnAdd.setOnClickListener() {
+                    TODO("Add to Cart")
+                }
             }
         }
     }
