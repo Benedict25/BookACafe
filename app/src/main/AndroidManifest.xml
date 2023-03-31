@@ -15,6 +15,9 @@
         android:theme="@style/Theme.BookACafe"
         tools:targetApi="31">
         <activity
+            android:name=".view.TestLogin"
+            android:exported="false" />
+        <activity
             android:name=".view.MenuCart"
             android:exported="false" />
         <activity

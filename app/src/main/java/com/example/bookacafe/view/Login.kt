@@ -67,10 +67,14 @@ class Login : AppCompatActivity() {
     }
 
     fun navigateToSecondActivity(){
-//        finish()
+        finish()
         //ini buat direct ke admin yang transactions.. nanti di ganti ganti lagi aja
-        val switchActivityIntent = Intent(this, ShowTransactions::class.java)
-        startActivity(switchActivityIntent)
+//        val switchActivityIntent = Intent(this, ShowTransactions::class.java)
+//        startActivity(switchActivityIntent)
+
+        // ini buat ke TestLogin
+        val intent = Intent(this@Login, TestLogin::class.java)
+        startActivity(intent)
     }
 
 }
