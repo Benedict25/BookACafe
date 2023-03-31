@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.bookacafe.R
 import org.w3c.dom.Text
@@ -16,7 +17,7 @@ class Register : AppCompatActivity() {
         setContentView(R.layout.activity_register)
         supportActionBar?.hide()
 
-        val backButton: TextView = findViewById(R.id.register_back)
+        val backButton: RelativeLayout = findViewById(R.id.register_back)
 
         backButton.setOnClickListener {
             val intent = Intent(this@Register, Login::class.java)
