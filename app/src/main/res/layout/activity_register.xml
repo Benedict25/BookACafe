@@ -8,12 +8,26 @@
     android:orientation="vertical"
     tools:context=".view.Register">
 
-    <TextView
-        android:id="@+id/register_back"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/back"
-        android:layout_marginLeft="20dp" />
+        android:id="@+id/register_back">
+
+        <ImageView
+            android:id="@+id/register_back_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back"
+            android:layout_toRightOf="@+id/register_back_logo"
+            android:layout_centerVertical="true" />
+
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/register_title"
