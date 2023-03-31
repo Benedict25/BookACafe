@@ -5,11 +5,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager.widget.ViewPager
 import com.example.bookacafe.R
+import com.example.bookacafe.view.HomePage
 import com.example.bookacafe.view.ViewPagerAdapter
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -19,6 +23,7 @@ class FirstFragment:Fragment(R.layout.fragment_first) {
     lateinit var viewPagerAdapter: ViewPagerAdapter
     lateinit var imageList: List<Int>
     lateinit var timer: Timer
+    lateinit var nameTextView: TextView
     var currentPosition = 0
 
     override fun onCreateView(
@@ -26,6 +31,7 @@ class FirstFragment:Fragment(R.layout.fragment_first) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as AppCompatActivity).supportActionBar?.hide()
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
 
@@ -89,7 +95,18 @@ class FirstFragment:Fragment(R.layout.fragment_first) {
                 }
             }
         }, 2000, 5000)
+
+        nameTextView = view.findViewById(R.id.homeUserName)
+        var acct: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(requireActivity())
+
+        // Set data ; ambil dari data yang login sekarang
+        if (acct != null){
+            var activeName: String = acct.displayName.toString()
+            var displayName = "Welcome \n ${activeName}"
+            nameTextView.setText(displayName)
+        }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
