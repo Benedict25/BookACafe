@@ -7,6 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookacafe.R
+import com.example.bookacafe.controller.ActiveUser
 import com.example.bookacafe.view.adminTransaction.ShowTransactions
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -59,6 +60,16 @@ class Login : AppCompatActivity() {
 
             try {
                 task.getResult(ApiException::class.java)
+
+                // Get logged in user's data
+                var acct: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
+
+                if (acct != null){
+                    var activeName: String = acct.displayName.toString()
+                    // Save to singleton before continuing to next activity
+                    ActiveUser.setName(activeName)
+                }
+
                 navigateToSecondActivity()
             } catch (e: ApiException) {
                 Toast.makeText(applicationContext, "Something Went Wrong!", Toast.LENGTH_SHORT).show()
@@ -74,7 +85,7 @@ class Login : AppCompatActivity() {
 
         // ini buat ke TestLogin
 //        val intent = Intent(this@Login, TestLogin::class.java)
-//        startActivity
+//        startActivity(intent)
 
         val intent = Intent(this@Login, HomePage::class.java)
         startActivity(intent)
