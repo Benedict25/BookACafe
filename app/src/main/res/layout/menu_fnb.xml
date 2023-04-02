@@ -25,7 +25,7 @@
                 android:layout_margin="20dp"
                 android:textStyle="bold"
                 android:textSize="30sp"
-                android:text="F&B" />
+                android:text="FnB" />
         </LinearLayout>
 
         <!-- SEARCH VIEW -->
