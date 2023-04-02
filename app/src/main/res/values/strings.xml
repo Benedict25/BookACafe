@@ -191,6 +191,16 @@
             Total Ordered: 2\nIncome: Rp 50.000,-
         </item>
     </string-array>
+    <string-array name="food_menus_id">
+        <item>M001</item>
+        <item>M002</item>
+        <item>M003</item>
+        <item>M004</item>
+        <item>M005</item>
+        <item>M006</item>
+        <item>M007</item>
+        <item>M008</item>
+    </string-array>
     <string-array name="foodPict">
         <item>@drawable/food_1</item>
         <item>@drawable/food_2</item>
@@ -201,6 +211,17 @@
         <item>@drawable/food_7</item>
         <item>@drawable/food_8</item>
     </string-array>
+
+    <integer-array name="foodPrice">
+        <item>10666</item>
+        <item>20000</item>
+        <item>30000</item>
+        <item>40000</item>
+        <item>50000</item>
+        <item>60000</item>
+        <item>70000</item>
+        <item>80000</item>
+    </integer-array>
 
     <!-- Beverage Transactions -->
     <string name="beverage_name">Beverage Menu</string>
@@ -243,6 +264,26 @@
         <item>
             Total Ordered: 2\nIncome: Rp 50.000,-
         </item>
+    </string-array>
+    <integer-array name="beveragePrice">
+        <item>25000</item>
+        <item>18000</item>
+        <item>25000</item>
+        <item>18000</item>
+        <item>19000</item>
+        <item>21000</item>
+        <item>25000</item>
+        <item>20000</item>
+    </integer-array>
+    <string-array name="beverage_menus_id">
+        <item>M009</item>
+        <item>M010</item>
+        <item>M011</item>
+        <item>M012</item>
+        <item>M013</item>
+        <item>M014</item>
+        <item>M015</item>
+        <item>M016</item>
     </string-array>
     <string-array name="beveragePict">
         <item>@drawable/beverage_1</item>
