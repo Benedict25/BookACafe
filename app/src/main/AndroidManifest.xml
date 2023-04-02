@@ -69,6 +69,15 @@
         <activity
             android:name=".view.MenuBook"
             android:exported="false" />
+        <activity
+            android:name=".view.AdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.CashierActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.MenuFnB"
+            android:exported="false" />
     </application>
 
 </manifest>
