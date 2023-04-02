@@ -2,12 +2,16 @@ package com.example.bookacafe.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.ActiveUser
+import com.example.bookacafe.controller.LoginControllers
 import com.example.bookacafe.view.adminTransaction.ShowTransactions
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -21,12 +25,36 @@ class Login : AppCompatActivity() {
     lateinit var gso: GoogleSignInOptions
     lateinit var gsc: GoogleSignInClient
     lateinit var googleButton: ImageView
+    lateinit var loginButton: Button
+    lateinit var inputEmailET: EditText
+    lateinit var inputPasswordET: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
 
+        // Manual Login
+        loginButton = findViewById(R.id.login_button)
+        inputEmailET = findViewById(R.id.login_email)
+        inputPasswordET = findViewById(R.id.login_password)
+
+        loginButton.setOnClickListener {
+            val inputEmail: String = inputEmailET.text.toString()
+            val inputPassword: String = inputPasswordET.text.toString()
+
+            val control: LoginControllers = LoginControllers()
+            val successLogin: Boolean = control.getLoginData(inputEmail, inputPassword)
+
+            if (successLogin){
+                Toast.makeText(applicationContext, "Welcome!", Toast.LENGTH_SHORT).show()
+                navigateToSecondActivity()
+            } else {
+                Toast.makeText(applicationContext, "No Account Found!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Google Login
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
         gsc = GoogleSignIn.getClient(this,gso)
         googleButton = findViewById(R.id.login_google)
@@ -84,11 +112,11 @@ class Login : AppCompatActivity() {
 //        startActivity(switchActivityIntent)
 
         // ini buat ke TestLogin
-//        val intent = Intent(this@Login, TestLogin::class.java)
-//        startActivity(intent)
-
-        val intent = Intent(this@Login, HomePage::class.java)
+        val intent = Intent(this@Login, TestLogin::class.java)
         startActivity(intent)
+
+//        val intent = Intent(this@Login, HomePage::class.java)
+//        startActivity(intent)
     }
 
 }
