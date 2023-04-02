@@ -652,4 +652,9 @@
     <string name="title_history">History</string>
     <string name="invoice_number_history">Invoice Number: </string>
     <string name="invoice_date_history">Invoice Date</string>
+    <string name="seat_display">A4</string>
+    <string name="kursi_a4">Kursi A4</string>
+
+    <!--Untuk Dummy di Bill Screen-->
+
 </resources>

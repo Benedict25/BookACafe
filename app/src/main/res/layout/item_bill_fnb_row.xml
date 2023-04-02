@@ -3,48 +3,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="16dp">
+    android:orientation="horizontal">
 
     <LinearLayout
+        android:id="@+id/container_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">>
+            android:orientation="vertical">
+
             <TextView
-                android:layout_width="150dp"
+                android:id="@+id/tv_bill_menu_name"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Nama Menu" />
+                android:text="Fetucina" />
 
             <TextView
-                android:layout_width="150dp"
+                android:id="@+id/tv_bill_menu_price"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Hrg Menu" />
+                android:text="Rp20.000,-" />
         </LinearLayout>
-        <TextView
-            android:id="@+id/tv_bill_menu_amount"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="x..." />
 
-        <TextView
-            android:id="@+id/tv_bill_menu_price"
-            android:layout_width="100dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:gravity="right|center"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Ttl Harga" />
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/tv_bill_menu_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="x1"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/tv_bill_total_menu_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Rp20.000,-"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

@@ -40,6 +40,9 @@
             android:name=".view.MenuFnB"
             android:exported="false" />
         <activity
+            android:name=".view.BillActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
