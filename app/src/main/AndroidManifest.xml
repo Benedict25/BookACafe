@@ -37,6 +37,9 @@
             android:exported="false"
             android:label="Home" />
         <activity
+            android:name=".view.MenuFnB"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -75,9 +78,7 @@
         <activity
             android:name=".view.CashierActivity"
             android:exported="false" />
-        <activity
-            android:name=".view.MenuFnB"
-            android:exported="false" />
+
     </application>
 
 </manifest>

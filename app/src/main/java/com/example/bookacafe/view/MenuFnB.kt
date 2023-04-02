@@ -33,7 +33,6 @@ class MenuFnB : AppCompatActivity(), View.OnClickListener {
 
         tabLayout!!.addTab(tabLayout!!.newTab().setText(menuType[0]))
         tabLayout!!.addTab(tabLayout!!.newTab().setText(menuType[1]))
-        tabLayout!!.addTab(tabLayout!!.newTab().setText(menuType[2]))
         tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
 
         tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -95,9 +94,6 @@ class MenuFnB : AppCompatActivity(), View.OnClickListener {
         val listMenuAdapter = ListMenuAdapter(listMenu)
         binding.rvMenus.adapter = listMenuAdapter
 
-        listMenuAdapter.onItemClick = {
-                menu -> showMenuDetails()
-        }
     }
-    fun showMenuDetails() {}
+//    fun showMenuDetails() {}
 }
