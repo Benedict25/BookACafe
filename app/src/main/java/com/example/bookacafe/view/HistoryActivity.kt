@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.R
+import com.example.bookacafe.controller.MemberControllers
 import com.example.bookacafe.databinding.HistoryScreenBinding
 import com.example.bookacafe.model.Transaction
 
@@ -30,18 +31,19 @@ class HistoryActivity : AppCompatActivity() {
     }
 
     fun getListHistory(): ArrayList<Transaction> {
-        val invoiceNumber = resources.getStringArray(R.array.invoice_number)
-        val invoiceDate = resources.getStringArray(R.array.invoice_date)
+//        val invoiceNumber = resources.getStringArray(R.array.invoice_number)
+//        val invoiceDate = resources.getStringArray(R.array.invoice_date)
+//
+//        val listHistory = ArrayList<Transaction>()
+//        for (position in invoiceNumber.indices) {
+//            val history = Transaction(
+//                transactionId = invoiceNumber[position],
+//                checkedIn = invoiceDate[position]
+//            )
+//            listHistory.add(history)
+//        }
 
-        val listHistory = ArrayList<Transaction>()
-        for (position in invoiceNumber.indices) {
-            val history = Transaction(
-                transactionId = invoiceNumber[position],
-                checkedIn = invoiceDate[position]
-            )
-            listHistory.add(history)
-        }
-
+        val listHistory = MemberControllers.ShowHistory()
         return listHistory
     }
 }

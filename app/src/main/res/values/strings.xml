@@ -648,30 +648,8 @@
     <!-- Profile Screen String-->
     <string name="profile">Profile</string>
 
-
     <!-- History Screen String-->
     <string name="title_history">History</string>
     <string name="invoice_number_history">Invoice Number: </string>
     <string name="invoice_date_history">Invoice Date</string>
-    <string-array name="invoice_number">
-        <item>INV-221225204</item>
-        <item>INV-230102666</item>
-        <item>INV-230107444</item>
-        <item>INV-230110066</item>
-        <item>INV-230115467</item>
-        <item>INV-230128777</item>
-        <item>INV-230128778</item>
-        <item>INV-230128779</item>
-    </string-array>
-
-    <string-array name="invoice_date">
-        <item>25/12/2022</item>
-        <item>02/01/2022</item>
-        <item>07/01/2023</item>
-        <item>10/01/2023</item>
-        <item>15/01/2023</item>
-        <item>28/01/2023</item>
-        <item>28/01/2023</item>
-        <item>28/01/2023</item>
-    </string-array>
 </resources>
