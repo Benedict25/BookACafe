@@ -33,7 +33,10 @@ class LoginControllers {
 
             if (isLoggedIn){
                 ActiveUser.setId(user.userId)
-                ActiveUser.setName(user.firstName)
+                ActiveUser.setFirstName(user.firstName)
+                ActiveUser.setLastName(user.lastName)
+                ActiveUser.setEmail(user.email)
+                ActiveUser.setPassword(user.password)
                 return true
             } else {
                 return false
