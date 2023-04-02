@@ -37,7 +37,7 @@ class HomePage : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.icon_home->{
-                    val intent = Intent(this, MenuProfile::class.java)
+                    val intent = Intent(this, HomePage::class.java)
                     startActivity(intent)
                 }
                 R.id.icon_tables->{
