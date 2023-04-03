@@ -1,11 +1,11 @@
-package com.example.bookacafe.model.adminDummy
+package com.example.bookacafe.model.adminDataDetails
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class BookDummy (
-    var bookPict: Int,
+    var bookPict: String,
     var bookName: String,
     var bookDesc: String
 ): Parcelable

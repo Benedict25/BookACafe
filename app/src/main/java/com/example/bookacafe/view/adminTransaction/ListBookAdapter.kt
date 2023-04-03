@@ -3,8 +3,9 @@ package com.example.bookacafe.view.adminTransaction
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.bookacafe.databinding.ItemRowBookBinding
-import com.example.bookacafe.model.adminDummy.BookDummy
+import com.example.bookacafe.model.adminDataDetails.BookDummy
 
 class ListBookAdapter(private val listBooks: ArrayList<BookDummy>) :  RecyclerView.Adapter<ListBookAdapter.ListViewHolderBook>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolderBook {
@@ -22,7 +23,9 @@ class ListBookAdapter(private val listBooks: ArrayList<BookDummy>) :  RecyclerVi
 
         fun bind(book: BookDummy) {
             with(binding){
-                imgBookPhoto.setImageResource(book.bookPict)
+                Glide.with(itemView)
+                    .load(book.bookPict)
+                    .into(imgBookPhoto)
                 tvItemName.text = book.bookName
                 tvItemDescription.text = book.bookDesc
             }

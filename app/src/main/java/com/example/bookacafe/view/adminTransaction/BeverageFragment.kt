@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.bookacafe.R;
-import com.example.bookacafe.model.adminDummy.MenuDummy
+import com.example.bookacafe.controller.AdminControllers
 
 class BeverageFragment: Fragment() {
 
@@ -23,25 +23,25 @@ class BeverageFragment: Fragment() {
         recyclerView = view.findViewById<RecyclerView>(R.id.rv_beverages)
         recyclerView.setHasFixedSize(true)
         recyclerView.setLayoutManager(LinearLayoutManager(context))
-        recyclerView.setAdapter(ListBeverageAdapter(getListBeverages()))
+        recyclerView.setAdapter(ListBeverageAdapter(AdminControllers().getBeverageData()))
 
         return view
     }
 
-    fun getListBeverages(): ArrayList<MenuDummy> {
-        val dataName = resources.getStringArray(R.array.beverageName)
-        val dataDescription = resources.getStringArray(R.array.beverageDesc)
-        val dataPict = resources.obtainTypedArray(R.array.beveragePict)
-
-        val listBeverages = ArrayList<MenuDummy>()
-        for (position in dataName.indices) {
-            val beverage = MenuDummy(
-                dataPict.getResourceId(position,-1),
-                dataName[position],
-                dataDescription[position]
-            )
-            listBeverages.add(beverage)
-        }
-        return listBeverages
-    }
+//    fun getListBeverages(): ArrayList<MenuDummy> {
+//        val dataName = resources.getStringArray(R.array.beverageName)
+//        val dataDescription = resources.getStringArray(R.array.beverageDesc)
+//        val dataPict = resources.obtainTypedArray(R.array.beveragePict)
+//
+//        val listBeverages = ArrayList<MenuDummy>()
+//        for (position in dataName.indices) {
+//            val beverage = MenuDummy(
+//                dataPict.getResourceId(position,-1),
+//                dataName[position],
+//                dataDescription[position]
+//            )
+//            listBeverages.add(beverage)
+//        }
+//        return listBeverages
+//    }
 }
