@@ -1,8 +1,12 @@
 package com.example.bookacafe.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 class Table (
-    tableId: String,
-    tableName: String,
-    room: String,
-    status: TableTypeEnum
-)
+    var tableId: String,
+    var tableName: String,
+    var room: String,
+    var status: TableTypeEnum
+): Parcelable

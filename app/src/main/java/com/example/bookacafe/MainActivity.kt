@@ -6,21 +6,21 @@ import android.os.Bundle
 import android.os.Handler
 import com.example.bookacafe.view.HomePage
 import com.example.bookacafe.view.Login
+import com.example.bookacafe.view.adminDisabledUser.DisabledUserMenu
+import com.example.bookacafe.view.adminTransaction.ShowTransactions
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.bill_screen)
 
         // Hide action bar yang di atas aplikasi
-        supportActionBar?.hide()
+//        supportActionBar?.hide()
 
         // Pindah dari splash screen ke Home (delay 2 detik)
-        Handler().postDelayed({
-            val intent = Intent(this@MainActivity, Login::class.java)
-            startActivity(intent)
-        }, 2000)
-
-        //testing dari feli :)
+//        Handler().postDelayed({
+//            val intent = Intent(this@MainActivity, Login::class.java)
+//            startActivity(intent)
+//        }, 2000)
     }
 }

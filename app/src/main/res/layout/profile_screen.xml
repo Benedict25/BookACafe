@@ -4,17 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="40dp"
-    android:paddingTop="50dp"
-    android:paddingRight="40dp">
+    android:paddingLeft="30dp"
+    android:paddingTop="30dp"
+    android:paddingRight="30dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Profile"
+        android:text="@string/profile"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:fontFamily="@font/poppins_bold"
         />
@@ -22,72 +22,101 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:text="First Name"
-        android:textSize="18dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/firstName"
+        android:textSize="18sp"
+        android:fontFamily="@font/poppins_regular"
         android:textStyle="bold" />
 
     <EditText
+        android:id="@+id/edit_firstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Benedict Ivan"
         android:minHeight="48dp"
-        android:textSize="16dp"
-        tools:ignore="TextSizeCheck" />
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_regular"
+        android:background="@drawable/square_edit_text"
+        android:hint="@string/firstName"
+        tools:ignore="TextSizeCheck"
+        android:paddingLeft="10dp"
+        />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Last Name"
-        android:textSize="18dp"
-        android:textStyle="bold" />
+        android:text="@string/lastName"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_regular"
+        />
 
     <EditText
+        android:id="@+id/edit_lastName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Siapa Hayo"
         android:minHeight="48dp"
-        android:textSize="16dp" />
+        android:inputType="none"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_regular"
+        android:paddingLeft="10dp"
+        android:background="@drawable/square_edit_text"
+        android:hint="@string/lastName"
+        />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Email"
-        android:textSize="18dp" />
+        android:text="@string/email"
+        android:fontFamily="@font/poppins_regular"
+        android:textStyle="bold"
+        android:textSize="18sp" />
 
     <EditText
+        android:id="@+id/edit_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:hint="Siapa Hayo"
         android:minHeight="48dp"
-        android:textSize="16dp" />
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_regular"
+        android:paddingLeft="10dp"
+        android:hint="@string/lastName"
+        android:background="@drawable/square_edit_text"
+        />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="Password"
-        android:textSize="16dp" />
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_regular"/>
 
     <EditText
-
+        android:id="@+id/edit_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Meycakep"
         android:inputType="textPassword"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textSize="14sp"
+        android:paddingLeft="10dp"
+        android:hint="@string/password"
+        android:fontFamily="@font/poppins_regular"
+        android:background="@drawable/square_edit_text"
+        />
 
     <Button
+        android:id="@+id/btn_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/red_rounded_button"
         android:text="History" />
 
     <Button
+        android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"

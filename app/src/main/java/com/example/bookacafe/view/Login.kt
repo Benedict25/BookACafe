@@ -1,13 +1,16 @@
 package com.example.bookacafe.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.bookacafe.R
+import com.example.bookacafe.controller.ActiveUser
+import com.example.bookacafe.controller.LoginControllers
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -20,16 +23,36 @@ class Login : AppCompatActivity() {
     lateinit var gso: GoogleSignInOptions
     lateinit var gsc: GoogleSignInClient
     lateinit var googleButton: ImageView
+    lateinit var loginButton: Button
+    lateinit var inputEmailET: EditText
+    lateinit var inputPasswordET: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
 
-        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
-        gsc = GoogleSignIn.getClient(this,gso)
-        googleButton = findViewById(R.id.login_google)
+        // Manual Login
+        loginButton = findViewById(R.id.login_button)
+        inputEmailET = findViewById(R.id.login_email)
+        inputPasswordET = findViewById(R.id.login_password)
 
+        loginButton.setOnClickListener {
+            val inputEmail: String = inputEmailET.text.toString()
+            val inputPassword: String = inputPasswordET.text.toString()
+
+            val control: LoginControllers = LoginControllers()
+            val successLogin: Boolean = control.getLoginData(inputEmail, inputPassword)
+
+            if (successLogin){
+                Toast.makeText(applicationContext, "Welcome!", Toast.LENGTH_SHORT).show()
+                navigateToHomeScreen()
+            } else {
+                Toast.makeText(applicationContext, "No Account Found!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // To Register
         val signupButton: TextView = findViewById(R.id.login_description)
 
         signupButton.setOnClickListener {
@@ -37,10 +60,15 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Google Login
+        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
+        gsc = GoogleSignIn.getClient(this,gso)
+        googleButton = findViewById(R.id.login_google)
+
         // Kalau udh login, kluar app tapi ga sign out, pas masuk lgi jdnya langsung login otomatis
         var acct: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
         if (acct != null) {
-            navigateToSecondActivity()
+            navigateToHomeScreen()
         }
 
         googleButton.setOnClickListener {
@@ -59,17 +87,39 @@ class Login : AppCompatActivity() {
 
             try {
                 task.getResult(ApiException::class.java)
-                navigateToSecondActivity()
+
+                // Get logged in user's data
+                var acct: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
+
+                if (acct != null){
+//                    var activeName: String = acct.displayName.toString()
+//                    ActiveUser.setName(activeName)
+                    navigateToCompleteProfile()
+                }
+
             } catch (e: ApiException) {
-                Toast.makeText(applicationContext, "Something Went Wrong!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Google Error!", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    fun navigateToSecondActivity(){
+    fun navigateToHomeScreen(){
         finish()
-//        val intent = Intent(this@MainActivity, Home::class.java)
+        //ini buat direct ke admin yang transactions.. nanti di ganti ganti lagi aja
+//        val switchActivityIntent = Intent(this, ShowTransactions::class.java)
+//        startActivity(switchActivityIntent)
+
+        // ini buat ke TestLogin
+        val intent = Intent(this@Login, MenuProfile::class.java) //numpang bentar ya ben
         startActivity(intent)
+
+//        val intent = Intent(this@Login, HomePage::class.java)
+//        startActivity(intent)
     }
 
+    fun navigateToCompleteProfile() {
+        finish()
+        val intent = Intent(this@Login, CompleteProfile::class.java)
+        startActivity(intent)
+    }
 }

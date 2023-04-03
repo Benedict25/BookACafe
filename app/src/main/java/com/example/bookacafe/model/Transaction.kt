@@ -1,12 +1,15 @@
 package com.example.bookacafe.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import java.sql.Timestamp
 
-class Transaction (
-    transactionId: String,
-    table: Table,
-    checkedIn: Timestamp,
-    checkedOut: Timestamp,
-    status: TransactionEnum,
-    detailTransaction: ArrayList<DetailTransaction>
-)
+@Parcelize
+class Transaction(
+    var transactionId: String,
+    var table: String,
+    var checkedIn: Timestamp, // Tar balikkin ke Timestamp!!
+    var checkedOut: Timestamp,
+    var status: TransactionEnum,
+    var detailTransaction: ArrayList<DetailTransaction>
+) : Parcelable
