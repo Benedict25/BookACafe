@@ -12,7 +12,10 @@ import com.example.bookacafe.view.adminTransaction.ShowTransactions
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.bill_screen)
+//        setContentView(R.layout.bill_screen)
+
+        val intent = Intent(this@MainActivity, ShowTransactions::class.java)
+        startActivity(intent)
 
         // Hide action bar yang di atas aplikasi
 //        supportActionBar?.hide()

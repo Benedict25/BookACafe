@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.bookacafe.databinding.ItemRowBeverageBinding
-import com.example.bookacafe.model.adminDataDetails.MenuDummy
+import com.example.bookacafe.model.adminDataDetails.AdminMenuDetails
 
-class ListBeverageAdapter(private val listBeverage: ArrayList<MenuDummy>) :  RecyclerView.Adapter<ListBeverageAdapter.ListViewHolder>() {
+class ListBeverageAdapter(private val listBeverage: ArrayList<AdminMenuDetails>) :  RecyclerView.Adapter<ListBeverageAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {
         val binding = ItemRowBeverageBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return ListViewHolder(binding)
@@ -21,7 +21,7 @@ class ListBeverageAdapter(private val listBeverage: ArrayList<MenuDummy>) :  Rec
     }
 
     inner class ListViewHolder(private val binding: ItemRowBeverageBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(menu: MenuDummy) {
+        fun bind(menu: AdminMenuDetails) {
             with(binding){
                 Glide.with(itemView)
                     .load(menu.menuPict)
