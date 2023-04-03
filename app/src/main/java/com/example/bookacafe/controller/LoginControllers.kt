@@ -32,15 +32,10 @@ class LoginControllers {
             val isLoggedIn: Boolean = checkLoginData(user, inputEmail, inputPassword)
 
             if (isLoggedIn){
-                ActiveUser.setId(user.userId)
-                ActiveUser.setFirstName(user.firstName)
-                ActiveUser.setLastName(user.lastName)
-                ActiveUser.setEmail(user.email)
-                ActiveUser.setPassword(user.password)
-                
-                // Check userType dari alphabet depan userId
-                val userId = user.userId.subSequence(0, 1)
-                ActiveUser.setType(checkUserType(user, userId.toString()))
+                val control = UserControllers()
+                val userType = control.checkUserType(user.userId)
+
+                control.setSingleton(user, userType)
                 
                 return true
             } else {
@@ -54,31 +49,6 @@ class LoginControllers {
 
     fun checkLoginData(user: User, inputEmail: String, inputPassword: String): Boolean{
         return inputEmail == user.email && inputPassword == user.password
-    }
-
-    fun checkUserType(user: User, userId: String): String {
-        if (userId == "M") {
-            return "MEMBER"
-        } else {
-            var adminType: String = ""
-            val query = "SELECT adminType FROM admins WHERE adminId = '${user.userId}'"
-
-            try {
-                val stmt: Statement = con!!.createStatement()
-                val rs: ResultSet = stmt.executeQuery(query)
-                while (rs.next()) {
-                    adminType = rs.getString("adminType")
-                }
-            } catch (e: SQLException) {
-                e.printStackTrace()
-            }
-
-            if (adminType == "ADMIN") {
-                return  "ADMIN"
-            } else {
-                return "CASHIER"
-            }
-        }
     }
 
 }
