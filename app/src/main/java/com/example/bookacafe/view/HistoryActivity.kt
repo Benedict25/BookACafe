@@ -43,7 +43,7 @@ class HistoryActivity : AppCompatActivity() {
 //            listHistory.add(history)
 //        }
 
-        val listHistory = MemberControllers.ShowHistory()
+        var listHistory = MemberControllers.ShowHistory()
         return listHistory
     }
 }
