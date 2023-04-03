@@ -40,7 +40,7 @@ class Register : AppCompatActivity() {
         registerButton.setOnClickListener {
             val control: RegisterControllers = RegisterControllers()
             val user = User("", firstNameET.text.toString(), lastNameET.text.toString(), emailET.text.toString(), passwordET.text.toString())
-            val isRegistered = control.registerUser(user, checkPasswordET.toString())
+            val isRegistered = control.registerUser(user, checkPasswordET.text.toString())
 
             if (isRegistered) {
                 Toast.makeText(applicationContext, "Registered, Please Login", Toast.LENGTH_SHORT).show()

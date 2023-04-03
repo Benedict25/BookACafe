@@ -12,6 +12,7 @@ import com.example.bookacafe.R
 import com.example.bookacafe.controller.ActiveUser
 import com.example.bookacafe.controller.LoginControllers
 import com.example.bookacafe.controller.RegisterControllers
+import com.example.bookacafe.controller.UserControllers
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -94,10 +95,13 @@ class Login : AppCompatActivity() {
                 var acct: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
 
                 if (acct != null){
+                    val activeEmail = acct.email.toString()
                     val control: RegisterControllers = RegisterControllers()
-                    val accountExists: Boolean = control.checkAccountExistence(acct.email.toString())
+                    val accountExists: Boolean = control.checkAccountExistence(activeEmail)
                     // Check kalau user google sudah terdaftar di database = langsung ke home, kalau belum = lengkapin data
                     if (accountExists) {
+                        val control = UserControllers()
+                        control.setSingletonGoogle(activeEmail)
                         navigateToHomeScreen()
                     }else {
                         navigateToCompleteProfile()
