@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.ActiveUser
 import com.example.bookacafe.controller.LoginControllers
+import com.example.bookacafe.controller.RegisterControllers
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -80,6 +81,7 @@ class Login : AppCompatActivity() {
         var signInIntent = gsc.signInIntent
         startActivityForResult(signInIntent, 1000)
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1000){
@@ -92,9 +94,14 @@ class Login : AppCompatActivity() {
                 var acct: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
 
                 if (acct != null){
-//                    var activeName: String = acct.displayName.toString()
-//                    ActiveUser.setName(activeName)
-                    navigateToCompleteProfile()
+                    val control: RegisterControllers = RegisterControllers()
+                    val accountExists: Boolean = control.checkAccountExistence(acct.email.toString())
+                    // Check kalau user google sudah terdaftar di database = langsung ke home, kalau belum = lengkapin data
+                    if (accountExists) {
+                        navigateToHomeScreen()
+                    }else {
+                        navigateToCompleteProfile()
+                    }
                 }
 
             } catch (e: ApiException) {
@@ -110,7 +117,7 @@ class Login : AppCompatActivity() {
 //        startActivity(switchActivityIntent)
 
         // ini buat ke TestLogin
-        val intent = Intent(this@Login, MenuProfile::class.java) //numpang bentar ya ben
+        val intent = Intent(this@Login, TestLogin::class.java) //numpang bentar ya ben
         startActivity(intent)
 
 //        val intent = Intent(this@Login, HomePage::class.java)
