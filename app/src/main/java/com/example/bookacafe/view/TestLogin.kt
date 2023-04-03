@@ -34,7 +34,7 @@ class TestLogin : AppCompatActivity() {
         gsc = GoogleSignIn.getClient(this,gso)
 
         // Extract & display name & type from singleton
-        nameTextView.setText(ActiveUser.getName())
+        nameTextView.setText(ActiveUser.getFirstName())
         typeTextView.setText(ActiveUser.getType())
 
         // Button signOut

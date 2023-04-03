@@ -117,7 +117,7 @@ class Login : AppCompatActivity() {
 //        startActivity(switchActivityIntent)
 
         // ini buat ke TestLogin
-        val intent = Intent(this@Login, MenuProfile::class.java) //numpang bentar ya ben
+        val intent = Intent(this@Login, TestLogin::class.java) //numpang bentar ya ben
         startActivity(intent)
 
 //        val intent = Intent(this@Login, HomePage::class.java)
