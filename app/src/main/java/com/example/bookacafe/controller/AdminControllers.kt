@@ -19,8 +19,8 @@ class AdminControllers {
 
     fun getTotalIncome(): Int {
         var income = 0
-        val querySeat = "SELECT count(b.transactionId)*10000 as \"tableIncome\" FROM tables a JOIN transactions b ON a.tableId = b.tableId;"
-        val queryMenuOrdered = "SELECT sum(b.menuQuantity)*a.price as \"menuIncome\" FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId GROUP BY a.menuId;"
+        val querySeat = "SELECT count(b.transactionId)*10000 as \"tableIncome\" FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status != 'CANCELED';"
+        val queryMenuOrdered = "SELECT sum(b.menuQuantity)*a.price as \"menuIncome\" FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON b.transactionId = c.transactionId WHERE c.status != 'CANCELED' GROUP BY a.menuId;"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs1: ResultSet = stmt.executeQuery(querySeat)
@@ -59,7 +59,7 @@ class AdminControllers {
 
     fun getBookData(): ArrayList<AdminBookDetails> {
         val books: ArrayList<AdminBookDetails> = ArrayList()
-        val query = "SELECT a.title, sum(b.bookQuantity) as \"totalOrdered\", a.imagePath FROM books a JOIN detail_transactions b ON a.bookId = b.bookId GROUP BY a.bookId"
+        val query = "SELECT a.title, sum(b.bookQuantity) as \"totalOrdered\", a.imagePath FROM books a JOIN detail_transactions b ON a.bookId = b.bookId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' GROUP BY a.bookId"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -79,7 +79,7 @@ class AdminControllers {
 
     fun getFoodData(): ArrayList<AdminMenuDetails> {
         val foods: ArrayList<AdminMenuDetails> = ArrayList()
-        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"foodIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId WHERE a.type = \"FOOD\" GROUP BY a.menuId"
+        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"foodIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' AND a.type = \"FOOD\" GROUP BY a.menuId"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -99,7 +99,7 @@ class AdminControllers {
 
     fun getBeverageData(): ArrayList<AdminMenuDetails> {
         val beverages: ArrayList<AdminMenuDetails> = ArrayList()
-        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"beverageIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId WHERE a.type = \"BEVERAGE\" GROUP BY a.menuId"
+        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"beverageIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' AND a.type = \"BEVERAGE\" GROUP BY a.menuId"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -119,7 +119,7 @@ class AdminControllers {
 
     fun getSeatData():ArrayList<TableDummy> {
         val seats: ArrayList<TableDummy> = ArrayList()
-        val query = "SELECT a.tableName, count(b.transactionId) as \"totalBooked\", count(b.transactionId)*10000 as \"tableIncome\" FROM tables a JOIN transactions b ON a.tableId = b.tableId GROUP BY a.tableId"
+        val query = "SELECT a.tableName, count(b.transactionId) as \"totalBooked\", count(b.transactionId)*10000 as \"tableIncome\" FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status != 'CANCELED' GROUP BY a.tableId"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
