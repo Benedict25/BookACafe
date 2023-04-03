@@ -15,7 +15,7 @@ class ListHistoryAdapter(private val listHistory: ArrayList<Transaction>) :
         fun bind(history: Transaction) {
             with(binding) {
                 tvHistoryInvoiceNumber.text = "Invoice Number: " + history.transactionId
-                tvHistoryInvoiceDate.text = history.checkedIn
+                tvHistoryInvoiceDate.text = history.checkedIn.toString() // maap ben
             }
         }
     }

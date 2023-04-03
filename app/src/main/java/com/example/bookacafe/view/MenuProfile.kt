@@ -10,13 +10,19 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookacafe.R
+import com.example.bookacafe.controller.ActiveUser
+import com.example.bookacafe.model.User
 
 class MenuProfile: AppCompatActivity(), View.OnClickListener {
+    private val user = ActiveUser;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profile_screen)
         supportActionBar?.hide()
+
+        // test print bang
+        print("Namanya: "+user.getFirstName())
 
         val btnHistory: Button = findViewById(R.id.btn_history)
         val btnLogout: Button = findViewById(R.id.btn_logout)
@@ -27,16 +33,16 @@ class MenuProfile: AppCompatActivity(), View.OnClickListener {
         val editPassword: EditText = findViewById(R.id.edit_password)
 
         // Make All Fields Not Editable
-        editFirstName.setText("Benedict Ivan")
+        editFirstName.setText(user.getFirstName())
         editFirstName.isEnabled = false
 
-        editLastName.setText("Iskandar")
+        editLastName.setText(user.getLastName())
         editLastName.isEnabled = false
 
-        editEmail.setText("benedictivan@iskandar.com")
+        editEmail.setText(user.getEmail())
         editEmail.isEnabled = false
 
-        editPassword.setText("inipassword")
+        editPassword.setText(user.getPassword())
         editPassword.isEnabled = false
         editPassword.transformationMethod = PasswordTransformationMethod.getInstance()
 

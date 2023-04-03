@@ -1,10 +1,14 @@
 package com.example.bookacafe.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 class DetailTransaction (
-    detailTransactionId: Int,
-    books: Book,
-    bookQuantity: Int,
-    menu: Menu,
-    menuQuantity: Int,
-    status: DetailTransEnum
-)
+    //var detailTransactionId: Int,
+    var books: String, // nnti ganti ke book!
+    var bookQuantity: Int,
+    var menu: String, // nnti ganti ke menu!
+    var menuQuantity: Int,
+    var status: DetailTransEnum
+): Parcelable

@@ -33,11 +33,15 @@ class LoginControllers {
 
             if (isLoggedIn){
                 ActiveUser.setId(user.userId)
-                ActiveUser.setName(user.firstName)
-
+                ActiveUser.setFirstName(user.firstName)
+                ActiveUser.setLastName(user.lastName)
+                ActiveUser.setEmail(user.email)
+                ActiveUser.setPassword(user.password)
+                
+                // Check userType dari alphabet depan userId
                 val userId = user.userId.subSequence(0, 1)
                 ActiveUser.setType(checkUserType(user, userId.toString()))
-
+                
                 return true
             } else {
                 return false

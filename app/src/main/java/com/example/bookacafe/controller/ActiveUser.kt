@@ -5,31 +5,61 @@ object ActiveUser {
     // Singleton
 
     private var id: String = "NoId"
-    private var name: String = "NoUser"
+    private var firstName: String = "NoFirstName"
+    private var lastName: String = "NoLastName"
+    private var email: String = "NoEmail"
+    private var password: String = "NoPassword"
     private var userType: String = "NoType" // MEMBER, ADMIN, CASHIER
-
-    fun setId(id: String){
+    
+    // Setter
+    
+    fun setId(id: String) {
         this.id = id
     }
 
-    fun setName(name: String){
-        this.name = name
+    fun setFirstName(firstName: String) {
+        this.firstName = firstName
+    }
+
+    fun setLastName(lastName: String) {
+        this.lastName = lastName
+    }
+
+    fun setEmail(email: String) {
+        this.email = email
+    }
+
+    fun setPassword(password: String) {
+        this.password = password
     }
 
     fun setType(userType: String){
         this.userType = userType
     }
+    
+    // Getter
 
     fun getId(): String {
         return this.id
     }
 
-    fun getName(): String {
-        return this.name
+    fun getFirstName(): String {
+        return this.firstName
+    }
+    
+    fun getLastName(): String {
+        return this.lastName
     }
 
-    fun getType(): String {
+    fun getEmail(): String {
+        return this.email
+    }
+
+    fun getPassword(): String {
+        return this.password
+    }
+    
+     fun getType(): String {
         return this.userType
     }
-
 }
