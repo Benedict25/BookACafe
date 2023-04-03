@@ -8,6 +8,7 @@
     <string name="password">Password</string>
     <string name="back">Back</string>
     <string name="seeDetails">see details</string>
+    <string name="retypePassword">Re-type Password</string>
 
     <!-- Login String -->
     <string name="loginTitle">Login</string>
@@ -17,8 +18,11 @@
 
     <!-- Register String -->
     <string name="registerTitle">Register</string>
-    <string name="retypePassword">Re-type Password</string>
     <string name="registerButton">REGISTER</string>
+
+    <!-- Complete Profile String -->
+    <string name="completeTitle">Complete Your Profile</string>
+    <string name="completeButton">I\'m Ready!</string>
 
     <!-- Cart String -->
     <string name="cartTitle">Cart</string>

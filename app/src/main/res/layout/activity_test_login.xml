@@ -16,12 +16,20 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:id="@+id/testLogin"
+        android:id="@+id/testLoginName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/testLoginType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UserType"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/testLoginName"/>
 
     <Button
         android:id="@+id/testSignout"
@@ -29,6 +37,6 @@
         android:layout_height="wrap_content"
         android:text="Signout"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/testLogin" />
+        android:layout_below="@+id/testLoginType" />
 
 </RelativeLayout>

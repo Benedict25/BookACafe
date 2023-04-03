@@ -17,6 +17,7 @@ class TestLogin : AppCompatActivity() {
     lateinit var gso: GoogleSignInOptions
     lateinit var gsc: GoogleSignInClient
     lateinit var nameTextView: TextView
+    lateinit var typeTextView: TextView
     lateinit var signout: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,15 +25,17 @@ class TestLogin : AppCompatActivity() {
         setContentView(R.layout.activity_test_login)
         supportActionBar?.hide()
 
-        nameTextView = findViewById(R.id.testLogin)
+        nameTextView = findViewById(R.id.testLoginName)
+        typeTextView = findViewById(R.id.testLoginType)
         signout = findViewById(R.id.testSignout)
 
         // Biar bisa signout
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
         gsc = GoogleSignIn.getClient(this,gso)
 
-        // Extract & display name from singleton
+        // Extract & display name & type from singleton
         nameTextView.setText(ActiveUser.getName())
+        typeTextView.setText(ActiveUser.getType())
 
         // Button signOut
         signout.setOnClickListener {
