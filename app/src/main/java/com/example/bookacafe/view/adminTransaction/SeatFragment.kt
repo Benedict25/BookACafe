@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.bookacafe.R;
+import com.example.bookacafe.controller.AdminControllers
 import com.example.bookacafe.model.adminDataDetails.TableDummy
 
 class SeatFragment: Fragment() {
@@ -24,24 +25,8 @@ class SeatFragment: Fragment() {
         recyclerView = view.findViewById<RecyclerView>(R.id.rv_seats)
         recyclerView.setHasFixedSize(true)
         recyclerView.setLayoutManager(LinearLayoutManager(context))
-        recyclerView.setAdapter(ListSeatAdapter(getListSeats()))
+        recyclerView.setAdapter(ListSeatAdapter(AdminControllers().getSeatData()))
 
         return view
     }
-
-    fun getListSeats(): ArrayList<TableDummy> {
-        val dataName = resources.getStringArray(R.array.seatNum)
-        val dataDescription = resources.getStringArray(R.array.seatDesc)
-
-        val listSeats = ArrayList<TableDummy>()
-        for (position in dataName.indices) {
-            val seat = TableDummy(
-                dataName[position],
-                dataDescription[position]
-            )
-            listSeats.add(seat)
-        }
-        return listSeats
-    }
-
 }
