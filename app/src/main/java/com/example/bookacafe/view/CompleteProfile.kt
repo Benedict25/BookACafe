@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.LoginControllers
 import com.example.bookacafe.controller.RegisterControllers
+import com.example.bookacafe.controller.UserControllers
 import com.example.bookacafe.model.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -42,10 +43,14 @@ class CompleteProfile : AppCompatActivity() {
         completeButton.setOnClickListener {
             val control = RegisterControllers()
             val user = User("", firstNameET.text.toString(), lastNameET.text.toString(), activeEmail, passwordET.text.toString())
-            val isRegistered = control.registerUser(user, checkPasswordET.toString())
+            val isRegistered = control.registerUser(user, checkPasswordET.text.toString())
 
             if (isRegistered) {
                 Toast.makeText(applicationContext, "Welcome!", Toast.LENGTH_SHORT).show()
+
+                val control = UserControllers()
+                control.setSingletonGoogle(activeEmail)
+
                 navigateToHomeScreen()
             } else {
                 Toast.makeText(applicationContext, "Registration Error!", Toast.LENGTH_SHORT).show()

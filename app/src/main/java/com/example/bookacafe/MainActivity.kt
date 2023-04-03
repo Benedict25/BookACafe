@@ -17,16 +17,16 @@ class MainActivity : AppCompatActivity() {
 //        val intent = Intent(this@MainActivity, ShowTransactions::class.java)
 //        startActivity(intent)
 
-        val intent = Intent(this@MainActivity, DisabledUserMenu::class.java)
-        startActivity(intent)
+//        val intent = Intent(this@MainActivity, DisabledUserMenu::class.java)
+//        startActivity(intent)
 
 //        // Hide action bar yang di atas aplikasi
 //        supportActionBar?.hide()
 //
-//        // Pindah dari splash screen ke Home (delay 2 detik)
-//        Handler().postDelayed({
-//            val intent = Intent(this@MainActivity, Login::class.java)
-//            startActivity(intent)
-//        }, 2000)
+        // Pindah dari splash screen ke Home (delay 2 detik)
+        Handler().postDelayed({
+            val intent = Intent(this@MainActivity, Login::class.java)
+            startActivity(intent)
+        }, 2000)
     }
 }

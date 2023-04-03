@@ -46,4 +46,29 @@ class UserControllers {
         ActiveUser.setType(userType)
     }
 
+    fun setSingletonGoogle(inputEmail: String) {
+        var user: User = User("", "", "", "", "")
+        val query = "SELECT * FROM users WHERE email = '$inputEmail'"
+
+        try {
+            val stmt: Statement = con!!.createStatement()
+            val rs: ResultSet = stmt.executeQuery(query)
+
+            while (rs.next()) {
+                user = User(
+                    rs.getString("userId"),
+                    rs.getString("firstName"),
+                    rs.getString("lastName"),
+                    rs.getString("email"),
+                    rs.getString("password")
+                )
+            }
+
+            val userType = checkUserType(user.userId)
+            setSingleton(user, userType)
+        } catch (e: SQLException) {
+            e.printStackTrace()
+        }
+    }
+
 }
