@@ -1,9 +1,14 @@
 package com.example.bookacafe.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+
+@Parcelize
 class User(
-    userId: Int,
-    firstName: String,
-    lastName: String,
-    email: String,
-    password: String
-)
+    var userId: String,
+    var firstName: String,
+    var lastName: String,
+    var email: String,
+    var password: String
+) : Parcelable

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.bookacafe.R;
-import com.example.bookacafe.model.adminDummy.MenuDummy
+import com.example.bookacafe.controller.AdminControllers
 
 class FoodFragment: Fragment() {
 
@@ -23,25 +23,8 @@ class FoodFragment: Fragment() {
         recyclerView = view.findViewById<RecyclerView>(R.id.rv_foods)
         recyclerView.setHasFixedSize(true)
         recyclerView.setLayoutManager(LinearLayoutManager(context))
-        recyclerView.setAdapter(ListFoodAdapter(getListFoods()))
+        recyclerView.setAdapter(ListFoodAdapter(AdminControllers().getFoodData()))
 
         return view
-    }
-
-    fun getListFoods(): ArrayList<MenuDummy> {
-        val dataName = resources.getStringArray(R.array.foodName)
-        val dataDescription = resources.getStringArray(R.array.foodDesc)
-        val dataPict = resources.obtainTypedArray(R.array.foodPict)
-
-        val listFoods = ArrayList<MenuDummy>()
-        for (position in dataName.indices) {
-            val food = MenuDummy(
-                dataPict.getResourceId(position,-1),
-                dataName[position],
-                dataDescription[position]
-            )
-            listFoods.add(food)
-        }
-        return listFoods
     }
 }

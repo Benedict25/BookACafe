@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.bookacafe.databinding.ItemRowBeverageBinding
-import com.example.bookacafe.model.adminDummy.MenuDummy
+import com.example.bookacafe.model.adminDataDetails.MenuDummy
 
 class ListBeverageAdapter(private val listBeverage: ArrayList<MenuDummy>) :  RecyclerView.Adapter<ListBeverageAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {
@@ -24,7 +24,7 @@ class ListBeverageAdapter(private val listBeverage: ArrayList<MenuDummy>) :  Rec
         fun bind(menu: MenuDummy) {
             with(binding){
                 Glide.with(itemView)
-                    .load(itemView.resources.getDrawable(menu.menuPict))
+                    .load(menu.menuPict)
                     .apply(RequestOptions().override(55, 55))
                     .into(imgBeveragePhoto)
                 tvItemName.text = menu.menuName

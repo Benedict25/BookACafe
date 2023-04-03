@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.bookacafe.R;
+import com.example.bookacafe.controller.AdminControllers
 import com.example.bookacafe.databinding.AdminTransactionBinding
-import com.example.bookacafe.model.adminDummy.BookDummy
-import com.example.bookacafe.model.adminDummy.MemberDummy
+import com.example.bookacafe.model.adminDataDetails.MemberDummy
 
 class BookFragment: Fragment() {
 
@@ -28,25 +28,8 @@ class BookFragment: Fragment() {
         recyclerView = view.findViewById<RecyclerView>(R.id.rv_books)
         recyclerView.setHasFixedSize(true)
         recyclerView.setLayoutManager(LinearLayoutManager(context))
-        recyclerView.setAdapter(ListBookAdapter(getListBooks()))
+        recyclerView.setAdapter(ListBookAdapter(AdminControllers().getBookData()))
 
         return view
-    }
-
-    fun getListBooks(): ArrayList<BookDummy> {
-        val dataName = resources.getStringArray(R.array.bookName)
-        val dataDescription = resources.getStringArray(R.array.bookDesc)
-        val dataPict = resources.obtainTypedArray(R.array.bookPict)
-
-        val listBooks = ArrayList<BookDummy>()
-        for (position in dataName.indices) {
-            val book = BookDummy(
-                dataPict.getResourceId(position,-1),
-                dataName[position],
-                dataDescription[position]
-            )
-            listBooks.add(book)
-        }
-        return listBooks
     }
 }

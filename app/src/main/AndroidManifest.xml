@@ -15,6 +15,9 @@
         android:theme="@style/Theme.BookACafe"
         tools:targetApi="31">
         <activity
+            android:name=".view.CompleteProfile"
+            android:exported="false" />
+        <activity
             android:name=".view.TestLogin"
             android:exported="false" />
         <activity
@@ -36,6 +39,12 @@
             android:name=".view.HomePage"
             android:exported="false"
             android:label="Home" />
+        <activity
+            android:name=".view.MenuFnB"
+            android:exported="false" />
+        <activity
+            android:name=".view.BillActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -69,6 +78,13 @@
         <activity
             android:name=".view.MenuBook"
             android:exported="false" />
+        <activity
+            android:name=".view.AdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.CashierActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

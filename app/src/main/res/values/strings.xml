@@ -8,6 +8,7 @@
     <string name="password">Password</string>
     <string name="back">Back</string>
     <string name="seeDetails">see details</string>
+    <string name="retypePassword">Re-type Password</string>
 
     <!-- Login String -->
     <string name="loginTitle">Login</string>
@@ -17,8 +18,11 @@
 
     <!-- Register String -->
     <string name="registerTitle">Register</string>
-    <string name="retypePassword">Re-type Password</string>
     <string name="registerButton">REGISTER</string>
+
+    <!-- Complete Profile String -->
+    <string name="completeTitle">Complete Your Profile</string>
+    <string name="completeButton">I\'m Ready!</string>
 
     <!-- Cart String -->
     <string name="cartTitle">Cart</string>
@@ -154,239 +158,18 @@
     <string name="food_description">
         Deskripsi
     </string>
-    <!-- Food Dummy -->
-    <string-array name="foodName">
-        <item>Boiled Potatoes</item>
-        <item>Burgir</item>
-        <item>Fetucina</item>
-        <item>Wonton Cingcong</item>
-        <item>Cow Nugget</item>
-        <item>Charred Rice</item>
-        <item>Hail Salad</item>
-        <item>Malaymie</item>
-    </string-array>
-    <string-array name="foodDesc">
-        <item>
-            Total Ordered: 2\nIncome: Rp 50.000,-
-        </item>
-        <item>
-            Total Ordered: 2\nIncome: Rp 50.000,-
-        </item>
-        <item>
-            Total Ordered: 2\nIncome: Rp 50.000,-
-        </item>
-        <item>
-            Total Ordered: 2\nIncome: Rp 50.000,-
-        </item>
-        <item>
-            Total Ordered: 2\nIncome: Rp 50.000,-
-        </item>
-        <item>
-            Total Ordered: 2\nIncome: Rp 50.000,-
-        </item>
-        <item>
-            Total Ordered: 2\nIncome: Rp 50.000,-
-        </item>
-        <item>
-            Total Ordered: 2\nIncome: Rp 50.000,-
-        </item>
-    </string-array>
-    <string-array name="foodPict">
-        <item>@drawable/food_1</item>
-        <item>@drawable/food_2</item>
-        <item>@drawable/food_3</item>
-        <item>@drawable/food_4</item>
-        <item>@drawable/food_5</item>
-        <item>@drawable/food_6</item>
-        <item>@drawable/food_7</item>
-        <item>@drawable/food_8</item>
-    </string-array>
 
     <!-- Beverage Transactions -->
     <string name="beverage_name">Beverage Menu</string>
     <string name="beverage_description">
         Deskripsi
     </string>
-    <!-- Beverage Dummy -->
-    <string-array name="beverageName">
-        <item>Cinamon Coktail</item>
-        <item>Lemon Coktail</item>
-        <item>Melemon Milk</item>
-        <item>Merry Squash</item>
-        <item>Milky Cokelate</item>
-        <item>Orange Juice</item>
-        <item>Sprite and Leaf</item>
-        <item>Strobucat</item>
-    </string-array>
-    <string-array name="beverageDesc">
-        <item>
-            Total Ordered: 2\nIncome: Rp 50.000,-
-        </item>
-        <item>
-            Total Ordered: 2\nIncome: Rp 50.000,-
-        </item>
-        <item>
-            Total Ordered: 2\nIncome: Rp 50.000,-
-        </item>
-        <item>
-            Total Ordered: 2\nIncome: Rp 50.000,-
-        </item>
-        <item>
-            Total Ordered: 2\nIncome: Rp 50.000,-
-        </item>
-        <item>
-            Total Ordered: 2\nIncome: Rp 50.000,-
-        </item>
-        <item>
-            Total Ordered: 2\nIncome: Rp 50.000,-
-        </item>
-        <item>
-            Total Ordered: 2\nIncome: Rp 50.000,-
-        </item>
-    </string-array>
-    <string-array name="beveragePict">
-        <item>@drawable/beverage_1</item>
-        <item>@drawable/beverage_2</item>
-        <item>@drawable/beverage_3</item>
-        <item>@drawable/beverage_4</item>
-        <item>@drawable/beverage_5</item>
-        <item>@drawable/beverage_6</item>
-        <item>@drawable/beverage_7</item>
-        <item>@drawable/beverage_8</item>
-    </string-array>
 
     <!-- Book Transactions -->
     <string name="book_name">Book Title</string>
     <string name="book_description">
         Deskripsi
     </string>
-    <!-- Beverage Dummy -->
-    <string-array name="bookName">
-        <item>Bumi</item>
-        <item>Summer in Seoul</item>
-        <item>Modern Operating System</item>
-        <item>Bulan</item>
-        <item>Winter in Tokyo</item>
-        <item>Software Engineering</item>
-        <item>Matahari</item>
-        <item>Spring in London</item>
-        <item>Why Series: Microorganism</item>
-        <item>Bintang</item>
-        <item>Autumn in Paris</item>
-        <item>Why Series: Fossil</item>
-        <item>Ceros dan Batozar</item>
-        <item>Sunshine Becomes You</item>
-        <item>Why Series: Weather</item>
-        <item>Komet</item>
-        <item>In a Blue Ocean</item>
-        <item>Why Series: Disease</item>
-        <item>Komet Minor</item>
-        <item>Autumn Once More</item>
-        <item>Why Series: Anatomy</item>
-        <item>Selena</item>
-        <item>The Star and I</item>
-        <item>Why Series: Medication and Treatment</item>
-    </string-array>
-    <string-array name="bookDesc">
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-        <item>
-            Total Ordered: 5
-        </item>
-    </string-array>
-    <string-array name="bookPict">
-        <item>@drawable/fantasy_1</item>
-        <item>@drawable/romance_1</item>
-        <item>@drawable/science_1</item>
-        <item>@drawable/fantasy_2</item>
-        <item>@drawable/romance_2</item>
-        <item>@drawable/science_2</item>
-        <item>@drawable/fantasy_3</item>
-        <item>@drawable/romance_3</item>
-        <item>@drawable/science_3</item>
-        <item>@drawable/fantasy_4</item>
-        <item>@drawable/romance_4</item>
-        <item>@drawable/science_4</item>
-        <item>@drawable/fantasy_5</item>
-        <item>@drawable/romance_5</item>
-        <item>@drawable/science_5</item>
-        <item>@drawable/fantasy_6</item>
-        <item>@drawable/romance_6</item>
-        <item>@drawable/science_6</item>
-        <item>@drawable/fantasy_7</item>
-        <item>@drawable/romance_7</item>
-        <item>@drawable/science_7</item>
-        <item>@drawable/fantasy_8</item>
-        <item>@drawable/romance_8</item>
-        <item>@drawable/science_8</item>
-    </string-array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -607,30 +390,13 @@
     <!-- Profile Screen String-->
     <string name="profile">Profile</string>
 
-
     <!-- History Screen String-->
     <string name="title_history">History</string>
     <string name="invoice_number_history">Invoice Number: </string>
     <string name="invoice_date_history">Invoice Date</string>
-    <string-array name="invoice_number">
-        <item>INV-221225204</item>
-        <item>INV-230102666</item>
-        <item>INV-230107444</item>
-        <item>INV-230110066</item>
-        <item>INV-230115467</item>
-        <item>INV-230128777</item>
-        <item>INV-230128778</item>
-        <item>INV-230128779</item>
-    </string-array>
+    <string name="seat_display">A4</string>
+    <string name="kursi_a4">Kursi A4</string>
 
-    <string-array name="invoice_date">
-        <item>25/12/2022</item>
-        <item>02/01/2022</item>
-        <item>07/01/2023</item>
-        <item>10/01/2023</item>
-        <item>15/01/2023</item>
-        <item>28/01/2023</item>
-        <item>28/01/2023</item>
-        <item>28/01/2023</item>
-    </string-array>
+    <!--Untuk Dummy di Bill Screen-->
+
 </resources>
