@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.LoginControllers
+import com.example.bookacafe.controller.RegisterControllers
 import com.example.bookacafe.model.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -28,7 +30,7 @@ class CompleteProfile : AppCompatActivity() {
         // Get user's email from logged in Google user
         var acct: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
         if (acct != null){
-            activeEmail = acct.displayName.toString()
+            activeEmail = acct.email.toString()
         }
 
         firstNameET = findViewById(R.id.complete_first_name)
@@ -38,9 +40,16 @@ class CompleteProfile : AppCompatActivity() {
         completeButton = findViewById(R.id.complete_button)
 
         completeButton.setOnClickListener {
-            val control: LoginControllers = LoginControllers()
-            val user:User = User("", firstNameET.text.toString(), lastNameET.text.toString(), activeEmail, passwordET.text.toString())
+            val control = RegisterControllers()
+            val user = User("", firstNameET.text.toString(), lastNameET.text.toString(), activeEmail, passwordET.text.toString())
+            val isRegistered = control.registerUser(user, checkPasswordET.toString())
 
+            if (isRegistered) {
+                Toast.makeText(applicationContext, "Welcome!", Toast.LENGTH_SHORT).show()
+                navigateToHomeScreen()
+            } else {
+                Toast.makeText(applicationContext, "Registration Error!", Toast.LENGTH_SHORT).show()
+            }
         }
 
 

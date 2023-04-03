@@ -80,6 +80,7 @@ class Login : AppCompatActivity() {
         var signInIntent = gsc.signInIntent
         startActivityForResult(signInIntent, 1000)
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1000){
@@ -92,8 +93,9 @@ class Login : AppCompatActivity() {
                 var acct: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
 
                 if (acct != null){
-//                    var activeName: String = acct.displayName.toString()
-//                    ActiveUser.setName(activeName)
+                    // IF acc udh ad dalem db
+                        // navigateToHomeScreen()
+                    // ELSE
                     navigateToCompleteProfile()
                 }
 
