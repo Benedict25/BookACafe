@@ -2,7 +2,9 @@ package com.example.bookacafe.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import java.sql.Time
 import java.sql.Timestamp
+import java.time.LocalDateTime
 
 @Parcelize
 class Transaction(
