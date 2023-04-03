@@ -61,4 +61,22 @@ class RegisterControllers {
 
         return returnId
     }
+
+    fun checkAccountExistence(emailCheck: String): Boolean {
+        val query = "SELECT * FROM users WHERE email = '$emailCheck'"
+
+        try {
+            val stmt: Statement = con!!.createStatement()
+            val rs: ResultSet = stmt.executeQuery(query)
+
+            if (rs.first() == false) { // No result ; Email tidak ada di database
+                return false
+            }
+
+        } catch (e: SQLException) {
+            e.printStackTrace()
+        }
+
+        return true
+    }
 }

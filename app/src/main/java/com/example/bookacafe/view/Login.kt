@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.ActiveUser
 import com.example.bookacafe.controller.LoginControllers
+import com.example.bookacafe.controller.RegisterControllers
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -93,10 +94,14 @@ class Login : AppCompatActivity() {
                 var acct: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
 
                 if (acct != null){
-                    // IF acc udh ad dalem db
-                        // navigateToHomeScreen()
-                    // ELSE
-                    navigateToCompleteProfile()
+                    val control: RegisterControllers = RegisterControllers()
+                    val accountExists: Boolean = control.checkAccountExistence(acct.email.toString())
+                    // Check kalau user google sudah terdaftar di database = langsung ke home, kalau belum = lengkapin data
+                    if (accountExists) {
+                        navigateToHomeScreen()
+                    }else {
+                        navigateToCompleteProfile()
+                    }
                 }
 
             } catch (e: ApiException) {
