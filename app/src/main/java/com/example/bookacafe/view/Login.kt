@@ -2,7 +2,6 @@ package com.example.bookacafe.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -12,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.ActiveUser
 import com.example.bookacafe.controller.LoginControllers
-import com.example.bookacafe.view.adminTransaction.ShowTransactions
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -48,17 +46,13 @@ class Login : AppCompatActivity() {
 
             if (successLogin){
                 Toast.makeText(applicationContext, "Welcome!", Toast.LENGTH_SHORT).show()
-                navigateToSecondActivity()
+                navigateToHomeScreen()
             } else {
                 Toast.makeText(applicationContext, "No Account Found!", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Google Login
-        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
-        gsc = GoogleSignIn.getClient(this,gso)
-        googleButton = findViewById(R.id.login_google)
-
+        // To Register
         val signupButton: TextView = findViewById(R.id.login_description)
 
         signupButton.setOnClickListener {
@@ -66,10 +60,15 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Google Login
+        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
+        gsc = GoogleSignIn.getClient(this,gso)
+        googleButton = findViewById(R.id.login_google)
+
         // Kalau udh login, kluar app tapi ga sign out, pas masuk lgi jdnya langsung login otomatis
         var acct: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
         if (acct != null) {
-            navigateToSecondActivity()
+            navigateToHomeScreen()
         }
 
         googleButton.setOnClickListener {
@@ -93,19 +92,18 @@ class Login : AppCompatActivity() {
                 var acct: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
 
                 if (acct != null){
-                    var activeName: String = acct.displayName.toString()
-                    // Save to singleton before continuing to next activity
-                    ActiveUser.setFirstName(activeName)
+//                    var activeName: String = acct.displayName.toString()
+//                    ActiveUser.setName(activeName)
+                    navigateToCompleteProfile()
                 }
 
-                navigateToSecondActivity()
             } catch (e: ApiException) {
-                Toast.makeText(applicationContext, "Something Went Wrong!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Google Error!", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    fun navigateToSecondActivity(){
+    fun navigateToHomeScreen(){
         finish()
         //ini buat direct ke admin yang transactions.. nanti di ganti ganti lagi aja
 //        val switchActivityIntent = Intent(this, ShowTransactions::class.java)
@@ -119,4 +117,9 @@ class Login : AppCompatActivity() {
 //        startActivity(intent)
     }
 
+    fun navigateToCompleteProfile() {
+        finish()
+        val intent = Intent(this@Login, CompleteProfile::class.java)
+        startActivity(intent)
+    }
 }

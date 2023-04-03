@@ -2,14 +2,17 @@ package com.example.bookacafe.controller
 
 object ActiveUser {
 
-    // Singleton to save the id & the name of a logged in user
+    // Singleton
 
     private var id: String = "NoId"
     private var firstName: String = "NoFirstName"
     private var lastName: String = "NoLastName"
     private var email: String = "NoEmail"
     private var password: String = "NoPassword"
-
+    private var userType: String = "NoType" // MEMBER, ADMIN, CASHIER
+    
+    // Setter
+    
     fun setId(id: String) {
         this.id = id
     }
@@ -30,6 +33,12 @@ object ActiveUser {
         this.password = password
     }
 
+    fun setType(userType: String){
+        this.userType = userType
+    }
+    
+    // Getter
+
     fun getId(): String {
         return this.id
     }
@@ -37,7 +46,7 @@ object ActiveUser {
     fun getFirstName(): String {
         return this.firstName
     }
-
+    
     fun getLastName(): String {
         return this.lastName
     }
@@ -49,6 +58,8 @@ object ActiveUser {
     fun getPassword(): String {
         return this.password
     }
-
-
+    
+     fun getType(): String {
+        return this.userType
+    }
 }
