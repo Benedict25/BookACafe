@@ -12,18 +12,15 @@ import com.example.bookacafe.view.adminTransaction.ShowTransactions
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.bill_screen)
-
-        val intent = Intent(this@MainActivity, ShowTransactions::class.java)
-        startActivity(intent)
+        setContentView(R.layout.image_slider_item)
 
         // Hide action bar yang di atas aplikasi
-//        supportActionBar?.hide()
+        supportActionBar?.hide()
 
         // Pindah dari splash screen ke Home (delay 2 detik)
-//        Handler().postDelayed({
-//            val intent = Intent(this@MainActivity, Login::class.java)
-//            startActivity(intent)
-//        }, 2000)
+        Handler().postDelayed({
+            val intent = Intent(this@MainActivity, Login::class.java)
+            startActivity(intent)
+        }, 2000)
     }
 }
