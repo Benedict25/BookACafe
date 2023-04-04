@@ -127,7 +127,6 @@ class MenuBook : AppCompatActivity(), View.OnClickListener {
                 book.title + " added to cart.",
                 Toast.LENGTH_SHORT
             ).show()
-            TODO("Book Controllers: Add to Cart")
             dialog.dismiss()
         }
 
