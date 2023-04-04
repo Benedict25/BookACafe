@@ -47,7 +47,6 @@ class FirstFragment:Fragment(R.layout.fragment_first) {
             startActivity(intent)
         }
         myClickableText.setOnClickListener {
-
             val intent = Intent(context, MenuCart::class.java)
             startActivity(intent)
         }
