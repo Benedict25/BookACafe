@@ -12,7 +12,7 @@ import com.example.bookacafe.view.adminTransaction.ShowTransactions
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.image_slider_item)
+        setContentView(R.layout.activity_main)
 
 //        val intent = Intent(this@MainActivity, ShowTransactions::class.java)
 //        startActivity(intent)

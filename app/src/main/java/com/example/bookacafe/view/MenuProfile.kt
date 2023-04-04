@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.ActiveUser
 import com.example.bookacafe.model.User
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 class MenuProfile: AppCompatActivity(), View.OnClickListener {
     private val user = ActiveUser;
@@ -59,11 +61,18 @@ class MenuProfile: AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.btn_logout -> {
-                val moveIntent = Intent(this@MenuProfile, Login::class.java)
-                startActivity(moveIntent)
+                var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
+                var gsc = GoogleSignIn.getClient(this,gso)
 
-                val logout_toast = Toast.makeText(applicationContext, "Logging Out from BookACafe", Toast.LENGTH_SHORT)
-                logout_toast.show()
+                gsc.signOut().addOnCompleteListener {
+                    finish()
+
+                    val moveIntent = Intent(this@MenuProfile, Login::class.java)
+                    startActivity(moveIntent)
+
+                    val logout_toast = Toast.makeText(applicationContext, "Logging Out from BookACafe", Toast.LENGTH_SHORT)
+                    logout_toast.show()
+                }
             }
         }
     }
