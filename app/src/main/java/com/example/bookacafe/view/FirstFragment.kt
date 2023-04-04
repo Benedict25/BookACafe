@@ -11,10 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager.widget.ViewPager
 import com.example.bookacafe.R
-import com.example.bookacafe.view.HomePage
-import com.example.bookacafe.view.MenuCart
-import com.example.bookacafe.view.MenuProfile
-import com.example.bookacafe.view.ViewPagerAdapter
+import com.example.bookacafe.view.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import java.util.*
@@ -47,7 +44,7 @@ class FirstFragment:Fragment(R.layout.fragment_first) {
             startActivity(intent)
         }
         myClickableText.setOnClickListener {
-            val intent = Intent(context, MenuCart::class.java)
+            val intent = Intent(context, BillActivity::class.java)
             startActivity(intent)
         }
 //        myClickableText.setOnClickListener {
