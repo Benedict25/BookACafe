@@ -1,3 +1,4 @@
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.viewpager.widget.ViewPager
 import com.example.bookacafe.R
 import com.example.bookacafe.view.HomePage
+import com.example.bookacafe.view.MenuCart
+import com.example.bookacafe.view.MenuProfile
 import com.example.bookacafe.view.ViewPagerAdapter
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -40,37 +43,27 @@ class FirstFragment:Fragment(R.layout.fragment_first) {
         val myClickableText = view.findViewById<TextView>(R.id.seeDetails)
         val clickableImage: ImageButton = view.findViewById(R.id.imageProfile)
         clickableImage.setOnClickListener{
-            val mCategoryFragment = ThirdFragment()
-            val mFragmentManager = parentFragmentManager as FragmentManager
-            mFragmentManager
-                .beginTransaction()
-                .replace(
-                    R.id.fragment_container,
-                    mCategoryFragment,
-                    ThirdFragment::class.java.simpleName
-                )
-                .addToBackStack(null)
-                .commit()
+            val intent = Intent(context, MenuProfile::class.java)
+            startActivity(intent)
         }
         myClickableText.setOnClickListener {
-
-//            val newFragment = SecondFragment()
-//            val transaction = parentFragmentManager.beginTransaction()
-//            transaction.replace(R.id.fragment_container, newFragment)
-//            transaction.addToBackStack(null)
-//            transaction.commit()
-            val mCategoryFragment = SecondFragment()
-            val mFragmentManager = parentFragmentManager as FragmentManager
-            mFragmentManager
-                .beginTransaction()
-                .replace(
-                    R.id.fragment_container,
-                    mCategoryFragment,
-                    SecondFragment::class.java.simpleName
-                )
-                .addToBackStack(null)
-                .commit()
+            val intent = Intent(context, MenuCart::class.java)
+            startActivity(intent)
         }
+//        myClickableText.setOnClickListener {
+//
+//            val mCategoryFragment = SecondFragment()
+//            val mFragmentManager = parentFragmentManager as FragmentManager
+//            mFragmentManager
+//                .beginTransaction()
+//                .replace(
+//                    R.id.fragment_container,
+//                    mCategoryFragment,
+//                    SecondFragment::class.java.simpleName
+//                )
+//                .addToBackStack(null)
+//                .commit()
+//        }
 
         viewPager = view.findViewById(R.id.idViewPager)
 
@@ -113,22 +106,6 @@ class FirstFragment:Fragment(R.layout.fragment_first) {
         timer.cancel()
     }
 
-//    override fun onClick(v: View) {
-//        if (v.id == R.id.seeDetails) {
-//            val mCategoryFragment = SecondFragment()
-//            val mFragmentManager = parentFragmentManager as FragmentManager
-//            mFragmentManager
-//                .beginTransaction()
-//                .replace(
-//                    R.id.fragment_container,
-//                    mCategoryFragment,
-//                    SecondFragment::class.java.simpleName
-//                )
-//                .addToBackStack(null)
-//                .commit()
-//
-//        }
-//    }
 }
 
 
