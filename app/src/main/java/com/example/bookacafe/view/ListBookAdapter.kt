@@ -50,7 +50,6 @@ class ListBookAdapter(private val books : ArrayList<Book>) : RecyclerView.Adapte
                 book.title + " added to cart.",
                 Toast.LENGTH_SHORT
             ).show()
-            TODO("Book Controllers: Add to Cart")
         }
 
         val negativeButtonClick = { _: DialogInterface, _: Int ->
