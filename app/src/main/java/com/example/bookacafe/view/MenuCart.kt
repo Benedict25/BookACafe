@@ -1,9 +1,12 @@
 package com.example.bookacafe.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.R
@@ -19,6 +22,9 @@ class MenuCart : AppCompatActivity() {
     private lateinit var binding: ActivityMenuCartBinding
     private lateinit var cart: Cart
 
+    // Button
+    lateinit var cartTableCancel: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMenuCartBinding.inflate(layoutInflater)
@@ -28,13 +34,21 @@ class MenuCart : AppCompatActivity() {
         val control: CartControllers = CartControllers()
         cart = control.GetCartData()
 
-        setSeat(cart)
+        setTable(cart)
         showCartMenus()
         showCartBooks()
         setTotal(control.getTotalForCart())
+
+        cartTableCancel = findViewById(R.id.cartTableCancel)
+        cartTableCancel.setOnClickListener {
+            control.RemoveTableFromCart()
+            Toast.makeText(applicationContext, "Table ${cart.table.tableName} Removed", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this@MenuCart, MenuCart::class.java)
+            startActivity(intent)
+        }
     }
 
-    fun setSeat(cart: Cart) {
+    fun setTable(cart: Cart) {
         var cartRoomNumber: Button = findViewById(R.id.cartRoomNumber)
         var cartTableNumber: TextView = findViewById(R.id.cartTableNumber)
 
