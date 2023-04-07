@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bookacafe.controller.BookControllers
 import com.example.bookacafe.databinding.ItemBookBinding
 import com.example.bookacafe.model.Book
 import com.squareup.picasso.Picasso
@@ -45,18 +46,22 @@ class ListBookAdapter(private val books : ArrayList<Book>) : RecyclerView.Adapte
     }
 
     private fun showAddToCartDialog(book: Book) {
+        val addToCartDialog = AlertDialog.Builder(context)
+
         val positiveButtonClick = { _: DialogInterface, _: Int ->
             Toast.makeText(context,
                 book.title + " added to cart.",
                 Toast.LENGTH_SHORT
             ).show()
+            BookControllers().addBookToCart(book.bookId)
+            addToCartDialog.create().dismiss()
         }
 
         val negativeButtonClick = { _: DialogInterface, _: Int ->
 
         }
 
-        val addToCartDialog = AlertDialog.Builder(context)
+
         addToCartDialog.setTitle("Add to Cart")
             .setIcon(android.R.drawable.ic_dialog_info)
             .setMessage("You chose " + book.title)
