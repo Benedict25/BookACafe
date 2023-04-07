@@ -13,6 +13,7 @@ import com.example.bookacafe.controller.ActiveUser
 import com.example.bookacafe.controller.LoginControllers
 import com.example.bookacafe.controller.RegisterControllers
 import com.example.bookacafe.controller.UserControllers
+import com.example.bookacafe.view.adminTransaction.ShowTransactions
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -116,16 +117,13 @@ class Login : AppCompatActivity() {
 
     fun navigateToHomeScreen(){
         finish()
-        //ini buat direct ke admin yang transactions.. nanti di ganti ganti lagi aja
-//        val switchActivityIntent = Intent(this, ShowTransactions::class.java)
-//        startActivity(switchActivityIntent)
-
-        // ini buat ke TestLogin
-        val intent = Intent(this@Login, MenuProfile::class.java) //numpang bentar ya ben
-        startActivity(intent)
-
-//        val intent = Intent(this@Login, HomePage::class.java)
-//        startActivity(intent)
+        if (ActiveUser.getType() == "MEMBER") {
+            val intent = Intent(this@Login, HomePage::class.java)
+            startActivity(intent)
+        } else { // ADMIN / CASHIER
+            val intent = Intent(this@Login, ShowTransactions::class.java)
+            startActivity(intent)
+        }
     }
 
     fun navigateToCompleteProfile() {

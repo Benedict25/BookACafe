@@ -11,6 +11,7 @@ data class Menu (
 //    var description: String,
 //    var estimationTime: Integer,
 //    var type: String,
-    var imagePath: Int,
+//    var imagePath: Int,
+    var imagePath: String,
 //    var status: ItemTypeEnum
 ) : Parcelable

@@ -26,14 +26,14 @@
 
     <!-- Cart String -->
     <string name="cartTitle">Cart</string>
-    <string name="cartSeats">Seats</string>
+    <string name="cartTable">Table</string>
     <string name="cartFnb">Food and Beverages</string>
     <string name="cartBooks">Books</string>
     <string name="cartTotal">Total</string>
     <string name="cartOrderConfirm">Sure want to order?</string>
     <string name="cartOrder">ORDER</string>
     <string name="cartPayConfirm">Want to pay?</string>
-    <string name="cartPay">SHOW BILL</string>
+    <string name="cartPay">BILL &amp; PAY</string>
 
     <!-- Admin Menu String -->
     <string name="disabled_user_menu">Disabled User</string>
