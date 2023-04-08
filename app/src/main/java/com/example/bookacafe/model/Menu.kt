@@ -8,10 +8,9 @@ data class Menu (
     var menuId: String,
     var name: String,
     var price: Int,
-//    var description: String,
-//    var estimationTime: Integer,
-//    var type: String,
-//    var imagePath: Int,
+    var description: String,
+    var estimationTime: Int,
+    var type: String,
     var imagePath: String,
-//    var status: ItemTypeEnum
+    var status: ItemTypeEnum
 ) : Parcelable

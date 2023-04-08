@@ -1,32 +1,64 @@
 package com.example.bookacafe.view
 
-import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bookacafe.R
+import com.example.bookacafe.controller.MenuControllers
 import com.example.bookacafe.databinding.MenuFnbBinding
-import com.example.bookacafe.model.ListMenuAdapter
 import com.example.bookacafe.model.Menu
 import com.google.android.material.tabs.TabLayout
 
+
 class MenuFnB : AppCompatActivity(), View.OnClickListener {
 
-    private var tabLayout: TabLayout? = null
+
     private lateinit var binding: MenuFnbBinding
-    private val listMenu = ArrayList<Menu>()
-    private val menuType: Array<String> = arrayOf("Food", "Beverages")
-    private lateinit var menuId: Array<String>
-    private lateinit var menuName: Array<String>
-    private lateinit var menuPrice: IntArray
-    private lateinit var menuCover: TypedArray
+    private lateinit var searchView: SearchView
+    private var tabLayout: TabLayout? = null
+    private var menus = ArrayList<Menu>()
+    private var menuNames = ArrayList<String>()
     private var selectedTab: Int = 0
+    private val menuType: Array<String> = arrayOf("FOOD", "BEVERAGE")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MenuFnbBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Show Menus
+        getListMenus(selectedTab, "")
+        showMenus()
+
+        // Search View (per Type)
+        searchView = findViewById(R.id.search_view_menus)
+        for (menu in menus) {
+            menuNames.add(menu.name)
+        }
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (menuNames.contains(query)) {
+                    getListMenus(selectedTab, query.toString())
+                    showMenus()
+                } else {
+                    Toast.makeText(
+                        this@MenuFnB,
+                        "No menu found.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                getListMenus(selectedTab, newText.toString())
+                showMenus()
+                return false
+            }
+        })
 
         // Tab Layout & View Pager (Genre)
         tabLayout = findViewById(R.id.tl_menus)
@@ -37,63 +69,55 @@ class MenuFnB : AppCompatActivity(), View.OnClickListener {
 
         tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                listMenu.clear()
+                menus.clear()
                 selectedTab = tab.position
-                getListMenus(selectedTab)
+                searchView.setQuery("", false)
+                var queryHint = ""
+                when (selectedTab) {
+                    0 -> {
+                        queryHint = "Let's eat boom boom burgir!"
+                    }
+                    1 -> {
+                        queryHint = "Refresh your day with Merry Squash"
+                    }
+                }
+                searchView.queryHint = queryHint
+
+                getListMenus(selectedTab, "")
                 showMenus()
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
 
             }
+
             override fun onTabReselected(tab: TabLayout.Tab) {
 
             }
         })
-
-        // Show Books
-        getListMenus(selectedTab)
-        showMenus()
     }
 
     override fun onClick(p0: View?) {
 
     }
 
-    private fun getListMenus(selectedTab: Int) : ArrayList<Menu> {
+    private fun getListMenus(selectedTab: Int, inputText: String): ArrayList<Menu> {
         when (selectedTab) {
             0 -> {
-                // MASIH MANUAL
-                menuId = resources.getStringArray(R.array.food_menus_id)
-                menuName = resources.getStringArray(R.array.foodName)
-                menuPrice = resources.getIntArray(R.array.foodPrice)
-                menuCover = resources.obtainTypedArray(R.array.foodPict)
+                menus = MenuControllers().getMenuData(menuType[0].lowercase(), inputText)
             }
             1 -> {
-                // MASIH MANUAL
-                menuId = resources.getStringArray(R.array.beverage_menus_id)
-                menuName = resources.getStringArray(R.array.beverageName)
-                menuPrice = resources.getIntArray(R.array.beveragePrice)
-                menuCover = resources.obtainTypedArray(R.array.beveragePict)
+                menus = MenuControllers().getMenuData(menuType[1].lowercase(), inputText)
             }
         }
 
-        for (position in menuName.indices) {
-            val menu = Menu(
-                menuId[position],
-                menuName[position],
-                menuPrice[position],
-                menuCover.getResourceId(position, -1),
-            )
-            listMenu.add(menu)
-        }
-        return listMenu
+        return menus
     }
+
     fun showMenus() {
         binding.rvMenus.layoutManager = GridLayoutManager(this, 2)
-        val listMenuAdapter = ListMenuAdapter(listMenu)
+        val listMenuAdapter = ListMenuAdapter(menus)
         binding.rvMenus.adapter = listMenuAdapter
 
     }
-//    fun showMenuDetails() {}
 }

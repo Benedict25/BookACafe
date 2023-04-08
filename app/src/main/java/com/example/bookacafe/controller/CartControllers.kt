@@ -191,7 +191,11 @@ class CartControllers {
                     rs.getString("menuId"),
                     rs.getString("name"),
                     rs.getInt("price"),
-                    rs.getString("imagePath")
+                    "",
+                    rs.getInt("estimationTime"),
+                    "",
+                    rs.getString("imagePath"),
+                    ItemTypeEnum.AVAILABLE
                 )
                 val quantity = rs.getInt("menuQuantity")
                 menus.add(menu)
