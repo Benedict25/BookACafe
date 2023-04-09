@@ -1,13 +1,11 @@
 package com.example.bookacafe.view
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -15,20 +13,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.buildSpannedString
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.ActiveUser
 import com.example.bookacafe.controller.LoginControllers
 import com.example.bookacafe.controller.RegisterControllers
 import com.example.bookacafe.controller.UserControllers
-import com.example.bookacafe.view.adminTransaction.ShowTransactions
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import kotlin.math.sign
 
 class Login : AppCompatActivity() {
 
@@ -53,7 +48,7 @@ class Login : AppCompatActivity() {
             val inputEmail: String = inputEmailET.text.toString()
             val inputPassword: String = inputPasswordET.text.toString()
 
-            val control: LoginControllers = LoginControllers()
+            val control = LoginControllers()
             val successLogin: Boolean = control.getLoginData(inputEmail, inputPassword)
 
             if (successLogin){
@@ -137,13 +132,14 @@ class Login : AppCompatActivity() {
 
     fun navigateToHomeScreen(){
         finish()
+        lateinit var intent: Intent
         if (ActiveUser.getType() == "MEMBER") {
-            val intent = Intent(this@Login, HomePage::class.java)
-            startActivity(intent)
-        } else { // ADMIN / CASHIER
-            val intent = Intent(this@Login, HomePage::class.java)
-            startActivity(intent)
+            intent = Intent(this@Login, HomePage::class.java)
+        } else if (ActiveUser.getType() == "ADMIN") { // ADMIN / CASHIER
+            intent = Intent(this@Login, AdminActivity::class.java)
+        } else if (ActiveUser.getType() == "CASHIER") { intent = Intent(this@Login, CashierActivity::class.java)
         }
+        startActivity(intent)
     }
 
     fun navigateToCompleteProfile() {

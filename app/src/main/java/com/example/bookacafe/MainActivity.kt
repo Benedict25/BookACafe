@@ -14,15 +14,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        val intent = Intent(this@MainActivity, ShowTransactions::class.java)
-//        startActivity(intent)
+        // Hide action bar yang di atas aplikasi
+        supportActionBar?.hide()
 
-//        val intent = Intent(this@MainActivity, DisabledUserMenu::class.java)
-//        startActivity(intent)
-
-//        // Hide action bar yang di atas aplikasi
-//        supportActionBar?.hide()
-//
         // Pindah dari splash screen ke Home (delay 2 detik)
         Handler().postDelayed({
             val intent = Intent(this@MainActivity, Login::class.java)
