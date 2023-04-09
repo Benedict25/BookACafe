@@ -13,7 +13,7 @@
     <!-- Login String -->
     <string name="loginTitle">Login</string>
     <string name="loginButton">LOGIN</string>
-    <string name="loginDescription">Doesn\'t have an account? Click Here!</string>
+    <string name="loginDescription">Doesn\'t have an account? Click here!</string>
     <string name="loginAlternative">or sign in with</string>
 
     <!-- Register String -->
@@ -26,14 +26,14 @@
 
     <!-- Cart String -->
     <string name="cartTitle">Cart</string>
-    <string name="cartSeats">Seats</string>
+    <string name="cartTable">Table</string>
     <string name="cartFnb">Food and Beverages</string>
     <string name="cartBooks">Books</string>
     <string name="cartTotal">Total</string>
     <string name="cartOrderConfirm">Sure want to order?</string>
     <string name="cartOrder">ORDER</string>
     <string name="cartPayConfirm">Want to pay?</string>
-    <string name="cartPay">SHOW BILL</string>
+    <string name="cartPay">BILL &amp; PAY</string>
 
     <!-- Admin Menu String -->
     <string name="disabled_user_menu">Disabled User</string>
@@ -529,6 +529,14 @@
     <string name="invoice_date_history">Invoice Date</string>
     <string name="seat_display">A4</string>
     <string name="kursi_a4">Kursi A4</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="books">Books</string>
+    <string name="genre">Genre</string>
+    <string name="book_cover">Book Cover</string>
+    <string name="plus">+</string>
+    <string name="title_placeholder">{title}</string>
+    <string name="author_placeholder">{author}</string>
+    <string name="stock_placeholder">{Stock: x}</string>
 
     <!--Untuk Dummy di Bill Screen-->
 

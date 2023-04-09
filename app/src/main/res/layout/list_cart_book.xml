@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/cartBookPic"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:src="@drawable/romance_3"/>
+
+        <TextView
+            android:id="@+id/cartBookName"
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/cartBookPic"
+            android:text="Spring in London"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/cartBookPic"
+            android:layout_toRightOf="@+id/cartBookPic"
+            android:text="Rp0,-" />
+
+        <ImageView
+            android:id="@+id/cartBookCancel"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/cancel_logo"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+</LinearLayout>

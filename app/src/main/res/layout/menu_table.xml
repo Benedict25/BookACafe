@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/sv_table"
     android:layout_width="match_parent"
@@ -58,12 +59,11 @@
                 android:layout_height="180dp"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="6dp"
-                android:layout_marginTop="30dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginBottom="6dp"
+                android:text="@string/table_a1"
                 android:background="@drawable/rounded_rectangle_button"
-                android:backgroundTint="@color/black"
-                android:text="@string/table_a1" />
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn_table_a2"
@@ -71,12 +71,11 @@
                 android:layout_height="180dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="30dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginBottom="6dp"
+                android:text="@string/table_a2"
                 android:background="@drawable/rounded_rectangle_button"
-                android:backgroundTint="@color/black"
-                android:text="@string/table_a2" />
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn_table_a3"
@@ -88,9 +87,9 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginBottom="6dp"
+                android:text="@string/table_a3"
                 android:background="@drawable/rounded_rectangle_button"
-                android:backgroundTint="@color/black"
-                android:text="@string/table_a3" />
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn_table_a4"
@@ -102,9 +101,9 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginBottom="6dp"
+                android:text="@string/table_a4"
                 android:background="@drawable/rounded_rectangle_button"
-                android:backgroundTint="@color/black"
-                android:text="@string/table_a4" />
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn_table_b1"
@@ -116,9 +115,9 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginBottom="6dp"
+                android:text="@string/table_b1"
                 android:background="@drawable/rounded_rectangle_button"
-                android:backgroundTint="@color/black"
-                android:text="@string/table_b1" />
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn_table_b2"
@@ -129,9 +128,9 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="6dp"
                 android:layout_toEndOf="@+id/btn_table_b1"
+                android:text="@string/table_b2"
                 android:background="@drawable/rounded_rectangle_button"
-                android:backgroundTint="@color/black"
-                android:text="@string/table_b2" />
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn_table_b3"
@@ -142,9 +141,9 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="6dp"
                 android:layout_toEndOf="@+id/btn_table_b2"
+                android:text="@string/table_b3"
                 android:background="@drawable/rounded_rectangle_button"
-                android:backgroundTint="@color/black"
-                android:text="@string/table_b3" />
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn_add_to_cart"
@@ -154,11 +153,11 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginStart="6dp"
                 android:layout_marginEnd="6dp"
-                android:background="@drawable/rounded_rectangle_button"
-                android:backgroundTint="@color/black"
-                android:text="Add to Cart"
+                android:text="@string/add_to_cart"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:background="@drawable/rounded_rectangle_button"
+                app:backgroundTint="@null" />
         </RelativeLayout>
     </LinearLayout>
 </ScrollView>

@@ -15,6 +15,7 @@
         tools:src="@android:color/darker_gray" />
 
     <LinearLayout
+        android:id="@+id/user_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -39,4 +40,15 @@
             android:maxLines="2"
             tools:text="@string/description" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_user_status"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="20dp"
+        android:text="User Status" />
+
 </RelativeLayout>

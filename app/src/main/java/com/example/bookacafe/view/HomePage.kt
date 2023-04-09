@@ -18,10 +18,9 @@ class HomePage : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
         val firstFragment=FirstFragment()
-        val secondFragment=SecondFragment()
-        val thirdFragment=ThirdFragment()
-
-        val fnbPage=MenuFnB()
+        val tableFragment=TableMenu()
+        val bookFragment=BookMenu()
+        val fnbFragment=FnBMenu()
         setCurrentFragment(firstFragment)
 
 //        bottomNavigationView.setOnNavigationItemSelectedListener {
@@ -41,16 +40,19 @@ class HomePage : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.icon_tables->{
-                    val intent = Intent(this, MenuTable::class.java)
-                    startActivity(intent)
+//                    val intent = Intent(this, MenuTable::class.java)
+//                    startActivity(intent)
+                    setCurrentFragment(tableFragment)
                 }
                 R.id.icon_books->{
-                    val intent = Intent(this, MenuBook::class.java)
-                    startActivity(intent)
+//                    val intent = Intent(this, MenuBook::class.java)
+//                    startActivity(intent)
+                    setCurrentFragment(bookFragment)
                 }
                 R.id.icon_fnb->{
-                    val intent = Intent(this, MenuFnB::class.java)
-                    startActivity(intent)
+//                    val intent = Intent(this, MenuFnB::class.java)
+//                    startActivity(intent)
+                    setCurrentFragment(fnbFragment)
                 }
                 R.id.icon_cart -> {
                     val intent = Intent(this, MenuCart::class.java)

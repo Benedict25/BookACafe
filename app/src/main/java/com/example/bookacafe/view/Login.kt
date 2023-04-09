@@ -2,6 +2,11 @@ package com.example.bookacafe.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -43,7 +48,7 @@ class Login : AppCompatActivity() {
             val inputEmail: String = inputEmailET.text.toString()
             val inputPassword: String = inputPasswordET.text.toString()
 
-            val control: LoginControllers = LoginControllers()
+            val control = LoginControllers()
             val successLogin: Boolean = control.getLoginData(inputEmail, inputPassword)
 
             if (successLogin){
@@ -55,12 +60,7 @@ class Login : AppCompatActivity() {
         }
 
         // To Register
-        val signupButton: TextView = findViewById(R.id.login_description)
-
-        signupButton.setOnClickListener {
-            val intent = Intent(this@Login, Register::class.java)
-            startActivity(intent)
-        }
+        signupTextSpan() // Partial clickable textview
 
         // Google Login
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
@@ -114,18 +114,32 @@ class Login : AppCompatActivity() {
         }
     }
 
+    fun signupTextSpan() {
+        val signupText: TextView = findViewById(R.id.login_description)
+        val spannableString = SpannableString(signupText.text.toString())
+
+        val clickableSpan = object: ClickableSpan() {
+            override fun onClick(widget: View) {
+                val intent = Intent(this@Login, Register::class.java)
+                startActivity(intent)
+            }
+        }
+
+        spannableString.setSpan(clickableSpan, 25, 36, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+        signupText.text = spannableString
+        signupText.movementMethod = LinkMovementMethod.getInstance()
+    }
+
     fun navigateToHomeScreen(){
         finish()
-        //ini buat direct ke admin yang transactions.. nanti di ganti ganti lagi aja
-//        val switchActivityIntent = Intent(this, ShowTransactions::class.java)
-//        startActivity(switchActivityIntent)
-
-        // ini buat ke TestLogin
-        val intent = Intent(this@Login, HomePage::class.java) //numpang bentar ya ben
+        lateinit var intent: Intent
+        if (ActiveUser.getType() == "MEMBER") {
+            intent = Intent(this@Login, HomePage::class.java)
+        } else if (ActiveUser.getType() == "ADMIN") { // ADMIN / CASHIER
+            intent = Intent(this@Login, AdminActivity::class.java)
+        } else if (ActiveUser.getType() == "CASHIER") { intent = Intent(this@Login, CashierActivity::class.java)
+        }
         startActivity(intent)
-
-//        val intent = Intent(this@Login, HomePage::class.java)
-//        startActivity(intent)
     }
 
     fun navigateToCompleteProfile() {

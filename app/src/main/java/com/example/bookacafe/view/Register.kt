@@ -40,14 +40,21 @@ class Register : AppCompatActivity() {
         registerButton.setOnClickListener {
             val control: RegisterControllers = RegisterControllers()
             val user = User("", firstNameET.text.toString(), lastNameET.text.toString(), emailET.text.toString(), passwordET.text.toString())
-            val isRegistered = control.registerUser(user, checkPasswordET.text.toString())
 
-            if (isRegistered) {
-                Toast.makeText(applicationContext, "Registered, Please Login", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this@Register, Login::class.java)
-                startActivity(intent)
+            val accountExists: Boolean = control.checkAccountExistence(user.email)
+
+            if (accountExists) {
+                Toast.makeText(applicationContext, "Email Used!", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(applicationContext, "Registration Error!", Toast.LENGTH_SHORT).show()
+                val isRegistered = control.registerUser(user, checkPasswordET.text.toString())
+
+                if (isRegistered) {
+                    Toast.makeText(applicationContext, "Registered, Please Login", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@Register, Login::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(applicationContext, "Password Mismatch!", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 

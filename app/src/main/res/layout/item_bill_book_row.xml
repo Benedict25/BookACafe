@@ -6,22 +6,11 @@
     android:orientation="horizontal"
     android:padding="16dp">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/book_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:orientation="vertical">
+        android:fontFamily="@font/poppins_bold"
+        android:text="Nama Buku" />
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_bold"
-                android:text="Nama Buku" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Harga Buku" />
-    </LinearLayout>
 </RelativeLayout>

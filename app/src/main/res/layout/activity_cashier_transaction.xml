@@ -24,14 +24,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
-        android:text="Nanti ini tanggal ceritanya"
         android:textColor="@color/darkgrey"
         android:textSize="13sp"/>
 
     <ScrollView
         android:id="@+id/bill_screen"
         android:layout_width="match_parent"
-        android:layout_height="395dp">
+        android:layout_height="360dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -59,6 +58,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/bill_seat_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -66,17 +66,18 @@
                 android:paddingBottom="10dp">
 
                 <Button
+                    android:id="@+id/tv_bill_seatdisplay"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/gray_rounded_button"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="A4"
+                    android:text="@string/seat_display"
                     android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -84,7 +85,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="Kursi A4" />
+                        android:text="@string/kursi_a4" />
 
                     <TextView
                         android:id="@+id/tv_bill_seatprice"
@@ -116,25 +117,29 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
+                <!--Awal-->
+
+                <!--Akhir-->
+
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_fnb"
+                    android:id="@+id/rv_bill_menu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginBottom="0dp"
                     tools:listitem="@layout/item_bill_fnb_row" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:paddingTop="10dp">
 
                 <ImageView
                     android:layout_width="28dp"
@@ -151,22 +156,35 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
+                <!--Awal-->
+
+                <!--Akhir-->
+
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_book_bill"
+                    android:id="@+id/rv_bill_books"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginBottom="0dp"
                     tools:listitem="@layout/item_bill_book_row" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+    <TextView
+        android:id="@+id/total_ordered_cost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Total Order"
+        android:textSize="18sp"
+        android:gravity="center_horizontal"
+        android:textStyle="bold" />
     <Button
         android:id="@+id/btn_print_bill"
         android:layout_width="match_parent"
@@ -175,6 +193,7 @@
         android:layout_marginTop="10dp"
         android:text="Print Bill" />
     <Button
+        android:id="@+id/btn_finished_transaction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_print_bill"
