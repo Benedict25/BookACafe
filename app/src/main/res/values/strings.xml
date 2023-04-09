@@ -13,7 +13,7 @@
     <!-- Login String -->
     <string name="loginTitle">Login</string>
     <string name="loginButton">LOGIN</string>
-    <string name="loginDescription">Doesn\'t have an account? Click Here!</string>
+    <string name="loginDescription">Doesn\'t have an account? Click here!</string>
     <string name="loginAlternative">or sign in with</string>
 
     <!-- Register String -->
