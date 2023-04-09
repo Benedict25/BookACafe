@@ -141,7 +141,7 @@ class Login : AppCompatActivity() {
             val intent = Intent(this@Login, HomePage::class.java)
             startActivity(intent)
         } else { // ADMIN / CASHIER
-            val intent = Intent(this@Login, ShowTransactions::class.java)
+            val intent = Intent(this@Login, HomePage::class.java)
             startActivity(intent)
         }
     }

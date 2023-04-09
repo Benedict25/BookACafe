@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.R
 import com.example.bookacafe.databinding.BillScreenBinding
+import com.example.bookacafe.model.ItemTypeEnum
 import com.example.bookacafe.model.Menu
 
 class BillActivity : AppCompatActivity() {
@@ -31,7 +32,11 @@ class BillActivity : AppCompatActivity() {
                 "M000",
                 name[position],
                 100000,
-                0
+                "",
+                0,
+                "",
+                "",
+                ItemTypeEnum.AVAILABLE
             )
 
             listMenu.add(menu)
