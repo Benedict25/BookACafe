@@ -43,8 +43,7 @@ class MenuCart : AppCompatActivity() {
         cartTableCancel.setOnClickListener {
             control.RemoveTableFromCart()
             Toast.makeText(applicationContext, "Table ${cart.table.tableName} Removed", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this@MenuCart, MenuCart::class.java)
-            startActivity(intent)
+            refreshCart()
         }
     }
 
@@ -71,5 +70,13 @@ class MenuCart : AppCompatActivity() {
     fun setTotal(total: Int) {
         var cartTotal: TextView = findViewById(R.id.cartTotal)
         cartTotal.text = "Rp$total,-"
+    }
+
+    fun refreshCart(){
+        finish()
+        overridePendingTransition(0, 0)
+        startActivity(intent)
+        overridePendingTransition(0, 0)
+        // overridePending biar pas refresh gada animasi blink
     }
 }

@@ -1,17 +1,18 @@
 package com.example.bookacafe.view
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookacafe.controller.CartControllers
 import com.example.bookacafe.databinding.ListCartMenuBinding
 import com.example.bookacafe.model.Cart
 import com.example.bookacafe.model.Menu
 import com.squareup.picasso.Picasso
+
 
 class ListMenuCartAdapter(private val cart: Cart) : RecyclerView.Adapter<ListMenuCartAdapter.ListViewHolder>() {
     var context: Context? = null // Context for Toast to work
@@ -42,10 +43,9 @@ class ListMenuCartAdapter(private val cart: Cart) : RecyclerView.Adapter<ListMen
 
                     if (isSubstracted) {
                         Toast.makeText(context, "${menu.name} Substracted", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(context, MenuCart::class.java)
-                        context?.startActivity(intent)
+                        (context as MenuCart).refreshCart()
                     } else {
-                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -54,10 +54,9 @@ class ListMenuCartAdapter(private val cart: Cart) : RecyclerView.Adapter<ListMen
 
                     if (isAdded) {
                         Toast.makeText(context, "${menu.name} Added", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(context, MenuCart::class.java)
-                        context?.startActivity(intent)
+                        (context as MenuCart).refreshCart()
                     } else {
-                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
