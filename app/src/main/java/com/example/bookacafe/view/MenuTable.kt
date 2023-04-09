@@ -8,7 +8,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookacafe.R
 
-
 class MenuTable : AppCompatActivity(), View.OnClickListener {
     private lateinit var btnTableA1: Button
     private lateinit var btnTableA2: Button
@@ -23,6 +22,8 @@ class MenuTable : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.menu_table)
+
+        // GET TABLE BELUM OTOMATIS KE DB
 
         btnTableA1 = findViewById(R.id.btn_table_a1)
         btnTableA1.setOnClickListener(this)

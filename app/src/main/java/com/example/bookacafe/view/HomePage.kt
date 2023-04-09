@@ -18,10 +18,6 @@ class HomePage : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
         val firstFragment=FirstFragment()
-        val secondFragment=SecondFragment()
-        val thirdFragment=ThirdFragment()
-
-        val fnbPage=MenuFnB()
         setCurrentFragment(firstFragment)
 
 //        bottomNavigationView.setOnNavigationItemSelectedListener {

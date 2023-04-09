@@ -5,10 +5,7 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bookacafe.R
@@ -22,8 +19,10 @@ import com.squareup.picasso.Picasso
 class MenuBook : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: MenuBookBinding
     private lateinit var dialog: Dialog
+    private lateinit var searchView: SearchView
     private var tabLayout: TabLayout? = null
     private var books = ArrayList<Book>()
+    private var bookTitles = ArrayList<String>()
     private var selectedTab: Int = 0
     private val bookGenre: Array<String> = arrayOf("Romance", "Science", "Fantasy")
 
@@ -31,6 +30,37 @@ class MenuBook : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = MenuBookBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Show Books
+        getListBooks(selectedTab, "")
+        showBooks()
+
+        // Search View (per Genre)
+        searchView = findViewById(R.id.search_view)
+        for (book in books) {
+            bookTitles.add(book.title)
+        }
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (bookTitles.contains(query)) {
+                    getListBooks(selectedTab, query.toString())
+                    showBooks()
+                } else {
+                    Toast.makeText(this@MenuBook,
+                        "No book found.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                getListBooks(selectedTab, newText.toString())
+                showBooks()
+                return false
+            }
+        })
 
         // Tab Layout & View Pager (Genre)
         tabLayout = findViewById(R.id.tl_books)
@@ -44,7 +74,22 @@ class MenuBook : AppCompatActivity(), View.OnClickListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 books.clear()
                 selectedTab = tab.position
-                getListBooks(selectedTab)
+                searchView.setQuery("", false)
+                var queryHint = ""
+                when (selectedTab) {
+                    0 -> {
+                        queryHint = "Romance book sounds great!"
+                    }
+                    1 -> {
+                        queryHint = "Learning never exhausts the mind."
+                    }
+                    2 -> {
+                        queryHint = "I recommend you Bumi by Tere Liye."
+                    }
+                }
+                searchView.queryHint = queryHint
+
+                getListBooks(selectedTab, "")
                 showBooks()
             }
 
@@ -55,26 +100,22 @@ class MenuBook : AppCompatActivity(), View.OnClickListener {
 
             }
         })
-
-        // Show Books
-        getListBooks(selectedTab)
-        showBooks()
     }
 
     override fun onClick(p0: View?) {
 
     }
 
-    private fun getListBooks(selectedTab: Int) : ArrayList<Book> {
+    private fun getListBooks(selectedTab: Int, inputText: String) : ArrayList<Book> {
         when (selectedTab) {
             0 -> {
-                books = BookControllers().getBookData(bookGenre[0].lowercase())
+                books = BookControllers().getBookData(bookGenre[0].lowercase(), inputText)
             }
             1 -> {
-                books = BookControllers().getBookData(bookGenre[1].lowercase())
+                books = BookControllers().getBookData(bookGenre[1].lowercase(), inputText)
             }
             2 -> {
-                books = BookControllers().getBookData(bookGenre[2].lowercase())
+                books = BookControllers().getBookData(bookGenre[2].lowercase(), inputText)
             }
         }
 
@@ -127,7 +168,7 @@ class MenuBook : AppCompatActivity(), View.OnClickListener {
                 book.title + " added to cart.",
                 Toast.LENGTH_SHORT
             ).show()
-            TODO("Book Controllers: Add to Cart")
+            BookControllers().addBookToCart(book.bookId)
             dialog.dismiss()
         }
 

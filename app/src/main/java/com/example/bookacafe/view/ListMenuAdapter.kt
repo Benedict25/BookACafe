@@ -7,53 +7,53 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bookacafe.controller.BookControllers
-import com.example.bookacafe.databinding.ItemBookBinding
-import com.example.bookacafe.model.Book
+import com.example.bookacafe.controller.MenuControllers
+import com.example.bookacafe.databinding.ItemMenusBinding
+import com.example.bookacafe.model.Menu
 import com.squareup.picasso.Picasso
 
-class ListBookAdapter(private val books : ArrayList<Book>) : RecyclerView.Adapter<ListBookAdapter.ListViewHolder>() {
-    var onItemClick: ((Book) -> Unit)? = null
+class ListMenuAdapter(private val menus : ArrayList<Menu>) : RecyclerView.Adapter<ListMenuAdapter.ListViewHolder>() {
+    var onItemClick: ((Menu) -> Unit)? = null
     var context: Context? = null
 
     override fun onCreateViewHolder(viewGroup : ViewGroup, i : Int) : ListViewHolder {
-        val binding = ItemBookBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
+        val binding = ItemMenusBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         context = viewGroup.context
         return ListViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = books.size
+    override fun getItemCount(): Int = menus.size
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.bind(books[position])
+        holder.bind(menus[position])
         holder.itemView.setOnClickListener {
-            onItemClick?.invoke(books[position])
+            onItemClick?.invoke(menus[position])
         }
     }
 
-    inner class ListViewHolder(private val binding : ItemBookBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(book : Book) {
+    inner class ListViewHolder(private val binding : ItemMenusBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(menu : Menu) {
             with(binding) {
-                tvBookTitle.text = book.title
-                tvBookAuthor.text = book.author
-                tvBookStock.text = "Stock: ${book.stock}"
-                Picasso.get().load(book.imagePath).into(imgBookCover)
+
+                tvMenuName.text = menu.name
+                tvMenuPrice.text = menu.price.toString()
+                Picasso.get().load(menu.imagePath).into(imgMenuCover)
                 btnAdd.setOnClickListener() {
-                    showAddToCartDialog(book)
+                    showAddToCartDialog(menu)
                 }
             }
         }
     }
 
-    private fun showAddToCartDialog(book: Book) {
+    private fun showAddToCartDialog(menu: Menu) {
         val addToCartDialog = AlertDialog.Builder(context)
 
         val positiveButtonClick = { _: DialogInterface, _: Int ->
             Toast.makeText(context,
-                book.title + " added to cart.",
+                menu.name + " added to cart.",
                 Toast.LENGTH_SHORT
             ).show()
-            BookControllers().addBookToCart(book.bookId)
+            MenuControllers().addMenuToCart(menu.menuId)
             addToCartDialog.create().dismiss()
         }
 
@@ -64,7 +64,7 @@ class ListBookAdapter(private val books : ArrayList<Book>) : RecyclerView.Adapte
 
         addToCartDialog.setTitle("Add to Cart")
             .setIcon(android.R.drawable.ic_dialog_info)
-            .setMessage("You chose " + book.title)
+            .setMessage("You chose " + menu.name)
             .setPositiveButton("Yes", DialogInterface.OnClickListener(function = positiveButtonClick))
             .setNegativeButton("No", DialogInterface.OnClickListener(function = negativeButtonClick))
         addToCartDialog.show()

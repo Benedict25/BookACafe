@@ -1,24 +1,34 @@
 package com.example.bookacafe.view
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.buildSpannedString
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.ActiveUser
 import com.example.bookacafe.controller.LoginControllers
 import com.example.bookacafe.controller.RegisterControllers
 import com.example.bookacafe.controller.UserControllers
+import com.example.bookacafe.view.adminTransaction.ShowTransactions
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import kotlin.math.sign
 
 class Login : AppCompatActivity() {
 
@@ -55,12 +65,7 @@ class Login : AppCompatActivity() {
         }
 
         // To Register
-        val signupButton: TextView = findViewById(R.id.login_description)
-
-        signupButton.setOnClickListener {
-            val intent = Intent(this@Login, Register::class.java)
-            startActivity(intent)
-        }
+        signupTextSpan() // Partial clickable textview
 
         // Google Login
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
@@ -114,17 +119,31 @@ class Login : AppCompatActivity() {
         }
     }
 
+    fun signupTextSpan() {
+        val signupText: TextView = findViewById(R.id.login_description)
+        val spannableString = SpannableString(signupText.text.toString())
+
+        val clickableSpan = object: ClickableSpan() {
+            override fun onClick(widget: View) {
+                val intent = Intent(this@Login, Register::class.java)
+                startActivity(intent)
+            }
+        }
+
+        spannableString.setSpan(clickableSpan, 25, 36, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+        signupText.text = spannableString
+        signupText.movementMethod = LinkMovementMethod.getInstance()
+    }
+
     fun navigateToHomeScreen(){
         finish()
-        lateinit var intent: Intent
-        if(ActiveUser.getType() == "USER") {
-            intent = Intent(this@Login, HomePage::class.java)
-        } else if(ActiveUser.getType() == "ADMIN") {
-            intent = Intent(this@Login, AdminActivity::class.java)
-        } else if (ActiveUser.getType() == "CASHIER") {
-            intent = Intent(this@Login, CashierActivity::class.java)
+        if (ActiveUser.getType() == "MEMBER") {
+            val intent = Intent(this@Login, HomePage::class.java)
+            startActivity(intent)
+        } else { // ADMIN / CASHIER
+            val intent = Intent(this@Login, HomePage::class.java)
+            startActivity(intent)
         }
-        startActivity(intent)
     }
 
     fun navigateToCompleteProfile() {
