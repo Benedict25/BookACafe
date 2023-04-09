@@ -110,7 +110,10 @@ class MenuFnB : AppCompatActivity(), View.OnClickListener {
                 menus = MenuControllers().getMenuData(menuType[1].lowercase(), inputText)
             }
         }
-
+        menuNames.clear()
+        for (menu in menus) {
+            menuNames.add(menu.name)
+        }
         return menus
     }
 

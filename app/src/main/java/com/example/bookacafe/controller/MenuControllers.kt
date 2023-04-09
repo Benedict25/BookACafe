@@ -18,7 +18,7 @@ class MenuControllers {
         if (inputText == "") {
             query = "SELECT * from menus WHERE type = '$type' AND status = '${ItemTypeEnum.AVAILABLE}'"
         } else {
-            query = "SELECT * from menus WHERE type = '$type' AND status = '${ItemTypeEnum.AVAILABLE}' AND title LIKE '%$inputText%'"
+            query = "SELECT * from menus WHERE type = '$type' AND status = '${ItemTypeEnum.AVAILABLE}' AND name LIKE '%$inputText%'"
         }
 
         try {
