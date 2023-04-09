@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.CartControllers
+import com.example.bookacafe.controller.OrderControllers
 import com.example.bookacafe.databinding.ActivityMenuCartBinding
 import com.example.bookacafe.databinding.ListCartBookBinding
 import com.example.bookacafe.databinding.ListCartMenuBinding
@@ -24,6 +25,8 @@ class MenuCart : AppCompatActivity() {
 
     // Button
     lateinit var cartTableCancel: ImageView
+    lateinit var cartOrder: Button
+    lateinit var cartPay: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +47,24 @@ class MenuCart : AppCompatActivity() {
             control.RemoveTableFromCart()
             Toast.makeText(applicationContext, "Table ${cart.table.tableName} Removed", Toast.LENGTH_SHORT).show()
             refreshCart()
+        }
+
+        cartOrder = findViewById(R.id.cartOrder)
+        cartOrder.setOnClickListener {
+            val control: OrderControllers = OrderControllers()
+            val isOrdered = control.order()
+
+            if (isOrdered) {
+                Toast.makeText(applicationContext, "Order Success!", Toast.LENGTH_SHORT).show()
+                refreshCart()
+            } else {
+                Toast.makeText(applicationContext, "Order Error!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        cartPay = findViewById(R.id.cartPay)
+        cartPay.setOnClickListener {
+
         }
     }
 
