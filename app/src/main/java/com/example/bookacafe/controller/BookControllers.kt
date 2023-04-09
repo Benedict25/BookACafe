@@ -89,19 +89,28 @@ class BookControllers {
     fun addBookToCart(bookId: String): Boolean {
         return try {
             var cartId = ""
+            var alreadyInCart = 0
             val query1 = "SELECT cartId FROM carts WHERE memberId = '${user.getId()}'"
             val stmt1: Statement = con!!.createStatement()
             val rs: ResultSet = stmt1.executeQuery(query1)
             while (rs.next()) {
                 cartId = rs.getString("cartId")
             }
-            val query2 = "INSERT INTO detail_carts(detailCartId, cartId, bookId, bookQuantity) VALUES(default,?,?,?)"
-            val stmt2: PreparedStatement = con!!.prepareStatement(query2)
-            stmt2.setString(1, cartId)
-            stmt2.setString(2, bookId)
-            stmt2.setInt(3, 1)
-            stmt2.executeUpdate()
-            true
+            val query2 = "SELECT EXISTS(SELECT * FROM detail_carts WHERE bookId = '$bookId' AND cartId = '$cartId') AS alreadyInCart"
+            val rs2: ResultSet = stmt1.executeQuery(query2)
+            while (rs2.next()) {
+                alreadyInCart = rs2.getInt("alreadyInCart")
+            }
+            if (alreadyInCart != 1) {
+                val query3 = "INSERT INTO detail_carts(detailCartId, cartId, bookId) VALUES(default,?,?)"
+                val stmt3: PreparedStatement = con!!.prepareStatement(query3)
+                stmt3.setString(1, cartId)
+                stmt3.setString(2, bookId)
+                stmt3.executeUpdate()
+                true
+            } else {
+                false
+            }
         } catch (e: SQLException) {
             e.printStackTrace()
             false
