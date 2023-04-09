@@ -9,6 +9,38 @@ import java.sql.Statement
 class CartControllers {
     var con = DatabaseHandler.connect()
 
+    fun createCartId(): String {
+        val query = "SELECT cartId FROM carts ORDER BY cartId ASC"
+        var newestId: String = String()
+        var returnId: String = String()
+
+        try {
+            val stmt: Statement = con!!.createStatement()
+            val rs: ResultSet = stmt.executeQuery(query)
+            while (rs.next()) {
+                // Bakal ke overwrite terus sampe id paling baru di DB
+                newestId = rs.getString("cartId")
+            }
+        } catch (e: SQLException) {
+            e.printStackTrace()
+        }
+
+        // Ambil angkanya aja dari memberId terus di +1
+        val extractNumber = newestId.subSequence(1, 4)
+        var number = extractNumber.toString().toInt()
+        number += 1
+
+        if (number < 10) {
+            returnId = "C00$number"
+        } else if (number < 100) {
+            returnId = "C0$number"
+        } else {
+            returnId = "C$number"
+        }
+
+        return returnId
+    }
+
     fun GetCartData(): Cart {
         val cartId = getCartId()
         val table = getTableFromCart()
