@@ -1,6 +1,5 @@
 package com.example.bookacafe.view
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,27 +7,50 @@ import com.example.bookacafe.databinding.ItemRowHistoryBinding
 import com.example.bookacafe.model.Transaction
 
 class ListHistoryAdapter(private val listHistory: ArrayList<Transaction>) :
-    RecyclerView.Adapter<ListHistoryAdapter.ListViewHolder>() {
-    inner class ListViewHolder(private val binding: ItemRowHistoryBinding) :
+    RecyclerView.Adapter<ListHistoryAdapter.ViewHolder>() {
+    private var onClickListener: OnClickListener? = null
+
+    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
+        return ViewHolder(
+            ItemRowHistoryBinding.inflate(
+                LayoutInflater.from(viewGroup.context),
+                viewGroup,
+                false
+            )
+        )
+    }
+
+    inner class ViewHolder(binding: ItemRowHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        @SuppressLint("SetTextI18n")
-        fun bind(history: Transaction) {
-            with(binding) {
-                tvHistoryInvoiceNumber.text = "Invoice Number: " + history.transactionId
-                tvHistoryInvoiceDate.text = history.checkedIn.toString() // maap ben
+        val tvHistoryInvoiceNumber = binding.tvHistoryInvoiceNumber
+        val tvHistoryInvoiceDate = binding.tvHistoryInvoiceDate
+    }
+
+
+    override fun getItemCount(): Int = listHistory.size
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val history = listHistory[position]
+        holder.tvHistoryInvoiceNumber.text = history.transactionId
+        holder.tvHistoryInvoiceDate.text = history.checkedIn.toString()
+
+        holder.itemView.setOnClickListener {
+            if (onClickListener != null) {
+                onClickListener!!.onClick(position, history)
             }
         }
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {
-        val binding =
-            ItemRowHistoryBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
-        return ListViewHolder(binding)
+    interface OnClickListener {
+        fun onClick(position: Int, model: Transaction)
     }
 
-    override fun getItemCount(): Int = listHistory.size
-
-    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.bind(listHistory[position])
+    companion object {
+        fun setOnClickListener(
+            listHistoryAdapter: ListHistoryAdapter,
+            onClickListener: OnClickListener
+        ) {
+            listHistoryAdapter.onClickListener = onClickListener
+        }
     }
 }
