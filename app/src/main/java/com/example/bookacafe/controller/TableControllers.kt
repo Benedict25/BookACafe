@@ -13,16 +13,22 @@ class TableControllers {
 
     fun getTableData(): ArrayList<Table> {
         val tables: ArrayList<Table> = ArrayList()
-        val query = "SELECT * from tables WHERE status = '${TableTypeEnum.AVAILABLE}'"
+        val query = "SELECT * from tables"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
+            var status = TableTypeEnum.AVAILABLE
             while (rs.next()) {
+                when (rs.getString("status")) {
+                    "AVAILABLE" -> status = TableTypeEnum.AVAILABLE
+                    "BOOKED" -> status = TableTypeEnum.BOOKED
+                    "BLOCKED" -> status = TableTypeEnum.BLOCKED
+                }
                 val table = Table(
                     rs.getString("tableId"),
                     rs.getString("tableName"),
                     rs.getString("room"),
-                    TableTypeEnum.AVAILABLE
+                    status
                 )
                 tables.add(table)
             }

@@ -529,6 +529,14 @@
     <string name="invoice_date_history">Invoice Date</string>
     <string name="seat_display">A4</string>
     <string name="kursi_a4">Kursi A4</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="books">Books</string>
+    <string name="genre">Genre</string>
+    <string name="book_cover">Book Cover</string>
+    <string name="plus">+</string>
+    <string name="title_placeholder">{title}</string>
+    <string name="author_placeholder">{author}</string>
+    <string name="stock_placeholder">{Stock: x}</string>
 
     <!--Untuk Dummy di Bill Screen-->
 
