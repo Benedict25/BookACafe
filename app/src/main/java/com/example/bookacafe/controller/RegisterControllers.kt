@@ -2,6 +2,7 @@ package com.example.bookacafe.controller
 
 import android.database.SQLException
 import android.util.Log
+import com.example.bookacafe.model.Cart
 import com.example.bookacafe.model.User
 import java.sql.ResultSet
 import java.sql.Statement
@@ -12,14 +13,18 @@ class RegisterControllers {
 
     fun registerUser(user: User, checkPassword: String): Boolean {
         if (user.password == checkPassword) {
+            val control: CartControllers = CartControllers()
+            val cartId = control.createCartId()
             val memberId = createMemberId()
             val query = "INSERT INTO users VALUES ('$memberId', '${user.firstName}', '${user.lastName}', '${user.email}', '${user.password}')"
             val query2 = "INSERT INTO members VALUES ('$memberId', 'ACTIVE')"
+            val query3 = "INSERT INTO carts VALUES ('$cartId', '$memberId', NULL)"
 
             try {
                 val stmt: Statement = con!!.createStatement()
                 stmt.executeQuery(query)
                 stmt.executeQuery(query2)
+                stmt.executeQuery(query3)
                 return true
             } catch (e: SQLException) {
                 e.printStackTrace()
