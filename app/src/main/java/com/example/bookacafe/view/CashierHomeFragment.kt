@@ -2,6 +2,7 @@ package com.example.bookacafe.view
 
 import SecondFragment
 import ThirdFragment
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.fragment.app.FragmentManager
 import com.example.bookacafe.R
+import com.example.bookacafe.view.adminTransaction.ShowTransactions
 
 
 class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home) {
@@ -36,95 +38,32 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home) {
         val clickableImage: ImageButton = view.findViewById(R.id.imageProfile)
 
         btnA1.setOnClickListener{
-            val mCategoryFragment = ThirdFragment()
-            val mFragmentManager = parentFragmentManager as FragmentManager
-            mFragmentManager
-                .beginTransaction()
-                .replace(
-                    R.id.fragment_container,
-                    mCategoryFragment,
-                    ThirdFragment::class.java.simpleName
-                )
-                .addToBackStack(null)
-                .commit()
+            val intent = Intent(context, ShowTransactions::class.java)
+            startActivity(intent)
         }
         btnA2.setOnClickListener{
-            val mCategoryFragment = SecondFragment()
-            val mFragmentManager = parentFragmentManager as FragmentManager
-            mFragmentManager
-                .beginTransaction()
-                .replace(
-                    R.id.fragment_container,
-                    mCategoryFragment,
-                    ThirdFragment::class.java.simpleName
-                )
-                .addToBackStack(null)
-                .commit()
+            val intent = Intent(context, ShowTransactions::class.java)
+            startActivity(intent)
         }
         btnA3.setOnClickListener{
-            val mCategoryFragment = ThirdFragment()
-            val mFragmentManager = parentFragmentManager as FragmentManager
-            mFragmentManager
-                .beginTransaction()
-                .replace(
-                    R.id.fragment_container,
-                    mCategoryFragment,
-                    ThirdFragment::class.java.simpleName
-                )
-                .addToBackStack(null)
-                .commit()
+            val intent = Intent(context, ShowTransactions::class.java)
+            startActivity(intent)
         }
         btnA4.setOnClickListener{
-            val mCategoryFragment = SecondFragment()
-            val mFragmentManager = parentFragmentManager as FragmentManager
-            mFragmentManager
-                .beginTransaction()
-                .replace(
-                    R.id.fragment_container,
-                    mCategoryFragment,
-                    ThirdFragment::class.java.simpleName
-                )
-                .addToBackStack(null)
-                .commit()
+            val intent = Intent(context, ShowTransactions::class.java)
+            startActivity(intent)
         }
         btnB1.setOnClickListener{
-            val mCategoryFragment = ThirdFragment()
-            val mFragmentManager = parentFragmentManager as FragmentManager
-            mFragmentManager
-                .beginTransaction()
-                .replace(
-                    R.id.fragment_container,
-                    mCategoryFragment,
-                    ThirdFragment::class.java.simpleName
-                )
-                .addToBackStack(null)
-                .commit()
+            val intent = Intent(context, ShowTransactions::class.java)
+            startActivity(intent)
         }
         btnB2.setOnClickListener{
-            val mCategoryFragment = SecondFragment()
-            val mFragmentManager = parentFragmentManager as FragmentManager
-            mFragmentManager
-                .beginTransaction()
-                .replace(
-                    R.id.fragment_container,
-                    mCategoryFragment,
-                    ThirdFragment::class.java.simpleName
-                )
-                .addToBackStack(null)
-                .commit()
+            val intent = Intent(context, ShowTransactions::class.java)
+            startActivity(intent)
         }
         btnB3.setOnClickListener{
-            val mCategoryFragment = ThirdFragment()
-            val mFragmentManager = parentFragmentManager as FragmentManager
-            mFragmentManager
-                .beginTransaction()
-                .replace(
-                    R.id.fragment_container,
-                    mCategoryFragment,
-                    ThirdFragment::class.java.simpleName
-                )
-                .addToBackStack(null)
-                .commit()
+            val intent = Intent(context, ShowTransactions::class.java)
+            startActivity(intent)
         }
         btnLogOut.setOnClickListener{
             val mCategoryFragment = SecondFragment()

@@ -116,16 +116,15 @@ class Login : AppCompatActivity() {
 
     fun navigateToHomeScreen(){
         finish()
-        //ini buat direct ke admin yang transactions.. nanti di ganti ganti lagi aja
-//        val switchActivityIntent = Intent(this, ShowTransactions::class.java)
-//        startActivity(switchActivityIntent)
-
-        // ini buat ke TestLogin
-        val intent = Intent(this@Login, MenuProfile::class.java) //numpang bentar ya ben
+        lateinit var intent: Intent
+        if(ActiveUser.getType() == "USER") {
+            intent = Intent(this@Login, HomePage::class.java)
+        } else if(ActiveUser.getType() == "ADMIN") {
+            intent = Intent(this@Login, AdminActivity::class.java)
+        } else if (ActiveUser.getType() == "CASHIER") {
+            intent = Intent(this@Login, CashierActivity::class.java)
+        }
         startActivity(intent)
-
-//        val intent = Intent(this@Login, HomePage::class.java)
-//        startActivity(intent)
     }
 
     fun navigateToCompleteProfile() {

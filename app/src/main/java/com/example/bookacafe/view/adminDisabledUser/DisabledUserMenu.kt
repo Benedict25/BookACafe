@@ -23,26 +23,9 @@ class DisabledUserMenu: AppCompatActivity() {
         showRecyclerList()
     }
 
-    fun getListUsers(): ArrayList<MemberDummy> {
-        val dataName = resources.getStringArray(R.array.userName)
-        val dataDescription = resources.getStringArray(R.array.userOrderHistory)
-        val dataPhoto = resources.getStringArray(R.array.user_profile)
-
-        val listUsers = ArrayList<MemberDummy>()
-        for (position in dataName.indices) {
-            val user = MemberDummy(
-                dataName[position],
-                dataDescription[position],
-                dataPhoto[position]
-            )
-            listUsers.add(user)
-        }
-        return listUsers
-    }
-
     private fun showRecyclerList() {
         binding.rvUsers.layoutManager = LinearLayoutManager(this@DisabledUserMenu)
-        val listHeroAdapter = ListUserAdapter(list)
-        binding.rvUsers.adapter = listHeroAdapter
+        val listUserAdapter = ListUserAdapter(list)
+        binding.rvUsers.adapter = listUserAdapter
     }
 }

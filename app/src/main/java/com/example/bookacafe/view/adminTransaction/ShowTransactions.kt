@@ -24,12 +24,6 @@ class ShowTransactions: AppCompatActivity() {
         var text: TextView = findViewById(R.id.allIncome);
         text.setText("Total Income: Rp" + AdminControllers().getTotalIncome());
 
-//        tabLayout.addTab(tabLayout.newTab().setText("Seat"));
-//        tabLayout.addTab(tabLayout.newTab().setText("Food"));
-//        tabLayout.addTab(tabLayout.newTab().setText("Beverage"));
-//        tabLayout.addTab(tabLayout.newTab().setText("Book"));
-//        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
         val adapter: AdminTransactionAdapter = AdminTransactionAdapter(this, getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
 
