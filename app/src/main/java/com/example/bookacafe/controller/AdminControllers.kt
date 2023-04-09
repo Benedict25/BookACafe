@@ -11,12 +11,6 @@ import java.text.DecimalFormat
 
 class AdminControllers {
     var con = DatabaseHandler.connect()
-    // nitip query SQL
-    // query get all user: SELECT a.firstName, a.lastName, sum(if(c.status = 'CANCELED',1,0)) as 'canceledOrder', sum(if(c.status = 'CANCELED',0,1)) as 'fixedOrder' FROM users a JOIN members b ON a.userId = b.memberId JOIN transactions c ON b.memberId = c.memberId GROUP BY b.memberId;
-    // query get all seat: SELECT a.tableName, count(b.transactionId) as "totalBooked", count(b.transactionId)*10000 as "tableIncome" FROM tables a JOIN transactions b ON a.tableId = b.tableId GROUP BY a.tableId;
-    // query get all food: SELECT a.name, sum(b.menuQuantity) as "totalOrdered", sum(b.menuQuantity)*a.price as "foodIncome", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId WHERE a.type = "FOOD" GROUP BY a.menuId;
-    // query get all drink: SELECT a.name, sum(b.menuQuantity) as "totalOrdered", sum(b.menuQuantity)*a.price as "beverageIncome", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId WHERE a.type = "BEVERAGE" GROUP BY a.menuId;
-    // query get all book: SELECT a.title, sum(b.bookQuantity) as "totalOrdered", a.imagePath FROM books a JOIN detail_transactions b ON a.bookId = b.bookId GROUP BY a.bookId;
     var maxHours = 2
     var maxHoursMin = maxHours -1
     val formatter = DecimalFormat("#,###")
@@ -155,7 +149,4 @@ class AdminControllers {
         }
         return seats
     }
-    fun ShowDailyReport() {}
-    fun VerifyOrder() {}
-    fun VerifyPayment() {}
 }
