@@ -3,14 +3,18 @@ package com.example.bookacafe.view
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookacafe.controller.BookControllers
 import com.example.bookacafe.databinding.ItemBookBinding
 import com.example.bookacafe.model.Book
 import com.squareup.picasso.Picasso
+
 
 class ListBookAdapter(private val books : ArrayList<Book>) : RecyclerView.Adapter<ListBookAdapter.ListViewHolder>() {
     var onItemClick: ((Book) -> Unit)? = null
@@ -49,11 +53,23 @@ class ListBookAdapter(private val books : ArrayList<Book>) : RecyclerView.Adapte
         val addToCartDialog = AlertDialog.Builder(context)
 
         val positiveButtonClick = { _: DialogInterface, _: Int ->
-            Toast.makeText(context,
-                book.title + " added to cart.",
+            val added = BookControllers().addBookToCart(book.bookId)
+            var text: String
+            if (added) {
+                text = book.title + " added to cart."
+            } else {
+                text = book.title + " is already in your cart!"
+            }
+            val toast = Toast.makeText(context,
+                text,
                 Toast.LENGTH_SHORT
-            ).show()
-            BookControllers().addBookToCart(book.bookId)
+            )
+            val layout = toast.view as LinearLayout?
+            if (layout!!.childCount > 0) {
+                val tv = layout!!.getChildAt(0) as TextView
+                tv.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
+            }
+            toast.show()
             addToCartDialog.create().dismiss()
         }
 
