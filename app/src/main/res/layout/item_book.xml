@@ -8,7 +8,8 @@
         android:id="@+id/img_book_cover"
         android:layout_width="180dp"
         android:layout_height="250dp"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        android:contentDescription="@string/book_cover" />
 
     <!-- BUTTON + -->
     <Button
@@ -16,7 +17,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_below="@id/img_book_cover"
-        android:text="+"
+        android:text="@string/plus"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/white"
@@ -35,7 +36,7 @@
         android:layout_below="@id/img_book_cover"
         android:layout_toEndOf="@+id/btn_add"
         android:layout_marginTop="10dp"
-        android:text="{title}"
+        android:text="@string/title_placeholder"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -47,7 +48,7 @@
         android:layout_toEndOf="@+id/btn_add"
         android:layout_marginStart="10dp"
         android:ellipsize="end"
-        android:text="{author}" />
+        android:text="@string/author_placeholder" />
 
     <TextView
         android:id="@+id/tv_book_stock"
@@ -57,5 +58,5 @@
         android:layout_toEndOf="@+id/btn_add"
         android:layout_marginStart="10dp"
         android:ellipsize="end"
-        android:text="{Stock: x}" />
+        android:text="@string/stock_placeholder" />
 </RelativeLayout>

@@ -25,7 +25,7 @@
                 android:layout_margin="20dp"
                 android:textStyle="bold"
                 android:textSize="30sp"
-                android:text="Books" />
+                android:text="@string/books" />
         </LinearLayout>
 
         <!-- SEARCH VIEW -->
@@ -52,7 +52,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:contentDescription="Genre" />
+            android:contentDescription="@string/genre" />
 
         <!-- DISPLAY -->
         <androidx.recyclerview.widget.RecyclerView
