@@ -41,10 +41,9 @@ class ListBookCartAdapter(private val cart: Cart) : RecyclerView.Adapter<ListBoo
 
                     if (isRemoved) {
                         Toast.makeText(context, "${book.title} Removed", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(context, MenuCart::class.java)
-                        context?.startActivity(intent)
+                        (context as MenuCart).refreshCart()
                     } else {
-                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

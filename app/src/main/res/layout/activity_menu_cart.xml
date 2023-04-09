@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/cartRoomNumber"
             android:layout_toRightOf="@+id/cartRoomNumber"
-            android:text="Rp5.000,-" />
+            android:text="Rp10.000,-" />
 
         <ImageView
             android:id="@+id/cartTableCancel"
