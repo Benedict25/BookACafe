@@ -15,6 +15,7 @@
         android:text="Welcome \nNicholas Russel Permana"
         android:textColor="@color/black"
         android:textSize="20dp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.664"
         app:layout_constraintLeft_toLeftOf="parent"

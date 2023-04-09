@@ -15,6 +15,18 @@ class CashierControllers {
     var maxHoursMin = maxHours -1
     val formatter = DecimalFormat("#,###")
 
+    fun updateTransactionStatus(tableId: String): Boolean {
+        return try {
+            val query = "UPDATE transactions SET status = 'PAID' WHERE tableId = '$tableId' AND status = 'NOT_PAID'"
+            val stmt: Statement = con!!.createStatement()
+            stmt.executeUpdate(query)
+            true
+        } catch (e: SQLException) {
+            e.printStackTrace()
+            false
+        }
+    }
+
     fun getTableInTransaction(tableName:String): Boolean {
         var founded = false
         val query = "SELECT a.tableName, 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1) as 'tableCost' FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status = 'NOT_PAID' AND a.tableName = '$tableName' GROUP BY a.tableId;"
@@ -30,12 +42,13 @@ class CashierControllers {
     fun getTableData(tableName: String): TableDummy {
 //        SELECT a.tableName, 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>2,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-1,1) as 'tableCost' FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status = 'NOT_PAID' AND a.tableName = 'A1' GROUP BY a.tableId;
         lateinit var tableData: TableDummy
-        val query = "SELECT a.tableName, 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1) as 'tableCost' FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status = 'NOT_PAID' AND a.tableName = '$tableName' GROUP BY a.tableId;"
+        val query = "SELECT a.tableId, a.tableName, 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1) as 'tableCost' FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status = 'NOT_PAID' AND a.tableName = '$tableName' GROUP BY a.tableId;"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
             while (rs.next()) {
                 tableData = TableDummy(
+                    rs.getString("tableId"),
                     rs.getString("tableName"),
                     formatter.format(rs.getInt("tableCost"))
                 )

@@ -1,18 +1,20 @@
 package com.example.bookacafe.view.cashierTransaction
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.format.DateFormat
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.controller.CashierControllers
 import com.example.bookacafe.databinding.ActivityCashierTransactionBinding
 import com.example.bookacafe.model.Book
 import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
+import com.example.bookacafe.model.adminDataDetails.TableDummy
 import com.example.bookacafe.view.CashierActivity
-import com.example.bookacafe.view.CashierHomeFragment
 import java.text.DecimalFormat
 import java.time.LocalDate
 
@@ -42,19 +44,18 @@ class CashierTransaction() : AppCompatActivity() {
             bookList.addAll(CashierControllers().getOrderedBookData(tableName))
             showRecyclerList()
 
+//            val alertDialogBuilder = AlertDialog.Builder(this)
             binding.btnPrintBill.setOnClickListener {
-                //nanti ada pop up notif deh kek <yakin bang?> kalo iya baru gas
-                binding.btnPrintBill.isEnabled = false
+                dialogBoxPrintBill(tableData)
             }
 
             binding.btnFinishedTransaction.setOnClickListener {
-                //nanti ada pop up notif deh kek <yakin bang?> kalo iya baru gas
-                //nanti update transaction user nya jadi Paid
-                //trus info makasih makasih an lah
-                finish()
-                val intent = Intent(this, CashierActivity::class.java)
-                startActivity(intent)
+                dialogBoxFinishedTransaction(tableData)
             }
+//                dialogBoxFinishedTransaction(tableData)
+//                //trus info makasih makasih an lah
+
+
         } else {
             finish()
             val intent = Intent(this, CashierActivity::class.java)
@@ -72,5 +73,51 @@ class CashierTransaction() : AppCompatActivity() {
         binding.rvBillBooks.layoutManager = LinearLayoutManager(this)
         val listBookAdapter = CashierBookAdapter(bookList)
         binding.rvBillBooks.adapter = listBookAdapter
+    }
+
+    // Menampilkan AlertDialog pertama
+    private fun dialogBoxPrintBill(table:TableDummy) {
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle("Print Bill")
+        alertDialogBuilder.setMessage("Lanjutkan proses pencetakan bill??")
+        alertDialogBuilder.setPositiveButton("Yes") { dialog, which ->
+            // Aksi yang dijalankan ketika tombol "OK"
+            //realnya kalo ngeprint ya bawa datanya kan :))
+            dialog.dismiss()
+            binding.btnPrintBill.isEnabled = false
+            Toast.makeText(this, "Bill sudah dicetak!", Toast.LENGTH_SHORT).show()
+        }
+        alertDialogBuilder.setNegativeButton("No") { dialog, which ->
+            // Aksi yang dijalankan ketika tombol "Cancel" ditekan
+            dialog.dismiss()
+            Toast.makeText(this, "Alert Dialog Closed!", Toast.LENGTH_SHORT).show()
+        }
+        val alertDialog1 = alertDialogBuilder.create()
+        alertDialog1.show()
+    }
+
+    // Menampilkan AlertDialog kedua
+    private fun dialogBoxFinishedTransaction(table: TableDummy) {
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle("Finished Transaction")
+        alertDialogBuilder.setMessage("Selesaikan Transaksi??")
+        alertDialogBuilder.setPositiveButton("Yes") { dialog, which ->
+            // Aksi yang dijalankan ketika tombol "Yes" ditekan
+            dialog.dismiss()
+
+            CashierControllers().updateTransactionStatus(table.tableId)
+            Toast.makeText(this, "Transaksi pada meja "+ table.tableName + " sudah selesai!", Toast.LENGTH_SHORT).show()
+
+            finish()
+            val intent = Intent(this, CashierActivity::class.java)
+            startActivity(intent)
+        }
+        alertDialogBuilder.setNegativeButton("No") { dialog, which ->
+            // Aksi yang dijalankan ketika tombol "No" ditekan
+            dialog.dismiss()
+            Toast.makeText(this, "Alert Dialog Closed!", Toast.LENGTH_SHORT).show()
+        }
+        val alertDialog2 = alertDialogBuilder.create()
+        alertDialog2.show()
     }
 }

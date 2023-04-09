@@ -78,7 +78,7 @@ class AdminControllers {
 
     fun getBookData(): ArrayList<AdminBookDetails> {
         val books: ArrayList<AdminBookDetails> = ArrayList()
-        val query = "SELECT a.title, count(b.bookId) as \"totalOrdered\", a.imagePath FROM books a JOIN detail_transactions b ON a.bookId = b.bookId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' GROUP BY a.bookId"
+        val query = "SELECT a.title, count(b.bookId) as \"totalOrdered\", a.imagePath FROM books a JOIN detail_transactions b ON a.bookId = b.bookId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' GROUP BY a.bookId ORDER BY `totalOrdered` DESC, `a`.`title` ASC"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -98,7 +98,7 @@ class AdminControllers {
 
     fun getFoodData(): ArrayList<AdminMenuDetails> {
         val foods: ArrayList<AdminMenuDetails> = ArrayList()
-        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"foodIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' AND a.type = \"FOOD\" GROUP BY a.menuId"
+        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"foodIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' AND a.type = \"FOOD\" GROUP BY a.menuId ORDER BY `totalOrdered` DESC, `a`.`name` ASC"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -118,7 +118,7 @@ class AdminControllers {
 
     fun getBeverageData(): ArrayList<AdminMenuDetails> {
         val beverages: ArrayList<AdminMenuDetails> = ArrayList()
-        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"beverageIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' AND a.type = \"BEVERAGE\" GROUP BY a.menuId"
+        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"beverageIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' AND a.type = \"BEVERAGE\" GROUP BY a.menuId ORDER BY `totalOrdered` DESC, `a`.`name` ASC"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -138,12 +138,13 @@ class AdminControllers {
 
     fun getSeatData():ArrayList<TableDummy> {
         val seats: ArrayList<TableDummy> = ArrayList()
-        val query = "SELECT a.tableName, count(b.transactionId) as \"totalBooked\", sum(10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1)) as \"tableIncome\" FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status != 'CANCELED' GROUP BY a.tableId"
+        val query = "SELECT a.tableId, a.tableName, count(b.transactionId) as \"totalBooked\", sum(10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1)) as \"tableIncome\" FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status != 'CANCELED' GROUP BY a.tableId ORDER BY `totalBooked` DESC, `a`.`tableName` ASC"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
             while (rs.next()) {
                 val seat = TableDummy(
+                    rs.getString("tableId"),
                     rs.getString("tableName"),
                     "Total Booked: " + rs.getString("totalBooked") + "\nTable Income: Rp" + formatter.format(rs.getInt("tableIncome"))
                 )

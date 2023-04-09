@@ -32,7 +32,7 @@ class AdminHomeFragment :Fragment(R.layout.fragment_admin_home) {
         super.onViewCreated(view, savedInstanceState)
 
         var adminTextView: TextView = view.findViewById(R.id.admin_textView)
-        adminTextView.text = ActiveUser.getFirstName() + " " + ActiveUser.getLastName()
+        adminTextView.text = "Welcome,\n" + ActiveUser.getFirstName() + " " + ActiveUser.getLastName()
 
         val btnDisableUser: Button = view.findViewById(R.id.buttonDisableUser)
         val btnShowTrans: Button = view.findViewById(R.id.buttonShowAllTransaction)
