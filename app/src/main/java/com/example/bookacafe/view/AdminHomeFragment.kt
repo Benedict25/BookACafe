@@ -10,13 +10,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import com.example.bookacafe.R
+import com.example.bookacafe.controller.ActiveUser
 import com.example.bookacafe.view.adminDisabledUser.DisabledUserMenu
 import com.example.bookacafe.view.adminTransaction.ShowTransactions
 
 
 class AdminHomeFragment :Fragment(R.layout.fragment_admin_home) {
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,6 +30,10 @@ class AdminHomeFragment :Fragment(R.layout.fragment_admin_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var adminTextView: TextView = view.findViewById(R.id.admin_textView)
+        adminTextView.text = ActiveUser.getFirstName() + " " + ActiveUser.getLastName()
+
         val btnDisableUser: Button = view.findViewById(R.id.buttonDisableUser)
         val btnShowTrans: Button = view.findViewById(R.id.buttonShowAllTransaction)
         val btnLogOut: Button = view.findViewById(R.id.buttonLogOut)
@@ -40,17 +47,9 @@ class AdminHomeFragment :Fragment(R.layout.fragment_admin_home) {
             startActivity(intent)
         }
         btnLogOut.setOnClickListener{
-            val mCategoryFragment = SecondFragment()
-            val mFragmentManager = parentFragmentManager as FragmentManager
-            mFragmentManager
-                .beginTransaction()
-                .replace(
-                    R.id.fragment_container,
-                    mCategoryFragment,
-                    ThirdFragment::class.java.simpleName
-                )
-                .addToBackStack(null)
-                .commit()
+            //nanti set user ke null
+            val intent = Intent(context, Login::class.java)
+            startActivity(intent)
         }
         clickableImage.setOnClickListener{
             val mCategoryFragment = ThirdFragment()

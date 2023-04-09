@@ -7,11 +7,26 @@ import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
 import com.example.bookacafe.model.adminDataDetails.TableDummy
 import java.sql.ResultSet
 import java.sql.Statement
+import java.text.DecimalFormat
 
 class CashierControllers {
     var con = DatabaseHandler.connect()
     var maxHours = 2
     var maxHoursMin = maxHours -1
+    val formatter = DecimalFormat("#,###")
+
+    fun getTableInTransaction(tableName:String): Boolean {
+        var founded = false
+        val query = "SELECT a.tableName, 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1) as 'tableCost' FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status = 'NOT_PAID' AND a.tableName = '$tableName' GROUP BY a.tableId;"
+        try{
+            val stmt: Statement = con!!.createStatement()
+            val rs: ResultSet = stmt.executeQuery(query)
+            founded = rs.next()
+        } catch (e: SQLException) {
+            e.printStackTrace()
+        }
+        return founded
+    }
     fun getTableData(tableName: String): TableDummy {
 //        SELECT a.tableName, 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>2,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-1,1) as 'tableCost' FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status = 'NOT_PAID' AND a.tableName = 'A1' GROUP BY a.tableId;
         lateinit var tableData: TableDummy
@@ -22,7 +37,7 @@ class CashierControllers {
             while (rs.next()) {
                 tableData = TableDummy(
                     rs.getString("tableName"),
-                    rs.getString("tableCost")
+                    formatter.format(rs.getInt("tableCost"))
                 )
             }
         } catch (e: SQLException) {
@@ -41,9 +56,9 @@ class CashierControllers {
             while (rs.next()) {
                 val menu = CashierMenuDetail(
                     rs.getString("name"),
-                    rs.getString("price"),
+                    formatter.format(rs.getInt("price")),
                     rs.getString("menuQuantity"),
-                    rs.getString("menuCost")
+                    formatter.format(rs.getInt("menuCost"))
                 )
                 orderedMenus.add(menu)
             }
