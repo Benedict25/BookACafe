@@ -4,20 +4,25 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.Gravity
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.BookControllers
-import com.example.bookacafe.databinding.MenuBookBinding
 import com.example.bookacafe.model.Book
-import com.google.android.material.tabs.TabLayout
 import com.squareup.picasso.Picasso
+import android.widget.*
+import com.example.bookacafe.databinding.MenuBookBinding
+import com.google.android.material.tabs.TabLayout
 
 
-class MenuBook : AppCompatActivity(), View.OnClickListener {
+class BookMenu : Fragment(), View.OnClickListener {
     private lateinit var binding: MenuBookBinding
     private lateinit var dialog: Dialog
     private lateinit var searchView: SearchView
@@ -27,17 +32,24 @@ class MenuBook : AppCompatActivity(), View.OnClickListener {
     private var selectedTab: Int = 0
     private val bookGenre: Array<String> = arrayOf("Romance", "Science", "Fantasy")
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = MenuBookBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = MenuBookBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // Show Books
         getListBooks(selectedTab, "")
         showBooks()
 
         // Search View (per Genre)
-        searchView = findViewById(R.id.search_view)
+        searchView = view.findViewById(R.id.search_view)
         for (book in books) {
             bookTitles.add(book.title)
         }
@@ -48,7 +60,7 @@ class MenuBook : AppCompatActivity(), View.OnClickListener {
                     getListBooks(selectedTab, query.toString())
                     showBooks()
                 } else {
-                    Toast.makeText(this@MenuBook,
+                    Toast.makeText(requireContext(),
                         "No book found.",
                         Toast.LENGTH_LONG
                     ).show()
@@ -64,7 +76,7 @@ class MenuBook : AppCompatActivity(), View.OnClickListener {
         })
 
         // Tab Layout & View Pager (Genre)
-        tabLayout = findViewById(R.id.tl_books)
+        tabLayout = view.findViewById(R.id.tl_books)
 
         tabLayout!!.addTab(tabLayout!!.newTab().setText(bookGenre[0]))
         tabLayout!!.addTab(tabLayout!!.newTab().setText(bookGenre[1]))
@@ -102,7 +114,6 @@ class MenuBook : AppCompatActivity(), View.OnClickListener {
             }
         })
     }
-
     override fun onClick(p0: View?) {
 
     }
@@ -124,17 +135,17 @@ class MenuBook : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun showBooks() {
-        binding.rvBooks.layoutManager = GridLayoutManager(this, 2)
+        binding.rvBooks.layoutManager = GridLayoutManager(requireContext(), 2)
         val listBookAdapter = ListBookAdapter(books)
         binding.rvBooks.adapter = listBookAdapter
 
         listBookAdapter.onItemClick = {
-            book -> showBookDetails(book)
+                book -> showBookDetails(book)
         }
     }
 
     private fun showBookDetails(book: Book) {
-        dialog = Dialog(this)
+        dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.book_details_dialog)
         dialog.setTitle("Book Detail")
 
@@ -165,23 +176,11 @@ class MenuBook : AppCompatActivity(), View.OnClickListener {
 
     private fun showAddToCartDialog(book: Book) {
         val positiveButtonClick = { _: DialogInterface, _: Int ->
-            val added = BookControllers().addBookToCart(book.bookId)
-            var text = ""
-            if (added) {
-                text = book.title + " added to cart."
-            } else {
-                text = book.title + " is already in your cart!"
-            }
-            val toast = Toast.makeText(this@MenuBook,
-                text,
+            Toast.makeText(requireContext(),
+                book.title + " added to cart.",
                 Toast.LENGTH_SHORT
-            )
-            val layout = toast.view as LinearLayout?
-            if (layout!!.childCount > 0) {
-                val tv = layout!!.getChildAt(0) as TextView
-                tv.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
-            }
-            toast.show()
+            ).show()
+            BookControllers().addBookToCart(book.bookId)
             dialog.dismiss()
         }
 
@@ -189,7 +188,7 @@ class MenuBook : AppCompatActivity(), View.OnClickListener {
             dialog.dismiss()
         }
 
-        val addToCartDialog = AlertDialog.Builder(this@MenuBook)
+        val addToCartDialog = AlertDialog.Builder(requireContext())
         addToCartDialog.setTitle("Add to Cart")
             .setIcon(android.R.drawable.ic_dialog_info)
             .setMessage("You chose " + book.title)
