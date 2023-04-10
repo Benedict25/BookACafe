@@ -65,9 +65,9 @@ class FirstFragment:Fragment(R.layout.fragment_first) {
         viewPager = view.findViewById(R.id.idViewPager)
 
         imageList = ArrayList<Int>()
-        imageList = imageList + R.drawable.logo1
-        imageList = imageList + R.drawable.logo2
-        imageList = imageList + R.drawable.hunter
+        imageList = imageList + R.drawable.burgir_banner
+        imageList = imageList + R.drawable.strobucat_banner
+        imageList = imageList + R.drawable.sashimsimi_banner
 
         viewPagerAdapter = ViewPagerAdapter(requireContext(), imageList)
 
