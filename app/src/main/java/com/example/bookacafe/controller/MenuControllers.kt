@@ -90,25 +90,66 @@ class MenuControllers {
     fun addMenuToCart(menuId: String): Boolean {
         return try {
             var cartId = ""
+            var cartIds = ""
             val query1 = "SELECT cartId FROM carts WHERE memberId = '${user.getId()}'"
             val stmt1: Statement = con!!.createStatement()
             val rs: ResultSet = stmt1.executeQuery(query1)
+
             while (rs.next()) {
                 cartId = rs.getString("cartId")
             }
-            val query2 = "INSERT INTO detail_carts(detailCartId, cartId, menuId, menuQuantity) VALUES(default,?,?,?)"
-            val stmt2: PreparedStatement = con!!.prepareStatement(query2)
-            stmt2.setString(1, cartId)
-            stmt2.setString(2, menuId)
-            stmt2.setInt(3, 1)
-            stmt2.executeUpdate()
-            true
+            cartIds=checkMenuExistance(cartId, menuId)
+            if (cartIds == "-1") {
+                val query2 = "INSERT INTO detail_carts(detailCartId, cartId, menuId, menuQuantity) VALUES(default,?,?,?)"
+                val stmt2: PreparedStatement = con!!.prepareStatement(query2)
+                stmt2.setString(1, cartId)
+                stmt2.setString(2, menuId)
+                stmt2.setInt(3, 1)
+                stmt2.executeUpdate()
+                true
+            } else {
+                val queryGetQuantity = "SELECT menuQuantity FROM detail_carts WHERE menuId = '${menuId}' and cartId = '${cartId}'"
+                var quantity = 0
+                val stmt1: Statement = con!!.createStatement()
+                val rs: ResultSet = stmt1.executeQuery(queryGetQuantity)
+                while (rs.next()) {
+                    quantity = rs.getInt("menuQuantity") + 1
+                }
+
+                val query3 = "UPDATE detail_carts SET menuQuantity = ? WHERE menuId = ? and cartId = ?"
+                val stmt2: PreparedStatement = con!!.prepareStatement(query3)
+                stmt2.setInt(1, quantity)
+                stmt2.setString(2, menuId)
+                stmt2.setString(3, cartId)
+                stmt2.executeUpdate()
+                true
+            }
+
         } catch (e: SQLException) {
             e.printStackTrace()
             false
         }
     }
+    fun checkMenuExistance(cartId : String, menuId : String): String {
+        var cartIds = "-1"
 
+        val query = "SELECT cartId\n" +
+                "FROM detail_carts\n" +
+                "WHERE menuId = '${menuId}' AND cartId = '${cartId}'\n"
+
+        try {
+            val stmt: Statement = con!!.createStatement()
+            val rs: ResultSet = stmt.executeQuery(query)
+
+            while (rs.next()) {
+                cartIds = rs.getString("cartId")
+            }
+        } catch (e: SQLException) {
+            e.printStackTrace()
+        }
+
+        return cartIds
+    }
     private fun createMenuId(): String {
         val query = "SELECT menuId FROM menus ORDER BY menuId DESC LIMIT 1"
         var newestId = String()
