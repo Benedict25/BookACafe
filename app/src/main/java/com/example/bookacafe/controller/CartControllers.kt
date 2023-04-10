@@ -262,7 +262,6 @@ class CartControllers {
                     "",
                     "",
                     rs.getString("imagePath"),
-                    1,
                     ItemTypeEnum.AVAILABLE
                 )
                 books.add(book)

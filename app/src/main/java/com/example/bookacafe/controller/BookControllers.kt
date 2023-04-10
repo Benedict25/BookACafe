@@ -31,7 +31,6 @@ class BookControllers {
                     rs.getString("genre"),
                     rs.getString("synopsis"),
                     rs.getString("imagePath"),
-                    rs.getInt("stock"),
                     ItemTypeEnum.AVAILABLE
                 )
                 books.add(book)
@@ -43,7 +42,7 @@ class BookControllers {
     }
     fun addNewBook(book: Book): Boolean {
         return try {
-            val query = "INSERT INTO books VALUES(?,?,?,?,?,?,?,?)"
+            val query = "INSERT INTO books VALUES(?,?,?,?,?,?,?)"
             val stmt: PreparedStatement = con!!.prepareStatement(query)
             val bookId = createBookId()
             stmt.setString(1, bookId)
@@ -52,8 +51,7 @@ class BookControllers {
             stmt.setString(4, book.genre)
             stmt.setString(5, book.synopsis)
             stmt.setString(6, book.imagePath)
-            stmt.setInt(7, book.stock)
-            stmt.setString(8, ItemTypeEnum.AVAILABLE.toString())
+            stmt.setString(7, ItemTypeEnum.AVAILABLE.toString())
             stmt.executeUpdate()
             true
         } catch (e: SQLException) {
@@ -64,8 +62,7 @@ class BookControllers {
     fun editBook(book: Book): Boolean {
         return try {
             val query = "UPDATE books SET title = '${book.title}', author = '${book.author}', genre = '${book.genre}'," +
-                    "synopsis = '${book.synopsis}', imagePath = '${book.imagePath}', stock = '${book.stock}' " +
-                    "WHERE bookId = '${book.bookId}'"
+                    "synopsis = '${book.synopsis}', imagePath = '${book.imagePath}' WHERE bookId = '${book.bookId}'"
             val stmt: Statement = con!!.createStatement()
             stmt.executeUpdate(query)
             true

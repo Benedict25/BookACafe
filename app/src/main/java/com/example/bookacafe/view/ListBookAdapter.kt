@@ -40,7 +40,6 @@ class ListBookAdapter(private val books : ArrayList<Book>) : RecyclerView.Adapte
             with(binding) {
                 tvBookTitle.text = book.title
                 tvBookAuthor.text = book.author
-                tvBookStock.text = "Stock: ${book.stock}"
                 Picasso.get().load(book.imagePath).into(imgBookCover)
                 btnAdd.setOnClickListener() {
                     showAddToCartDialog(book)
@@ -54,7 +53,7 @@ class ListBookAdapter(private val books : ArrayList<Book>) : RecyclerView.Adapte
 
         val positiveButtonClick = { _: DialogInterface, _: Int ->
             val added = BookControllers().addBookToCart(book.bookId)
-            var text: String
+            val text: String
             if (added) {
                 text = book.title + " added to cart."
             } else {

@@ -89,7 +89,7 @@ class CashierControllers {
                 val book = Book(
                     "",
                     rs.getString("title"),
-                    "","","","",0, ItemTypeEnum.AVAILABLE
+                    "","","","", ItemTypeEnum.AVAILABLE
                 )
                 books.add(book)
             }
