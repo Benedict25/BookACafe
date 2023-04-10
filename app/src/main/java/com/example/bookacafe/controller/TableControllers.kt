@@ -1,6 +1,7 @@
 package com.example.bookacafe.controller
 
 import android.database.SQLException
+import android.util.Log
 import com.example.bookacafe.model.Table
 import com.example.bookacafe.model.TableTypeEnum
 import java.sql.PreparedStatement
@@ -87,10 +88,12 @@ class TableControllers {
             while (rs.next()) {
                 cartId = rs.getString("cartId")
             }
-            val query =
+            Log.d("TABLE ID", tableId)
+            Log.d("CART ID", cartId)
+            val query2 =
                 "UPDATE carts SET tableId = '$tableId' WHERE cartId = '$cartId'"
             val stmt2: Statement = con!!.createStatement()
-            stmt2.executeUpdate(query)
+            stmt2.executeUpdate(query2)
             true
         } catch (e: SQLException) {
             e.printStackTrace()
