@@ -21,6 +21,7 @@ class HomePage : AppCompatActivity() {
         val tableFragment=TableMenu()
         val bookFragment=BookMenu()
         val fnbFragment=FnBMenu()
+        val cartFragment=MenuCart()
         setCurrentFragment(firstFragment)
 
 //        bottomNavigationView.setOnNavigationItemSelectedListener {
@@ -38,6 +39,8 @@ class HomePage : AppCompatActivity() {
                 R.id.icon_home->{
                     val intent = Intent(this, HomePage::class.java)
                     startActivity(intent)
+                    // Biar gada transisi blink
+                    overridePendingTransition(0, 0)
                 }
                 R.id.icon_tables->{
 //                    val intent = Intent(this, MenuTable::class.java)
@@ -55,8 +58,9 @@ class HomePage : AppCompatActivity() {
                     setCurrentFragment(fnbFragment)
                 }
                 R.id.icon_cart -> {
-                    val intent = Intent(this, MenuCart::class.java)
-                    startActivity(intent)
+//                    val intent = Intent(this, MenuCart::class.java)
+//                    startActivity(intent)
+                    setCurrentFragment(cartFragment)
                 }
             }
             true
