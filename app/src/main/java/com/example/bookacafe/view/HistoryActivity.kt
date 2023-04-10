@@ -1,10 +1,12 @@
 package com.example.bookacafe.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.controller.MemberControllers
+import com.example.bookacafe.controller.TransactionControllers
 import com.example.bookacafe.databinding.HistoryScreenBinding
 import com.example.bookacafe.model.Transaction
 import com.example.bookacafe.view.ListHistoryAdapter.OnClickListener
@@ -36,6 +38,8 @@ class HistoryActivity : AppCompatActivity() {
             listHistoryAdapter,
             object : OnClickListener {
                 override fun onClick(position: Int, model: Transaction) {
+                    moveToBillPage(model)
+
                     Toast.makeText(
                         applicationContext,
                         "Ini toast, trans id: ${model.transactionId}",
@@ -45,8 +49,14 @@ class HistoryActivity : AppCompatActivity() {
             })
     }
 
+    fun moveToBillPage(model: Transaction){
+        val intent = Intent(this@HistoryActivity, BillActivity::class.java)
+        intent.putExtra(BillActivity.EXTRA_TRANSACTION, model)
+        startActivity(intent)
+    }
+
     fun getListHistory(): ArrayList<Transaction> {
-        var listHistory = MemberControllers.ShowHistory()
+        var listHistory = TransactionControllers.GetTransactionData()
         return listHistory
     }
 }
