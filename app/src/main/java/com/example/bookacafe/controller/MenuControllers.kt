@@ -77,8 +77,7 @@ class MenuControllers {
     }
     fun deleteMenu(menuId: String): Boolean {
         return try {
-            val query =
-                "UPDATE menus SET status = '${ItemTypeEnum.UNAVAILABLE}' WHERE menuId = '$menuId'"
+            val query = "UPDATE menus SET status = '${ItemTypeEnum.UNAVAILABLE}' WHERE menuId = '$menuId'"
             val stmt: Statement = con!!.createStatement()
             stmt.executeUpdate(query)
             true
