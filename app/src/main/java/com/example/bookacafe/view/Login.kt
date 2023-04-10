@@ -135,9 +135,10 @@ class Login : AppCompatActivity() {
         lateinit var intent: Intent
         if (ActiveUser.getType() == "MEMBER") {
             intent = Intent(this@Login, HomePage::class.java)
-        } else if (ActiveUser.getType() == "ADMIN") { // ADMIN / CASHIER
+        } else if (ActiveUser.getType() == "ADMIN") {
             intent = Intent(this@Login, AdminActivity::class.java)
-        } else if (ActiveUser.getType() == "CASHIER") { intent = Intent(this@Login, CashierActivity::class.java)
+        } else if (ActiveUser.getType() == "CASHIER") {
+            intent = Intent(this@Login, CashierActivity::class.java)
         }
         startActivity(intent)
     }

@@ -14,7 +14,7 @@ import com.example.bookacafe.model.Cart
 import com.example.bookacafe.model.Menu
 import com.squareup.picasso.Picasso
 
-class ListBookCartAdapter(private val cart: Cart) : RecyclerView.Adapter<ListBookCartAdapter.ListViewHolder>() {
+class ListBookCartAdapter(private val cart: Cart, val refreshCart: () -> Unit) : RecyclerView.Adapter<ListBookCartAdapter.ListViewHolder>() {
     var context: Context? = null // Context for Toast to work
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {
@@ -41,7 +41,7 @@ class ListBookCartAdapter(private val cart: Cart) : RecyclerView.Adapter<ListBoo
 
                     if (isRemoved) {
                         Toast.makeText(context, "${book.title} Removed", Toast.LENGTH_SHORT).show()
-                        (context as MenuCart).refreshCart()
+                        refreshCart()
                     } else {
                         Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show()
                     }

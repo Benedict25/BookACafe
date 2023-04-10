@@ -4,6 +4,8 @@ import SecondFragment
 import ThirdFragment
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.ActiveUser
@@ -33,12 +36,12 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home) {
         super.onViewCreated(view, savedInstanceState)
 
         var cashierTextView: TextView = view.findViewById(R.id.cashier_textView)
-        cashierTextView.text = ActiveUser.getFirstName() + " " + ActiveUser.getLastName()
+        cashierTextView.text = "Welcome,\n" + ActiveUser.getFirstName() + " " + ActiveUser.getLastName()
 
         var btnA1: Button = view.findViewById(R.id.buttonTablesA1)
         btnA1.setOnClickListener{
             if (!CashierControllers().getTableInTransaction(btnA1.text.toString())) {
-                btnA1.isEnabled = false
+                Toast.makeText(requireContext(), "Belum ada transaksi baru pada meja "+btnA1.text.toString()+"!", Toast.LENGTH_SHORT).show()
             } else {
                 val intent = Intent(context, CashierTransaction::class.java)
                 intent.putExtra("table_key", btnA1.text.toString())
@@ -49,7 +52,7 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home) {
         var btnA2: Button = view.findViewById(R.id.buttonTablesA2)
         btnA2.setOnClickListener{
             if (!CashierControllers().getTableInTransaction(btnA2.text.toString())) {
-                btnA2.isEnabled = false
+                Toast.makeText(requireContext(), "Belum ada transaksi baru pada meja "+btnA2.text.toString()+"!", Toast.LENGTH_SHORT).show()
             } else {
                 val intent = Intent(context, CashierTransaction::class.java)
                 intent.putExtra("table_key", btnA2.text.toString())
@@ -60,7 +63,7 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home) {
         var btnA3: Button = view.findViewById(R.id.buttonTablesA3)
         btnA3.setOnClickListener{
             if (!CashierControllers().getTableInTransaction(btnA3.text.toString())) {
-                btnA3.isEnabled = false
+                Toast.makeText(requireContext(), "Belum ada transaksi baru pada meja "+btnA3.text.toString()+"!", Toast.LENGTH_SHORT).show()
             } else {
                 val intent = Intent(context, CashierTransaction::class.java)
                 intent.putExtra("table_key", btnA3.text.toString())
@@ -71,7 +74,7 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home) {
         var btnA4: Button = view.findViewById(R.id.buttonTablesA4)
         btnA4.setOnClickListener{
             if (!CashierControllers().getTableInTransaction(btnA4.text.toString())) {
-                btnA4.isEnabled = false
+                Toast.makeText(requireContext(), "Belum ada transaksi baru pada meja "+btnA4.text.toString()+"!", Toast.LENGTH_SHORT).show()
             } else {
                 val intent = Intent(context, CashierTransaction::class.java)
                 intent.putExtra("table_key", btnA4.text.toString())
@@ -82,7 +85,7 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home) {
         var btnB1: Button = view.findViewById(R.id.buttonTablesB1)
         btnB1.setOnClickListener{
             if (!CashierControllers().getTableInTransaction(btnB1.text.toString())) {
-                btnB1.isEnabled = false
+                Toast.makeText(requireContext(), "Belum ada transaksi baru pada meja "+btnB1.text.toString()+"!", Toast.LENGTH_SHORT).show()
             } else {
                 val intent = Intent(context, CashierTransaction::class.java)
                 intent.putExtra("table_key", btnB1.text.toString())
@@ -93,7 +96,7 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home) {
         var btnB2: Button = view.findViewById(R.id.buttonTablesB2)
         btnB2.setOnClickListener{
             if (!CashierControllers().getTableInTransaction(btnB2.text.toString())) {
-                btnB2.isEnabled = false
+                Toast.makeText(requireContext(), "Belum ada transaksi baru pada meja "+btnB2.text.toString()+"!", Toast.LENGTH_SHORT).show()
             } else {
                 val intent = Intent(context, CashierTransaction::class.java)
                 intent.putExtra("table_key", btnB2.text.toString())
@@ -104,7 +107,7 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home) {
         var btnB3: Button = view.findViewById(R.id.buttonTablesB3)
         btnB3.setOnClickListener{
             if (!CashierControllers().getTableInTransaction(btnB3.text.toString())) {
-                btnB3.isEnabled = false
+                Toast.makeText(requireContext(), "Belum ada transaksi baru pada meja "+btnB3.text.toString()+"!", Toast.LENGTH_SHORT).show()
             } else {
                 val intent = Intent(context, CashierTransaction::class.java)
                 intent.putExtra("table_key", btnB3.text.toString())

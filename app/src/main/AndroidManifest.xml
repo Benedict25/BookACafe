@@ -76,10 +76,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.MenuTable"
+            android:name=".view.TableMenu"
             android:exported="false" />
         <activity
-            android:name=".view.MenuBook"
+            android:name=".view.BookMenu"
             android:exported="false" />
         <activity
             android:name=".view.AdminActivity"

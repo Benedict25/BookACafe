@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -161,8 +162,6 @@ class BookMenu : Fragment(), View.OnClickListener {
         bookTitle.text = book.title
         val bookAuthor = dialog.findViewById(R.id.tv_book_author) as TextView
         bookAuthor.text = book.author
-        val bookStock = dialog.findViewById(R.id.tv_book_stock) as TextView
-        bookStock.text = "Stock: ${book.stock}"
         val bookSynopsis = dialog.findViewById(R.id.tv_book_synopsis) as TextView
         bookSynopsis.text = book.synopsis
 
@@ -176,11 +175,23 @@ class BookMenu : Fragment(), View.OnClickListener {
 
     private fun showAddToCartDialog(book: Book) {
         val positiveButtonClick = { _: DialogInterface, _: Int ->
-            Toast.makeText(requireContext(),
-                book.title + " added to cart.",
+            val added = BookControllers().addBookToCart(book.bookId)
+            val text: String
+            if (added) {
+                text = book.title + " added to cart."
+            } else {
+                text = book.title + " is already in your cart!"
+            }
+            val toast = Toast.makeText(requireContext(),
+                text,
                 Toast.LENGTH_SHORT
-            ).show()
-            BookControllers().addBookToCart(book.bookId)
+            )
+            val layout = toast.view as LinearLayout?
+            if (layout!!.childCount > 0) {
+                val tv = layout!!.getChildAt(0) as TextView
+                tv.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
+            }
+            toast.show()
             dialog.dismiss()
         }
 

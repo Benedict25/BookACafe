@@ -11,12 +11,6 @@ import java.text.DecimalFormat
 
 class AdminControllers {
     var con = DatabaseHandler.connect()
-    // nitip query SQL
-    // query get all user: SELECT a.firstName, a.lastName, sum(if(c.status = 'CANCELED',1,0)) as 'canceledOrder', sum(if(c.status = 'CANCELED',0,1)) as 'fixedOrder' FROM users a JOIN members b ON a.userId = b.memberId JOIN transactions c ON b.memberId = c.memberId GROUP BY b.memberId;
-    // query get all seat: SELECT a.tableName, count(b.transactionId) as "totalBooked", count(b.transactionId)*10000 as "tableIncome" FROM tables a JOIN transactions b ON a.tableId = b.tableId GROUP BY a.tableId;
-    // query get all food: SELECT a.name, sum(b.menuQuantity) as "totalOrdered", sum(b.menuQuantity)*a.price as "foodIncome", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId WHERE a.type = "FOOD" GROUP BY a.menuId;
-    // query get all drink: SELECT a.name, sum(b.menuQuantity) as "totalOrdered", sum(b.menuQuantity)*a.price as "beverageIncome", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId WHERE a.type = "BEVERAGE" GROUP BY a.menuId;
-    // query get all book: SELECT a.title, sum(b.bookQuantity) as "totalOrdered", a.imagePath FROM books a JOIN detail_transactions b ON a.bookId = b.bookId GROUP BY a.bookId;
     var maxHours = 2
     var maxHoursMin = maxHours -1
     val formatter = DecimalFormat("#,###")
@@ -78,7 +72,7 @@ class AdminControllers {
 
     fun getBookData(): ArrayList<AdminBookDetails> {
         val books: ArrayList<AdminBookDetails> = ArrayList()
-        val query = "SELECT a.title, count(b.bookId) as \"totalOrdered\", a.imagePath FROM books a JOIN detail_transactions b ON a.bookId = b.bookId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' GROUP BY a.bookId"
+        val query = "SELECT a.title, count(b.bookId) as \"totalOrdered\", a.imagePath FROM books a JOIN detail_transactions b ON a.bookId = b.bookId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' GROUP BY a.bookId ORDER BY `totalOrdered` DESC, `a`.`title` ASC"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -98,7 +92,7 @@ class AdminControllers {
 
     fun getFoodData(): ArrayList<AdminMenuDetails> {
         val foods: ArrayList<AdminMenuDetails> = ArrayList()
-        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"foodIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' AND a.type = \"FOOD\" GROUP BY a.menuId"
+        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"foodIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' AND a.type = \"FOOD\" GROUP BY a.menuId ORDER BY `totalOrdered` DESC, `a`.`name` ASC"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -118,7 +112,7 @@ class AdminControllers {
 
     fun getBeverageData(): ArrayList<AdminMenuDetails> {
         val beverages: ArrayList<AdminMenuDetails> = ArrayList()
-        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"beverageIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' AND a.type = \"BEVERAGE\" GROUP BY a.menuId"
+        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"beverageIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' AND a.type = \"BEVERAGE\" GROUP BY a.menuId ORDER BY `totalOrdered` DESC, `a`.`name` ASC"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -138,12 +132,13 @@ class AdminControllers {
 
     fun getSeatData():ArrayList<TableDummy> {
         val seats: ArrayList<TableDummy> = ArrayList()
-        val query = "SELECT a.tableName, count(b.transactionId) as \"totalBooked\", sum(10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1)) as \"tableIncome\" FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status != 'CANCELED' GROUP BY a.tableId"
+        val query = "SELECT a.tableId, a.tableName, count(b.transactionId) as \"totalBooked\", sum(10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1)) as \"tableIncome\" FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status != 'CANCELED' GROUP BY a.tableId ORDER BY `totalBooked` DESC, `a`.`tableName` ASC"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
             while (rs.next()) {
                 val seat = TableDummy(
+                    rs.getString("tableId"),
                     rs.getString("tableName"),
                     "Total Booked: " + rs.getString("totalBooked") + "\nTable Income: Rp" + formatter.format(rs.getInt("tableIncome"))
                 )
@@ -154,7 +149,4 @@ class AdminControllers {
         }
         return seats
     }
-    fun ShowDailyReport() {}
-    fun VerifyOrder() {}
-    fun VerifyPayment() {}
 }

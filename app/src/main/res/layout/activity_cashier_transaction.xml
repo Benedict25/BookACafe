@@ -189,14 +189,14 @@
         android:id="@+id/btn_print_bill"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cb_print"
+        android:layout_below="@id/total_ordered_cost"
         android:layout_marginTop="10dp"
         android:text="Print Bill" />
     <Button
         android:id="@+id/btn_finished_transaction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_print_bill"
+        android:layout_below="@id/btn_print_bill"
         android:layout_marginTop="5dp"
         android:text="Finished Transaction" />
 </LinearLayout>

@@ -224,7 +224,7 @@ class CartControllers {
                     rs.getString("name"),
                     rs.getInt("price"),
                     "",
-                    rs.getInt("estimationTime"),
+                    0,
                     "",
                     rs.getString("imagePath"),
                     ItemTypeEnum.AVAILABLE
@@ -262,7 +262,6 @@ class CartControllers {
                     "",
                     "",
                     rs.getString("imagePath"),
-                    1,
                     ItemTypeEnum.AVAILABLE
                 )
                 books.add(book)
