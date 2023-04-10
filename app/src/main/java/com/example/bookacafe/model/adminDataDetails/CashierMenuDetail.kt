@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class CashierMenuDetail(
+    var menuId: String,
     var menuName: String,
     var menuPrice: String,
     var menuQuantity: String,

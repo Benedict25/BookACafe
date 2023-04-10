@@ -1,10 +1,7 @@
 package com.example.bookacafe.controller
 
 import android.database.SQLException
-import com.example.bookacafe.model.adminDataDetails.AdminBookDetails
-import com.example.bookacafe.model.adminDataDetails.AdminMenuDetails
-import com.example.bookacafe.model.adminDataDetails.MemberDummy
-import com.example.bookacafe.model.adminDataDetails.TableDummy
+import com.example.bookacafe.model.adminDataDetails.*
 import java.sql.ResultSet
 import java.sql.Statement
 import java.text.DecimalFormat
@@ -14,7 +11,6 @@ class AdminControllers {
     var maxHours = 2
     var maxHoursMin = maxHours -1
     val formatter = DecimalFormat("#,###")
-
 
     fun getTotalIncome(): Int {
         var income = 0

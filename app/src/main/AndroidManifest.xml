@@ -87,6 +87,9 @@
         <activity
             android:name=".view.CashierActivity"
             android:exported="false" />
+        <activity
+            android:name=".view.cashierUpdateFnBStatus.CashierUpdateNotServedStatus"
+            android:exported="false" />
     </application>
 
 </manifest>

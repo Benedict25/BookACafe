@@ -1,11 +1,9 @@
 package com.example.bookacafe.view
 
-import SecondFragment
 import ThirdFragment
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,15 +12,29 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.FragmentManager
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.ActiveUser
 import com.example.bookacafe.controller.CashierControllers
-import com.example.bookacafe.view.adminTransaction.ShowTransactions
+import com.example.bookacafe.controller.TableControllers
+import com.example.bookacafe.model.Table
+import com.example.bookacafe.model.TableTypeEnum
 import com.example.bookacafe.view.cashierTransaction.CashierTransaction
+import com.example.bookacafe.view.cashierUpdateFnBStatus.CashierUpdateNotServedStatus
 
 
-class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home) {
+class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home), View.OnClickListener {
+    private lateinit var btnTableA1: Button
+    private lateinit var btnTableA2: Button
+    private lateinit var btnTableA3: Button
+    private lateinit var btnTableA4: Button
+    private lateinit var btnTableB1: Button
+    private lateinit var btnTableB2: Button
+    private lateinit var btnTableB3: Button
+    private lateinit var tables: ArrayList<Table>
+    private var buttons: ArrayList<Button> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,82 +50,33 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home) {
         var cashierTextView: TextView = view.findViewById(R.id.cashier_textView)
         cashierTextView.text = "Welcome,\n" + ActiveUser.getFirstName() + " " + ActiveUser.getLastName()
 
-        var btnA1: Button = view.findViewById(R.id.buttonTablesA1)
-        btnA1.setOnClickListener{
-            if (!CashierControllers().getTableInTransaction(btnA1.text.toString())) {
-                Toast.makeText(requireContext(), "Belum ada transaksi baru pada meja "+btnA1.text.toString()+"!", Toast.LENGTH_SHORT).show()
-            } else {
-                val intent = Intent(context, CashierTransaction::class.java)
-                intent.putExtra("table_key", btnA1.text.toString())
-                startActivity(intent)
-            }
-        }
+        btnTableA1 = view.findViewById(R.id.btn_table_a1)
+        btnTableA1.setOnClickListener(this)
+        buttons.add(btnTableA1)
 
-        var btnA2: Button = view.findViewById(R.id.buttonTablesA2)
-        btnA2.setOnClickListener{
-            if (!CashierControllers().getTableInTransaction(btnA2.text.toString())) {
-                Toast.makeText(requireContext(), "Belum ada transaksi baru pada meja "+btnA2.text.toString()+"!", Toast.LENGTH_SHORT).show()
-            } else {
-                val intent = Intent(context, CashierTransaction::class.java)
-                intent.putExtra("table_key", btnA2.text.toString())
-                startActivity(intent)
-            }
-        }
+        btnTableA2 = view.findViewById(R.id.btn_table_a2)
+        btnTableA2.setOnClickListener(this)
+        buttons.add(btnTableA2)
 
-        var btnA3: Button = view.findViewById(R.id.buttonTablesA3)
-        btnA3.setOnClickListener{
-            if (!CashierControllers().getTableInTransaction(btnA3.text.toString())) {
-                Toast.makeText(requireContext(), "Belum ada transaksi baru pada meja "+btnA3.text.toString()+"!", Toast.LENGTH_SHORT).show()
-            } else {
-                val intent = Intent(context, CashierTransaction::class.java)
-                intent.putExtra("table_key", btnA3.text.toString())
-                startActivity(intent)
-            }
-        }
+        btnTableA3 = view.findViewById(R.id.btn_table_a3)
+        btnTableA3.setOnClickListener(this)
+        buttons.add(btnTableA3)
 
-        var btnA4: Button = view.findViewById(R.id.buttonTablesA4)
-        btnA4.setOnClickListener{
-            if (!CashierControllers().getTableInTransaction(btnA4.text.toString())) {
-                Toast.makeText(requireContext(), "Belum ada transaksi baru pada meja "+btnA4.text.toString()+"!", Toast.LENGTH_SHORT).show()
-            } else {
-                val intent = Intent(context, CashierTransaction::class.java)
-                intent.putExtra("table_key", btnA4.text.toString())
-                startActivity(intent)
-            }
-        }
+        btnTableA4 = view.findViewById(R.id.btn_table_a4)
+        btnTableA4.setOnClickListener(this)
+        buttons.add(btnTableA4)
 
-        var btnB1: Button = view.findViewById(R.id.buttonTablesB1)
-        btnB1.setOnClickListener{
-            if (!CashierControllers().getTableInTransaction(btnB1.text.toString())) {
-                Toast.makeText(requireContext(), "Belum ada transaksi baru pada meja "+btnB1.text.toString()+"!", Toast.LENGTH_SHORT).show()
-            } else {
-                val intent = Intent(context, CashierTransaction::class.java)
-                intent.putExtra("table_key", btnB1.text.toString())
-                startActivity(intent)
-            }
-        }
+        btnTableB1 = view.findViewById(R.id.btn_table_b1)
+        btnTableB1.setOnClickListener(this)
+        buttons.add(btnTableB1)
 
-        var btnB2: Button = view.findViewById(R.id.buttonTablesB2)
-        btnB2.setOnClickListener{
-            if (!CashierControllers().getTableInTransaction(btnB2.text.toString())) {
-                Toast.makeText(requireContext(), "Belum ada transaksi baru pada meja "+btnB2.text.toString()+"!", Toast.LENGTH_SHORT).show()
-            } else {
-                val intent = Intent(context, CashierTransaction::class.java)
-                intent.putExtra("table_key", btnB2.text.toString())
-                startActivity(intent)
-            }
-        }
+        btnTableB2 = view.findViewById(R.id.btn_table_b2)
+        btnTableB2.setOnClickListener(this)
+        buttons.add(btnTableB2)
 
-        var btnB3: Button = view.findViewById(R.id.buttonTablesB3)
-        btnB3.setOnClickListener{
-            if (!CashierControllers().getTableInTransaction(btnB3.text.toString())) {
-                Toast.makeText(requireContext(), "Belum ada transaksi baru pada meja "+btnB3.text.toString()+"!", Toast.LENGTH_SHORT).show()
-            } else {
-                val intent = Intent(context, CashierTransaction::class.java)
-                intent.putExtra("table_key", btnB3.text.toString())
-                startActivity(intent)
-            }
-        }
+        btnTableB3 = view.findViewById(R.id.btn_table_b3)
+        btnTableB3.setOnClickListener(this)
+        buttons.add(btnTableB3)
 
         var btnLogOut: Button = view.findViewById(R.id.buttonLogOut)
         var clickableImage: ImageButton = view.findViewById(R.id.imageProfile)
@@ -136,6 +99,170 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home) {
                 )
                 .addToBackStack(null)
                 .commit()
+        }
+
+        tables = TableControllers().getTableData()
+        resetButtonColor()
+    }
+
+    private fun resetButtonColor() {
+
+        for (i in 0 until tables.size) {
+            if (tables[i].status == TableTypeEnum.AVAILABLE) {
+                val wrappedDrawable: Drawable = DrawableCompat.wrap(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.rounded_rectangle_button
+                    )!!
+                )
+                DrawableCompat.setTint(
+                    wrappedDrawable,
+                    ContextCompat.getColor(
+                        requireContext(),
+                        androidx.appcompat.R.color.primary_dark_material_dark
+                    )
+                )
+                buttons[i].background = wrappedDrawable
+                buttons[i].isClickable = false
+            } else {
+                val wrappedDrawable: Drawable = DrawableCompat.wrap(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.rounded_rectangle_button
+                    )!!
+                )
+                DrawableCompat.setTint(
+                    wrappedDrawable,
+                    ContextCompat.getColor(
+                        requireContext(),
+                        androidx.appcompat.R.color.material_blue_grey_800
+                    )
+                )
+                buttons[i].background = wrappedDrawable
+                buttons[i].isEnabled = true
+                buttons[i].isClickable = true
+            }
+        }
+    }
+
+    override fun onClick(v: View) {
+        showTables(v)
+    }
+
+    private fun showTables(v: View) {
+        when (v.id) {
+            R.id.btn_table_a1 -> {
+                val transactionId = CashierControllers().getTransactionId(tables[0].tableName)
+                if (CashierControllers().getTableInTransaction(tables[0].tableName)) {
+                    val intent = Intent(context, CashierTransaction::class.java)
+                    intent.putExtra("table_key", tables[0].tableName)
+                    startActivity(intent)
+
+                } else if(CashierControllers().getNotServedMenu(transactionId)) {
+                    val intent = Intent(context, CashierUpdateNotServedStatus::class.java)
+                    intent.putExtra("table_key", tables[0].tableName)
+                    intent.putExtra("trans_id", transactionId)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(requireContext(), "Semua pesanan dari meja " + tables[0].tableName + " sudah disajikan\nCustomer belum melakukan checkout!!", Toast.LENGTH_SHORT).show()
+                }
+            }
+            R.id.btn_table_a2 -> {
+                val transactionId = CashierControllers().getTransactionId(tables[1].tableName)
+                if (CashierControllers().getTableInTransaction(tables[1].tableName)) {
+                    val intent = Intent(context, CashierTransaction::class.java)
+                    intent.putExtra("table_key", tables[1].tableName)
+                    startActivity(intent)
+
+                } else if(CashierControllers().getNotServedMenu(transactionId)) {
+                    val intent = Intent(context, CashierUpdateNotServedStatus::class.java)
+                    intent.putExtra("table_key", tables[1].tableName)
+                    intent.putExtra("trans_id", transactionId)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(requireContext(), "Semua pesanan dari meja " + tables[1].tableName + " sudah disajikan\nCustomer belum melakukan checkout!!", Toast.LENGTH_SHORT).show()
+                }
+            }
+            R.id.btn_table_a3 -> {
+                val transactionId = CashierControllers().getTransactionId(tables[2].tableName)
+                if (CashierControllers().getTableInTransaction(tables[2].tableName)) {
+                    val intent = Intent(context, CashierTransaction::class.java)
+                    intent.putExtra("table_key", tables[2].tableName)
+                    startActivity(intent)
+
+                } else if(CashierControllers().getNotServedMenu(transactionId)) {
+                    val intent = Intent(context, CashierUpdateNotServedStatus::class.java)
+                    intent.putExtra("table_key", tables[2].tableName)
+                    intent.putExtra("trans_id", transactionId)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(requireContext(), "Semua pesanan dari meja " + tables[2].tableName + " sudah disajikan\nCustomer belum melakukan checkout!!", Toast.LENGTH_SHORT).show()
+                }
+            }
+            R.id.btn_table_a4 -> {
+                val transactionId = CashierControllers().getTransactionId(tables[3].tableName)
+                if (CashierControllers().getTableInTransaction(tables[3].tableName)) {
+                    val intent = Intent(context, CashierTransaction::class.java)
+                    intent.putExtra("table_key", tables[3].tableName)
+                    startActivity(intent)
+
+                } else if(CashierControllers().getNotServedMenu(transactionId)) {
+                    val intent = Intent(context, CashierUpdateNotServedStatus::class.java)
+                    intent.putExtra("table_key", tables[3].tableName)
+                    intent.putExtra("trans_id", transactionId)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(requireContext(), "Semua pesanan dari meja " + tables[3].tableName + " sudah disajikan\nCustomer belum melakukan checkout!!", Toast.LENGTH_SHORT).show()
+                }
+            }
+            R.id.btn_table_b1 -> {
+                val transactionId = CashierControllers().getTransactionId(tables[4].tableName)
+                if (CashierControllers().getTableInTransaction(tables[4].tableName)) {
+                    val intent = Intent(context, CashierTransaction::class.java)
+                    intent.putExtra("table_key", tables[4].tableName)
+                    startActivity(intent)
+
+                } else if(CashierControllers().getNotServedMenu(transactionId)) {
+                    val intent = Intent(context, CashierUpdateNotServedStatus::class.java)
+                    intent.putExtra("table_key", tables[4].tableName)
+                    intent.putExtra("trans_id", transactionId)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(requireContext(), "Semua pesanan dari meja " + tables[4].tableName + " sudah disajikan\nCustomer belum melakukan checkout!!", Toast.LENGTH_SHORT).show()
+                }
+            }
+            R.id.btn_table_b2 -> {
+                val transactionId = CashierControllers().getTransactionId(tables[5].tableName)
+                if (CashierControllers().getTableInTransaction(tables[5].tableName)) {
+                    val intent = Intent(context, CashierTransaction::class.java)
+                    intent.putExtra("table_key", tables[5].tableName)
+                    startActivity(intent)
+
+                } else if(CashierControllers().getNotServedMenu(transactionId)) {
+                    val intent = Intent(context, CashierUpdateNotServedStatus::class.java)
+                    intent.putExtra("table_key", tables[5].tableName)
+                    intent.putExtra("trans_id", transactionId)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(requireContext(), "Semua pesanan dari meja " + tables[5].tableName + " sudah disajikan\nCustomer belum melakukan checkout!!", Toast.LENGTH_SHORT).show()
+                }
+            }
+            R.id.btn_table_b3 -> {
+                val transactionId = CashierControllers().getTransactionId(tables[6].tableName)
+                if (CashierControllers().getTableInTransaction(tables[6].tableName)) {
+                    val intent = Intent(context, CashierTransaction::class.java)
+                    intent.putExtra("table_key", tables[6].tableName)
+                    startActivity(intent)
+
+                } else if(CashierControllers().getNotServedMenu(transactionId)) {
+                    val intent = Intent(context, CashierUpdateNotServedStatus::class.java)
+                    intent.putExtra("table_key", tables[6].tableName)
+                    intent.putExtra("trans_id", transactionId)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(requireContext(), "Semua pesanan dari meja " + tables[6].tableName + " sudah disajikan\nCustomer belum melakukan checkout!!", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
     }

@@ -14,13 +14,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookacafe.R;
 import com.example.bookacafe.controller.AdminControllers
 import com.example.bookacafe.databinding.AdminTransactionBinding
-import com.example.bookacafe.model.adminDataDetails.MemberDummy
+import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
 
 class BookFragment: Fragment() {
 
     private lateinit var recyclerView: RecyclerView;
     private lateinit var binding: AdminTransactionBinding
-    private val list = ArrayList<MemberDummy>()
+    private val list = ArrayList<CashierMenuDetail>()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

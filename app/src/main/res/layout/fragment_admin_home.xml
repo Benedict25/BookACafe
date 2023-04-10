@@ -11,18 +11,18 @@
 
     <ImageView
         android:id="@+id/SplashScreenImage"
-        android:layout_width="250dp"
-        android:layout_height="150dp"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
         android:src="@drawable/logo2"
         android:layout_marginTop="30dp"
         android:layout_gravity="center"/>
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/SplashScreenImage"
         android:orientation="horizontal"
+        android:layout_marginTop="15dp"
         android:gravity="center">
 
         <ImageButton
@@ -52,6 +52,7 @@
             android:id="@+id/buttonDisableUser"
             android:layout_width="300dp"
             android:layout_height="50dp"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/custom_button"
             android:text="DISABLE USER"
             android:textColor="@color/white"
@@ -61,6 +62,7 @@
             android:id="@+id/buttonShowAllTransaction"
             android:layout_width="300dp"
             android:layout_height="50dp"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/custom_button"
             android:text="SHOW ALL TRANSACTION"
             android:textColor="@color/white"
