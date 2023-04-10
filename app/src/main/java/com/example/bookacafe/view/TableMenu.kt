@@ -41,6 +41,7 @@ class TableMenu : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        buttons.clear()
 
         btnTableA1 = view.findViewById(R.id.btn_table_a1)
         btnTableA1.setOnClickListener(this)
@@ -103,7 +104,6 @@ class TableMenu : Fragment(), View.OnClickListener {
 
     //nanti colong yang bawah ini
     private fun resetButtonColor() {
-
         for (i in 0 until tables.size) {
             if (tables[i].status == TableTypeEnum.BOOKED || tables[i].status == TableTypeEnum.BLOCKED) {
                 val wrappedDrawable: Drawable = DrawableCompat.wrap(
@@ -213,16 +213,29 @@ class TableMenu : Fragment(), View.OnClickListener {
 
     }
 
+    private fun refreshTable() {
+        parentFragmentManager.beginTransaction().detach(this).commit()
+        parentFragmentManager.beginTransaction().attach(this).commit()
+    }
+
     private fun showAddToCartDialog(selectedTableId: String, selectedTableName: String) {
         val addToCartDialog = AlertDialog.Builder(requireContext())
 
         val positiveButtonClick = { _: DialogInterface, _: Int ->
+            val added = TableControllers().addTableToCart(selectedTableId)
+            val text: String
+            if (added) {
+                text = "$selectedTableName added to cart."
+            } else {
+                text = "You have ordered table!"
+            }
             Toast.makeText(requireContext(),
-                "$selectedTableName added to cart.",
+                text,
                 Toast.LENGTH_SHORT
             ).show()
-            TableControllers().addTableToCart(selectedTableId)
+
             addToCartDialog.create().dismiss()
+            refreshTable()
         }
 
         val negativeButtonClick = { _: DialogInterface, _: Int ->
