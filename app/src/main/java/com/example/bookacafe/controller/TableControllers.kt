@@ -1,10 +1,9 @@
 package com.example.bookacafe.controller
 
 import android.database.SQLException
-import android.util.Log
 import com.example.bookacafe.model.Table
 import com.example.bookacafe.model.TableTypeEnum
-import java.sql.PreparedStatement
+import com.example.bookacafe.model.TransactionEnum
 import java.sql.ResultSet
 import java.sql.Statement
 
@@ -38,46 +37,6 @@ class TableControllers {
         }
         return tables
     }
-    fun addTable(table: Table): Boolean {
-        return try {
-            val query = "INSERT INTO tables VALUES(?,?,?,?)"
-            val stmt: PreparedStatement = con!!.prepareStatement(query)
-            val tableId = createTableId()
-            stmt.setString(1, tableId)
-            stmt.setString(2, table.tableName)
-            stmt.setString(3, table.room)
-            stmt.setString(4, TableTypeEnum.AVAILABLE.toString())
-            stmt.executeUpdate()
-            true
-        } catch (e: SQLException) {
-            e.printStackTrace()
-            false
-        }
-    }
-    fun editTable(table: Table): Boolean {
-        return try {
-            val query = "UPDATE tables SET tableName = '${table.tableName}', room = '${table.room}'" +
-                    "WHERE tableId = '${table.tableId}'"
-            val stmt: Statement = con!!.createStatement()
-            stmt.executeUpdate(query)
-            true
-        } catch (e: SQLException) {
-            e.printStackTrace()
-            false
-        }
-    }
-    fun deleteTable(tableId: String): Boolean {
-        return try {
-            val query =
-                "UPDATE tables SET status = '${TableTypeEnum.BLOCKED}' WHERE tableId = '$tableId'"
-            val stmt: Statement = con!!.createStatement()
-            stmt.executeUpdate(query)
-            true
-        } catch (e: SQLException) {
-            e.printStackTrace()
-            false
-        }
-    }
 
     fun addTableToCart(tableId: String): Boolean {
         return try {
@@ -88,44 +47,32 @@ class TableControllers {
             while (rs.next()) {
                 cartId = rs.getString("cartId")
             }
-            Log.d("TABLE ID", tableId)
-            Log.d("CART ID", cartId)
-            val query2 =
-                "UPDATE carts SET tableId = '$tableId' WHERE cartId = '$cartId'"
+
+            var tableIdFromDatabase = String()
+            val query2 = "SELECT tableId FROM carts WHERE cartId = '$cartId'"
             val stmt2: Statement = con!!.createStatement()
-            stmt2.executeUpdate(query2)
-            true
+            val rs2: ResultSet = stmt2.executeQuery(query2)
+            if (rs2.next()) {
+                if (rs2.getObject("tableId") == null) {
+                    tableIdFromDatabase = "NULL"
+                }
+            }
+
+            val query3 = "SELECT tableId FROM transactions WHERE memberId = '${user.getId()}' AND status = '${TransactionEnum.NOT_PAID}'"
+            val stmt3: Statement = con!!.createStatement()
+            val rs3: ResultSet = stmt3.executeQuery(query3)
+
+            if (tableIdFromDatabase != "NULL" || rs3.first()) {
+                return false
+            } else {
+                val query4 = "UPDATE carts SET tableId = '$tableId' WHERE cartId = '$cartId'"
+                val stmt4: Statement = con!!.createStatement()
+                stmt4.executeUpdate(query4)
+                true
+            }
         } catch (e: SQLException) {
             e.printStackTrace()
             false
         }
-    }
-
-    private fun createTableId(): String {
-        val query = "SELECT tableId FROM tables ORDER BY tableId DESC LIMIT 1"
-        var newestId = String()
-        val returnId: String
-
-        try {
-            val stmt: Statement = con!!.createStatement()
-            val rs: ResultSet = stmt.executeQuery(query)
-            while (rs.next()) {
-                newestId = rs.getString("tableId")
-            }
-        } catch (e: SQLException) {
-            e.printStackTrace()
-        }
-
-        val extractNumber = newestId.subSequence(1, 3)
-        var number = extractNumber.toString().toInt()
-        number += 1
-
-        if (number < 10) {
-            returnId = "T0$number"
-        } else {
-            returnId = "T$number"
-        }
-
-        return returnId
     }
 }
