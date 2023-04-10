@@ -1,21 +1,24 @@
 package com.example.bookacafe.view
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.R
+import com.example.bookacafe.controller.BookControllers
 import com.example.bookacafe.controller.CartControllers
 import com.example.bookacafe.controller.OrderControllers
 import com.example.bookacafe.databinding.*
+import com.example.bookacafe.model.Book
 import com.example.bookacafe.model.Cart
 
 
@@ -62,15 +65,8 @@ class MenuCart : Fragment(), View.OnClickListener {
 
         cartOrder = view.findViewById(R.id.cartOrder)
         cartOrder.setOnClickListener {
-            val control: OrderControllers = OrderControllers()
-            val isOrdered = control.order()
-
-            if (isOrdered) {
-                Toast.makeText(requireContext(), "Order Success!", Toast.LENGTH_SHORT).show()
-                refreshCart()
-            } else {
-                Toast.makeText(requireContext(), "Order Error!", Toast.LENGTH_SHORT).show()
-            }
+            showOrderConfirmationDialog()
+            refreshCart()
         }
 
         cartPay = view.findViewById(R.id.cartPay)
@@ -114,5 +110,31 @@ class MenuCart : Fragment(), View.OnClickListener {
 //        overridePendingTransition(0, 0) // OverridePending biar pas refresh gada animasi blink
 //        startActivity(intent)
 //        overridePendingTransition(0, 0)
+    }
+
+    private fun showOrderConfirmationDialog() {
+        val positiveButtonClick = { _: DialogInterface, _: Int ->
+            val control: OrderControllers = OrderControllers()
+            val isOrdered = control.order()
+
+            if (isOrdered) {
+                Toast.makeText(requireContext(), "Order Success!", Toast.LENGTH_SHORT).show()
+                refreshCart()
+            } else {
+                Toast.makeText(requireContext(), "Order Error!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        val negativeButtonClick = { _: DialogInterface, _: Int ->
+
+        }
+
+        val addToCartDialog = AlertDialog.Builder(requireContext())
+        addToCartDialog.setTitle("Order")
+            .setIcon(android.R.drawable.ic_dialog_info)
+            .setMessage("Are you sure you want to order?")
+            .setPositiveButton("Yes", DialogInterface.OnClickListener(function = positiveButtonClick))
+            .setNegativeButton("No", DialogInterface.OnClickListener(function = negativeButtonClick))
+        addToCartDialog.show()
     }
 }
