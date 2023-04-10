@@ -13,8 +13,6 @@ class OrderControllers {
         val openTransId = checkTransExistance()
         var cartIsTransfered: Boolean
 
-        Log.d("Trans Id: ", openTransId)
-
         if (openTransId == "noOpenTransaction") {
             // Buat trans baru
             val newTransId = createTransId()
@@ -32,6 +30,7 @@ class OrderControllers {
         if (cartIsTransfered) {
             val detailCartIsDeleted = deleteFromDetailCart()
             if (detailCartIsDeleted) {
+                setTableStatusToBooked()
                 return nullifyTableInCart()
             } else {
                 return false
@@ -201,6 +200,24 @@ class OrderControllers {
         } catch (e: SQLException) {
             e.printStackTrace()
             return false
+        }
+    }
+
+    fun setTableStatusToBooked() {
+        val query = "UPDATE tables\n" +
+                "SET status = 'BOOKED'\n" +
+                "WHERE tableId \n" +
+                "IN (\n" +
+                "\tSELECT tableId\n" +
+                "\tFROM carts\n" +
+                "\tWHERE memberId = '${ActiveUser.getId()}'\n" +
+                ")"
+
+        try {
+            val stmt: Statement = con!!.createStatement()
+            stmt.executeQuery(query)
+        } catch (e: SQLException) {
+            e.printStackTrace()
         }
     }
 }
