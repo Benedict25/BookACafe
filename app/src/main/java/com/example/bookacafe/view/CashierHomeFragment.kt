@@ -4,6 +4,7 @@ import ThirdFragment
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,8 @@ import com.example.bookacafe.model.Table
 import com.example.bookacafe.model.TableTypeEnum
 import com.example.bookacafe.view.cashierTransaction.CashierTransaction
 import com.example.bookacafe.view.cashierUpdateFnBStatus.CashierUpdateNotServedStatus
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home), View.OnClickListener {
@@ -36,6 +39,9 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home), View.OnClic
     private lateinit var tables: ArrayList<Table>
     private var buttons: ArrayList<Button> = ArrayList()
 
+    private val mHandler = Handler()
+    private lateinit var mTimer: Timer
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,6 +52,9 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home), View.OnClic
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mTimer = Timer()
+        mTimer.scheduleAtFixedRate(RefreshTask(), 0, 10000)
 
         var cashierTextView: TextView = view.findViewById(R.id.cashier_textView)
         cashierTextView.text = "Welcome,\n" + ActiveUser.getFirstName() + " " + ActiveUser.getLastName()
@@ -103,6 +112,20 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home), View.OnClic
 
         tables = TableControllers().getTableData()
         resetButtonColor()
+    }
+
+    inner class RefreshTask : TimerTask() {
+        override fun run() {
+            mHandler.post {
+                tables = TableControllers().getTableData()
+                resetButtonColor()
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mTimer.cancel()
     }
 
     private fun resetButtonColor() {

@@ -9,6 +9,8 @@ import com.example.bookacafe.databinding.CashierFnbNotServedBinding
 import com.example.bookacafe.model.Book
 import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
 import com.example.bookacafe.view.CashierActivity
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CashierUpdateNotServedStatus: AppCompatActivity(), ListFnBAdapter.OnPositiveClickListener, ListBookAdapter.OnPositiveClickListener {
     private lateinit var binding: CashierFnbNotServedBinding
@@ -51,10 +53,12 @@ class CashierUpdateNotServedStatus: AppCompatActivity(), ListFnBAdapter.OnPositi
     override fun onPositiveClick() {
         if (CashierControllers().getNotServedMenu(transactionId)) {
             finish()
+            overridePendingTransition(0, 0)
             val intent = Intent(this, CashierUpdateNotServedStatus::class.java)
             intent.putExtra("table_key", tableName)
             intent.putExtra("trans_id", transactionId)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         } else {
             finish()
             val intent = Intent(this, CashierActivity::class.java)

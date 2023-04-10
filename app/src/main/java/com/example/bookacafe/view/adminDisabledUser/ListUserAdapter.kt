@@ -75,9 +75,9 @@ class ListUserAdapter(private val listUser: ArrayList<MemberDummy>, private val 
         }
         alertDialogBuilder.setPositiveButton("Yes") {
             dialog, which ->
-            AdminControllers().updateUserStatus("ACTIVE",memberId)
-            Toast.makeText(context, "Pengaktifan akun berhasil!!", Toast.LENGTH_SHORT).show()
-            onPositiveClickListener.onPositiveClick()
+                AdminControllers().updateUserStatus("ACTIVE",memberId)
+                Toast.makeText(context, "Pengaktifan akun berhasil!!", Toast.LENGTH_SHORT).show()
+                onPositiveClickListener.onPositiveClick()
         }
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()

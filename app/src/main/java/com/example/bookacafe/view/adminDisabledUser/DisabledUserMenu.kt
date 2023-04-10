@@ -8,6 +8,7 @@ import com.example.bookacafe.controller.AdminControllers
 import com.example.bookacafe.databinding.AdminDisabledUserBinding
 import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
 import com.example.bookacafe.model.adminDataDetails.MemberDummy
+import com.example.bookacafe.view.cashierUpdateFnBStatus.CashierUpdateNotServedStatus
 
 class DisabledUserMenu: AppCompatActivity(), ListUserAdapter.OnPositiveClickListener {
     private lateinit var binding: AdminDisabledUserBinding
@@ -31,8 +32,10 @@ class DisabledUserMenu: AppCompatActivity(), ListUserAdapter.OnPositiveClickList
     }
 
     override fun onPositiveClick() {
+        finish()
+        overridePendingTransition(0, 0)
         val intent = Intent(this, DisabledUserMenu::class.java)
         startActivity(intent)
-        finish()
+        overridePendingTransition(0, 0)
     }
 }
