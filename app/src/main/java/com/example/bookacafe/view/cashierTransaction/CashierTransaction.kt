@@ -40,8 +40,8 @@ class CashierTransaction() : AppCompatActivity() {
             binding.totalOrderedCost.text = "Total Ordered: Rp"+DecimalFormat("#,###").format(CashierControllers().getTableCosts(tableName))
 
             binding.rvBillMenu.setHasFixedSize(true)
-            menuList.addAll(CashierControllers().getOrderedMenuData(tableName))
-            bookList.addAll(CashierControllers().getOrderedBookData(tableName))
+            menuList.addAll(CashierControllers().getOrderedMenuData(tableName, false))
+            bookList.addAll(CashierControllers().getOrderedBookData(tableName, false))
             showRecyclerList()
 
 //            val alertDialogBuilder = AlertDialog.Builder(this)
@@ -106,6 +106,7 @@ class CashierTransaction() : AppCompatActivity() {
             dialog.dismiss()
 
             CashierControllers().updateTransactionStatus(table.tableId)
+            CashierControllers().updateTableStatus(table.tableId)
             Toast.makeText(this, "Transaksi pada meja "+ table.tableName + " sudah selesai!", Toast.LENGTH_SHORT).show()
 
             finish()

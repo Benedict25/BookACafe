@@ -1,23 +1,17 @@
 package com.example.bookacafe.view.adminDisabledUser
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
-import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.os.persistableBundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.bookacafe.R
 import com.example.bookacafe.controller.AdminControllers
 import com.example.bookacafe.databinding.ItemRowUserBinding
+import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
 import com.example.bookacafe.model.adminDataDetails.MemberDummy
 
 class ListUserAdapter(private val listUser: ArrayList<MemberDummy>, private val context: Context, private val onPositiveClickListener: OnPositiveClickListener) :  RecyclerView.Adapter<ListUserAdapter.ListViewHolder>() {

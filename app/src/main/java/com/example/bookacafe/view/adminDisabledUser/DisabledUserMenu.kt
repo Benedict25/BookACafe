@@ -4,9 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.bookacafe.R
 import com.example.bookacafe.controller.AdminControllers
 import com.example.bookacafe.databinding.AdminDisabledUserBinding
+import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
 import com.example.bookacafe.model.adminDataDetails.MemberDummy
 
 class DisabledUserMenu: AppCompatActivity(), ListUserAdapter.OnPositiveClickListener {
