@@ -10,7 +10,6 @@ class Book(
     var genre: String,
     var synopsis: String,
     var imagePath: String,
-    var stock: Int,
     var status: ItemTypeEnum
 ) : Parcelable
 

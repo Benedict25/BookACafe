@@ -13,7 +13,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@android:color/transparent"
-            android:text="X"
+            android:text="@string/close"
             android:textColor="@color/red"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -31,7 +31,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
-                android:contentDescription="Book Cover"
+                android:contentDescription="@string/book_cover"
                 android:scaleType="fitXY" />
 
             <Button
@@ -43,14 +43,14 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="20dp"
-                android:text="Add to Cart" />
+                android:text="@string/add_to_cart" />
 
             <TextView
                 android:id="@+id/tv_book_title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/btn_add_to_cart"
-                android:text="{title}"
+                android:text="@string/title_placeholder"
                 android:textColor="@color/black"
                 android:textAlignment="center"
                 android:textSize="18sp"
@@ -61,18 +61,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_book_title"
-                android:text="{author}"
-                android:textColor="@color/black"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_book_stock"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_book_author"
-                android:text="{stock}"
+                android:text="@string/author_placeholder"
                 android:textColor="@color/black"
                 android:textAlignment="center"
                 android:textSize="18sp"
@@ -82,10 +71,10 @@
                 android:id="@+id/tv_book_synopsis"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_book_stock"
+                android:layout_below="@+id/tv_book_author"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
-                android:text="{synopsis}"
+                android:text="@string/synopsis_placeholder"
                 android:textColor="@color/black"
                 android:textAlignment="center"
                 android:textSize="14sp" />
