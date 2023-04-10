@@ -47,21 +47,17 @@ class CompleteProfile : AppCompatActivity() {
 
             if (isRegistered) {
                 Toast.makeText(applicationContext, "Welcome!", Toast.LENGTH_SHORT).show()
-
                 val control = UserControllers()
                 control.setSingletonGoogle(activeEmail)
-
                 navigateToHomeScreen()
             } else {
                 Toast.makeText(applicationContext, "Registration Error!", Toast.LENGTH_SHORT).show()
             }
         }
-
-
     }
 
     fun navigateToHomeScreen(){
-        val intent = Intent(this@CompleteProfile, TestLogin::class.java)
+        val intent = Intent(this@CompleteProfile, HomePage::class.java)
         startActivity(intent)
 //        val intent = Intent(this@Login, HomePage::class.java)
 //        startActivity(intent)
