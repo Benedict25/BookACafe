@@ -45,6 +45,7 @@ class FirstFragment:Fragment(R.layout.fragment_first) {
         }
         myClickableText.setOnClickListener {
             val intent = Intent(context, BillActivity::class.java)
+            intent.putExtra("transaction_id", "TR20230211-001")
             startActivity(intent)
         }
 //        myClickableText.setOnClickListener {

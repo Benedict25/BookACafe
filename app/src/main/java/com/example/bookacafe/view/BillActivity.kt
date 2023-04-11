@@ -33,6 +33,7 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: BillScreenBinding
     private lateinit var btn_pay: Button
     private lateinit var tv_total_order: TextView
+    private lateinit var tv_table: Button
     private lateinit var transaction: Transaction
     private lateinit var dialog: Dialog
     private var totalPayment: Int = 0
