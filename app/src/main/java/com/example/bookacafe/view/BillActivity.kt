@@ -65,6 +65,8 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
             if (transaction.status == TransactionEnum.PENDING) {
                 Log.d("TAG", "Buttonnya PENDING")
                 btn_pay.text = "PENDING..."
+                btn_pay.isEnabled = false
+                btn_pay.isClickable = false
             } else if (transaction.status == TransactionEnum.PAID) {
                 Log.d("TAG", "bUTTONNYA PAID")
                 btn_pay.visibility = View.INVISIBLE
@@ -133,6 +135,7 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun showOrderDialog() {
+        dialog = Dialog(this@BillActivity)
         Log.d("TAG", "Masuk show order dialog")
         val positiveButtonClick = { _: DialogInterface, _: Int ->
             val userPaid = TransactionControllers.UpdateStatusToPending(transaction.transactionId)
@@ -141,12 +144,14 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
             if (userPaid) {
                 text =
                     "Thank you for your payment. Please wait the cashier to confirm your transaction."
+                btn_pay.setText("PENDING...")
+                btn_pay.isClickable = false
+                btn_pay.isEnabled = false
             } else {
                 text = "Whoops. Something wrong with your payment. Please ask cashier"
             }
 
-            val toast = Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT)
-            toast.show()
+            Toast.makeText(this@BillActivity, text, Toast.LENGTH_SHORT).show()
             dialog.dismiss()
         }
 
