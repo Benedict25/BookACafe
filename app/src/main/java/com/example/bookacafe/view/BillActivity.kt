@@ -33,7 +33,9 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: BillScreenBinding
     private lateinit var btn_pay: Button
     private lateinit var tv_total_order: TextView
-    private lateinit var tv_table: Button
+    private lateinit var tv_bill_seatdisplay: Button
+    private lateinit var tv_bill_seatname: TextView
+    private lateinit var tv_bill_seatprice: TextView
     private lateinit var transaction: Transaction
     private lateinit var dialog: Dialog
     private var totalPayment: Int = 0
@@ -47,6 +49,9 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
 
         tv_total_order = findViewById(R.id.tv_total_order)
         btn_pay = findViewById(R.id.btn_pay_order)
+        tv_bill_seatdisplay = findViewById(R.id.tv_bill_seatdisplay)
+        tv_bill_seatname = findViewById(R.id.tv_bill_seatname)
+        tv_bill_seatprice = findViewById(R.id.tv_bill_seatprice)
 
         val transactionId = intent.getStringExtra("transaction_id")
 
@@ -61,6 +66,10 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
             var totalTablePayment = getTotalTablePayment()
             totalPayment = totalBookPayment + totalTablePayment
             tv_total_order.text = "Total: " + totalPayment.toString()
+            tv_bill_seatdisplay.text = transaction.table?.tableName
+            tv_bill_seatname.text = "Kursi "+transaction.table?.tableName
+            tv_bill_seatprice.text = "Rp "+totalTablePayment.toString()
+
             Log.d("TAG", transaction.status.toString())
 
             if (transaction.status == TransactionEnum.PENDING) {
