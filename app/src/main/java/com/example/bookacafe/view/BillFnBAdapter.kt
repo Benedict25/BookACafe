@@ -1,21 +1,22 @@
 package com.example.bookacafe.view
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.bookacafe.databinding.ItemBillFnbRowBinding
 import com.example.bookacafe.model.Menu
 
-class BillFnBAdapter(private val listFnB: ArrayList<Menu>): RecyclerView.Adapter<BillFnBAdapter.ListViewHolder>() {
+class BillFnBAdapter(private val listFnB: ArrayList<Menu>, private val listFnBQuantity: ArrayList<Int>): RecyclerView.Adapter<BillFnBAdapter.ListViewHolder>() {
     inner class ListViewHolder(private val binding: ItemBillFnbRowBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(menu: Menu){
+        fun bind(menu: Menu, i: Int){
+
             with(binding){
+                var totalMenuPrice = menu.price * i
+
                 tvBillMenuName.text = menu.name
                 tvBillMenuPrice.text = menu.price.toString()
-                tvBillMenuAmount.text = "x1"
-                tvBillTotalMenuPrice.text = menu.price.toString()
+                tvBillMenuAmount.text = "x"+i.toString()
+                tvBillTotalMenuPrice.text = totalMenuPrice.toString()
             }
         }
     }
@@ -30,6 +31,6 @@ class BillFnBAdapter(private val listFnB: ArrayList<Menu>): RecyclerView.Adapter
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.bind(listFnB[position])
+        holder.bind(listFnB[position], listFnBQuantity[position])
     }
 }
