@@ -51,7 +51,7 @@ class HistoryActivity : AppCompatActivity() {
 
     fun moveToBillPage(model: Transaction){
         val intent = Intent(this@HistoryActivity, BillActivity::class.java)
-        intent.putExtra(BillActivity.EXTRA_TRANSACTION, model)
+        intent.putExtra("transaction_id", model.transactionId)
         startActivity(intent)
     }
 

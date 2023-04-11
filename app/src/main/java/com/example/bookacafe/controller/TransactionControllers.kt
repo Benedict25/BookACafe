@@ -1,5 +1,6 @@
 package com.example.bookacafe.controller
 
+import android.util.Log
 import com.example.bookacafe.model.*
 import java.sql.ResultSet
 import java.sql.SQLException
@@ -10,8 +11,33 @@ class TransactionControllers {
 
     companion object {
         var con = DatabaseHandler.connect()
+
+        fun GetTransactionDetail(transactionId: String): Transaction{
+            val transactionId = transactionId
+
+            val table = getTableFromTransaction(transactionId)
+            var status = TransactionEnum.PAID
+            var (checkedIn, checkedOut, status_string) = getGeneralData(transactionId)
+            val books = getBookFromTransaction(transactionId)
+            val (menus, menuQuantities) = getMenuFromTransaction(transactionId)
+
+            if (status_string.equals("PAID")) {
+                status = TransactionEnum.PAID
+            }
+
+            val transaction: Transaction = Transaction(
+                transactionId,
+                table,
+                Timestamp.valueOf(checkedIn),
+                Timestamp.valueOf(checkedOut),
+                status,
+                books,
+                menus,
+                menuQuantities
+            )
+            return transaction
+        }
         fun GetTransactionData(): ArrayList<Transaction> {
-//            val transactionGeneralData = getTransactionGeneralData()
 
             val transactionIds: ArrayList<String> = getTransactionGeneralData()
             val transactions: ArrayList<Transaction> = ArrayList<Transaction>()
@@ -21,8 +47,11 @@ class TransactionControllers {
                 val table = getTableFromTransaction(transactionIds[i])
                 var status: TransactionEnum = TransactionEnum.NOT_PAID
                 var (checkedIn, checkedOut, status_string) = getGeneralData(transactionIds[i])
-                if (status_string.equals("PAID")) {
+                if (status_string == "PAID") {
+                    Log.d("TAG", "akwoakwoakwoa statusnya paid")
                     status = TransactionEnum.PAID
+                } else if (status_string == "PENDING") {
+                    status = TransactionEnum.PENDING
                 }
 
                 val books = getBookFromTransaction(transactionIds[i])
@@ -41,8 +70,6 @@ class TransactionControllers {
 
                 transactions.add(transaction)
             }
-
-
 
             return transactions
         }
@@ -185,6 +212,21 @@ class TransactionControllers {
 
         fun AddTransaction() {}
         fun UpdateTransaction() {}
-        fun UpdateStatus() {}
+        fun UpdateStatusToPending(transactionId: String):Boolean {
+            val query = "UPDATE transactions SET status = 'PENDING' WHERE memberId = '${transactionId}'"
+            var success = false
+            try {
+                val stmt: Statement = con!!.createStatement()
+                val rs: ResultSet = stmt.executeQuery(query)
+                while (rs.next()) {
+                    success = true
+                }
+
+            } catch (e: SQLException) {
+                e.printStackTrace()
+            }
+
+            return success
+        }
     }
 }
