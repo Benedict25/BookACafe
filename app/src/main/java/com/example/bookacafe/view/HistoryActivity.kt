@@ -2,10 +2,8 @@ package com.example.bookacafe.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.bookacafe.controller.MemberControllers
 import com.example.bookacafe.controller.TransactionControllers
 import com.example.bookacafe.databinding.HistoryScreenBinding
 import com.example.bookacafe.model.Transaction
@@ -39,12 +37,6 @@ class HistoryActivity : AppCompatActivity() {
             object : OnClickListener {
                 override fun onClick(position: Int, model: Transaction) {
                     moveToBillPage(model)
-
-                    Toast.makeText(
-                        applicationContext,
-                        "Ini toast, trans id: ${model.transactionId}",
-                        Toast.LENGTH_SHORT
-                    ).show()
                 }
             })
     }
@@ -56,7 +48,6 @@ class HistoryActivity : AppCompatActivity() {
     }
 
     fun getListHistory(): ArrayList<Transaction> {
-        var listHistory = TransactionControllers.GetTransactionData()
-        return listHistory
+        return TransactionControllers.GetTransactionData()
     }
 }

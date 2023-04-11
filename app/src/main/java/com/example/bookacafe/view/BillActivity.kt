@@ -52,6 +52,7 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
         if (transactionId != null) {
             Log.d("TAG", "Transactionnya ada")
             transaction = TransactionControllers.GetTransactionDetail(transactionId)
+            Log.d("TAG", "Transaction "+transaction.status)
             binding.rvBillMenu.setHasFixedSize(true)
             showRecyclerList()
 
