@@ -216,14 +216,12 @@ class TransactionControllers {
         fun AddTransaction() {}
         fun UpdateTransaction() {}
         fun UpdateStatusToPending(transactionId: String):Boolean {
-            val query = "UPDATE transactions SET status = 'PENDING' WHERE memberId = '${transactionId}'"
+            val query = "UPDATE transactions SET status = 'PENDING' WHERE transactionId = '${transactionId}'"
             var success = false
             try {
-                val stmt: Statement = con!!.createStatement()
-                val rs: ResultSet = stmt.executeQuery(query)
-                while (rs.next()) {
-                    success = true
-                }
+                val stmt = con!!.prepareStatement(query)
+                stmt.execute()
+                success = true
 
             } catch (e: SQLException) {
                 e.printStackTrace()
