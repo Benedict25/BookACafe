@@ -16,13 +16,15 @@ class TransactionControllers {
             val transactionId = transactionId
 
             val table = getTableFromTransaction(transactionId)
-            var status = TransactionEnum.PAID
+            var status = TransactionEnum.NOT_PAID
             var (checkedIn, checkedOut, status_string) = getGeneralData(transactionId)
             val books = getBookFromTransaction(transactionId)
             val (menus, menuQuantities) = getMenuFromTransaction(transactionId)
 
-            if (status_string.equals("PAID")) {
+            if (status_string == "PAID") {
                 status = TransactionEnum.PAID
+            } else if (status_string == "PENDING"){
+                status = TransactionEnum.PENDING
             }
 
             val transaction: Transaction = Transaction(
@@ -48,7 +50,7 @@ class TransactionControllers {
                 var status: TransactionEnum = TransactionEnum.NOT_PAID
                 var (checkedIn, checkedOut, status_string) = getGeneralData(transactionIds[i])
                 if (status_string == "PAID") {
-                    Log.d("TAG", "akwoakwoakwoa statusnya paid")
+//                    Log.d("TAG", "akwoakwoakwoa statusnya paid")
                     status = TransactionEnum.PAID
                 } else if (status_string == "PENDING") {
                     status = TransactionEnum.PENDING
@@ -94,6 +96,7 @@ class TransactionControllers {
                 e.printStackTrace()
             }
 
+            Log.d("TAG", "CheckedIn: ${checkedIn}, CheckedOut: ${checkedOut}, Status: ${status}")
             return Triple(checkedIn, checkedOut, status)
         }
 
