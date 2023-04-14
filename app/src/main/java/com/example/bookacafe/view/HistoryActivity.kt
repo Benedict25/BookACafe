@@ -2,6 +2,7 @@ package com.example.bookacafe.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.controller.TransactionControllers
@@ -21,10 +22,18 @@ class HistoryActivity : AppCompatActivity() {
 
         list.addAll(getListHistory())
 
-        binding?.rvHistory?.setHasFixedSize(true)
+        if (list.size == 0) {
+            moveBackToHistory()
+        } else {
+            binding?.rvHistory?.setHasFixedSize(true)
+            showRecyclerListHistory()
+        }
+    }
 
-        showRecyclerListHistory()
-
+    private fun moveBackToHistory() {
+        val intent = Intent(this@HistoryActivity, MenuProfile::class.java)
+        Toast.makeText(applicationContext, "You don't have history activity", Toast.LENGTH_SHORT).show()
+        startActivity(intent)
     }
 
     private fun showRecyclerListHistory() {
@@ -41,7 +50,7 @@ class HistoryActivity : AppCompatActivity() {
             })
     }
 
-    fun moveToBillPage(model: Transaction){
+    fun moveToBillPage(model: Transaction) {
         val intent = Intent(this@HistoryActivity, BillActivity::class.java)
         intent.putExtra("transaction_id", model.transactionId)
         startActivity(intent)

@@ -11,19 +11,13 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.TransactionControllers
 import com.example.bookacafe.databinding.BillScreenBinding
 import com.example.bookacafe.model.*
 import com.example.bookacafe.view.cashierTransaction.CashierBookAdapter
-import com.example.bookacafe.view.cashierUpdateFnBStatus.ListFnBAdapter
-import java.lang.System.currentTimeMillis
-import java.sql.Time
 import java.sql.Timestamp
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import kotlin.math.ceil
 
 class BillActivity : AppCompatActivity(), View.OnClickListener {
@@ -56,9 +50,7 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
         val transactionId = intent.getStringExtra("transaction_id")
 
         if (transactionId != null) {
-            Log.d("TAG", "Transactionnya ada")
             transaction = TransactionControllers.GetTransactionDetail(transactionId)
-            Log.d("TAG", "Transaction "+transaction.status)
             binding.rvBillMenu.setHasFixedSize(true)
             showRecyclerList()
 
@@ -70,21 +62,19 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
             tv_bill_seatname.text = "Kursi "+transaction.table?.tableName
             tv_bill_seatprice.text = "Rp "+totalTablePayment.toString()
 
-            Log.d("TAG", transaction.status.toString())
-
             if (transaction.status == TransactionEnum.PENDING) {
-                Log.d("TAG", "Buttonnya PENDING")
                 btn_pay.text = "PENDING..."
                 btn_pay.isEnabled = false
                 btn_pay.isClickable = false
             } else if (transaction.status == TransactionEnum.PAID) {
-                Log.d("TAG", "bUTTONNYA PAID")
                 btn_pay.visibility = View.INVISIBLE
+            } else if (transaction.status == TransactionEnum.CANCELLED) {
+                btn_pay.text = "CANCELLED"
+                btn_pay.isEnabled = false
+                btn_pay.isClickable = false
             }
             btn_pay.setOnClickListener(this)
-
         } else {
-            Log.d("TAG", "Transactionnya ga ada")
             finish()
             val intent = Intent(this, MenuProfile::class.java)
             startActivity(intent)
@@ -92,7 +82,6 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun getTotalTablePayment(): Int {
-
         var total = 0
         var ts: Timestamp = transaction.checkedIn
 
@@ -100,16 +89,18 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
         var checkedOut = ts.time
         var totalHours = checkedOut - checkedIn.time
 
+        Log.d("TAG","Total Jam(dalam milisekom): "+totalHours)
+
         var hargaPerJam = 10000
         var jamPertama = 2
         var selisihJam =
             ceil(totalHours.toDouble() / (1000 * 60 * 60)).toInt() // konversi dari mili ke jam
-        if (selisihJam <= jamPertama) {
+        if (selisihJam <= 2) {
             total = hargaPerJam
         } else {
             total = hargaPerJam + (selisihJam - jamPertama) * hargaPerJam
         }
-        Log.d("TAG", "Totalnya ada")
+        Log.d("TAG", "Totalnya ada: "+total)
         return total
 
     }
@@ -138,7 +129,6 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_pay_order -> {
-                Log.d("TAG", "Klik Button pay")
                 showOrderDialog()
             }
         }
@@ -148,7 +138,13 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
         dialog = Dialog(this@BillActivity)
         Log.d("TAG", "Masuk show order dialog")
         val positiveButtonClick = { _: DialogInterface, _: Int ->
-            val userPaid = TransactionControllers.UpdateStatusToPending(transaction.transactionId)
+            var ts: Timestamp = transaction.checkedIn
+            var checkedOut = ts.time
+
+            Log.d("TAG", checkedOut.toString())
+
+            val userPaid = TransactionControllers.UpdateStatusToPending(transaction.transactionId, checkedOut)
+
             val text: String
 
             if (userPaid) {

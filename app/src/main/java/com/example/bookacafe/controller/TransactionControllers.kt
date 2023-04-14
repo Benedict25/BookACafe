@@ -12,8 +12,10 @@ class TransactionControllers {
     companion object {
         var con = DatabaseHandler.connect()
 
-        fun GetTransactionDetail(transactionId: String): Transaction{
+        fun GetTransactionDetail(transactionId: String): Transaction {
             val transactionId = transactionId
+
+            var timestamp: Timestamp?
 
             val table = getTableFromTransaction(transactionId)
             var status = TransactionEnum.NOT_PAID
@@ -23,15 +25,23 @@ class TransactionControllers {
 
             if (status_string == "PAID") {
                 status = TransactionEnum.PAID
-            } else if (status_string == "PENDING"){
+            } else if (status_string == "PENDING") {
                 status = TransactionEnum.PENDING
+            } else if (status_string == "CANCELLED") {
+                status = TransactionEnum.CANCELLED
+            }
+
+            if (checkedOut == "null") {
+                timestamp = null
+            } else {
+                timestamp = Timestamp.valueOf(checkedOut)
             }
 
             val transaction: Transaction = Transaction(
                 transactionId,
                 table,
                 Timestamp.valueOf(checkedIn),
-                Timestamp.valueOf(checkedOut),
+                timestamp,
                 status,
                 books,
                 menus,
@@ -39,11 +49,11 @@ class TransactionControllers {
             )
             return transaction
         }
-        fun GetTransactionData(): ArrayList<Transaction> {
 
+        fun GetTransactionData(): ArrayList<Transaction> {
             val transactionIds: ArrayList<String> = getTransactionGeneralData()
             val transactions: ArrayList<Transaction> = ArrayList<Transaction>()
-
+            var timestamp: Timestamp?
 
             for (i in transactionIds.indices) {
                 val table = getTableFromTransaction(transactionIds[i])
@@ -54,6 +64,14 @@ class TransactionControllers {
                     status = TransactionEnum.PAID
                 } else if (status_string == "PENDING") {
                     status = TransactionEnum.PENDING
+                } else if (status_string == "CANCELLED") {
+                    status = TransactionEnum.CANCELLED
+                }
+
+                if (checkedOut == "null") {
+                    timestamp = null
+                } else {
+                    timestamp = Timestamp.valueOf(checkedOut)
                 }
 
                 val books = getBookFromTransaction(transactionIds[i])
@@ -63,7 +81,7 @@ class TransactionControllers {
                     transactionIds[i],
                     table,
                     Timestamp.valueOf(checkedIn),
-                    Timestamp.valueOf(checkedOut),
+                    timestamp,
                     status,
                     books,
                     menus,
@@ -89,7 +107,11 @@ class TransactionControllers {
                 val rs: ResultSet = stmt.executeQuery(query)
                 while (rs.next()) {
                     checkedIn = rs.getString("checkedIn")
-                    checkedOut = rs.getString("checkedOut")
+                    if (rs.getString("checkedOut") == null) {// if you fetched null value then initialize output with blank string
+                        checkedOut = "null";
+                    } else {
+                        checkedOut = rs.getString("checkedOut")
+                    }
                     status = rs.getString("status")
                 }
             } catch (e: android.database.SQLException) {
@@ -197,7 +219,7 @@ class TransactionControllers {
             var transactionGeneralData: ArrayList<String> = ArrayList()
 
             val query =
-                "SELECT transactionId FROM transactions WHERE memberId = '${ActiveUser.getId()}'"
+                "SELECT transactionId FROM transactions WHERE memberId = '${ActiveUser.getId()}' ORDER BY checkedIn DESC"
 
             try {
                 val stmt: Statement = con!!.createStatement()
@@ -215,8 +237,9 @@ class TransactionControllers {
 
         fun AddTransaction() {}
         fun UpdateTransaction() {}
-        fun UpdateStatusToPending(transactionId: String):Boolean {
-            val query = "UPDATE transactions SET status = 'PENDING' WHERE transactionId = '${transactionId}'"
+        fun UpdateStatusToPending(transactionId: String, checkedOut: Long): Boolean {
+            val query =
+                "UPDATE transactions SET status = 'PENDING', checkedOut = ${checkedOut} WHERE transactionId = '${transactionId}'"
             var success = false
             try {
                 val stmt = con!!.prepareStatement(query)

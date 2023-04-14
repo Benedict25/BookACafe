@@ -11,7 +11,7 @@ class Transaction(
     var transactionId: String,
     var table: Table?,
     var checkedIn: Timestamp,
-    var checkedOut: Timestamp,
+    var checkedOut: Timestamp?,
     var status: TransactionEnum,
     var books: ArrayList<Book>,
     var menus: ArrayList<Menu>,
