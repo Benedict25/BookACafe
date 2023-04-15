@@ -10,6 +10,7 @@ import com.example.bookacafe.databinding.ListCartMenuBinding
 import com.example.bookacafe.model.Cart
 import com.example.bookacafe.model.Menu
 import com.squareup.picasso.Picasso
+import java.text.DecimalFormat
 
 
 class ListMenuCartAdapter(private val cart: Cart, val refreshCart: () -> Unit) : RecyclerView.Adapter<ListMenuCartAdapter.ListViewHolder>() {
@@ -32,7 +33,7 @@ class ListMenuCartAdapter(private val cart: Cart, val refreshCart: () -> Unit) :
         fun bindMenu(menu: Menu) {
             with(binding) {
                 cartFnbName.text = menu.name
-                cartFnbPrice.text = "Rp" + menu.price.toString() + ",-"
+                cartFnbPrice.text = "Rp" + DecimalFormat("#,###").format(menu.price)
                 Picasso.get().load(menu.imagePath).into(cartFnbPic)
                 val control = CartControllers()
 

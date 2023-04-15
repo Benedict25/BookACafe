@@ -2,6 +2,7 @@ package com.example.bookacafe.view
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +11,12 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.R
+import com.example.bookacafe.controller.AdminControllers
 import com.example.bookacafe.controller.CartControllers
 import com.example.bookacafe.controller.OrderControllers
 import com.example.bookacafe.databinding.*
 import com.example.bookacafe.model.Cart
+import java.text.DecimalFormat
 
 class MenuCart : Fragment(), View.OnClickListener {
     private lateinit var binding: MenuCartBinding
@@ -63,7 +66,9 @@ class MenuCart : Fragment(), View.OnClickListener {
 
         cartPay = view.findViewById(R.id.cartPay)
         cartPay.setOnClickListener {
-
+            val intent = Intent(context, BillActivity::class.java)
+            intent.putExtra("transaction_id", "TR20230211-001")
+            startActivity(intent)
         }
     }
 
@@ -89,7 +94,8 @@ class MenuCart : Fragment(), View.OnClickListener {
 
     fun setTotal(total: Int, view: View) {
         var cartTotal: TextView = view.findViewById(R.id.cartTotal)
-        cartTotal.text = "Rp$total,-"
+        var totalFormat = DecimalFormat("#,###").format(total)
+        cartTotal.text = "Rp$totalFormat"
     }
 
     fun refreshCart(){
