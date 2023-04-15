@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/cartRoomNumber"
             android:layout_toRightOf="@+id/cartRoomNumber"
-            android:text="First 2 Hours: Rp10.000,-" />
+            android:text="First 2 Hours: Rp10,000" />
 
         <ImageView
             android:id="@+id/cartTableCancel"
@@ -175,7 +175,7 @@
             android:id="@+id/cartTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rp82.666,-"
+            android:text="Rp0"
             android:textStyle="bold"
             android:textSize="15dp"
             android:layout_alignParentRight="true" />

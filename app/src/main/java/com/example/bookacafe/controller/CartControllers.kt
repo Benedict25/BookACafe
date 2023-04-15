@@ -264,7 +264,7 @@ class CartControllers {
 
     fun getTotalForCart(): Int {
         var total = 0
-        val query = "SELECT SUM(d.menuQuantity * m.price) as total\n" +
+        val query = "SELECT SUM(d.menuQuantity * m.price) + 10000 as total\n" +
                 "FROM menus m\n" +
                 "JOIN detail_carts d\n" +
                 "ON m.menuId = d.menuId\n" +
