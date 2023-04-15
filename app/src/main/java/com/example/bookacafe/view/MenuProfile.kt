@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.ActiveUser
+import com.example.bookacafe.controller.TransactionControllers
 import com.example.bookacafe.model.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -53,8 +54,13 @@ class MenuProfile: AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id){
             R.id.btn_history -> {
-                val moveIntent = Intent(this@MenuProfile, HistoryActivity::class.java)
-                startActivity(moveIntent)
+                var listTransaction = TransactionControllers.getTransactionData()
+                if (listTransaction.size==0){
+                    Toast.makeText(applicationContext, "You don't have history activity, let's make one!", Toast.LENGTH_SHORT).show()
+                } else {
+                    val moveIntent = Intent(this@MenuProfile, HistoryActivity::class.java)
+                    startActivity(moveIntent)
+                }
             }
 
             R.id.btn_logout -> {

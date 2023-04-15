@@ -17,6 +17,7 @@ import com.example.bookacafe.controller.TransactionControllers
 import com.example.bookacafe.databinding.BillScreenBinding
 import com.example.bookacafe.model.*
 import com.example.bookacafe.view.cashierTransaction.CashierBookAdapter
+import java.sql.Time
 import java.sql.Timestamp
 import kotlin.math.ceil
 
@@ -52,13 +53,16 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
             binding.rvBillMenu.setHasFixedSize(true)
             showRecyclerList()
 
+            var checkOutTime = getCheckOut()
             var totalBookPayment = getTotalMenuPayment()
-            var totalTablePayment = getTotalTablePayment()
+            var (totalTablePayment, selisihJam) = getTotalTablePayment(transaction.checkedIn, checkOutTime)
+
+
             totalPayment = totalBookPayment + totalTablePayment
             tvTotalOrder.text = "Total: " + totalPayment.toString()
             tvBillSeatDisplay.text = transaction.table?.tableName
             tvBillSeatName.text = "Kursi "+transaction.table?.tableName
-            tvBillSeatPrice.text = "Rp "+totalTablePayment.toString()
+            tvBillSeatPrice.text = "Rp "+totalTablePayment.toString()+ ", "+selisihJam.toString()+" hours."
 
             if (transaction.status == TransactionEnum.PENDING) {
                 btnPay.text = "PENDING..."
@@ -79,13 +83,17 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun getTotalTablePayment(): Int {
-        var total = 0
-        var ts: Timestamp = transaction.checkedIn
+    private fun getCheckOut(): Timestamp {
+        if (transaction.checkedOut != null){
+            return transaction.checkedOut!!
+        }
+        return Timestamp(System.currentTimeMillis())
+    }
 
-        var checkedIn = transaction.checkedIn
-        var checkedOut = ts.time
-        var totalHours = checkedOut - checkedIn.time
+    private fun getTotalTablePayment(checkedIn: Timestamp, checkedOut: Timestamp): Pair<Int, Int> {
+        var total = 0
+
+        var totalHours = checkedOut.time - checkedIn.time
 
         Log.d("TAG","Total Jam(dalam milisekom): "+totalHours)
 
@@ -99,7 +107,7 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
             total = hargaPerJam + (selisihJam - jamPertama) * hargaPerJam
         }
         Log.d("TAG", "Totalnya ada: "+total)
-        return total
+        return Pair(total, selisihJam)
 
     }
 
@@ -108,8 +116,6 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
         for (i in transaction.menus.indices) {
             total += transaction.menus[i].price * transaction.menuQuantities[i]
         }
-
-        Log.d("TAG", "Total Menumya ada")
 
         return total
     }
@@ -134,14 +140,9 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun showOrderDialog() {
         dialog = Dialog(this@BillActivity)
-        Log.d("TAG", "Masuk show order dialog")
+
         val positiveButtonClick = { _: DialogInterface, _: Int ->
-            var ts: Timestamp = transaction.checkedIn
-            var checkedOut = ts.time
-
-            Log.d("TAG", checkedOut.toString())
-
-            val userPaid = TransactionControllers.updateStatusToPending(transaction.transactionId, checkedOut)
+            val userPaid = TransactionControllers.updateStatusToPending(transaction.transactionId)
 
             val text: String
 
