@@ -236,9 +236,9 @@ class TransactionControllers {
 
         fun addTransaction() {}
         fun updateTransaction() {}
-        fun updateStatusToPending(transactionId: String, checkedOut: Long): Boolean {
+        fun updateStatusToPending(transactionId: String): Boolean {
             val query =
-                "UPDATE transactions SET status = 'PENDING', checkedOut = $checkedOut WHERE transactionId = '${transactionId}'"
+                "UPDATE transactions SET status = 'PENDING', checkedOut = current_timestamp() WHERE transactionId = '${transactionId}'"
             var success = false
             try {
                 val stmt = con!!.prepareStatement(query)

@@ -14,6 +14,8 @@ class HistoryActivity : AppCompatActivity() {
     var binding: HistoryScreenBinding? = null
     private val list = ArrayList<Transaction>()
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = HistoryScreenBinding.inflate(layoutInflater)
@@ -22,18 +24,8 @@ class HistoryActivity : AppCompatActivity() {
 
         list.addAll(getListHistory())
 
-        if (list.size == 0) {
-            moveBackToHistory()
-        } else {
-            binding?.rvHistory?.setHasFixedSize(true)
-            showRecyclerListHistory()
-        }
-    }
-
-    private fun moveBackToHistory() {
-        val intent = Intent(this@HistoryActivity, MenuProfile::class.java)
-        Toast.makeText(applicationContext, "You don't have history activity", Toast.LENGTH_SHORT).show()
-        startActivity(intent)
+        binding?.rvHistory?.setHasFixedSize(true)
+        showRecyclerListHistory()
     }
 
     private fun showRecyclerListHistory() {
