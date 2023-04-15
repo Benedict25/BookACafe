@@ -1,6 +1,5 @@
 package com.example.bookacafe.view.cashierUpdateFnBStatus
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -19,7 +18,6 @@ class ListBookAdapter(private val listBook: ArrayList<Book>, private val transac
 
     override fun getItemCount(): Int = listBook.size
 
-    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val pointer = listBook[position]
         holder.itemView.setOnClickListener {
@@ -40,7 +38,7 @@ class ListBookAdapter(private val listBook: ArrayList<Book>, private val transac
     private fun confirmServedBook(bookId: String) {
         val alertDialogBuilder = AlertDialog.Builder(context)
         alertDialogBuilder.setTitle("Serve Book")
-        alertDialogBuilder.setMessage("Buku akan di-serve??")
+        alertDialogBuilder.setMessage("Serve the book?")
         alertDialogBuilder.setNegativeButton("No") {
             dialog, which -> dialog.dismiss()
         }
@@ -48,7 +46,7 @@ class ListBookAdapter(private val listBook: ArrayList<Book>, private val transac
             dialog, which ->
                 val temp = CashierControllers().updateDetailTransactionStatusBook(transactionId, bookId)
                 if (temp) {
-                    Toast.makeText(context, "Buku sudah di-serve!!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Book has been served!", Toast.LENGTH_SHORT).show()
                 }
                 onPositiveClickListener.onPositiveClick()
         }

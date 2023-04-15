@@ -1,29 +1,21 @@
 package com.example.bookacafe.view
 
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.DialogInterface
-import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.R
-import com.example.bookacafe.controller.BookControllers
 import com.example.bookacafe.controller.CartControllers
 import com.example.bookacafe.controller.OrderControllers
 import com.example.bookacafe.databinding.*
-import com.example.bookacafe.model.Book
 import com.example.bookacafe.model.Cart
 
-
 class MenuCart : Fragment(), View.OnClickListener {
-
     private lateinit var binding: MenuCartBinding
     private lateinit var cart: Cart
 
@@ -48,8 +40,8 @@ class MenuCart : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val control: CartControllers = CartControllers()
-        cart = control.GetCartData()
+        val control = CartControllers()
+        cart = control.getCartData()
 
         setTable(cart, view)
         showCartMenus()
@@ -58,8 +50,8 @@ class MenuCart : Fragment(), View.OnClickListener {
 
         cartTableCancel = view.findViewById(R.id.cartTableCancel)
         cartTableCancel.setOnClickListener {
-            control.RemoveTableFromCart()
-            Toast.makeText(requireContext(), "Table ${cart.table.tableName} Removed", Toast.LENGTH_SHORT).show()
+            control.removeTableFromCart()
+            Toast.makeText(requireContext(), "Table ${cart.table.tableName} removed", Toast.LENGTH_SHORT).show()
             refreshCart()
         }
 
@@ -114,14 +106,14 @@ class MenuCart : Fragment(), View.OnClickListener {
 
     private fun showOrderConfirmationDialog() {
         val positiveButtonClick = { _: DialogInterface, _: Int ->
-            val control: OrderControllers = OrderControllers()
+            val control = OrderControllers()
             val isOrdered = control.order()
 
             if (isOrdered) {
-                Toast.makeText(requireContext(), "Order Success!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Order success!", Toast.LENGTH_SHORT).show()
                 refreshCart()
             } else {
-                Toast.makeText(requireContext(), "Order Error!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Order error!", Toast.LENGTH_SHORT).show()
             }
         }
 

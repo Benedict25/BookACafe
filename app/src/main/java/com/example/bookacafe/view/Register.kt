@@ -3,21 +3,18 @@ package com.example.bookacafe.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.*
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.RegisterControllers
 import com.example.bookacafe.model.User
-import org.w3c.dom.Text
 
 class Register : AppCompatActivity() {
-
-    lateinit var firstNameET: EditText
-    lateinit var lastNameET: EditText
-    lateinit var emailET: EditText
-    lateinit var passwordET: EditText
-    lateinit var checkPasswordET: EditText
-    lateinit var registerButton: Button
+    private lateinit var firstNameET: EditText
+    private lateinit var lastNameET: EditText
+    private lateinit var emailET: EditText
+    private lateinit var passwordET: EditText
+    private lateinit var checkPasswordET: EditText
+    private lateinit var registerButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +35,7 @@ class Register : AppCompatActivity() {
         registerButton = findViewById(R.id.register_button)
 
         registerButton.setOnClickListener {
-            val control: RegisterControllers = RegisterControllers()
+            val control = RegisterControllers()
             val user = User("", firstNameET.text.toString(), lastNameET.text.toString(), emailET.text.toString(), passwordET.text.toString())
 
             val accountExists: Boolean = control.checkAccountExistence(user.email)

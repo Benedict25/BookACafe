@@ -1,45 +1,42 @@
 package com.example.bookacafe.controller
 
 import android.database.SQLException
-import android.util.Log
-import com.example.bookacafe.model.Cart
 import com.example.bookacafe.model.User
 import java.sql.ResultSet
 import java.sql.Statement
 
 class RegisterControllers {
-
-    var con = DatabaseHandler.connect()
+    private var con = DatabaseHandler.connect()
 
     fun registerUser(user: User, checkPassword: String): Boolean {
         if (user.password == checkPassword) {
-            val control: CartControllers = CartControllers()
+            val control = CartControllers()
             val cartId = control.createCartId()
             val memberId = createMemberId()
             val query = "INSERT INTO users VALUES ('$memberId', '${user.firstName}', '${user.lastName}', '${user.email}', '${user.password}')"
             val query2 = "INSERT INTO members VALUES ('$memberId', 'ACTIVE')"
             val query3 = "INSERT INTO carts VALUES ('$cartId', '$memberId', NULL)"
 
-            try {
+            return try {
                 val stmt: Statement = con!!.createStatement()
                 stmt.executeQuery(query)
                 stmt.executeQuery(query2)
                 stmt.executeQuery(query3)
-                return true
+                 true
             } catch (e: SQLException) {
                 e.printStackTrace()
-                return false
+                false
             }
         } else {
             return false
         }
     }
 
-    fun createMemberId(): String {
+    private fun createMemberId(): String {
 
         val query = "SELECT memberId FROM members ORDER BY memberId ASC"
-        var newestId: String = String()
-        var returnId: String = String()
+        var newestId = String()
+        var returnId = String()
 
         try {
             val stmt: Statement = con!!.createStatement()

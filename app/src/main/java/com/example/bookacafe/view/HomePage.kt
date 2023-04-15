@@ -1,8 +1,5 @@
 package com.example.bookacafe.view
 
-import FirstFragment
-import SecondFragment
-import ThirdFragment
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

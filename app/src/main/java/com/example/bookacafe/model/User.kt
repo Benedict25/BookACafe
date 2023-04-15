@@ -3,7 +3,6 @@ package com.example.bookacafe.model
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-
 @Parcelize
 class User(
     var userId: String,

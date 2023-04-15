@@ -22,18 +22,16 @@ import kotlin.math.ceil
 
 class BillActivity : AppCompatActivity(), View.OnClickListener {
 
-
     //    var transaction = intent.getParcelableArrayListExtra<Transaction>("EXTRA_TRANSACTION")
     private lateinit var binding: BillScreenBinding
-    private lateinit var btn_pay: Button
-    private lateinit var tv_total_order: TextView
-    private lateinit var tv_bill_seatdisplay: Button
-    private lateinit var tv_bill_seatname: TextView
-    private lateinit var tv_bill_seatprice: TextView
+    private lateinit var btnPay: Button
+    private lateinit var tvTotalOrder: TextView
+    private lateinit var tvBillSeatDisplay: Button
+    private lateinit var tvBillSeatName: TextView
+    private lateinit var tvBillSeatPrice: TextView
     private lateinit var transaction: Transaction
     private lateinit var dialog: Dialog
     private var totalPayment: Int = 0
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,39 +39,39 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        tv_total_order = findViewById(R.id.tv_total_order)
-        btn_pay = findViewById(R.id.btn_pay_order)
-        tv_bill_seatdisplay = findViewById(R.id.tv_bill_seatdisplay)
-        tv_bill_seatname = findViewById(R.id.tv_bill_seatname)
-        tv_bill_seatprice = findViewById(R.id.tv_bill_seatprice)
+        tvTotalOrder = findViewById(R.id.tv_total_order)
+        btnPay = findViewById(R.id.btn_pay_order)
+        tvBillSeatDisplay = findViewById(R.id.tv_bill_seatdisplay)
+        tvBillSeatName = findViewById(R.id.tv_bill_seatname)
+        tvBillSeatPrice = findViewById(R.id.tv_bill_seatprice)
 
         val transactionId = intent.getStringExtra("transaction_id")
 
         if (transactionId != null) {
-            transaction = TransactionControllers.GetTransactionDetail(transactionId)
+            transaction = TransactionControllers.getTransactionDetail(transactionId)
             binding.rvBillMenu.setHasFixedSize(true)
             showRecyclerList()
 
             var totalBookPayment = getTotalMenuPayment()
             var totalTablePayment = getTotalTablePayment()
             totalPayment = totalBookPayment + totalTablePayment
-            tv_total_order.text = "Total: " + totalPayment.toString()
-            tv_bill_seatdisplay.text = transaction.table?.tableName
-            tv_bill_seatname.text = "Kursi "+transaction.table?.tableName
-            tv_bill_seatprice.text = "Rp "+totalTablePayment.toString()
+            tvTotalOrder.text = "Total: " + totalPayment.toString()
+            tvBillSeatDisplay.text = transaction.table?.tableName
+            tvBillSeatName.text = "Kursi "+transaction.table?.tableName
+            tvBillSeatPrice.text = "Rp "+totalTablePayment.toString()
 
             if (transaction.status == TransactionEnum.PENDING) {
-                btn_pay.text = "PENDING..."
-                btn_pay.isEnabled = false
-                btn_pay.isClickable = false
+                btnPay.text = "PENDING..."
+                btnPay.isEnabled = false
+                btnPay.isClickable = false
             } else if (transaction.status == TransactionEnum.PAID) {
-                btn_pay.visibility = View.INVISIBLE
+                btnPay.visibility = View.INVISIBLE
             } else if (transaction.status == TransactionEnum.CANCELLED) {
-                btn_pay.text = "CANCELLED"
-                btn_pay.isEnabled = false
-                btn_pay.isClickable = false
+                btnPay.text = "CANCELLED"
+                btnPay.isEnabled = false
+                btnPay.isClickable = false
             }
-            btn_pay.setOnClickListener(this)
+            btnPay.setOnClickListener(this)
         } else {
             finish()
             val intent = Intent(this, MenuProfile::class.java)
@@ -143,16 +141,16 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
 
             Log.d("TAG", checkedOut.toString())
 
-            val userPaid = TransactionControllers.UpdateStatusToPending(transaction.transactionId, checkedOut)
+            val userPaid = TransactionControllers.updateStatusToPending(transaction.transactionId, checkedOut)
 
             val text: String
 
             if (userPaid) {
                 text =
                     "Thank you for your payment. Please wait the cashier to confirm your transaction."
-                btn_pay.setText("PENDING...")
-                btn_pay.isClickable = false
-                btn_pay.isEnabled = false
+                btnPay.setText("PENDING...")
+                btnPay.isClickable = false
+                btnPay.isEnabled = false
             } else {
                 text = "Whoops. Something wrong with your payment. Please ask cashier"
             }

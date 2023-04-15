@@ -9,7 +9,7 @@ import java.sql.Statement
 
 class TableControllers {
     private val user = ActiveUser
-    var con = DatabaseHandler.connect()
+    private var con = DatabaseHandler.connect()
 
     fun getTableData(): ArrayList<Table> {
         val tables: ArrayList<Table> = ArrayList()

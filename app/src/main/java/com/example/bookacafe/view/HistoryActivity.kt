@@ -56,7 +56,7 @@ class HistoryActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun getListHistory(): ArrayList<Transaction> {
-        return TransactionControllers.GetTransactionData()
+    private fun getListHistory(): ArrayList<Transaction> {
+        return TransactionControllers.getTransactionData()
     }
 }

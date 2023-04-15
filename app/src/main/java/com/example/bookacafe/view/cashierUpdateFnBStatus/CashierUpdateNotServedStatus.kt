@@ -9,7 +9,6 @@ import com.example.bookacafe.databinding.CashierFnbNotServedBinding
 import com.example.bookacafe.model.Book
 import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
 import com.example.bookacafe.view.CashierActivity
-import java.util.*
 import kotlin.collections.ArrayList
 
 class CashierUpdateNotServedStatus: AppCompatActivity(), ListFnBAdapter.OnPositiveClickListener, ListBookAdapter.OnPositiveClickListener {
@@ -23,13 +22,13 @@ class CashierUpdateNotServedStatus: AppCompatActivity(), ListFnBAdapter.OnPositi
         super.onCreate(savedInstanceState)
         binding = CashierFnbNotServedBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val tableName_temp = intent.getStringExtra("table_key")
-        val transactionId_temp = intent.getStringExtra("trans_id")
+        val tableNameTemp = intent.getStringExtra("table_key")
+        val transactionIdTemp = intent.getStringExtra("trans_id")
 
         binding.rvUsers.setHasFixedSize(true)
-        if (tableName_temp != null && transactionId_temp != null) {
-            transactionId = transactionId_temp
-            tableName = tableName_temp
+        if (tableNameTemp != null && transactionIdTemp != null) {
+            transactionId = transactionIdTemp
+            tableName = tableNameTemp
             listMenu.addAll(CashierControllers().getOrderedMenuData(tableName, true))
             listBook.addAll(CashierControllers().getOrderedBookData(tableName, true))
             showRecyclerList()

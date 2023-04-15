@@ -1,6 +1,5 @@
 package com.example.bookacafe.view
 
-import SecondFragment
 import ThirdFragment
 import android.content.Intent
 import android.os.Bundle
@@ -16,7 +15,6 @@ import com.example.bookacafe.R
 import com.example.bookacafe.controller.ActiveUser
 import com.example.bookacafe.view.adminDisabledUser.DisabledUserMenu
 import com.example.bookacafe.view.adminTransaction.ShowTransactions
-
 
 class AdminHomeFragment :Fragment(R.layout.fragment_admin_home) {
 

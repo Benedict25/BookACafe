@@ -10,10 +10,10 @@ import java.sql.Statement
 import java.text.DecimalFormat
 
 class CashierControllers {
-    var con = DatabaseHandler.connect()
-    var maxHours = 2
-    var maxHoursMin = maxHours -1
-    val formatter = DecimalFormat("#,###")
+    private var con = DatabaseHandler.connect()
+    private var maxHours = 2
+    private var maxHoursMin = maxHours -1
+    private val formatter = DecimalFormat("#,###")
 
     fun updateDetailTransactionStatusMenu(transactionId: String, menuId: String): Boolean {
         return try {

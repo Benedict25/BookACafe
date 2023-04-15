@@ -12,11 +12,10 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 
 class MemberControllers {
+    private val user = ActiveUser
+    private var con = DatabaseHandler.connect()
 
-
-    fun CheckOut() {}
-    fun Pay() {}
-    fun ShowHistory() {}
-
-
+    fun checkOut() {}
+    fun pay() {}
+    fun showHistory() {}
 }

@@ -26,13 +26,12 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 
 class Login : AppCompatActivity() {
-
-    lateinit var gso: GoogleSignInOptions
-    lateinit var gsc: GoogleSignInClient
-    lateinit var googleButton: ImageView
-    lateinit var loginButton: Button
-    lateinit var inputEmailET: EditText
-    lateinit var inputPasswordET: EditText
+    private lateinit var gso: GoogleSignInOptions
+    private lateinit var gsc: GoogleSignInClient
+    private lateinit var googleButton: ImageView
+    private lateinit var loginButton: Button
+    private lateinit var inputEmailET: EditText
+    private lateinit var inputPasswordET: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +77,7 @@ class Login : AppCompatActivity() {
         }
     }
 
-    fun signIn() {
+    private fun signIn() {
         var signInIntent = gsc.signInIntent
         startActivityForResult(signInIntent, 1000)
     }
@@ -96,7 +95,7 @@ class Login : AppCompatActivity() {
 
                 if (acct != null){
                     val activeEmail = acct.email.toString()
-                    val control: RegisterControllers = RegisterControllers()
+                    val control = RegisterControllers()
                     val accountExists: Boolean = control.checkAccountExistence(activeEmail)
                     // Check kalau user google sudah terdaftar di database = langsung ke home, kalau belum = lengkapin data
                     if (accountExists) {
@@ -130,7 +129,7 @@ class Login : AppCompatActivity() {
         signupText.movementMethod = LinkMovementMethod.getInstance()
     }
 
-    fun navigateToHomeScreen(){
+    private fun navigateToHomeScreen(){
         finish()
         lateinit var intent: Intent
         if (ActiveUser.getType() == "MEMBER") {
@@ -143,7 +142,7 @@ class Login : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun navigateToCompleteProfile() {
+    private fun navigateToCompleteProfile() {
         finish()
         val intent = Intent(this@Login, CompleteProfile::class.java)
         startActivity(intent)

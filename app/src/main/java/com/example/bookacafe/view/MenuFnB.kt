@@ -11,10 +11,7 @@ import com.example.bookacafe.databinding.MenuFnbBinding
 import com.example.bookacafe.model.Menu
 import com.google.android.material.tabs.TabLayout
 
-
 class MenuFnB : AppCompatActivity(), View.OnClickListener {
-
-
     private lateinit var binding: MenuFnbBinding
     private lateinit var searchView: SearchView
     private var tabLayout: TabLayout? = null

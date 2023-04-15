@@ -1,17 +1,14 @@
 package com.example.bookacafe.view
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookacafe.controller.CartControllers
 import com.example.bookacafe.databinding.ListCartBookBinding
-import com.example.bookacafe.databinding.ListCartMenuBinding
 import com.example.bookacafe.model.Book
 import com.example.bookacafe.model.Cart
-import com.example.bookacafe.model.Menu
 import com.squareup.picasso.Picasso
 
 class ListBookCartAdapter(private val cart: Cart, val refreshCart: () -> Unit) : RecyclerView.Adapter<ListBookCartAdapter.ListViewHolder>() {
@@ -34,10 +31,10 @@ class ListBookCartAdapter(private val cart: Cart, val refreshCart: () -> Unit) :
             with(binding) {
                 cartBookName.text = book.title
                 Picasso.get().load(book.imagePath).into(cartBookPic)
-                val control: CartControllers = CartControllers()
+                val control = CartControllers()
 
                 cartBookCancel.setOnClickListener {
-                    val isRemoved = control.RemoveBookFromCart(book.bookId)
+                    val isRemoved = control.removeBookFromCart(book.bookId)
 
                     if (isRemoved) {
                         Toast.makeText(context, "${book.title} Removed", Toast.LENGTH_SHORT).show()

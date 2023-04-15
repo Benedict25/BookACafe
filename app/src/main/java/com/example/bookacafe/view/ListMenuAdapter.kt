@@ -3,8 +3,11 @@ package com.example.bookacafe.view
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookacafe.controller.MenuControllers
@@ -49,10 +52,17 @@ class ListMenuAdapter(private val menus : ArrayList<Menu>) : RecyclerView.Adapte
         val addToCartDialog = AlertDialog.Builder(context)
 
         val positiveButtonClick = { _: DialogInterface, _: Int ->
-            Toast.makeText(context,
-                menu.name + " added to cart.",
+            val text = menu.name + " added to cart."
+            val toast = Toast.makeText(context,
+                text,
                 Toast.LENGTH_SHORT
-            ).show()
+            )
+            val layout = toast.view as LinearLayout?
+            if (layout!!.childCount > 0) {
+                val tv = layout!!.getChildAt(0) as TextView
+                tv.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
+            }
+            toast.show()
             MenuControllers().addMenuToCart(menu.menuId)
             addToCartDialog.create().dismiss()
         }

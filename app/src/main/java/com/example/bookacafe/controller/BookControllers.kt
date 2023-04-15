@@ -9,7 +9,7 @@ import java.sql.Statement
 
 class BookControllers {
     private val user = ActiveUser
-    var con = DatabaseHandler.connect()
+    private var con = DatabaseHandler.connect()
 
     fun getBookData(genre: String, inputText: String): ArrayList<Book> {
         val books: ArrayList<Book> = ArrayList()

@@ -1,30 +1,28 @@
+package com.example.bookacafe.view
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.viewpager.widget.ViewPager
 import com.example.bookacafe.R
-import com.example.bookacafe.view.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import java.util.*
 import kotlin.collections.ArrayList
 
 class FirstFragment:Fragment(R.layout.fragment_first) {
-
-    lateinit var viewPager: ViewPager
-    lateinit var viewPagerAdapter: ViewPagerAdapter
-    lateinit var imageList: List<Int>
-    lateinit var timer: Timer
-    lateinit var nameTextView: TextView
-    var currentPosition = 0
+    private lateinit var viewPager: ViewPager
+    private lateinit var viewPagerAdapter: ViewPagerAdapter
+    private lateinit var imageList: List<Int>
+    private lateinit var timer: Timer
+    private lateinit var nameTextView: TextView
+    private var currentPosition = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -93,7 +91,7 @@ class FirstFragment:Fragment(R.layout.fragment_first) {
         // Set data ; ambil dari data yang login sekarang
         if (acct != null){
             var activeName: String = acct.displayName.toString()
-            var displayName = "Welcome \n ${activeName}"
+            var displayName = "Welcome \n $activeName!"
             nameTextView.setText(displayName)
         }
     }

@@ -1,13 +1,12 @@
 package com.example.bookacafe.controller
 
 import android.database.SQLException
-import android.util.Log
 import java.sql.ResultSet
 import java.sql.Statement
 import java.util.*
 
 class OrderControllers {
-    var con = DatabaseHandler.connect()
+    private var con = DatabaseHandler.connect()
 
     fun order(): Boolean {
         val openTransId = checkTransExistance()
@@ -40,7 +39,7 @@ class OrderControllers {
         }
     }
 
-    fun checkTransExistance(): String {
+    private fun checkTransExistance(): String {
         var transactionId = "noOpenTransaction"
 
         val query = "SELECT transactionId\n" +
@@ -74,10 +73,10 @@ class OrderControllers {
         return transactionId
     }
 
-    fun createTransId(): String {
+    private fun createTransId(): String {
         val query = "SELECT transactionId FROM transactions ORDER BY transactionId ASC"
-        var newestId: String = String()
-        var returnId: String = String()
+        var newestId = String()
+        var returnId = String()
 
         try {
             val stmt: Statement = con!!.createStatement()
@@ -136,23 +135,23 @@ class OrderControllers {
         return returnId
     }
 
-    fun createNewTransaction(transId: String): Boolean {
+    private fun createNewTransaction(transId: String): Boolean {
         val query = "INSERT INTO transactions\n" +
                 "SELECT '$transId', '${ActiveUser.getId()}', c.tableId, current_timestamp(), NULL, 'NOT_PAID'\n" +
                 "FROM carts c\n" +
                 "WHERE c.memberId = '${ActiveUser.getId()}'"
 
-        try {
+        return try {
             val stmt: Statement = con!!.createStatement()
             stmt.executeQuery(query)
-            return true
+            true
         } catch (e: SQLException) {
             e.printStackTrace()
-            return false
+            false
         }
     }
 
-    fun transferCartToTrans(transId: String): Boolean {
+    private fun transferCartToTrans(transId: String): Boolean {
         val query = "INSERT INTO detail_transactions\n" +
                 "SELECT NULL, '$transId', d.bookId, d.menuId, d.menuQuantity, 'NOT_SERVED'\n" +
                 "FROM detail_carts d\n" +
@@ -160,17 +159,17 @@ class OrderControllers {
                 "ON d.cartId = c.cartId\n" +
                 "WHERE c.memberId = '${ActiveUser.getId()}'"
 
-        try {
+        return try {
             val stmt: Statement = con!!.createStatement()
             stmt.executeQuery(query)
-            return true
+            true
         } catch (e: SQLException) {
             e.printStackTrace()
-            return false
+            false
         }
     }
 
-    fun deleteFromDetailCart(): Boolean {
+    private fun deleteFromDetailCart(): Boolean {
         val query = "DELETE FROM detail_carts\n" +
                 "WHERE cartId IN (\n" +
                 "\tSELECT cartId\n" +
@@ -178,32 +177,32 @@ class OrderControllers {
                 "\tWHERE memberId = '${ActiveUser.getId()}'\n" +
                 ")"
 
-        try {
+        return try {
             val stmt: Statement = con!!.createStatement()
             stmt.executeQuery(query)
-            return true
+            true
         } catch (e: SQLException) {
             e.printStackTrace()
-            return false
+            false
         }
     }
 
-    fun nullifyTableInCart(): Boolean {
+    private fun nullifyTableInCart(): Boolean {
         val query = "UPDATE carts\n" +
                 "SET tableId = NULL\n" +
                 "WHERE memberId = '${ActiveUser.getId()}'"
 
-        try {
+        return try {
             val stmt: Statement = con!!.createStatement()
             stmt.executeQuery(query)
-            return true
+            true
         } catch (e: SQLException) {
             e.printStackTrace()
-            return false
+            false
         }
     }
 
-    fun setTableStatusToBooked() {
+    private fun setTableStatusToBooked() {
         val query = "UPDATE tables\n" +
                 "SET status = 'BOOKED'\n" +
                 "WHERE tableId \n" +

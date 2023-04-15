@@ -26,7 +26,6 @@ class ListHistoryAdapter(private val listHistory: ArrayList<Transaction>) :
         val tvHistoryInvoiceDate = binding.tvHistoryInvoiceDate
     }
 
-
     override fun getItemCount(): Int = listHistory.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

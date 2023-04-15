@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.bookacafe.R
-import com.example.bookacafe.controller.LoginControllers
 import com.example.bookacafe.controller.RegisterControllers
 import com.example.bookacafe.controller.UserControllers
 import com.example.bookacafe.model.User
@@ -15,13 +14,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 
 class CompleteProfile : AppCompatActivity() {
-
-    lateinit var firstNameET: EditText
-    lateinit var lastNameET: EditText
-    lateinit var passwordET: EditText
-    lateinit var checkPasswordET: EditText
-    lateinit var completeButton: Button
-    lateinit var activeEmail: String
+    private lateinit var firstNameET: EditText
+    private lateinit var lastNameET: EditText
+    private lateinit var passwordET: EditText
+    private lateinit var checkPasswordET: EditText
+    private lateinit var completeButton: Button
+    private lateinit var activeEmail: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +54,7 @@ class CompleteProfile : AppCompatActivity() {
         }
     }
 
-    fun navigateToHomeScreen(){
+    private fun navigateToHomeScreen(){
         val intent = Intent(this@CompleteProfile, HomePage::class.java)
         startActivity(intent)
 //        val intent = Intent(this@Login, HomePage::class.java)
