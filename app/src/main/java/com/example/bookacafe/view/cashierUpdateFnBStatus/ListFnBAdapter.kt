@@ -1,6 +1,5 @@
 package com.example.bookacafe.view.cashierUpdateFnBStatus
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -19,7 +18,6 @@ class ListFnBAdapter(private val listFnB: ArrayList<CashierMenuDetail>, private 
 
     override fun getItemCount(): Int = listFnB.size
 
-    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val pointer = listFnB[position]
         holder.itemView.setOnClickListener {
@@ -40,15 +38,15 @@ class ListFnBAdapter(private val listFnB: ArrayList<CashierMenuDetail>, private 
 
     private fun confirmServedMenu(menuId: String) {
         val alertDialogBuilder = AlertDialog.Builder(context)
-        alertDialogBuilder.setTitle("Disabled User")
-        alertDialogBuilder.setMessage("Menu akan disajikan??")
+        alertDialogBuilder.setTitle("Serve Menu")
+        alertDialogBuilder.setMessage("Serve the menu?")
         alertDialogBuilder.setNegativeButton("No") {
-            dialog, which -> dialog.dismiss()
+            dialog, _ -> dialog.dismiss()
         }
         alertDialogBuilder.setPositiveButton("Yes") {
-            dialog, which ->
+            _, _ ->
                 CashierControllers().updateDetailTransactionStatusMenu(transactionId, menuId)
-                Toast.makeText(context, "Menu sudah disajikan!!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Menu has been served!", Toast.LENGTH_SHORT).show()
                 onPositiveClickListener.onPositiveClick()
         }
         val alertDialog = alertDialogBuilder.create()

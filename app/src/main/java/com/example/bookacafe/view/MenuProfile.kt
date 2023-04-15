@@ -23,9 +23,6 @@ class MenuProfile: AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.profile_screen)
         supportActionBar?.hide()
 
-        // test print bang
-        print("Namanya: "+user.getFirstName())
-
         val btnHistory: Button = findViewById(R.id.btn_history)
         val btnLogout: Button = findViewById(R.id.btn_logout)
 
@@ -70,8 +67,8 @@ class MenuProfile: AppCompatActivity(), View.OnClickListener {
                     val moveIntent = Intent(this@MenuProfile, Login::class.java)
                     startActivity(moveIntent)
 
-                    val logout_toast = Toast.makeText(applicationContext, "Logging Out from BookACafe", Toast.LENGTH_SHORT)
-                    logout_toast.show()
+                    val logoutToast = Toast.makeText(applicationContext, "Logging Out from BookACafe", Toast.LENGTH_SHORT)
+                    logoutToast.show()
                 }
             }
         }

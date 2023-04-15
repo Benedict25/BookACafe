@@ -1,6 +1,5 @@
 package com.example.bookacafe.view.cashierTransaction
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -33,7 +32,7 @@ class CashierTransaction() : AppCompatActivity() {
         if (tableName != null) {
             val tableData = CashierControllers().getTableData(tableName)
             binding.tvBillSeatdisplay.text = tableData.tableName
-            binding.tvBillSeatname.text = "Kursi " + tableData.tableName
+            binding.tvBillSeatname.text = "Table " + tableData.tableName
             binding.tvBillSeatprice.text = "Rp"+tableData.tableDesc+",-"
             binding.dateOrdered.text = "Ordered at " + LocalDate.now()
             print(tableName)
@@ -46,7 +45,7 @@ class CashierTransaction() : AppCompatActivity() {
 
 //            val alertDialogBuilder = AlertDialog.Builder(this)
             binding.btnPrintBill.setOnClickListener {
-                dialogBoxPrintBill(tableData)
+                dialogBoxPrintBill()
             }
 
             binding.btnFinishedTransaction.setOnClickListener {
@@ -76,21 +75,21 @@ class CashierTransaction() : AppCompatActivity() {
     }
 
     // Menampilkan AlertDialog pertama
-    private fun dialogBoxPrintBill(table:TableDummy) {
+    private fun dialogBoxPrintBill() {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Print Bill")
-        alertDialogBuilder.setMessage("Lanjutkan proses pencetakan bill??")
-        alertDialogBuilder.setPositiveButton("Yes") { dialog, which ->
+        alertDialogBuilder.setMessage("Continue the bill printing process?")
+        alertDialogBuilder.setPositiveButton("Yes") { dialog, _ ->
             // Aksi yang dijalankan ketika tombol "OK"
             //realnya kalo ngeprint ya bawa datanya kan :))
             dialog.dismiss()
             binding.btnPrintBill.isEnabled = false
-            Toast.makeText(this, "Bill sudah dicetak!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Bill has been printed!", Toast.LENGTH_SHORT).show()
         }
-        alertDialogBuilder.setNegativeButton("No") { dialog, which ->
+        alertDialogBuilder.setNegativeButton("No") { dialog, _ ->
             // Aksi yang dijalankan ketika tombol "Cancel" ditekan
             dialog.dismiss()
-            Toast.makeText(this, "Alert Dialog Closed!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Alert dialog closed!", Toast.LENGTH_SHORT).show()
         }
         val alertDialog1 = alertDialogBuilder.create()
         alertDialog1.show()
@@ -100,23 +99,23 @@ class CashierTransaction() : AppCompatActivity() {
     private fun dialogBoxFinishedTransaction(table: TableDummy) {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Finished Transaction")
-        alertDialogBuilder.setMessage("Selesaikan Transaksi??")
-        alertDialogBuilder.setPositiveButton("Yes") { dialog, which ->
+        alertDialogBuilder.setMessage("Complete the transaction?")
+        alertDialogBuilder.setPositiveButton("Yes") { dialog, _ ->
             // Aksi yang dijalankan ketika tombol "Yes" ditekan
             dialog.dismiss()
 
             CashierControllers().updateTransactionStatus(table.tableId)
             CashierControllers().updateTableStatus(table.tableId)
-            Toast.makeText(this, "Transaksi pada meja "+ table.tableName + " sudah selesai!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Table "+ table.tableName + " transaction has been completed!", Toast.LENGTH_SHORT).show()
 
             finish()
             val intent = Intent(this, CashierActivity::class.java)
             startActivity(intent)
         }
-        alertDialogBuilder.setNegativeButton("No") { dialog, which ->
+        alertDialogBuilder.setNegativeButton("No") { dialog, _ ->
             // Aksi yang dijalankan ketika tombol "No" ditekan
             dialog.dismiss()
-            Toast.makeText(this, "Alert Dialog Closed!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Alert dialog cllosed!", Toast.LENGTH_SHORT).show()
         }
         val alertDialog2 = alertDialogBuilder.create()
         alertDialog2.show()

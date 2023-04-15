@@ -10,9 +10,9 @@ import java.sql.Timestamp
 class TransactionControllers {
 
     companion object {
-        var con = DatabaseHandler.connect()
+        private var con = DatabaseHandler.connect()
 
-        fun GetTransactionDetail(transactionId: String): Transaction {
+        fun getTransactionDetail(transactionId: String): Transaction {
             val transactionId = transactionId
 
             var timestamp: Timestamp?
@@ -50,9 +50,9 @@ class TransactionControllers {
             return transaction
         }
 
-        fun GetTransactionData(): ArrayList<Transaction> {
+        fun getTransactionData(): ArrayList<Transaction> {
             val transactionIds: ArrayList<String> = getTransactionGeneralData()
-            val transactions: ArrayList<Transaction> = ArrayList<Transaction>()
+            val transactions: ArrayList<Transaction> = ArrayList()
             var timestamp: Timestamp?
 
             for (i in transactionIds.indices) {
@@ -60,7 +60,6 @@ class TransactionControllers {
                 var status: TransactionEnum = TransactionEnum.NOT_PAID
                 var (checkedIn, checkedOut, status_string) = getGeneralData(transactionIds[i])
                 if (status_string == "PAID") {
-//                    Log.d("TAG", "akwoakwoakwoa statusnya paid")
                     status = TransactionEnum.PAID
                 } else if (status_string == "PENDING") {
                     status = TransactionEnum.PENDING
@@ -77,7 +76,7 @@ class TransactionControllers {
                 val books = getBookFromTransaction(transactionIds[i])
                 val (menus, menuQuantities) = getMenuFromTransaction(transactionIds[i])
 
-                val transaction: Transaction = Transaction(
+                val transaction = Transaction(
                     transactionIds[i],
                     table,
                     Timestamp.valueOf(checkedIn),
@@ -94,13 +93,13 @@ class TransactionControllers {
             return transactions
         }
 
-        fun getGeneralData(transactionId: String): Triple<String, String, String> {
+        private fun getGeneralData(transactionId: String): Triple<String, String, String> {
             val query =
                 "SELECT checkedIn, checkedOut, status FROM transactions WHERE transactionId = '${transactionId}'"
 
-            var checkedIn: String = String()
-            var checkedOut: String = String()
-            var status: String = String()
+            var checkedIn = String()
+            var checkedOut = String()
+            var status = String()
 
             try {
                 val stmt: Statement = con!!.createStatement()
@@ -108,7 +107,7 @@ class TransactionControllers {
                 while (rs.next()) {
                     checkedIn = rs.getString("checkedIn")
                     if (rs.getString("checkedOut") == null) {// if you fetched null value then initialize output with blank string
-                        checkedOut = "null";
+                        checkedOut = "null"
                     } else {
                         checkedOut = rs.getString("checkedOut")
                     }
@@ -118,11 +117,11 @@ class TransactionControllers {
                 e.printStackTrace()
             }
 
-            Log.d("TAG", "CheckedIn: ${checkedIn}, CheckedOut: ${checkedOut}, Status: ${status}")
+            Log.d("TAG", "CheckedIn: $checkedIn, CheckedOut: $checkedOut, Status: $status")
             return Triple(checkedIn, checkedOut, status)
         }
 
-        fun getMenuFromTransaction(transactionId: String): Pair<ArrayList<Menu>, ArrayList<Int>> {
+        private fun getMenuFromTransaction(transactionId: String): Pair<ArrayList<Menu>, ArrayList<Int>> {
             val menus: ArrayList<Menu> = ArrayList()
             val menuQuantities: ArrayList<Int> = ArrayList()
 
@@ -159,7 +158,7 @@ class TransactionControllers {
             return Pair(menus, menuQuantities)
         }
 
-        fun getBookFromTransaction(transactionId: String): ArrayList<Book> {
+        private fun getBookFromTransaction(transactionId: String): ArrayList<Book> {
             val books: ArrayList<Book> = ArrayList()
             val query = "SELECT b.bookId, b.title " +
                     "FROM books b JOIN detail_transactions d " +
@@ -190,7 +189,7 @@ class TransactionControllers {
             return books
         }
 
-        fun getTableFromTransaction(transactionId: String): Table {
+        private fun getTableFromTransaction(transactionId: String): Table {
             var table = Table("", "", "", TableTypeEnum.AVAILABLE)
             val query = "SELECT tables.tableId, tables.tableName, tables.room " +
                     "FROM tables JOIN transactions " +
@@ -215,7 +214,7 @@ class TransactionControllers {
             return table
         }
 
-        fun getTransactionGeneralData(): ArrayList<String> {
+        private fun getTransactionGeneralData(): ArrayList<String> {
             var transactionGeneralData: ArrayList<String> = ArrayList()
 
             val query =
@@ -235,11 +234,11 @@ class TransactionControllers {
             return transactionGeneralData
         }
 
-        fun AddTransaction() {}
-        fun UpdateTransaction() {}
-        fun UpdateStatusToPending(transactionId: String, checkedOut: Long): Boolean {
+        fun addTransaction() {}
+        fun updateTransaction() {}
+        fun updateStatusToPending(transactionId: String, checkedOut: Long): Boolean {
             val query =
-                "UPDATE transactions SET status = 'PENDING', checkedOut = ${checkedOut} WHERE transactionId = '${transactionId}'"
+                "UPDATE transactions SET status = 'PENDING', checkedOut = $checkedOut WHERE transactionId = '${transactionId}'"
             var success = false
             try {
                 val stmt = con!!.prepareStatement(query)

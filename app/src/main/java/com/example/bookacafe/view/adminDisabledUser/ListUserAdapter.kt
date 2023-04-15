@@ -1,6 +1,5 @@
 package com.example.bookacafe.view.adminDisabledUser
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.bookacafe.controller.AdminControllers
 import com.example.bookacafe.databinding.ItemRowUserBinding
-import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
 import com.example.bookacafe.model.adminDataDetails.MemberDummy
 
 class ListUserAdapter(private val listUser: ArrayList<MemberDummy>, private val context: Context, private val onPositiveClickListener: OnPositiveClickListener) :  RecyclerView.Adapter<ListUserAdapter.ListViewHolder>() {
@@ -22,7 +20,6 @@ class ListUserAdapter(private val listUser: ArrayList<MemberDummy>, private val 
 
     override fun getItemCount(): Int = listUser.size
 
-    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val pointer = listUser[position]
         holder.itemView.setOnClickListener {
@@ -52,14 +49,14 @@ class ListUserAdapter(private val listUser: ArrayList<MemberDummy>, private val 
     private fun showDialogDisabled(memberId: String) {
         val alertDialogBuilder = AlertDialog.Builder(context)
         alertDialogBuilder.setTitle("Disabled User")
-        alertDialogBuilder.setMessage("Yakin untuk mengganti status user menjadi INACTIVE??")
+        alertDialogBuilder.setMessage("Are you sure to change the user status to INACTIVE?")
         alertDialogBuilder.setNegativeButton("No") {
-            dialog, which -> dialog.dismiss()
+            dialog, _ -> dialog.dismiss()
         }
         alertDialogBuilder.setPositiveButton("Yes") {
-            dialog, which ->
+            _, _ ->
             AdminControllers().updateUserStatus("INACTIVE",memberId)
-            Toast.makeText(context, "Menonaktifkan akun berhasil!!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Deactivating account succeed!", Toast.LENGTH_SHORT).show()
             onPositiveClickListener.onPositiveClick()
         }
         val alertDialog = alertDialogBuilder.create()
@@ -69,14 +66,14 @@ class ListUserAdapter(private val listUser: ArrayList<MemberDummy>, private val 
     private fun showDialogActive(memberId: String) {
         val alertDialogBuilder = AlertDialog.Builder(context)
         alertDialogBuilder.setTitle("Activated User")
-        alertDialogBuilder.setMessage("Yakin untuk mengganti status user menjadi ACTIVE??")
+        alertDialogBuilder.setMessage("Are you sure to change the user status to ACTIVE?")
         alertDialogBuilder.setNegativeButton("No") {
-            dialog, which -> dialog.dismiss()
+            dialog, _ -> dialog.dismiss()
         }
         alertDialogBuilder.setPositiveButton("Yes") {
-            dialog, which ->
+            _, _ ->
                 AdminControllers().updateUserStatus("ACTIVE",memberId)
-                Toast.makeText(context, "Pengaktifan akun berhasil!!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Activating account succeed!", Toast.LENGTH_SHORT).show()
                 onPositiveClickListener.onPositiveClick()
         }
         val alertDialog = alertDialogBuilder.create()

@@ -1,18 +1,17 @@
 package com.example.bookacafe.controller
 
 import android.database.SQLException
-import androidx.annotation.Nullable
 import com.example.bookacafe.model.*
 import java.sql.ResultSet
 import java.sql.Statement
 
 class CartControllers {
-    var con = DatabaseHandler.connect()
+    private var con = DatabaseHandler.connect()
 
     fun createCartId(): String {
         val query = "SELECT cartId FROM carts ORDER BY cartId ASC"
-        var newestId: String = String()
-        var returnId: String = String()
+        var newestId = String()
+        var returnId = String()
 
         try {
             val stmt: Statement = con!!.createStatement()
@@ -41,19 +40,19 @@ class CartControllers {
         return returnId
     }
 
-    fun GetCartData(): Cart {
+    fun getCartData(): Cart {
         val cartId = getCartId()
         val table = getTableFromCart()
         val books = getBookFromCart()
         val (menus, menuQuantities) = getMenuFromCart()
 
-        val cart: Cart = Cart(cartId, table, books, menus, menuQuantities)
+        val cart = Cart(cartId, table, books, menus, menuQuantities)
 
         return cart
     }
 
-    fun getCartId(): String {
-        var cartId: String = String()
+    private fun getCartId(): String {
+        var cartId = String()
 
         val query = "SELECT cartId FROM carts WHERE memberId = '${ActiveUser.getId()}'"
 
@@ -70,115 +69,105 @@ class CartControllers {
         return cartId
     }
 
-    fun RemoveTableFromCart(): Boolean {
+    fun removeTableFromCart(): Boolean {
         val query = "UPDATE carts SET tableId = NULL WHERE memberId = '${ActiveUser.getId()}'"
 
-        try {
+        return try {
             val stmt: Statement = con!!.createStatement()
             stmt.executeQuery(query)
-            return true
+            true
         } catch (e: SQLException) {
             e.printStackTrace()
-            return false
+            false
         }
-
-        return false
     }
 
-    fun AddMenuQuantityOnCart(menuId: String): Boolean {
+    fun addMenuQuantityOnCart(menuId: String): Boolean {
         val cartId = getCartId()
         val query = "UPDATE detail_carts SET menuQuantity = menuQuantity + 1 WHERE cartId = '$cartId' AND menuId = '$menuId'"
 
-        try {
+        return try {
             val stmt: Statement = con!!.createStatement()
             stmt.executeQuery(query)
-            return true
+            true
         } catch (e: SQLException) {
             e.printStackTrace()
-            return false
+            false
         }
-
-        return false
     }
 
-    fun SubstractMenuQuantityOnCart(menuId: String): Boolean {
+    fun subtractMenuQuantityOnCart(menuId: String): Boolean {
         val menuQuantity = getMenuQuantityFromCart(menuId)
 
         if (menuQuantity == 1) { // Quantity = 1, proceed to removal
-            return RemoveMenuFromCart(menuId)
-        } else { // Quantity > 1, proceed to normal substraction
+            return removeMenuFromCart(menuId)
+        } else { // Quantity > 1, proceed to normal subtraction
             val cartId = getCartId()
             val query = "UPDATE detail_carts SET menuQuantity = menuQuantity - 1 WHERE cartId = '$cartId' AND menuId = '$menuId'"
 
-            try {
+            return try {
                 val stmt: Statement = con!!.createStatement()
                 stmt.executeQuery(query)
-                return true
+                true
             } catch (e: SQLException) {
                 e.printStackTrace()
-                return false
+                false
             }
         }
     }
 
-    fun getMenuQuantityFromCart(menuId: String): Int {
+    private fun getMenuQuantityFromCart(menuId: String): Int {
         val cartId = getCartId()
         val query = "SELECT d.menuQuantity\n" +
                 "FROM detail_carts d\n" +
                 "JOIN carts c\n" +
                 "ON d.cartId = c.cartId\n" +
                 "WHERE d.menuId = '$menuId' AND c.cartId = '$cartId'"
-        var menuQuantity: Int = 0
+        var menuQuantity = 0
 
-        try {
+        return try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
             while (rs.next()) {
                 menuQuantity = rs.getInt("menuQuantity")
             }
-            return menuQuantity
+            menuQuantity
         } catch (e: SQLException) {
             e.printStackTrace()
-            return menuQuantity
+            menuQuantity
         }
-
-        return menuQuantity
     }
 
-    fun RemoveMenuFromCart(menuId: String): Boolean {
+    private fun removeMenuFromCart(menuId: String): Boolean {
         val cartId = getCartId()
         val query = "DELETE FROM detail_carts WHERE cartId = '$cartId' AND menuId = '$menuId'"
 
-        try {
+        return try {
             val stmt: Statement = con!!.createStatement()
             stmt.executeQuery(query)
-            return true
+            true
         } catch (e: SQLException) {
             e.printStackTrace()
-            return false
+            false
         }
-
-        return false
     }
 
-    fun RemoveBookFromCart(bookId: String): Boolean {
+    fun removeBookFromCart(bookId: String): Boolean {
         val cartId = getCartId()
         val query = "DELETE FROM detail_carts WHERE cartId = '$cartId' AND bookId = '$bookId'"
 
-        try {
+        return try {
             val stmt: Statement = con!!.createStatement()
             stmt.executeQuery(query)
-            return true
+            true
         } catch (e: SQLException) {
             e.printStackTrace()
-            return false
+            false
         }
-
-        return false
     }
 
-    fun getTableFromCart(): Table {
-        var table: Table = Table("", "", "", TableTypeEnum.AVAILABLE)
+    private fun getTableFromCart(): Table {
+        var table = Table("", "", "", TableTypeEnum.AVAILABLE)
         val query = "SELECT t.tableId, t.tableName, t.room\n" +
                 "FROM tables t\n" +
                 "JOIN carts c\n" +
@@ -204,7 +193,7 @@ class CartControllers {
         // Cara getnya -> val(x, y) = getMenuFromCart()
     }
 
-    fun getMenuFromCart(): Pair<ArrayList<Menu>, ArrayList<Int>> {
+    private fun getMenuFromCart(): Pair<ArrayList<Menu>, ArrayList<Int>> {
         val menus: ArrayList<Menu> = ArrayList()
         val menuQuantities: ArrayList<Int> = ArrayList()
         val query = "SELECT m.menuId, m.name, m.price, m.imagePath, d.menuQuantity\n" +
@@ -241,7 +230,7 @@ class CartControllers {
         // Cara getnya -> val(x, y) = getMenuFromCart()
     }
 
-    fun getBookFromCart(): ArrayList<Book> {
+    private fun getBookFromCart(): ArrayList<Book> {
         val books: ArrayList<Book> = ArrayList()
         val query = "SELECT b.bookId, b.title, b.imagePath\n" +
                 "FROM books b\n" +
@@ -274,7 +263,7 @@ class CartControllers {
     }
 
     fun getTotalForCart(): Int {
-        var total: Int = 0
+        var total = 0
         val query = "SELECT SUM(d.menuQuantity * m.price) as total\n" +
                 "FROM menus m\n" +
                 "JOIN detail_carts d\n" +

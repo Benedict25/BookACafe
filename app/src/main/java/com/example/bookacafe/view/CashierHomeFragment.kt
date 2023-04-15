@@ -5,14 +5,12 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.FragmentManager
@@ -187,7 +185,17 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home), View.OnClic
                     intent.putExtra("trans_id", transactionId)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(requireContext(), "Semua pesanan dari meja " + tables[0].tableName + " sudah disajikan\nCustomer belum melakukan checkout!!", Toast.LENGTH_SHORT).show()
+                    val text = "All " + tables[0].tableName + " orders have been served.\nThe customer hasn't checked out yet!!"
+                    val toast = Toast.makeText(requireContext(),
+                        text,
+                        Toast.LENGTH_SHORT
+                    )
+                    val layout = toast.view as LinearLayout?
+                    if (layout!!.childCount > 0) {
+                        val tv = layout!!.getChildAt(0) as TextView
+                        tv.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
+                    }
+                    toast.show()
                 }
             }
             R.id.btn_table_a2 -> {
@@ -203,7 +211,17 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home), View.OnClic
                     intent.putExtra("trans_id", transactionId)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(requireContext(), "Semua pesanan dari meja " + tables[1].tableName + " sudah disajikan\nCustomer belum melakukan checkout!!", Toast.LENGTH_SHORT).show()
+                    val text = "All " + tables[1].tableName + " orders have been served.\nThe customer hasn't checked out yet!!"
+                    val toast = Toast.makeText(requireContext(),
+                        text,
+                        Toast.LENGTH_SHORT
+                    )
+                    val layout = toast.view as LinearLayout?
+                    if (layout!!.childCount > 0) {
+                        val tv = layout!!.getChildAt(0) as TextView
+                        tv.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
+                    }
+                    toast.show()
                 }
             }
             R.id.btn_table_a3 -> {
@@ -219,7 +237,17 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home), View.OnClic
                     intent.putExtra("trans_id", transactionId)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(requireContext(), "Semua pesanan dari meja " + tables[2].tableName + " sudah disajikan\nCustomer belum melakukan checkout!!", Toast.LENGTH_SHORT).show()
+                    val text = "All " + tables[2].tableName + " orders have been served.\nThe customer hasn't checked out yet!!"
+                    val toast = Toast.makeText(requireContext(),
+                        text,
+                        Toast.LENGTH_SHORT
+                    )
+                    val layout = toast.view as LinearLayout?
+                    if (layout!!.childCount > 0) {
+                        val tv = layout!!.getChildAt(0) as TextView
+                        tv.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
+                    }
+                    toast.show()
                 }
             }
             R.id.btn_table_a4 -> {
@@ -235,7 +263,17 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home), View.OnClic
                     intent.putExtra("trans_id", transactionId)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(requireContext(), "Semua pesanan dari meja " + tables[3].tableName + " sudah disajikan\nCustomer belum melakukan checkout!!", Toast.LENGTH_SHORT).show()
+                    val text = "All " + tables[3].tableName + " orders have been served.\nThe customer hasn't checked out yet!!"
+                    val toast = Toast.makeText(requireContext(),
+                        text,
+                        Toast.LENGTH_SHORT
+                    )
+                    val layout = toast.view as LinearLayout?
+                    if (layout!!.childCount > 0) {
+                        val tv = layout!!.getChildAt(0) as TextView
+                        tv.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
+                    }
+                    toast.show()
                 }
             }
             R.id.btn_table_b1 -> {
@@ -251,7 +289,17 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home), View.OnClic
                     intent.putExtra("trans_id", transactionId)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(requireContext(), "Semua pesanan dari meja " + tables[4].tableName + " sudah disajikan\nCustomer belum melakukan checkout!!", Toast.LENGTH_SHORT).show()
+                    val text = "All " + tables[4].tableName + " orders have been served.\nThe customer hasn't checked out yet!!"
+                    val toast = Toast.makeText(requireContext(),
+                        text,
+                        Toast.LENGTH_SHORT
+                    )
+                    val layout = toast.view as LinearLayout?
+                    if (layout!!.childCount > 0) {
+                        val tv = layout!!.getChildAt(0) as TextView
+                        tv.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
+                    }
+                    toast.show()
                 }
             }
             R.id.btn_table_b2 -> {
@@ -267,7 +315,17 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home), View.OnClic
                     intent.putExtra("trans_id", transactionId)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(requireContext(), "Semua pesanan dari meja " + tables[5].tableName + " sudah disajikan\nCustomer belum melakukan checkout!!", Toast.LENGTH_SHORT).show()
+                    val text = "All " + tables[5].tableName + " orders have been served.\nThe customer hasn't checked out yet!!"
+                    val toast = Toast.makeText(requireContext(),
+                        text,
+                        Toast.LENGTH_SHORT
+                    )
+                    val layout = toast.view as LinearLayout?
+                    if (layout!!.childCount > 0) {
+                        val tv = layout!!.getChildAt(0) as TextView
+                        tv.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
+                    }
+                    toast.show()
                 }
             }
             R.id.btn_table_b3 -> {
@@ -283,7 +341,17 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home), View.OnClic
                     intent.putExtra("trans_id", transactionId)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(requireContext(), "Semua pesanan dari meja " + tables[6].tableName + " sudah disajikan\nCustomer belum melakukan checkout!!", Toast.LENGTH_SHORT).show()
+                    val text = "All " + tables[6].tableName + " orders have been served.\nThe customer hasn't checked out yet!!"
+                    val toast = Toast.makeText(requireContext(),
+                        text,
+                        Toast.LENGTH_SHORT
+                    )
+                    val layout = toast.view as LinearLayout?
+                    if (layout!!.childCount > 0) {
+                        val tv = layout!!.getChildAt(0) as TextView
+                        tv.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
+                    }
+                    toast.show()
                 }
             }
         }

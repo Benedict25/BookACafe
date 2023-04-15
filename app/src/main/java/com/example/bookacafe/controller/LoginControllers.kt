@@ -1,17 +1,15 @@
 package com.example.bookacafe.controller
 
 import android.database.SQLException
-import android.util.Log
 import com.example.bookacafe.model.User
 import java.sql.ResultSet
 import java.sql.Statement
 
 class LoginControllers {
-
-    var con = DatabaseHandler.connect()
+    private var con = DatabaseHandler.connect()
 
     fun getLoginData(inputEmail: String, inputPassword: String): Boolean {
-        var user: User = User("", "", "", "", "")
+        var user = User("", "", "", "", "")
         val query = "SELECT * FROM users WHERE email = '$inputEmail' AND password = '$inputPassword'"
 
         try {
@@ -47,7 +45,7 @@ class LoginControllers {
         }
     }
 
-    fun checkLoginData(user: User, inputEmail: String, inputPassword: String): Boolean{
+    private fun checkLoginData(user: User, inputEmail: String, inputPassword: String): Boolean{
         return inputEmail == user.email && inputPassword == user.password
     }
 

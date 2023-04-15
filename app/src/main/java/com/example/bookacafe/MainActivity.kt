@@ -4,10 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.example.bookacafe.view.HomePage
 import com.example.bookacafe.view.Login
-import com.example.bookacafe.view.adminDisabledUser.DisabledUserMenu
-import com.example.bookacafe.view.adminTransaction.ShowTransactions
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
