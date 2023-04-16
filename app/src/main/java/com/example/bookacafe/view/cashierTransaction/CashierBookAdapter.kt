@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookacafe.databinding.ItemBillBookRowBinding
-import com.example.bookacafe.model.Book
+import com.example.bookacafe.model.adminDataDetails.CashierBookDetail
 
-class CashierBookAdapter(private val listBook: ArrayList<Book>): RecyclerView.Adapter<CashierBookAdapter.ListViewHolder>() {
+class CashierBookAdapter(private val listBook: ArrayList<CashierBookDetail>): RecyclerView.Adapter<CashierBookAdapter.ListViewHolder>() {
     inner class ListViewHolder(private val binding: ItemBillBookRowBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(book: Book){
+        fun bind(book: CashierBookDetail){
             with(binding){
-                bookData.text = book.title
+                bookData.text = book.bookTitle
             }
         }
     }

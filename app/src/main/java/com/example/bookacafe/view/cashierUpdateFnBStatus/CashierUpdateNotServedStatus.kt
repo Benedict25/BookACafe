@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.controller.CashierControllers
 import com.example.bookacafe.databinding.CashierFnbNotServedBinding
 import com.example.bookacafe.model.Book
+import com.example.bookacafe.model.adminDataDetails.CashierBookDetail
 import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
 import com.example.bookacafe.view.CashierActivity
 import kotlin.collections.ArrayList
@@ -14,7 +15,7 @@ import kotlin.collections.ArrayList
 class CashierUpdateNotServedStatus: AppCompatActivity(), ListFnBAdapter.OnPositiveClickListener, ListBookAdapter.OnPositiveClickListener {
     private lateinit var binding: CashierFnbNotServedBinding
     private val listMenu = ArrayList<CashierMenuDetail>()
-    private val listBook = ArrayList<Book>()
+    private val listBook = ArrayList<CashierBookDetail>()
     private lateinit var transactionId:String
     private lateinit var tableName: String
 
