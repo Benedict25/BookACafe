@@ -9,9 +9,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookacafe.controller.CashierControllers
 import com.example.bookacafe.databinding.ItemRowBookNotServedBinding
-import com.example.bookacafe.model.Book
+import com.example.bookacafe.model.adminDataDetails.CashierBookDetail
 
-class ListBookAdapter(private val listBook: ArrayList<Book>, private val transactionId: String, private val context: Context, private val onPositiveClickListener: OnPositiveClickListener) :  RecyclerView.Adapter<ListBookAdapter.ListViewHolder>() {
+class ListBookAdapter(private val listBook: ArrayList<CashierBookDetail>, private val transactionId: String, private val context: Context, private val onPositiveClickListener: OnPositiveClickListener) :  RecyclerView.Adapter<ListBookAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {
         val binding = ItemRowBookNotServedBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return ListViewHolder(binding)
@@ -23,21 +23,21 @@ class ListBookAdapter(private val listBook: ArrayList<Book>, private val transac
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val pointer = listBook[position]
         holder.itemView.setOnClickListener {
-            confirmServedBook(pointer.bookId)
+            confirmServedBook(pointer.detailTransactionId)
         }
         holder.bind(pointer)
     }
 
     inner class ListViewHolder(private val binding: ItemRowBookNotServedBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(book: Book) {
+        fun bind(book: CashierBookDetail) {
             with(binding){
-                tvItemName.text = book.title
+                tvItemName.text = book.bookTitle
                 tvUserStatus.text = "NOT_SERVED"
             }
         }
     }
 
-    private fun confirmServedBook(bookId: String) {
+    private fun confirmServedBook(detailTransactionId: Int) {
         val alertDialogBuilder = AlertDialog.Builder(context)
         alertDialogBuilder.setTitle("Serve Book")
         alertDialogBuilder.setMessage("Buku akan di-serve??")
@@ -46,7 +46,7 @@ class ListBookAdapter(private val listBook: ArrayList<Book>, private val transac
         }
         alertDialogBuilder.setPositiveButton("Yes") {
             dialog, which ->
-                val temp = CashierControllers().updateDetailTransactionStatusBook(transactionId, bookId)
+                val temp = CashierControllers().updateDetailTransactionStatus(detailTransactionId)
                 if (temp) {
                     Toast.makeText(context, "Buku sudah di-serve!!", Toast.LENGTH_SHORT).show()
                 }

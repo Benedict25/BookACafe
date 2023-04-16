@@ -23,7 +23,7 @@ class ListFnBAdapter(private val listFnB: ArrayList<CashierMenuDetail>, private 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val pointer = listFnB[position]
         holder.itemView.setOnClickListener {
-            confirmServedMenu(pointer.menuId)
+            confirmServedMenu(pointer.detailTransactionId)
         }
         holder.bind(pointer)
     }
@@ -38,7 +38,7 @@ class ListFnBAdapter(private val listFnB: ArrayList<CashierMenuDetail>, private 
         }
     }
 
-    private fun confirmServedMenu(menuId: String) {
+    private fun confirmServedMenu(detailTransationId: Int) {
         val alertDialogBuilder = AlertDialog.Builder(context)
         alertDialogBuilder.setTitle("Disabled User")
         alertDialogBuilder.setMessage("Menu akan disajikan??")
@@ -47,7 +47,7 @@ class ListFnBAdapter(private val listFnB: ArrayList<CashierMenuDetail>, private 
         }
         alertDialogBuilder.setPositiveButton("Yes") {
             dialog, which ->
-                CashierControllers().updateDetailTransactionStatusMenu(transactionId, menuId)
+                CashierControllers().updateDetailTransactionStatus(detailTransationId)
                 Toast.makeText(context, "Menu sudah disajikan!!", Toast.LENGTH_SHORT).show()
                 onPositiveClickListener.onPositiveClick()
         }

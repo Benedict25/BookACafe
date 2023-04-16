@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.controller.CashierControllers
 import com.example.bookacafe.databinding.ActivityCashierTransactionBinding
 import com.example.bookacafe.model.Book
+import com.example.bookacafe.model.adminDataDetails.CashierBookDetail
 import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
 import com.example.bookacafe.model.adminDataDetails.TableDummy
 import com.example.bookacafe.view.CashierActivity
@@ -21,7 +22,7 @@ import java.time.LocalDate
 class CashierTransaction() : AppCompatActivity() {
     private lateinit var binding: ActivityCashierTransactionBinding
     private val menuList = ArrayList<CashierMenuDetail>()
-    private val bookList = ArrayList<Book>()
+    private val bookList = ArrayList<CashierBookDetail>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
