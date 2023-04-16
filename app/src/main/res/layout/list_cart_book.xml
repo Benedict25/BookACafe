@@ -13,7 +13,7 @@
             android:id="@+id/cartBookPic"
             android:layout_width="70dp"
             android:layout_height="40dp"
-            android:src="@drawable/romance_3"/>
+            android:src="@drawable/book_logo"/>
 
         <TextView
             android:id="@+id/cartBookName"
