@@ -6,8 +6,7 @@ import java.sql.ResultSet
 import java.sql.Statement
 
 class UserControllers {
-
-    var con = DatabaseHandler.connect()
+    private var con = DatabaseHandler.connect()
 
     fun checkUserType(userId: String): String {
         // Check user type from the first letter of the id
@@ -16,7 +15,7 @@ class UserControllers {
         if (firstLetterId == "M") {
             return "MEMBER"
         } else {
-            var adminType: String = ""
+            var adminType = ""
             val query = "SELECT adminType FROM admins WHERE adminId = '$userId'"
 
             try {
@@ -47,7 +46,7 @@ class UserControllers {
     }
 
     fun setSingletonGoogle(inputEmail: String) {
-        var user: User = User("", "", "", "", "")
+        var user = User("", "", "", "", "")
         val query = "SELECT * FROM users WHERE email = '$inputEmail'"
 
         try {

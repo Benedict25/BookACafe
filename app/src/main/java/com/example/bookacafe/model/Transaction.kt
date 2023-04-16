@@ -9,9 +9,11 @@ import java.time.LocalDateTime
 @Parcelize
 class Transaction(
     var transactionId: String,
-    var table: String,
-    var checkedIn: Timestamp, // Tar balikkin ke Timestamp!!
-    var checkedOut: Timestamp,
+    var table: Table?,
+    var checkedIn: Timestamp,
+    var checkedOut: Timestamp?,
     var status: TransactionEnum,
-    var detailTransaction: ArrayList<DetailTransaction>
+    var books: ArrayList<Book>,
+    var menus: ArrayList<Menu>,
+    var menuQuantities: ArrayList<Int>
 ) : Parcelable

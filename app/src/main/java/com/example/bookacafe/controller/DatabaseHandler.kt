@@ -7,9 +7,9 @@ import java.sql.SQLException
 
 object DatabaseHandler {
     var con: Connection? = null
-    var url = "jdbc:mysql://10.0.2.2/bookacafe"
-    var username = "root"
-    var password = ""
+    private var url = "jdbc:mysql://10.0.2.2/bookacafe"
+    private var username = "root"
+    private var password = ""
 
     fun connect(): Connection? {
         try {

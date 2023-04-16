@@ -15,7 +15,6 @@ import com.example.bookacafe.databinding.ItemBookBinding
 import com.example.bookacafe.model.Book
 import com.squareup.picasso.Picasso
 
-
 class ListBookAdapter(private val books : ArrayList<Book>) : RecyclerView.Adapter<ListBookAdapter.ListViewHolder>() {
     var onItemClick: ((Book) -> Unit)? = null
     var context: Context? = null

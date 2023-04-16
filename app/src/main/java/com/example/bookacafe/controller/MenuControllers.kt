@@ -8,9 +8,8 @@ import java.sql.ResultSet
 import java.sql.Statement
 
 class MenuControllers {
-
     private val user = ActiveUser
-    var con = DatabaseHandler.connect()
+    private var con = DatabaseHandler.connect()
 
     fun getMenuData(type: String, inputText: String): ArrayList<Menu> {
         val menus: ArrayList<Menu> = ArrayList()
@@ -97,7 +96,7 @@ class MenuControllers {
             while (rs.next()) {
                 cartId = rs.getString("cartId")
             }
-            cartIds=checkMenuExistance(cartId, menuId)
+            cartIds = checkMenuExistence(cartId, menuId)
             if (cartIds == "-1") {
                 val query2 = "INSERT INTO detail_carts(detailCartId, cartId, menuId, menuQuantity) VALUES(default,?,?,?)"
                 val stmt2: PreparedStatement = con!!.prepareStatement(query2)
@@ -129,7 +128,7 @@ class MenuControllers {
             false
         }
     }
-    fun checkMenuExistance(cartId : String, menuId : String): String {
+    private fun checkMenuExistence(cartId : String, menuId : String): String {
         var cartIds = "-1"
 
         val query = "SELECT cartId\n" +

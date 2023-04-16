@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/cartBookPic"
             android:layout_toRightOf="@+id/cartBookPic"
-            android:text="Rp0,-" />
+            android:text="Rp0" />
 
         <ImageView
             android:id="@+id/cartBookCancel"

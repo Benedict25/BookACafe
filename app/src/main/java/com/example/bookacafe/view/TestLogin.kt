@@ -8,17 +8,15 @@ import android.widget.TextView
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.ActiveUser
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 class TestLogin : AppCompatActivity() {
-
-    lateinit var gso: GoogleSignInOptions
-    lateinit var gsc: GoogleSignInClient
-    lateinit var nameTextView: TextView
-    lateinit var typeTextView: TextView
-    lateinit var signout: Button
+    private lateinit var gso: GoogleSignInOptions
+    private lateinit var gsc: GoogleSignInClient
+    private lateinit var nameTextView: TextView
+    private lateinit var typeTextView: TextView
+    private lateinit var signout: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +41,7 @@ class TestLogin : AppCompatActivity() {
         }
     }
 
-    fun signOut() {
+    private fun signOut() {
         gsc.signOut().addOnCompleteListener {
             finish()
             val intent = Intent(this@TestLogin, Login::class.java)

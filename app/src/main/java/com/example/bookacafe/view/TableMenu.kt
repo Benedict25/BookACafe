@@ -102,7 +102,6 @@ class TableMenu : Fragment(), View.OnClickListener {
         changeSelectedButtonColor(selectedButton)
     }
 
-    //nanti colong yang bawah ini
     private fun resetButtonColor() {
         for (i in 0 until tables.size) {
             if (tables[i].status == TableTypeEnum.BOOKED || tables[i].status == TableTypeEnum.BLOCKED) {

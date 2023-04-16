@@ -119,6 +119,7 @@
                 android:id="@+id/rv_bill_menu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_bill_fnb_row" />
 
         </LinearLayout>
@@ -143,13 +144,43 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <!--Awal-->
+
+            <!--Akhir-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_bill_books"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/item_bill_book_row"
+                android:nestedScrollingEnabled="false"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_total_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Total Order"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"
+            android:textStyle="bold" />
 
         <Button
+            android:id = "@+id/btn_pay_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/scrollview_bill"
             android:layout_marginTop="10dp"
-            android:text="Ini Button" />
+            android:text="PAY" />
 
     </LinearLayout>
 </ScrollView>

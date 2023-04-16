@@ -1,11 +1,9 @@
 package com.example.bookacafe.view.adminTransaction;
 
 import android.content.Context;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
 
 public class AdminTransactionAdapter extends FragmentPagerAdapter {
     private Context myContext;

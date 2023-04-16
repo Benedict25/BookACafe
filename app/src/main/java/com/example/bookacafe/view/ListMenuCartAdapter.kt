@@ -1,8 +1,6 @@
 package com.example.bookacafe.view
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -12,6 +10,7 @@ import com.example.bookacafe.databinding.ListCartMenuBinding
 import com.example.bookacafe.model.Cart
 import com.example.bookacafe.model.Menu
 import com.squareup.picasso.Picasso
+import java.text.DecimalFormat
 
 
 class ListMenuCartAdapter(private val cart: Cart, val refreshCart: () -> Unit) : RecyclerView.Adapter<ListMenuCartAdapter.ListViewHolder>() {
@@ -34,15 +33,15 @@ class ListMenuCartAdapter(private val cart: Cart, val refreshCart: () -> Unit) :
         fun bindMenu(menu: Menu) {
             with(binding) {
                 cartFnbName.text = menu.name
-                cartFnbPrice.text = "Rp" + menu.price.toString() + ",-"
+                cartFnbPrice.text = "Rp" + DecimalFormat("#,###").format(menu.price)
                 Picasso.get().load(menu.imagePath).into(cartFnbPic)
-                val control: CartControllers = CartControllers()
+                val control = CartControllers()
 
-                cartSubstractButton.setOnClickListener{
-                    val isSubstracted = control.SubstractMenuQuantityOnCart(menu.menuId)
+                cartSubtractButton.setOnClickListener{
+                    val isSubtracted = control.subtractMenuQuantityOnCart(menu.menuId)
 
-                    if (isSubstracted) {
-                        Toast.makeText(context, "${menu.name} Substracted", Toast.LENGTH_SHORT).show()
+                    if (isSubtracted) {
+                        Toast.makeText(context, "${menu.name} subtracted", Toast.LENGTH_SHORT).show()
                         refreshCart()
                     } else {
                         Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show()
@@ -50,10 +49,10 @@ class ListMenuCartAdapter(private val cart: Cart, val refreshCart: () -> Unit) :
                 }
 
                 cartAddButton.setOnClickListener{
-                    val isAdded = control.AddMenuQuantityOnCart(menu.menuId)
+                    val isAdded = control.addMenuQuantityOnCart(menu.menuId)
 
                     if (isAdded) {
-                        Toast.makeText(context, "${menu.name} Added", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "${menu.name} added", Toast.LENGTH_SHORT).show()
                         refreshCart()
                     } else {
                         Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show()
