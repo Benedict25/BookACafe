@@ -3,6 +3,7 @@ package com.example.bookacafe.controller
 import android.database.SQLException
 import com.example.bookacafe.model.Book
 import com.example.bookacafe.model.ItemTypeEnum
+import com.example.bookacafe.model.TransactionEnum
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.Statement
@@ -86,7 +87,10 @@ class BookControllers {
     fun addBookToCart(bookId: String): Boolean {
         return try {
             var cartId = ""
+            var transactionId = ""
             var alreadyInCart = 0
+            var alreadyInTransaction = 0
+
             val query1 = "SELECT cartId FROM carts WHERE memberId = '${user.getId()}'"
             val stmt1: Statement = con!!.createStatement()
             val rs: ResultSet = stmt1.executeQuery(query1)
@@ -94,17 +98,34 @@ class BookControllers {
                 cartId = rs.getString("cartId")
             }
             val query2 = "SELECT EXISTS(SELECT * FROM detail_carts WHERE bookId = '$bookId' AND cartId = '$cartId') AS alreadyInCart"
-            val rs2: ResultSet = stmt1.executeQuery(query2)
+            val stmt2: Statement = con!!.createStatement()
+            val rs2: ResultSet = stmt2.executeQuery(query2)
             while (rs2.next()) {
                 alreadyInCart = rs2.getInt("alreadyInCart")
             }
             if (alreadyInCart != 1) {
-                val query3 = "INSERT INTO detail_carts(detailCartId, cartId, bookId) VALUES(default,?,?)"
-                val stmt3: PreparedStatement = con!!.prepareStatement(query3)
-                stmt3.setString(1, cartId)
-                stmt3.setString(2, bookId)
-                stmt3.executeUpdate()
-                true
+                val query3 = "SELECT transactionId FROM transactions WHERE memberId = '${user.getId()}' AND status = '${TransactionEnum.NOT_PAID}' OR status = '${TransactionEnum.PENDING}'"
+                val stmt3: Statement = con!!.createStatement()
+                val rs3: ResultSet = stmt3.executeQuery(query3)
+                while (rs3.next()) {
+                    transactionId = rs3.getString("transactionId")
+                }
+                val query4 = "SELECT EXISTS(SELECT * FROM detail_transactions WHERE bookId = '$bookId' AND transactionId = '$transactionId') AS alreadyInTransaction"
+                val stmt4: Statement = con!!.createStatement()
+                val rs4: ResultSet = stmt4.executeQuery(query4)
+                while (rs4.next()) {
+                    alreadyInTransaction = rs4.getInt("alreadyInTransaction")
+                }
+                if (alreadyInTransaction != 1) {
+                    val query5 = "INSERT INTO detail_carts(detailCartId, cartId, bookId) VALUES(default,?,?)"
+                    val stmt5: PreparedStatement = con!!.prepareStatement(query5)
+                    stmt5.setString(1, cartId)
+                    stmt5.setString(2, bookId)
+                    stmt5.executeUpdate()
+                    true
+                } else {
+                    false
+                }
             } else {
                 false
             }

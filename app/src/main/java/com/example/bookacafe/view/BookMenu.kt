@@ -180,7 +180,7 @@ class BookMenu : Fragment(), View.OnClickListener {
             if (added) {
                 text = book.title + " added to cart."
             } else {
-                text = book.title + " is already in your cart!"
+                text = book.title + " is already in your cart/table!"
             }
             val toast = Toast.makeText(requireContext(),
                 text,
