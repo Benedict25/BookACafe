@@ -127,8 +127,7 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
         binding.rvBillMenu.adapter = listMenuAdapter
 
         binding.rvBillBooks.layoutManager = LinearLayoutManager(this)
-        val books = ArrayList<CashierBookDetail>()
-        val listBookAdapter = CashierBookAdapter(books)
+        val listBookAdapter = BillBookAdapter(transaction.books)
         binding.rvBillBooks.adapter = listBookAdapter
     }
 
