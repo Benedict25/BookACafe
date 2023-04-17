@@ -1,4 +1,4 @@
-package com.example.bookacafe.view.adminTransaction
+package com.example.bookacafe.view
 
 import android.os.Bundle
 import android.os.Handler
@@ -11,7 +11,7 @@ import com.google.android.material.tabs.TabLayout
 import java.text.DecimalFormat
 import java.util.*
 
-class ShowTransactions: AppCompatActivity() {
+class AdminShowTransactions: AppCompatActivity() {
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager
     private lateinit var mAdapter: AdminTransactionAdapter

@@ -1,4 +1,4 @@
-package com.example.bookacafe.view.adminTransaction;
+package com.example.bookacafe.view;
 
 import android.content.Context;
 import androidx.fragment.app.Fragment;
@@ -17,13 +17,13 @@ public class AdminTransactionAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new SeatFragment();
+                return new AdminSeatFragment();
             case 1:
-                return new FoodFragment();
+                return new AdminFoodFragment();
             case 2:
-                return new BeverageFragment();
+                return new AdminBeverageFragment();
             case 3:
-                return new BookFragment();
+                return new AdminBookFragment();
             default:
                 return null;
         }

@@ -1,4 +1,4 @@
-package com.example.bookacafe.view.adminDisabledUser
+package com.example.bookacafe.view
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,9 +10,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.bookacafe.controller.AdminControllers
 import com.example.bookacafe.databinding.ItemRowUserBinding
-import com.example.bookacafe.model.adminDataDetails.MemberDummy
+import com.example.bookacafe.model.AdminMemberDetails
 
-class ListUserAdapter(private val listUser: ArrayList<MemberDummy>, private val context: Context, private val onPositiveClickListener: OnPositiveClickListener) :  RecyclerView.Adapter<ListUserAdapter.ListViewHolder>() {
+class AdminListUserAdapter(private val listUser: ArrayList<AdminMemberDetails>, private val context: Context, private val onPositiveClickListener: OnPositiveClickListener) :  RecyclerView.Adapter<AdminListUserAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {
         val binding = ItemRowUserBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return ListViewHolder(binding)
@@ -33,7 +33,7 @@ class ListUserAdapter(private val listUser: ArrayList<MemberDummy>, private val 
     }
 
     inner class ListViewHolder(private val binding: ItemRowUserBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: MemberDummy) {
+        fun bind(user: AdminMemberDetails) {
             with(binding){
                 Glide.with(itemView.context)
                     .load(user.photo)

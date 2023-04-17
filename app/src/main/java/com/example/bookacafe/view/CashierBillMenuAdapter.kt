@@ -1,14 +1,14 @@
-package com.example.bookacafe.view.cashierTransaction
+package com.example.bookacafe.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookacafe.databinding.ItemBillFnbRowBinding
-import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
+import com.example.bookacafe.model.CashierMenuDetails
 
-class CashierBillMenuAdapter(private val listFnB: ArrayList<CashierMenuDetail>): RecyclerView.Adapter<CashierBillMenuAdapter.ListViewHolder>() {
+class CashierBillMenuAdapter(private val listFnB: ArrayList<CashierMenuDetails>): RecyclerView.Adapter<CashierBillMenuAdapter.ListViewHolder>() {
     inner class ListViewHolder(private val binding: ItemBillFnbRowBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(menu: CashierMenuDetail){
+        fun bind(menu: CashierMenuDetails){
             with(binding){
                 tvBillMenuName.text = menu.menuName
                 tvBillMenuPrice.text = "Rp"+menu.menuPrice

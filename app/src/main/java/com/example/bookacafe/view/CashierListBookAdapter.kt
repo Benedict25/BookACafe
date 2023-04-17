@@ -1,4 +1,4 @@
-package com.example.bookacafe.view.cashierUpdateFnBStatus
+package com.example.bookacafe.view
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,9 +8,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookacafe.controller.CashierControllers
 import com.example.bookacafe.databinding.ItemRowBookNotServedBinding
-import com.example.bookacafe.model.adminDataDetails.CashierBookDetail
+import com.example.bookacafe.model.CashierBookDetails
 
-class ListBookAdapter(private val listBook: ArrayList<CashierBookDetail>, private val transactionId: String, private val context: Context, private val onPositiveClickListener: OnPositiveClickListener) :  RecyclerView.Adapter<ListBookAdapter.ListViewHolder>() {
+class CashierListBookAdapter(private val listBook: ArrayList<CashierBookDetails>, private val transactionId: String, private val context: Context, private val onPositiveClickListener: OnPositiveClickListener) :  RecyclerView.Adapter<CashierListBookAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {
         val binding = ItemRowBookNotServedBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return ListViewHolder(binding)
@@ -27,7 +27,7 @@ class ListBookAdapter(private val listBook: ArrayList<CashierBookDetail>, privat
     }
 
     inner class ListViewHolder(private val binding: ItemRowBookNotServedBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(book: CashierBookDetail) {
+        fun bind(book: CashierBookDetails) {
             with(binding){
                 tvItemName.text = book.bookTitle
                 tvUserStatus.text = "NOT_SERVED"

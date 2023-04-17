@@ -1,10 +1,10 @@
-package com.example.bookacafe.model.adminDataDetails
+package com.example.bookacafe.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class MemberDummy(
+data class AdminMemberDetails(
     var id: String,
     var name: String,
     var desc: String,

@@ -1,4 +1,4 @@
-package com.example.bookacafe.view.adminTransaction
+package com.example.bookacafe.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.AdminControllers
 
-class BeverageFragment: Fragment() {
+class AdminBeverageFragment: Fragment() {
 
     private lateinit var recyclerView: RecyclerView
 
@@ -19,7 +19,7 @@ class BeverageFragment: Fragment() {
         recyclerView = view.findViewById<RecyclerView>(R.id.rv_beverages)
         recyclerView.setHasFixedSize(true)
         recyclerView.setLayoutManager(LinearLayoutManager(context))
-        recyclerView.setAdapter(ListBeverageAdapter(AdminControllers().getBeverageData()))
+        recyclerView.setAdapter(AdminListBeverageAdapter(AdminControllers().getBeverageData()))
 
         return view
     }

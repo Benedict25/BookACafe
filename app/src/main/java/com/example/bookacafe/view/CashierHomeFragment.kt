@@ -20,8 +20,6 @@ import com.example.bookacafe.controller.CashierControllers
 import com.example.bookacafe.controller.TableControllers
 import com.example.bookacafe.model.Table
 import com.example.bookacafe.model.TableTypeEnum
-import com.example.bookacafe.view.cashierTransaction.CashierTransaction
-import com.example.bookacafe.view.cashierUpdateFnBStatus.CashierUpdateNotServedStatus
 import java.util.*
 import kotlin.collections.ArrayList
 

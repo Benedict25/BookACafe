@@ -1,4 +1,4 @@
-package com.example.bookacafe.view.cashierUpdateFnBStatus
+package com.example.bookacafe.view
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,9 +9,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookacafe.controller.CashierControllers
 import com.example.bookacafe.databinding.ItemRowFnbNotServedBinding
-import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
+import com.example.bookacafe.model.CashierMenuDetails
 
-class ListFnBAdapter(private val listFnB: ArrayList<CashierMenuDetail>, private val transactionId: String, private val context: Context, private val onPositiveClickListener: OnPositiveClickListener) :  RecyclerView.Adapter<ListFnBAdapter.ListViewHolder>() {
+class CashierListFnBAdapter(private val listFnB: ArrayList<CashierMenuDetails>, private val transactionId: String, private val context: Context, private val onPositiveClickListener: OnPositiveClickListener) :  RecyclerView.Adapter<CashierListFnBAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {
         val binding = ItemRowFnbNotServedBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return ListViewHolder(binding)
@@ -29,7 +29,7 @@ class ListFnBAdapter(private val listFnB: ArrayList<CashierMenuDetail>, private 
     }
 
     inner class ListViewHolder(private val binding: ItemRowFnbNotServedBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(menu: CashierMenuDetail) {
+        fun bind(menu: CashierMenuDetails) {
             with(binding){
                 tvItemName.text = menu.menuName
                 tvItemDescription.text = "Quantity: " + menu.menuQuantity

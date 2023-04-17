@@ -1,4 +1,4 @@
-package com.example.bookacafe.view.cashierUpdateFnBStatus
+package com.example.bookacafe.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,16 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.controller.CashierControllers
 import com.example.bookacafe.databinding.CashierFnbNotServedBinding
-import com.example.bookacafe.model.Book
-import com.example.bookacafe.model.adminDataDetails.CashierBookDetail
-import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
-import com.example.bookacafe.view.CashierActivity
+import com.example.bookacafe.model.CashierBookDetails
+import com.example.bookacafe.model.CashierMenuDetails
 import kotlin.collections.ArrayList
 
-class CashierUpdateNotServedStatus: AppCompatActivity(), ListFnBAdapter.OnPositiveClickListener, ListBookAdapter.OnPositiveClickListener {
+class CashierUpdateNotServedStatus: AppCompatActivity(),
+    CashierListFnBAdapter.OnPositiveClickListener, CashierListBookAdapter.OnPositiveClickListener {
     private lateinit var binding: CashierFnbNotServedBinding
-    private val listMenu = ArrayList<CashierMenuDetail>()
-    private val listBook = ArrayList<CashierBookDetail>()
+    private val listMenu = ArrayList<CashierMenuDetails>()
+    private val listBook = ArrayList<CashierBookDetails>()
     private lateinit var transactionId:String
     private lateinit var tableName: String
 
@@ -40,11 +39,11 @@ class CashierUpdateNotServedStatus: AppCompatActivity(), ListFnBAdapter.OnPositi
     private fun showRecyclerList() {
 
         binding.rvBooks.layoutManager = LinearLayoutManager(this)
-        val listBookAdapter = ListBookAdapter(listBook,transactionId, this, this)
+        val listBookAdapter = CashierListBookAdapter(listBook,transactionId, this, this)
         binding.rvBooks.adapter = listBookAdapter
 
         binding.rvUsers.layoutManager = LinearLayoutManager(this)
-        val listFnBAdapter = ListFnBAdapter(listMenu,transactionId, this, this)
+        val listFnBAdapter = CashierListFnBAdapter(listMenu,transactionId, this, this)
         binding.rvUsers.adapter = listFnBAdapter
 
 

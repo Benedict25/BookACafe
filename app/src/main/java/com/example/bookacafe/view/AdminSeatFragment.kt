@@ -1,4 +1,4 @@
-package com.example.bookacafe.view.adminTransaction
+package com.example.bookacafe.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.AdminControllers
 
-class SeatFragment: Fragment() {
+class AdminSeatFragment: Fragment() {
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -18,7 +18,7 @@ class SeatFragment: Fragment() {
         recyclerView = view.findViewById<RecyclerView>(R.id.rv_seats)
         recyclerView.setHasFixedSize(true)
         recyclerView.setLayoutManager(LinearLayoutManager(context))
-        recyclerView.setAdapter(ListSeatAdapter(AdminControllers().getSeatData()))
+        recyclerView.setAdapter(AdminListSeatAdapter(AdminControllers().getSeatData()))
 
         return view
     }

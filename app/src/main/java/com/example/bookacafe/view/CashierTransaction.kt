@@ -1,4 +1,4 @@
-package com.example.bookacafe.view.cashierTransaction
+package com.example.bookacafe.view
 
 import android.content.Intent
 import android.os.Build
@@ -10,18 +10,16 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.controller.CashierControllers
 import com.example.bookacafe.databinding.ActivityCashierTransactionBinding
-import com.example.bookacafe.model.Book
-import com.example.bookacafe.model.adminDataDetails.CashierBookDetail
-import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
-import com.example.bookacafe.model.adminDataDetails.TableDummy
-import com.example.bookacafe.view.CashierActivity
+import com.example.bookacafe.model.CashierBookDetails
+import com.example.bookacafe.model.CashierMenuDetails
+import com.example.bookacafe.model.AdminTableDetails
 import java.text.DecimalFormat
 import java.time.LocalDate
 
 class CashierTransaction() : AppCompatActivity() {
     private lateinit var binding: ActivityCashierTransactionBinding
-    private val menuList = ArrayList<CashierMenuDetail>()
-    private val bookList = ArrayList<CashierBookDetail>()
+    private val menuList = ArrayList<CashierMenuDetails>()
+    private val bookList = ArrayList<CashierBookDetails>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,7 +95,7 @@ class CashierTransaction() : AppCompatActivity() {
     }
 
     // Menampilkan AlertDialog kedua
-    private fun dialogBoxFinishedTransaction(table: TableDummy) {
+    private fun dialogBoxFinishedTransaction(table: AdminTableDetails) {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Finished Transaction")
         alertDialogBuilder.setMessage("Complete the transaction?")

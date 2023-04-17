@@ -13,8 +13,6 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.ActiveUser
-import com.example.bookacafe.view.adminDisabledUser.DisabledUserMenu
-import com.example.bookacafe.view.adminTransaction.ShowTransactions
 
 class AdminHomeFragment :Fragment(R.layout.fragment_admin_home) {
 
@@ -37,11 +35,11 @@ class AdminHomeFragment :Fragment(R.layout.fragment_admin_home) {
         val btnLogOut: Button = view.findViewById(R.id.buttonLogOut)
         val clickableImage: ImageButton = view.findViewById(R.id.imageProfile)
         btnDisableUser.setOnClickListener{
-            val intent = Intent(context, DisabledUserMenu::class.java)
+            val intent = Intent(context, AdminDisabledUserMenu::class.java)
             startActivity(intent)
         }
         btnShowTrans.setOnClickListener{
-            val intent = Intent(context, ShowTransactions::class.java)
+            val intent = Intent(context, AdminShowTransactions::class.java)
             startActivity(intent)
         }
         btnLogOut.setOnClickListener{

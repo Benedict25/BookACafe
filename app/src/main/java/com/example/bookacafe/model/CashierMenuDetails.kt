@@ -1,10 +1,10 @@
-package com.example.bookacafe.model.adminDataDetails
+package com.example.bookacafe.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class CashierMenuDetail(
+class CashierMenuDetails(
     var detailTransactionId: Int,
     var menuId: String,
     var menuName: String,
