@@ -17,16 +17,11 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_below="@id/img_book_cover"
-        android:text="@string/plus"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:minHeight="0dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:includeFontPadding="false"
         android:layout_marginTop="10dp"
-        android:background="@drawable/rectangle_button" />
+        android:background="@drawable/add_logo" />
 
     <TextView
         android:id="@+id/tv_book_title"

@@ -1,6 +1,5 @@
 package com.example.bookacafe.view
 
-import ThirdFragment
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.fragment.app.FragmentManager
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.ActiveUser
 
@@ -33,7 +31,6 @@ class AdminHomeFragment :Fragment(R.layout.fragment_admin_home) {
         val btnDisableUser: Button = view.findViewById(R.id.buttonDisableUser)
         val btnShowTrans: Button = view.findViewById(R.id.buttonShowAllTransaction)
         val btnLogOut: Button = view.findViewById(R.id.buttonLogOut)
-        val clickableImage: ImageButton = view.findViewById(R.id.imageProfile)
         btnDisableUser.setOnClickListener{
             val intent = Intent(context, AdminDisabledUserMenu::class.java)
             startActivity(intent)
@@ -47,19 +44,5 @@ class AdminHomeFragment :Fragment(R.layout.fragment_admin_home) {
             val intent = Intent(context, Login::class.java)
             startActivity(intent)
         }
-        clickableImage.setOnClickListener{
-            val mCategoryFragment = ThirdFragment()
-            val mFragmentManager = parentFragmentManager as FragmentManager
-            mFragmentManager
-                .beginTransaction()
-                .replace(
-                    R.id.fragment_container,
-                    mCategoryFragment,
-                    ThirdFragment::class.java.simpleName
-                )
-                .addToBackStack(null)
-                .commit()
-        }
-
     }
 }

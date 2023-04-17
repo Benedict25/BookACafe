@@ -13,12 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.CartControllers
 import com.example.bookacafe.controller.OrderControllers
-import com.example.bookacafe.databinding.*
+import com.example.bookacafe.databinding.FragmentMenuCartBinding
 import com.example.bookacafe.model.Cart
 import java.text.DecimalFormat
 
-class MenuCart : Fragment(), View.OnClickListener {
-    private lateinit var binding: MenuCartBinding
+class CartMenuFragment : Fragment(), View.OnClickListener {
+    private lateinit var binding: FragmentMenuCartBinding
     private lateinit var cart: Cart
 
     // Button
@@ -31,7 +31,7 @@ class MenuCart : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = MenuCartBinding.inflate(inflater, container, false)
+        binding = FragmentMenuCartBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -102,11 +102,7 @@ class MenuCart : Fragment(), View.OnClickListener {
         parentFragmentManager.beginTransaction().detach(this).commit()
         parentFragmentManager.beginTransaction().attach(this).commit()
 
-        // Refresh For Activity
-//        finish()
-//        overridePendingTransition(0, 0) // OverridePending biar pas refresh gada animasi blink
-//        startActivity(intent)
-//        overridePendingTransition(0, 0)
+
     }
 
     private fun showOrderConfirmationDialog() {
