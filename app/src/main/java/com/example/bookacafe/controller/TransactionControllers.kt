@@ -27,8 +27,8 @@ class TransactionControllers {
                 status = TransactionEnum.PAID
             } else if (status_string == "PENDING") {
                 status = TransactionEnum.PENDING
-            } else if (status_string == "CANCELLED") {
-                status = TransactionEnum.CANCELLED
+            } else if (status_string == "CANCELED") {
+                status = TransactionEnum.CANCELED
             }
 
             if (checkedOut == "null") {
@@ -63,8 +63,8 @@ class TransactionControllers {
                     status = TransactionEnum.PAID
                 } else if (status_string == "PENDING") {
                     status = TransactionEnum.PENDING
-                } else if (status_string == "CANCELLED") {
-                    status = TransactionEnum.CANCELLED
+                } else if (status_string == "CANCELED") {
+                    status = TransactionEnum.CANCELED
                 }
 
                 if (checkedOut == "null") {
