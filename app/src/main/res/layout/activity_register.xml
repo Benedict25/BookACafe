@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="40dp"
+    android:paddingHorizontal="40dp"
     android:orientation="vertical"
     tools:context=".view.Register">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/register_back">
+        android:id="@+id/register_back"
+        android:layout_marginTop="20dp">
 
         <ImageView
             android:id="@+id/register_back_logo"
@@ -25,7 +26,6 @@
             android:text="@string/back"
             android:layout_toEndOf="@+id/register_back_logo"
             android:layout_centerVertical="true" />
-
     </RelativeLayout>
 
     <TextView
@@ -36,15 +36,13 @@
         android:fontFamily="@font/poppins_bold"
         android:layout_gravity="center"
         android:textStyle="bold"
-        android:textSize="25dp"
-        android:layout_marginTop="5dp" />
-
+        android:textSize="25dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/firstName"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="10dp"/>
 
     <EditText
         android:id="@+id/register_first_name"
