@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -34,7 +35,6 @@ class CashierTransaction() : AppCompatActivity() {
             binding.tvBillSeatname.text = "Table " + tableData.tableName
             binding.tvBillSeatprice.text = "Rp"+tableData.tableDesc+",-"
             binding.dateOrdered.text = "Ordered at " + LocalDate.now()
-            print(tableName)
             binding.totalOrderedCost.text = "Total Ordered: Rp"+DecimalFormat("#,###").format(CashierControllers().getTableCosts(tableName))
 
             binding.rvBillMenu.setHasFixedSize(true)
@@ -102,11 +102,10 @@ class CashierTransaction() : AppCompatActivity() {
         alertDialogBuilder.setPositiveButton("Yes") { dialog, _ ->
             // Aksi yang dijalankan ketika tombol "Yes" ditekan
             dialog.dismiss()
-
+            Log.d("tableID", table.tableId)
             CashierControllers().updateTransactionStatus(table.tableId)
             CashierControllers().updateTableStatus(table.tableId)
             Toast.makeText(this, "Table "+ table.tableName + " transaction has been completed!", Toast.LENGTH_SHORT).show()
-
             finish()
             val intent = Intent(this, CashierActivity::class.java)
             startActivity(intent)

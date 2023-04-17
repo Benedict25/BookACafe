@@ -79,7 +79,7 @@ class CashierControllers {
 
     fun getTableData(tableName: String): AdminTableDetails {
         lateinit var tableData: AdminTableDetails
-        val query = "SELECT a.tableId, a.tableName, 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1) as 'tableCost' FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status = '${TransactionEnum.NOT_PAID}' OR b.status = '${TransactionEnum.PENDING}' AND a.tableName = '$tableName' GROUP BY a.tableId;"
+        val query = "SELECT a.tableId, a.tableName, 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1) as 'tableCost' FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE a.tableName = '$tableName' AND (b.status = '${TransactionEnum.NOT_PAID}' OR b.status = '${TransactionEnum.PENDING}') GROUP BY a.tableId;"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
