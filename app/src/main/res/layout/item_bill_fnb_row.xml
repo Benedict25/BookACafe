@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -22,14 +21,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Fetucina" />
+                android:text="@string/name_placeholder" />
 
             <TextView
                 android:id="@+id/tv_bill_menu_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Rp20.000,-" />
+                android:text="@string/price_placeholder" />
         </LinearLayout>
 
         <LinearLayout
@@ -44,15 +42,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="150dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="x1"
+                android:text="@string/quantity_placeholder"
                 android:textAlignment="textEnd" />
 
             <TextView
                 android:id="@+id/tv_bill_total_menu_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Rp20.000,-"
+                android:text="@string/price_placeholder"
                 android:textAlignment="textEnd" />
         </LinearLayout>
     </LinearLayout>

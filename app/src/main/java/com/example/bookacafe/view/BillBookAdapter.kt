@@ -3,8 +3,6 @@ package com.example.bookacafe.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.bookacafe.R
 import com.example.bookacafe.databinding.ItemBillBookRowBinding
 import com.example.bookacafe.model.Book
 

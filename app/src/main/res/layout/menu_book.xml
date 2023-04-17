@@ -25,6 +25,7 @@
                 android:layout_margin="20dp"
                 android:textStyle="bold"
                 android:textSize="30sp"
+                android:fontFamily="@font/poppins_bold"
                 android:text="@string/books" />
         </LinearLayout>
 

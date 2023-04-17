@@ -17,27 +17,27 @@
 
         <TextView
             android:id="@+id/cartFnbName"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/cartFnbPic"
-            android:text="Burgir"
+            android:layout_toEndOf="@+id/cartFnbPic"
+            android:text="@string/name_placeholder"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/cartFnbPrice"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/cartFnbPic"
-            android:layout_toRightOf="@+id/cartFnbPic"
-            android:text="Rp10.666,-" />
+            android:layout_toEndOf="@+id/cartFnbPic"
+            android:text="@string/price_placeholder" />
 
         <ImageView
             android:id="@+id/cartAddButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:src="@drawable/add_logo"
             android:layout_centerVertical="true" />
 
@@ -45,10 +45,10 @@
             android:id="@+id/cartFnbQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1"
+            android:text="@string/quantity_placeholder"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:layout_toLeftOf="@+id/cartAddButton"
+            android:layout_toStartOf="@+id/cartAddButton"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"/>
@@ -57,7 +57,7 @@
             android:id="@+id/cartSubtractButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_toLeftOf="@id/cartFnbQuantity"
+            android:layout_toStartOf="@id/cartFnbQuantity"
             android:src="@drawable/subtract_logo"
             android:layout_centerVertical="true" />
     </RelativeLayout>

@@ -16,9 +16,6 @@ import com.example.bookacafe.R
 import com.example.bookacafe.controller.TransactionControllers
 import com.example.bookacafe.databinding.BillScreenBinding
 import com.example.bookacafe.model.*
-import com.example.bookacafe.model.adminDataDetails.CashierBookDetail
-import com.example.bookacafe.view.cashierTransaction.CashierBookAdapter
-import java.sql.Time
 import java.sql.Timestamp
 import kotlin.math.ceil
 

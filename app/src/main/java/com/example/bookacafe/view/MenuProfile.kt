@@ -2,7 +2,6 @@ package com.example.bookacafe.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.Button
@@ -12,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.ActiveUser
 import com.example.bookacafe.controller.TransactionControllers
-import com.example.bookacafe.model.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
