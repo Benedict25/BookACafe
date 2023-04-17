@@ -57,7 +57,7 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
         setTimeDuration(view)
 
         clickableImage.setOnClickListener {
-            val intent = Intent(context, MenuProfile::class.java)
+            val intent = Intent(context, ProfileActivity::class.java)
             startActivity(intent)
         }
         myClickableText.setOnClickListener {

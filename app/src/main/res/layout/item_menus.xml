@@ -15,16 +15,11 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_below="@id/img_menu_cover"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rectangle_button"
-        android:includeFontPadding="false"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:minHeight="0dp"
-        android:text="@string/plus"
-        android:textColor="@color/white"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/add_logo" />
 
     <TextView
         android:id="@+id/tv_menu_name"

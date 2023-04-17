@@ -19,11 +19,11 @@ import com.example.bookacafe.controller.BookControllers
 import com.example.bookacafe.model.Book
 import com.squareup.picasso.Picasso
 import android.widget.*
-import com.example.bookacafe.databinding.MenuBookBinding
+import com.example.bookacafe.databinding.FragmentMenuBookBinding
 import com.google.android.material.tabs.TabLayout
 
-class BookMenu : Fragment(), View.OnClickListener {
-    private lateinit var binding: MenuBookBinding
+class BookMenuFragment : Fragment(), View.OnClickListener {
+    private lateinit var binding: FragmentMenuBookBinding
     private lateinit var dialog: Dialog
     private lateinit var searchView: SearchView
     private var tabLayout: TabLayout? = null
@@ -37,7 +37,7 @@ class BookMenu : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = MenuBookBinding.inflate(inflater, container, false)
+        binding = FragmentMenuBookBinding.inflate(inflater, container, false)
         return binding.root
     }
 

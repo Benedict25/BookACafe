@@ -14,7 +14,7 @@ import com.example.bookacafe.controller.TransactionControllers
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
-class MenuProfile: AppCompatActivity(), View.OnClickListener {
+class ProfileActivity: AppCompatActivity(), View.OnClickListener {
     private val user = ActiveUser;
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +56,7 @@ class MenuProfile: AppCompatActivity(), View.OnClickListener {
                 if (listTransaction.size==0){
                     Toast.makeText(applicationContext, "You don't have history activity, let's make one!", Toast.LENGTH_SHORT).show()
                 } else {
-                    val moveIntent = Intent(this@MenuProfile, HistoryActivity::class.java)
+                    val moveIntent = Intent(this@ProfileActivity, HistoryActivity::class.java)
                     startActivity(moveIntent)
                 }
             }
@@ -68,7 +68,7 @@ class MenuProfile: AppCompatActivity(), View.OnClickListener {
                 gsc.signOut().addOnCompleteListener {
                     finish()
 
-                    val moveIntent = Intent(this@MenuProfile, Login::class.java)
+                    val moveIntent = Intent(this@ProfileActivity, Login::class.java)
                     startActivity(moveIntent)
 
                     val logoutToast = Toast.makeText(applicationContext, "Logging Out from BookACafe", Toast.LENGTH_SHORT)

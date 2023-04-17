@@ -24,7 +24,7 @@
             android:name=".view.TestLogin"
             android:exported="false" />
         <activity
-            android:name=".view.MenuCart"
+            android:name=".view.CartMenuFragment"
             android:exported="false" />
         <activity
             android:name=".view.Register"
@@ -36,14 +36,14 @@
             android:name=".view.HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".view.MenuProfile"
+            android:name=".view.ProfileActivity"
             android:exported="false" />
         <activity
             android:name=".view.HomePage"
             android:exported="false"
             android:label="Home" />
         <activity
-            android:name=".view.MenuFnB"
+            android:name=".view.FnBMenuFragment"
             android:exported="false" />
         <activity
             android:name=".view.BillActivity"
@@ -76,10 +76,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.TableMenu"
+            android:name=".view.TableMenuFragment"
             android:exported="false" />
         <activity
-            android:name=".view.BookMenu"
+            android:name=".view.BookMenuFragment"
             android:exported="false" />
         <activity
             android:name=".view.AdminActivity"
