@@ -1,5 +1,6 @@
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.example.bookacafe.R
+import com.example.bookacafe.controller.ActiveUser
 import com.example.bookacafe.controller.CartControllers
 import com.example.bookacafe.controller.HomePageControllers
 import com.example.bookacafe.view.*
@@ -44,6 +46,10 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
         super.onViewCreated(view, savedInstanceState)
 
         val myClickableText = view.findViewById<TextView>(R.id.seeDetails)
+        if (ActiveUser.getActiveTransaction()== null) {
+            Log.d("TAG", "gak ad")
+            myClickableText.visibility = View.INVISIBLE
+        }
         val clickableImage: ImageButton = view.findViewById(R.id.imageProfile)
 
         setCheckedIn(controlHome.getTime(), view)
@@ -56,7 +62,7 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
         }
         myClickableText.setOnClickListener {
             val intent = Intent(context, BillActivity::class.java)
-            intent.putExtra("transaction_id", "TR20230211-001")
+            intent.putExtra("transaction_id", ActiveUser.getActiveTransaction()?.transactionId)
             startActivity(intent)
         }
 

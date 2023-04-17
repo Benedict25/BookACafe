@@ -1,6 +1,7 @@
 package com.example.bookacafe.controller
 
 import android.database.SQLException
+import com.example.bookacafe.model.Transaction
 import com.example.bookacafe.model.User
 import java.sql.ResultSet
 import java.sql.Statement
@@ -29,20 +30,23 @@ class UserControllers {
             }
 
             if (adminType == "ADMIN") {
-                return  "ADMIN"
+                return "ADMIN"
             } else {
                 return "CASHIER"
             }
         }
     }
 
-    fun setSingleton(user: User, userType: String) {
+    fun setSingleton(user: User, userType: String, activeTransaction: Transaction?) {
         ActiveUser.setId(user.userId)
         ActiveUser.setFirstName(user.firstName)
         ActiveUser.setLastName(user.lastName)
         ActiveUser.setEmail(user.email)
         ActiveUser.setPassword(user.password)
         ActiveUser.setType(userType)
+        if (activeTransaction != null) {
+            ActiveUser.setActiveTransaction(activeTransaction)
+        }
     }
 
     fun setSingletonGoogle(inputEmail: String) {
@@ -64,7 +68,17 @@ class UserControllers {
             }
 
             val userType = checkUserType(user.userId)
-            setSingleton(user, userType)
+            val activeTransactionId = TransactionControllers.getActiveTransactionId(user.userId)
+            var activeTransaction: Transaction? = null
+            if (activeTransactionId == null) {
+                setSingleton(user, userType, null)
+            } else {
+                activeTransaction = TransactionControllers.getTransactionDetail(activeTransactionId)
+                setSingleton(user, userType, activeTransaction)
+            }
+
+//            val activeTransactionIdId
+//            setSingleton(user, userType)
         } catch (e: SQLException) {
             e.printStackTrace()
         }

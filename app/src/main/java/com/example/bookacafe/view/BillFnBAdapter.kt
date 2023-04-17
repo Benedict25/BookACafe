@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookacafe.databinding.ItemBillFnbRowBinding
 import com.example.bookacafe.model.Menu
+import java.text.DecimalFormat
 
 class BillFnBAdapter(private val listFnB: ArrayList<Menu>, private val listFnBQuantity: ArrayList<Int>): RecyclerView.Adapter<BillFnBAdapter.ListViewHolder>() {
+    private val formatter = DecimalFormat("#,###")
     inner class ListViewHolder(private val binding: ItemBillFnbRowBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(menu: Menu, i: Int){
 
@@ -14,9 +16,9 @@ class BillFnBAdapter(private val listFnB: ArrayList<Menu>, private val listFnBQu
                 var totalMenuPrice = menu.price * i
 
                 tvBillMenuName.text = menu.name
-                tvBillMenuPrice.text = menu.price.toString()
+                tvBillMenuPrice.text = formatter.format(menu.price)
                 tvBillMenuAmount.text = "x"+i.toString()
-                tvBillTotalMenuPrice.text = totalMenuPrice.toString()
+                tvBillTotalMenuPrice.text = formatter.format(totalMenuPrice)
             }
         }
     }

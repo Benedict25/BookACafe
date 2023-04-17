@@ -1,5 +1,8 @@
 package com.example.bookacafe.controller
 
+import com.example.bookacafe.model.Transaction
+
+
 object ActiveUser {
 
     // Singleton
@@ -9,6 +12,7 @@ object ActiveUser {
     private var lastName: String = "NoLastName"
     private var email: String = "NoEmail"
     private var password: String = "NoPassword"
+    private var activeTransaction: Transaction? = null // get active transaction
     private var userType: String = "NoType" // MEMBER, ADMIN, CASHIER
     
     // Setter
@@ -36,6 +40,10 @@ object ActiveUser {
     fun setType(userType: String){
         this.userType = userType
     }
+
+    fun setActiveTransaction(activeTransaction: Transaction){
+        this.activeTransaction = activeTransaction
+    }
     
     // Getter
 
@@ -61,5 +69,9 @@ object ActiveUser {
     
      fun getType(): String {
         return this.userType
+    }
+
+    fun getActiveTransaction(): Transaction? {
+        return this.activeTransaction
     }
 }

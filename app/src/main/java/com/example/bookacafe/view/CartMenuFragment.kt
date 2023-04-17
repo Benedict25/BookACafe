@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.R
+import com.example.bookacafe.controller.ActiveUser
 import com.example.bookacafe.controller.CartControllers
 import com.example.bookacafe.controller.OrderControllers
 import com.example.bookacafe.databinding.FragmentMenuCartBinding
@@ -53,7 +54,11 @@ class CartMenuFragment : Fragment(), View.OnClickListener {
         cartTableCancel = view.findViewById(R.id.cartTableCancel)
         cartTableCancel.setOnClickListener {
             control.removeTableFromCart()
-            Toast.makeText(requireContext(), "Table ${cart.table.tableName} removed", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                "Table ${cart.table.tableName} removed",
+                Toast.LENGTH_SHORT
+            ).show()
             refreshCart()
         }
 
@@ -65,9 +70,14 @@ class CartMenuFragment : Fragment(), View.OnClickListener {
 
         cartPay = view.findViewById(R.id.cartPay)
         cartPay.setOnClickListener {
-            val intent = Intent(context, BillActivity::class.java)
-            intent.putExtra("transaction_id", "TR20230211-001")
-            startActivity(intent)
+            if (ActiveUser.getActiveTransaction() == null) {
+                cartPay.isEnabled = false
+                cartPay.isClickable = false
+            } else {
+                val intent = Intent(context, BillActivity::class.java)
+                intent.putExtra("transaction_id", ActiveUser.getActiveTransaction()?.transactionId)
+                startActivity(intent)
+            }
         }
     }
 
@@ -97,7 +107,7 @@ class CartMenuFragment : Fragment(), View.OnClickListener {
         cartTotal.text = "Rp$totalFormat"
     }
 
-    fun refreshCart(){
+    fun refreshCart() {
         // Refresh For Fragment
         parentFragmentManager.beginTransaction().detach(this).commit()
         parentFragmentManager.beginTransaction().attach(this).commit()
@@ -126,8 +136,14 @@ class CartMenuFragment : Fragment(), View.OnClickListener {
         addToCartDialog.setTitle("Order")
             .setIcon(android.R.drawable.ic_dialog_info)
             .setMessage("Are you sure you want to order?")
-            .setPositiveButton("Yes", DialogInterface.OnClickListener(function = positiveButtonClick))
-            .setNegativeButton("No", DialogInterface.OnClickListener(function = negativeButtonClick))
+            .setPositiveButton(
+                "Yes",
+                DialogInterface.OnClickListener(function = positiveButtonClick)
+            )
+            .setNegativeButton(
+                "No",
+                DialogInterface.OnClickListener(function = negativeButtonClick)
+            )
         addToCartDialog.show()
     }
 }
