@@ -14,8 +14,8 @@ class AdminControllers {
 
     fun getTotalIncome(): Int {
         var income = 0
-        val querySeat = "SELECT 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1) as \"tableIncome\" FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status != '${TransactionEnum.CANCELLED}';"
-        val queryMenuOrdered = "SELECT sum(b.menuQuantity)*a.price as \"menuIncome\" FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON b.transactionId = c.transactionId WHERE c.status != '${TransactionEnum.CANCELLED}' GROUP BY a.menuId;"
+        val querySeat = "SELECT 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1) as \"tableIncome\" FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status != '${TransactionEnum.CANCELED}';"
+        val queryMenuOrdered = "SELECT sum(b.menuQuantity)*a.price as \"menuIncome\" FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON b.transactionId = c.transactionId WHERE c.status != '${TransactionEnum.CANCELED}' GROUP BY a.menuId;"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs1: ResultSet = stmt.executeQuery(querySeat)
@@ -46,7 +46,7 @@ class AdminControllers {
 
     fun getUserDetails(): ArrayList<AdminMemberDetails> {
         val members: ArrayList<AdminMemberDetails> = ArrayList()
-        val query = "SELECT b.memberId, a.firstName, a.lastName, sum(if(c.status = '${TransactionEnum.CANCELLED}',1,0)) as 'canceledOrder', sum(if(c.status = '${TransactionEnum.CANCELLED}',0,1)) as 'fixedOrder', b.status FROM users a JOIN members b ON a.userId = b.memberId JOIN transactions c ON b.memberId = c.memberId GROUP BY b.memberId"
+        val query = "SELECT b.memberId, a.firstName, a.lastName, sum(if(c.status = '${TransactionEnum.CANCELED}',1,0)) as 'canceledOrder', sum(if(c.status = '${TransactionEnum.CANCELED}',0,1)) as 'fixedOrder', b.status FROM users a JOIN members b ON a.userId = b.memberId JOIN transactions c ON b.memberId = c.memberId GROUP BY b.memberId"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -68,7 +68,7 @@ class AdminControllers {
 
     fun getBookData(): ArrayList<AdminBookDetails> {
         val books: ArrayList<AdminBookDetails> = ArrayList()
-        val query = "SELECT a.title, count(b.bookId) as \"totalOrdered\", a.imagePath FROM books a JOIN detail_transactions b ON a.bookId = b.bookId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != '${TransactionEnum.CANCELLED}' GROUP BY a.bookId ORDER BY `totalOrdered` DESC, `a`.`title` ASC"
+        val query = "SELECT a.title, count(b.bookId) as \"totalOrdered\", a.imagePath FROM books a JOIN detail_transactions b ON a.bookId = b.bookId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != '${TransactionEnum.CANCELED}' GROUP BY a.bookId ORDER BY `totalOrdered` DESC, `a`.`title` ASC"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -88,7 +88,7 @@ class AdminControllers {
 
     fun getFoodData(): ArrayList<AdminMenuDetails> {
         val foods: ArrayList<AdminMenuDetails> = ArrayList()
-        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"foodIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != '${TransactionEnum.CANCELLED}' AND a.type = \"FOOD\" GROUP BY a.menuId ORDER BY `totalOrdered` DESC, `a`.`name` ASC"
+        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"foodIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != '${TransactionEnum.CANCELED}' AND a.type = \"FOOD\" GROUP BY a.menuId ORDER BY `totalOrdered` DESC, `a`.`name` ASC"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -108,7 +108,7 @@ class AdminControllers {
 
     fun getBeverageData(): ArrayList<AdminMenuDetails> {
         val beverages: ArrayList<AdminMenuDetails> = ArrayList()
-        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"beverageIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != '${TransactionEnum.CANCELLED}' AND a.type = \"BEVERAGE\" GROUP BY a.menuId ORDER BY `totalOrdered` DESC, `a`.`name` ASC"
+        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"beverageIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != '${TransactionEnum.CANCELED}' AND a.type = \"BEVERAGE\" GROUP BY a.menuId ORDER BY `totalOrdered` DESC, `a`.`name` ASC"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -128,7 +128,7 @@ class AdminControllers {
 
     fun getSeatData():ArrayList<AdminTableDetails> {
         val seats: ArrayList<AdminTableDetails> = ArrayList()
-        val query = "SELECT a.tableId, a.tableName, count(b.transactionId) as \"totalBooked\", sum(10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1)) as \"tableIncome\" FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status != '${TransactionEnum.CANCELLED}' GROUP BY a.tableId ORDER BY `totalBooked` DESC, `a`.`tableName` ASC"
+        val query = "SELECT a.tableId, a.tableName, count(b.transactionId) as \"totalBooked\", sum(10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1)) as \"tableIncome\" FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status != '${TransactionEnum.CANCELED}' GROUP BY a.tableId ORDER BY `totalBooked` DESC, `a`.`tableName` ASC"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)

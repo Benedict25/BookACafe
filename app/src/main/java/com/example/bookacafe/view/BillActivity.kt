@@ -17,11 +17,13 @@ import com.example.bookacafe.controller.TransactionControllers
 import com.example.bookacafe.databinding.BillScreenBinding
 import com.example.bookacafe.model.*
 import java.sql.Timestamp
+import java.text.DecimalFormat
 import kotlin.math.ceil
 
 class BillActivity : AppCompatActivity(), View.OnClickListener {
 
     //    var transaction = intent.getParcelableArrayListExtra<Transaction>("EXTRA_TRANSACTION")
+    private val formatter = DecimalFormat("#,###")
     private lateinit var binding: BillScreenBinding
     private lateinit var btnPay: Button
     private lateinit var tvTotalOrder: TextView
@@ -57,10 +59,11 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
 
 
             totalPayment = totalBookPayment + totalTablePayment
-            tvTotalOrder.text = "Total: " + totalPayment.toString()
+            tvTotalOrder.text = "Total: " + formatter.format(totalPayment)
             tvBillSeatDisplay.text = transaction.table?.tableName
             tvBillSeatName.text = "Kursi "+transaction.table?.tableName
-            tvBillSeatPrice.text = "Rp "+totalTablePayment.toString()+ ", "+selisihJam.toString()+" hours."
+//            tvBillSeatPrice.text = "Rp "+totalTablePayment.toString()+ ", "+selisihJam.toString()+" hours."
+            tvBillSeatPrice.text = "Rp "+formatter.format(totalTablePayment)+ ", "+selisihJam.toString()+" hours."
 
             if (transaction.status == TransactionEnum.PENDING) {
                 btnPay.text = "PENDING..."
@@ -68,8 +71,8 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
                 btnPay.isClickable = false
             } else if (transaction.status == TransactionEnum.PAID) {
                 btnPay.visibility = View.INVISIBLE
-            } else if (transaction.status == TransactionEnum.CANCELLED) {
-                btnPay.text = "CANCELLED"
+            } else if (transaction.status == TransactionEnum.CANCELED) {
+                btnPay.text = "CANCELED"
                 btnPay.isEnabled = false
                 btnPay.isClickable = false
             }

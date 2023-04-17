@@ -38,7 +38,7 @@ class ListHistoryAdapter(private val listHistory: ArrayList<Transaction>) :
 
         if (history.status == TransactionEnum.PENDING) {
             holder.layout.setBackgroundResource(R.drawable.history_background_pending)
-        } else if (history.status == TransactionEnum.PAID || history.status == TransactionEnum.CANCELLED) {
+        } else if (history.status == TransactionEnum.PAID || history.status == TransactionEnum.CANCELED) {
             holder.layout.setBackgroundResource(R.drawable.history_background_paid)
         } else if (history.status == TransactionEnum.NOT_PAID) {
             holder.layout.setBackgroundResource(R.drawable.history_background_on_going)
