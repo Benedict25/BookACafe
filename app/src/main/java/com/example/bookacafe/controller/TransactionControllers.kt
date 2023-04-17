@@ -214,6 +214,26 @@ class TransactionControllers {
             return table
         }
 
+        fun getActiveTransactionId(userId: String): String? {
+            var activeTransactionId: String? = null
+
+            val query =
+                "SELECT transactionId FROM transactions WHERE memberId = '${userId}' AND status = 'NOT_PAID'"
+
+            try {
+                val stmt: Statement = con!!.createStatement()
+                val rs: ResultSet = stmt.executeQuery(query)
+
+                while (rs.next()) {
+                    activeTransactionId = rs.getString("transactionId")
+                }
+            } catch (e: SQLException) {
+                e.printStackTrace()
+            }
+
+            return activeTransactionId
+        }
+
         private fun getTransactionGeneralData(): ArrayList<String> {
             var transactionGeneralData: ArrayList<String> = ArrayList()
 
