@@ -17,7 +17,7 @@ class CashierControllers {
 
     fun updateDetailTransactionStatus(detailTransactionId: Int): Boolean {
         return try {
-            val query = "UPDATE detail_transactions SET status='SERVED' WHERE detailTransactionId='$detailTransactionId'";
+            val query = "UPDATE detail_transactions SET status='${DetailTransEnum.SERVED}' WHERE detailTransactionId='$detailTransactionId'";
             val stmt: Statement = con!!.createStatement()
             stmt.executeUpdate(query)
             true
@@ -98,7 +98,7 @@ class CashierControllers {
 
     fun getTransactionId(tableName: String): String {
         lateinit var transId: String
-        val query = "SELECT b.transactionId FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status = '${TransactionEnum.NOT_PAID}' OR b.status = '${TransactionEnum.PENDING}' AND a.tableName = '$tableName' GROUP BY a.tableId;"
+        val query = "SELECT b.transactionId FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE a.tableName = '$tableName' AND (b.status = '${TransactionEnum.NOT_PAID}' OR b.status = '${TransactionEnum.PENDING}') GROUP BY a.tableId;"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
