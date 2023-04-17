@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/loginTitle"
+        android:fontFamily="@font/poppins_bold"
         android:gravity="center_horizontal"
         android:textStyle="bold"
         android:textSize="25dp"
@@ -27,7 +28,7 @@
         android:id="@+id/login_email"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
         android:background="@drawable/square_edit_text"
         android:layout_marginTop="10dp" />
 
@@ -41,7 +42,7 @@
         android:id="@+id/login_password"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
         android:background="@drawable/square_edit_text"
         android:layout_marginTop="10dp"
         android:inputType="textPassword"/>

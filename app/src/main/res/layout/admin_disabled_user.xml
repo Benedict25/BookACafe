@@ -12,7 +12,8 @@
         android:layout_height="40dp"
         android:textAlignment="center"
         android:gravity="center"
-        android:text="Disabled User"
+        android:text="@string/disabled_user_menu"
+        android:fontFamily="@font/poppins_bold"
         android:textStyle="bold"
         android:textSize="20sp" />
 
@@ -24,14 +25,4 @@
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
         tools:listitem="@layout/item_row_user" />
-
-<!--    <Button-->
-<!--        android:id="@+id/du_button"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:padding="10dp"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:text="@string/disable_button"-->
-<!--        android:textStyle="bold"/>-->
-
 </RelativeLayout>

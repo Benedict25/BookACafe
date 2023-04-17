@@ -22,7 +22,6 @@ import android.widget.*
 import com.example.bookacafe.databinding.MenuBookBinding
 import com.google.android.material.tabs.TabLayout
 
-
 class BookMenu : Fragment(), View.OnClickListener {
     private lateinit var binding: MenuBookBinding
     private lateinit var dialog: Dialog

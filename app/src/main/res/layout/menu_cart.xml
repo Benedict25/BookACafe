@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/cartTitle"
+        android:fontFamily="@font/poppins_bold"
         android:gravity="center"
         android:textStyle="bold"
         android:textSize="25dp"
@@ -32,9 +33,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cartTable"
+            android:text="@string/tables"
+            android:fontFamily="@font/poppins_bold"
             android:layout_toEndOf="@+id/cartSeats"
-            android:paddingLeft="5dp"
+            android:paddingStart="5dp"
             android:layout_centerVertical="true" />
     </RelativeLayout>
 
@@ -55,36 +57,35 @@
             android:layout_height="40dp"
             app:backgroundTint="@null"
             android:background="@drawable/white_rounded_button"
-            android:text="A"
+            android:text="@string/seat_placeholder"
             android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/cartTableNumber"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/cartRoomNumber"
-            android:text="Table"
+            android:layout_toEndOf="@+id/cartRoomNumber"
+            android:text="@string/tables"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/cartTablePrice"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/cartRoomNumber"
-            android:layout_toRightOf="@+id/cartRoomNumber"
-            android:text="First 2 Hours: Rp10,000" />
+            android:layout_toEndOf="@+id/cartRoomNumber"
+            android:text="@string/first_2_hours_price" />
 
         <ImageView
             android:id="@+id/cartTableCancel"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/cancel_logo"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true" />
     </RelativeLayout>
-
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -100,9 +101,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cartFnb"
+            android:text="@string/food_beverage"
+            android:fontFamily="@font/poppins_bold"
             android:layout_toEndOf="@+id/cartFnb"
-            android:paddingLeft="5dp"
+            android:paddingStart="5dp"
             android:layout_centerVertical="true" />
     </RelativeLayout>
 
@@ -114,7 +116,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="120dp"
         android:layout_marginTop="10dp"
         android:id="@+id/rvCartMenu"
         tools:listitem="@layout/list_cart_menu"/>
@@ -133,9 +135,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cartBooks"
+            android:text="@string/books"
+            android:fontFamily="@font/poppins_bold"
             android:layout_toEndOf="@+id/cartBooks"
-            android:paddingLeft="5dp"
+            android:paddingStart="5dp"
             android:layout_centerVertical="true"
             />
     </RelativeLayout>
@@ -148,7 +151,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="120dp"
         android:layout_marginTop="10dp"
         android:id="@+id/rvCartBook"
         tools:listitem="@layout/list_cart_book"/>
@@ -168,6 +171,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cartTotal"
+            android:fontFamily="@font/poppins_bold"
             android:textStyle="bold"
             android:textSize="15dp" />
 
@@ -175,10 +179,11 @@
             android:id="@+id/cartTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rp0"
+            android:text="@string/price_placeholder"
+            android:fontFamily="@font/poppins_bold"
             android:textStyle="bold"
             android:textSize="15dp"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -194,54 +199,20 @@
             app:backgroundTint="@null"
             android:background="@drawable/white_rounded_button"
             android:text="@string/cartOrder"
+            android:fontFamily="@font/poppins_bold"
             android:textColor="@color/black" />
 
         <Button
             android:id="@+id/cartPay"
             android:layout_width="150dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="30dp"
-            android:layout_toRightOf="@+id/cartOrder"
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@+id/cartOrder"
             android:background="@drawable/white_rounded_button"
             android:text="@string/cartPay"
+            android:fontFamily="@font/poppins_bold"
             android:textColor="@color/black"
             app:backgroundTint="@null" />
     </RelativeLayout>
-
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/cartOrderConfirm"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:gravity="center" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/cartOrder"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        app:backgroundTint="@null"-->
-<!--        android:background="@drawable/white_rounded_button"-->
-<!--        android:text="@string/cartOrder"-->
-<!--        android:textColor="@color/black" />-->
-
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/cartPayConfirm"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:gravity="center" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/cartPay"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        app:backgroundTint="@null"-->
-<!--        android:background="@drawable/white_rounded_button"-->
-<!--        android:text="@string/cartPay"-->
-<!--        android:textColor="@color/black" />-->
-
-
 
 </LinearLayout>

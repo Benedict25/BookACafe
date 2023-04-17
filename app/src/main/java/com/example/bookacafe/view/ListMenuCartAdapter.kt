@@ -12,7 +12,6 @@ import com.example.bookacafe.model.Menu
 import com.squareup.picasso.Picasso
 import java.text.DecimalFormat
 
-
 class ListMenuCartAdapter(private val cart: Cart, val refreshCart: () -> Unit) : RecyclerView.Adapter<ListMenuCartAdapter.ListViewHolder>() {
     var context: Context? = null // Context for Toast to work
 

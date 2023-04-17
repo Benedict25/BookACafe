@@ -2,7 +2,6 @@ package com.example.bookacafe.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.controller.TransactionControllers
@@ -13,8 +12,6 @@ import com.example.bookacafe.view.ListHistoryAdapter.OnClickListener
 class HistoryActivity : AppCompatActivity() {
     var binding: HistoryScreenBinding? = null
     private val list = ArrayList<Transaction>()
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
