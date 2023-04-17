@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.R
+import com.example.bookacafe.controller.ActiveUser
 import com.example.bookacafe.controller.TransactionControllers
 import com.example.bookacafe.databinding.BillScreenBinding
 import com.example.bookacafe.model.*
@@ -134,6 +135,7 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_pay_order -> {
+                ActiveUser.setActiveTransaction(null)
                 showOrderDialog()
             }
         }

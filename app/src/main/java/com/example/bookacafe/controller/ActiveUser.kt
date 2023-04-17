@@ -41,7 +41,7 @@ object ActiveUser {
         this.userType = userType
     }
 
-    fun setActiveTransaction(activeTransaction: Transaction){
+    fun setActiveTransaction(activeTransaction: Transaction?){
         this.activeTransaction = activeTransaction
     }
     

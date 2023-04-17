@@ -17,6 +17,7 @@ class OrderControllers {
             val newTransId = createTransId()
             val newTransIsCreated = createNewTransaction(newTransId)
             if (newTransIsCreated) {
+                ActiveUser.setActiveTransaction(TransactionControllers.getTransactionDetail(newTransId))
                 cartIsTransfered = transferCartToTrans(newTransId)
             } else {
                 return false
