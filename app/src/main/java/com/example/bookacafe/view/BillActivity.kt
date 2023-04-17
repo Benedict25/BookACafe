@@ -16,8 +16,6 @@ import com.example.bookacafe.R
 import com.example.bookacafe.controller.TransactionControllers
 import com.example.bookacafe.databinding.BillScreenBinding
 import com.example.bookacafe.model.*
-import com.example.bookacafe.view.cashierTransaction.CashierBookAdapter
-import java.sql.Time
 import java.sql.Timestamp
 import kotlin.math.ceil
 
@@ -126,7 +124,7 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
         binding.rvBillMenu.adapter = listMenuAdapter
 
         binding.rvBillBooks.layoutManager = LinearLayoutManager(this)
-        val listBookAdapter = CashierBookAdapter(transaction.books)
+        val listBookAdapter = BillBookAdapter(transaction.books)
         binding.rvBillBooks.adapter = listBookAdapter
     }
 

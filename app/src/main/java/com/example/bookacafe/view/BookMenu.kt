@@ -22,7 +22,6 @@ import android.widget.*
 import com.example.bookacafe.databinding.MenuBookBinding
 import com.google.android.material.tabs.TabLayout
 
-
 class BookMenu : Fragment(), View.OnClickListener {
     private lateinit var binding: MenuBookBinding
     private lateinit var dialog: Dialog
@@ -180,7 +179,7 @@ class BookMenu : Fragment(), View.OnClickListener {
             if (added) {
                 text = book.title + " added to cart."
             } else {
-                text = book.title + " is already in your cart!"
+                text = book.title + " is already in your cart/table!"
             }
             val toast = Toast.makeText(requireContext(),
                 text,

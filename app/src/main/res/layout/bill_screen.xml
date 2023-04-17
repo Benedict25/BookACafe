@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,14 +10,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:text="Bill"
+            android:text="@string/bill"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20dp"
@@ -38,9 +37,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Seats"
+                android:text="@string/seats"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -58,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/gray_rounded_button"
                 android:fontFamily="@font/poppins_bold"
-                android:text="@string/seat_display"
+                android:text="@string/seat_placeholder"
                 android:textSize="18sp" />
 
             <LinearLayout
@@ -72,14 +71,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="@string/kursi_a4" />
+                    android:text="@string/seat_placeholder" />
 
                 <TextView
                     android:id="@+id/tv_bill_seatprice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Rp10.000,-" />
+                    android:text="@string/price_placeholder" />
             </LinearLayout>
 
         </LinearLayout>
@@ -97,23 +96,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Food and Beverages"
+                android:text="@string/food_beverage"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
-
-            <!--Awal-->
-
-            <!--Akhir-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_bill_menu"
@@ -137,9 +131,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Books"
+                android:text="@string/books"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -149,10 +143,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
-
-            <!--Awal-->
-
-            <!--Akhir-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_bill_books"
@@ -169,7 +159,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:text="Total Order"
+            android:text="@string/total_order"
             android:textSize="18sp"
             android:gravity="center_horizontal"
             android:textStyle="bold" />
@@ -178,9 +168,8 @@
             android:id = "@+id/btn_pay_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/scrollview_bill"
             android:layout_marginTop="10dp"
-            android:text="PAY" />
+            android:text="@string/pay" />
 
     </LinearLayout>
 </ScrollView>

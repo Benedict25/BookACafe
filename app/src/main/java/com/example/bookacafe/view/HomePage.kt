@@ -1,5 +1,6 @@
 package com.example.bookacafe.view
 
+import FirstFragment
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,16 +22,6 @@ class HomePage : AppCompatActivity() {
         val cartFragment=MenuCart()
         setCurrentFragment(firstFragment)
 
-//        bottomNavigationView.setOnNavigationItemSelectedListener {
-//            when(it.itemId){
-//                R.id.icon_home->setCurrentFragment(firstFragment)
-//                R.id.icon_tables->setCurrentFragment(secondFragment)
-//                R.id.icon_books->setCurrentFragment(thirdFragment)
-//                R.id.icon_fnb->setCurrentFragment(thirdFragment)
-//                R.id.icon_cart->setCurrentFragment(thirdFragment)
-//            }
-//            true
-//        }
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.icon_home->{
