@@ -14,10 +14,12 @@ import com.example.bookacafe.controller.MenuControllers
 import com.example.bookacafe.databinding.ItemMenusBinding
 import com.example.bookacafe.model.Menu
 import com.squareup.picasso.Picasso
+import java.text.DecimalFormat
 
 class ListMenuAdapter(private val menus : ArrayList<Menu>) : RecyclerView.Adapter<ListMenuAdapter.ListViewHolder>() {
     var onItemClick: ((Menu) -> Unit)? = null
     var context: Context? = null
+    private val formatter = DecimalFormat("#,###")
 
     override fun onCreateViewHolder(viewGroup : ViewGroup, i : Int) : ListViewHolder {
         val binding = ItemMenusBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
@@ -39,7 +41,7 @@ class ListMenuAdapter(private val menus : ArrayList<Menu>) : RecyclerView.Adapte
             with(binding) {
 
                 tvMenuName.text = menu.name
-                tvMenuPrice.text = menu.price.toString()
+                tvMenuPrice.text = "Rp"+formatter.format(menu.price)
                 Picasso.get().load(menu.imagePath).into(imgMenuCover)
                 btnAdd.setOnClickListener() {
                     showAddToCartDialog(menu)

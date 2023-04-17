@@ -1,9 +1,9 @@
-package com.example.bookacafe.model.adminDataDetails
+package com.example.bookacafe.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 @Parcelize
-class TableDummy (
+class AdminTableDetails (
     var tableId: String,
     var tableName: String,
     var tableDesc: String

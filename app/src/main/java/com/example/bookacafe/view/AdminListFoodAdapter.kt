@@ -1,4 +1,4 @@
-package com.example.bookacafe.view.adminTransaction
+package com.example.bookacafe.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,9 +7,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.bookacafe.R
 import com.example.bookacafe.databinding.ItemRowFoodBinding
-import com.example.bookacafe.model.adminDataDetails.AdminMenuDetails
+import com.example.bookacafe.model.AdminMenuDetails
 
-class ListFoodAdapter(private val listFood: ArrayList<AdminMenuDetails>) :  RecyclerView.Adapter<ListFoodAdapter.ListViewHolder>() {
+class AdminListFoodAdapter(private val listFood: ArrayList<AdminMenuDetails>) :  RecyclerView.Adapter<AdminListFoodAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {
         val binding = ItemRowFoodBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return ListViewHolder(binding)

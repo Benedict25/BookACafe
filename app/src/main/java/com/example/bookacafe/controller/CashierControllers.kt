@@ -1,11 +1,10 @@
 package com.example.bookacafe.controller
 
 import android.database.SQLException
-import com.example.bookacafe.model.Book
-import com.example.bookacafe.model.ItemTypeEnum
-import com.example.bookacafe.model.adminDataDetails.CashierBookDetail
-import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
-import com.example.bookacafe.model.adminDataDetails.TableDummy
+import com.example.bookacafe.model.*
+import com.example.bookacafe.model.CashierBookDetails
+import com.example.bookacafe.model.CashierMenuDetails
+import com.example.bookacafe.model.AdminTableDetails
 import java.sql.ResultSet
 import java.sql.Statement
 import java.text.DecimalFormat
@@ -30,7 +29,7 @@ class CashierControllers {
 
     fun updateTableStatus(tableId: String): Boolean {
         return try {
-            val query = "UPDATE tables SET status='AVAILABLE' WHERE tableId='$tableId';"
+            val query = "UPDATE tables SET status='${TableTypeEnum.AVAILABLE}' WHERE tableId='$tableId';"
             val stmt: Statement = con!!.createStatement()
             stmt.executeUpdate(query)
             true
@@ -42,7 +41,7 @@ class CashierControllers {
 
     fun updateTransactionStatus(tableId: String): Boolean {
         return try {
-            val query = "UPDATE transactions SET status = 'PAID' WHERE tableId = '$tableId' AND status = 'PENDING'"
+            val query = "UPDATE transactions SET status = '${TransactionEnum.PAID}' WHERE tableId = '$tableId' AND status = '${TransactionEnum.PENDING}'"
             val stmt: Statement = con!!.createStatement()
             stmt.executeUpdate(query)
             true
@@ -54,7 +53,7 @@ class CashierControllers {
 
     fun getTableInTransaction(tableName:String): Boolean {
         var founded = false
-        val query = "SELECT a.tableName, 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1) as 'tableCost' FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status = 'PENDING' AND a.tableName = '$tableName' GROUP BY a.tableId;"
+        val query = "SELECT a.tableName, 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1) as 'tableCost' FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status = '${TransactionEnum.PENDING}' AND a.tableName = '$tableName' GROUP BY a.tableId;"
         try{
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -67,7 +66,7 @@ class CashierControllers {
 
     fun getNotServedMenu(transactionId: String): Boolean {
         var founded = false
-        val query = "SELECT count(c.detailTransactionId) as 'counter' FROM tables a JOIN transactions b ON a.tableId = b.tableId JOIN detail_transactions c ON c.transactionId = b.transactionId WHERE b.transactionId = '$transactionId' AND c.status = 'NOT_SERVED' GROUP BY c.transactionId;"
+        val query = "SELECT count(c.detailTransactionId) as 'counter' FROM tables a JOIN transactions b ON a.tableId = b.tableId JOIN detail_transactions c ON c.transactionId = b.transactionId WHERE b.transactionId = '$transactionId' AND c.status = '${DetailTransEnum.NOT_SERVED}' GROUP BY c.transactionId;"
         try{
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -78,14 +77,14 @@ class CashierControllers {
         return founded
     }
 
-    fun getTableData(tableName: String): TableDummy {
-        lateinit var tableData: TableDummy
-        val query = "SELECT a.tableId, a.tableName, 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1) as 'tableCost' FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status = 'NOT_PAID' OR b.status = 'PENDING' AND a.tableName = '$tableName' GROUP BY a.tableId;"
+    fun getTableData(tableName: String): AdminTableDetails {
+        lateinit var tableData: AdminTableDetails
+        val query = "SELECT a.tableId, a.tableName, 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1) as 'tableCost' FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE a.tableName = '$tableName' AND (b.status = '${TransactionEnum.NOT_PAID}' OR b.status = '${TransactionEnum.PENDING}') GROUP BY a.tableId;"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
             while (rs.next()) {
-                tableData = TableDummy(
+                tableData = AdminTableDetails(
                     rs.getString("tableId"),
                     rs.getString("tableName"),
                     formatter.format(rs.getInt("tableCost"))
@@ -99,7 +98,7 @@ class CashierControllers {
 
     fun getTransactionId(tableName: String): String {
         lateinit var transId: String
-        val query = "SELECT b.transactionId FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status = 'NOT_PAID' OR b.status = 'PENDING' AND a.tableName = '$tableName' GROUP BY a.tableId;"
+        val query = "SELECT b.transactionId FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status = '${TransactionEnum.NOT_PAID}' OR b.status = '${TransactionEnum.PENDING}' AND a.tableName = '$tableName' GROUP BY a.tableId;"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -112,17 +111,17 @@ class CashierControllers {
         return transId
     }
 
-    fun getOrderedMenuData(tableName: String, condition: Boolean): ArrayList<CashierMenuDetail> {
-        val orderedMenus: ArrayList<CashierMenuDetail> = ArrayList()
-        var query = "SELECT b.detailTransactionId, a.menuId, a.name, a.price, sum(b.menuQuantity) as \"menuQuantity\", sum(b.menuQuantity*a.price) as \"menuCost\" FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId JOIN tables d ON d.tableId=c.tableId WHERE d.tableName = '$tableName' AND c.status='PENDING' GROUP BY a.menuId;"
+    fun getOrderedMenuData(tableName: String, condition: Boolean): ArrayList<CashierMenuDetails> {
+        val orderedMenus: ArrayList<CashierMenuDetails> = ArrayList()
+        var query = "SELECT b.detailTransactionId, a.menuId, a.name, a.price, sum(b.menuQuantity) as \"menuQuantity\", sum(b.menuQuantity*a.price) as \"menuCost\" FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId JOIN tables d ON d.tableId=c.tableId WHERE d.tableName = '$tableName' AND c.status='${TransactionEnum.PENDING}' GROUP BY a.menuId;"
         if (condition) {
-            query = "SELECT b.detailTransactionId, a.menuId, a.name, a.price, b.menuQuantity, b.menuQuantity*a.price as \"menuCost\" FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId JOIN tables d ON d.tableId=c.tableId WHERE d.tableName = '$tableName' AND c.status='NOT_PAID' AND b.status='NOT_SERVED' GROUP BY  b.detailTransactionId;"
+            query = "SELECT b.detailTransactionId, a.menuId, a.name, a.price, b.menuQuantity, b.menuQuantity*a.price as \"menuCost\" FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId JOIN tables d ON d.tableId=c.tableId WHERE d.tableName = '$tableName' AND c.status='${TransactionEnum.NOT_PAID}' AND b.status='${DetailTransEnum.NOT_SERVED}' GROUP BY  b.detailTransactionId;"
         }
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
             while (rs.next()) {
-                val menu = CashierMenuDetail(
+                val menu = CashierMenuDetails(
                     rs.getInt("detailTransactionId"),
                     rs.getString("menuId"),
                     rs.getString("name"),
@@ -138,17 +137,17 @@ class CashierControllers {
         return orderedMenus
     }
 
-    fun getOrderedBookData(tableName: String, condition: Boolean): ArrayList<CashierBookDetail> {
-        val books: ArrayList<CashierBookDetail> = ArrayList()
-        var query = "SELECT b.detailTransactionId, a.bookId, a.title FROM books a JOIN detail_transactions b ON a.bookId = b.bookId JOIN transactions c ON c.transactionId = b.transactionId JOIN tables d ON d.tableId=c.tableId WHERE d.tableName = '$tableName' AND c.status='PENDING' GROUP BY a.bookId;"
+    fun getOrderedBookData(tableName: String, condition: Boolean): ArrayList<CashierBookDetails> {
+        val books: ArrayList<CashierBookDetails> = ArrayList()
+        var query = "SELECT b.detailTransactionId, a.bookId, a.title FROM books a JOIN detail_transactions b ON a.bookId = b.bookId JOIN transactions c ON c.transactionId = b.transactionId JOIN tables d ON d.tableId=c.tableId WHERE d.tableName = '$tableName' AND c.status='${TransactionEnum.PENDING}' GROUP BY a.bookId;"
         if (condition) {
-            query = "SELECT b.detailTransactionId, a.bookId, a.title FROM books a JOIN detail_transactions b ON a.bookId = b.bookId JOIN transactions c ON c.transactionId = b.transactionId JOIN tables d ON d.tableId=c.tableId WHERE d.tableName = '$tableName' AND c.status='NOT_PAID' AND b.status='NOT_SERVED' GROUP BY a.bookId;"
+            query = "SELECT b.detailTransactionId, a.bookId, a.title FROM books a JOIN detail_transactions b ON a.bookId = b.bookId JOIN transactions c ON c.transactionId = b.transactionId JOIN tables d ON d.tableId=c.tableId WHERE d.tableName = '$tableName' AND c.status='${TransactionEnum.NOT_PAID}' AND b.status='${DetailTransEnum.NOT_SERVED}' GROUP BY a.bookId;"
         }
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
             while (rs.next()) {
-                val book = CashierBookDetail (
+                val book = CashierBookDetails (
                     rs.getInt("detailTransactionId"),
                     rs.getString("bookId"),
                     rs.getString("title")
@@ -163,8 +162,8 @@ class CashierControllers {
 
     fun getTableCosts(tableName: String): Int {
         var income = 0
-        val querySeat = "SELECT 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1) as 'tableCost' FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE a.tableName = '$tableName' AND b.status = 'PENDING';"
-        val queryMenuOrdered = "SELECT sum(b.menuQuantity*a.price) as \"menuCost\" FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON b.transactionId = c.transactionId JOIN tables d ON d.tableId= c.tableId WHERE d.tableName = '$tableName' AND c.status = 'PENDING';"
+        val querySeat = "SELECT 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1) as 'tableCost' FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE a.tableName = '$tableName' AND b.status = '${TransactionEnum.PENDING}';"
+        val queryMenuOrdered = "SELECT sum(b.menuQuantity*a.price) as \"menuCost\" FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON b.transactionId = c.transactionId JOIN tables d ON d.tableId= c.tableId WHERE d.tableName = '$tableName' AND c.status = '${TransactionEnum.PENDING}';"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs1: ResultSet = stmt.executeQuery(querySeat)

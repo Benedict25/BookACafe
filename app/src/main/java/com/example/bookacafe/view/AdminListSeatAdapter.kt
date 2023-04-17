@@ -1,12 +1,12 @@
-package com.example.bookacafe.view.adminTransaction
+package com.example.bookacafe.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookacafe.databinding.ItemRowSeatBinding
-import com.example.bookacafe.model.adminDataDetails.TableDummy
+import com.example.bookacafe.model.AdminTableDetails
 
-class ListSeatAdapter(private val listSeat: ArrayList<TableDummy>) :  RecyclerView.Adapter<ListSeatAdapter.ListViewHolder>() {
+class AdminListSeatAdapter(private val listSeat: ArrayList<AdminTableDetails>) :  RecyclerView.Adapter<AdminListSeatAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ListViewHolder {
         val binding = ItemRowSeatBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return ListViewHolder(binding)
@@ -19,7 +19,7 @@ class ListSeatAdapter(private val listSeat: ArrayList<TableDummy>) :  RecyclerVi
     }
 
     inner class ListViewHolder(private  val binding: ItemRowSeatBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(seat: TableDummy) {
+        fun bind(seat: AdminTableDetails) {
             with(binding){
                 seatNumberId.text = seat.tableName
                 seatDescBox.text = seat.tableDesc

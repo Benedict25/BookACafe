@@ -15,7 +15,7 @@
         android:theme="@style/Theme.BookACafe"
         tools:targetApi="31">
         <activity
-            android:name=".view.cashierTransaction.CashierTransaction"
+            android:name=".view.CashierTransaction"
             android:exported="false" />
         <activity
             android:name=".view.CompleteProfile"
@@ -58,7 +58,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.adminTransaction.ShowTransactions"
+            android:name=".view.AdminShowTransactions"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -67,7 +67,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.adminDisabledUser.DisabledUserMenu"
+            android:name=".view.AdminDisabledUserMenu"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -88,7 +88,7 @@
             android:name=".view.CashierActivity"
             android:exported="false" />
         <activity
-            android:name=".view.cashierUpdateFnBStatus.CashierUpdateNotServedStatus"
+            android:name=".view.CashierUpdateNotServedStatus"
             android:exported="false" />
     </application>
 

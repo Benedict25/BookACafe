@@ -1,4 +1,4 @@
-package com.example.bookacafe.view.adminTransaction
+package com.example.bookacafe.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,10 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.AdminControllers
-import com.example.bookacafe.databinding.AdminTransactionBinding
-import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
 
-class BookFragment: Fragment() {
+class AdminBookFragment: Fragment() {
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -20,7 +18,7 @@ class BookFragment: Fragment() {
         recyclerView = view.findViewById<RecyclerView>(R.id.rv_books)
         recyclerView.setHasFixedSize(true)
         recyclerView.setLayoutManager(LinearLayoutManager(context))
-        recyclerView.setAdapter(ListBookAdapter(AdminControllers().getBookData()))
+        recyclerView.setAdapter(AdminListBookAdapter(AdminControllers().getBookData()))
 
         return view
     }

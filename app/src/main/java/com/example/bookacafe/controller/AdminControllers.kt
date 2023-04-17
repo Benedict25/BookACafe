@@ -1,7 +1,7 @@
 package com.example.bookacafe.controller
 
 import android.database.SQLException
-import com.example.bookacafe.model.adminDataDetails.*
+import com.example.bookacafe.model.*
 import java.sql.ResultSet
 import java.sql.Statement
 import java.text.DecimalFormat
@@ -14,8 +14,8 @@ class AdminControllers {
 
     fun getTotalIncome(): Int {
         var income = 0
-        val querySeat = "SELECT 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1) as \"tableIncome\" FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status != 'CANCELED';"
-        val queryMenuOrdered = "SELECT sum(b.menuQuantity)*a.price as \"menuIncome\" FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON b.transactionId = c.transactionId WHERE c.status != 'CANCELED' GROUP BY a.menuId;"
+        val querySeat = "SELECT 10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1) as \"tableIncome\" FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status != '${TransactionEnum.CANCELLED}';"
+        val queryMenuOrdered = "SELECT sum(b.menuQuantity)*a.price as \"menuIncome\" FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON b.transactionId = c.transactionId WHERE c.status != '${TransactionEnum.CANCELLED}' GROUP BY a.menuId;"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs1: ResultSet = stmt.executeQuery(querySeat)
@@ -44,14 +44,14 @@ class AdminControllers {
         }
     }
 
-    fun getUserDetails(): ArrayList<MemberDummy> {
-        val members: ArrayList<MemberDummy> = ArrayList()
-        val query = "SELECT b.memberId, a.firstName, a.lastName, sum(if(c.status = 'CANCELED',1,0)) as 'canceledOrder', sum(if(c.status = 'CANCELED',0,1)) as 'fixedOrder', b.status FROM users a JOIN members b ON a.userId = b.memberId JOIN transactions c ON b.memberId = c.memberId GROUP BY b.memberId"
+    fun getUserDetails(): ArrayList<AdminMemberDetails> {
+        val members: ArrayList<AdminMemberDetails> = ArrayList()
+        val query = "SELECT b.memberId, a.firstName, a.lastName, sum(if(c.status = '${TransactionEnum.CANCELLED}',1,0)) as 'canceledOrder', sum(if(c.status = '${TransactionEnum.CANCELLED}',0,1)) as 'fixedOrder', b.status FROM users a JOIN members b ON a.userId = b.memberId JOIN transactions c ON b.memberId = c.memberId GROUP BY b.memberId"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
             while (rs.next()) {
-                val member = MemberDummy(
+                val member = AdminMemberDetails(
                     rs.getString("memberId"),
                     rs.getString("firstName") + " " + rs.getString("lastName"),
                     "Finished Order: " + rs.getString("fixedOrder") + "\nCanceled Order: " + rs.getString("canceledOrder"),
@@ -68,7 +68,7 @@ class AdminControllers {
 
     fun getBookData(): ArrayList<AdminBookDetails> {
         val books: ArrayList<AdminBookDetails> = ArrayList()
-        val query = "SELECT a.title, count(b.bookId) as \"totalOrdered\", a.imagePath FROM books a JOIN detail_transactions b ON a.bookId = b.bookId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' GROUP BY a.bookId ORDER BY `totalOrdered` DESC, `a`.`title` ASC"
+        val query = "SELECT a.title, count(b.bookId) as \"totalOrdered\", a.imagePath FROM books a JOIN detail_transactions b ON a.bookId = b.bookId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != '${TransactionEnum.CANCELLED}' GROUP BY a.bookId ORDER BY `totalOrdered` DESC, `a`.`title` ASC"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -88,7 +88,7 @@ class AdminControllers {
 
     fun getFoodData(): ArrayList<AdminMenuDetails> {
         val foods: ArrayList<AdminMenuDetails> = ArrayList()
-        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"foodIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' AND a.type = \"FOOD\" GROUP BY a.menuId ORDER BY `totalOrdered` DESC, `a`.`name` ASC"
+        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"foodIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != '${TransactionEnum.CANCELLED}' AND a.type = \"FOOD\" GROUP BY a.menuId ORDER BY `totalOrdered` DESC, `a`.`name` ASC"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -108,7 +108,7 @@ class AdminControllers {
 
     fun getBeverageData(): ArrayList<AdminMenuDetails> {
         val beverages: ArrayList<AdminMenuDetails> = ArrayList()
-        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"beverageIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != 'CANCELED' AND a.type = \"BEVERAGE\" GROUP BY a.menuId ORDER BY `totalOrdered` DESC, `a`.`name` ASC"
+        val query = "SELECT a.name, sum(b.menuQuantity) as \"totalOrdered\", sum(b.menuQuantity)*a.price as \"beverageIncome\", a.imagePath FROM menus a JOIN detail_transactions b ON a.menuId = b.menuId JOIN transactions c ON c.transactionId = b.transactionId WHERE c.status != '${TransactionEnum.CANCELLED}' AND a.type = \"BEVERAGE\" GROUP BY a.menuId ORDER BY `totalOrdered` DESC, `a`.`name` ASC"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
@@ -126,14 +126,14 @@ class AdminControllers {
         return beverages
     }
 
-    fun getSeatData():ArrayList<TableDummy> {
-        val seats: ArrayList<TableDummy> = ArrayList()
-        val query = "SELECT a.tableId, a.tableName, count(b.transactionId) as \"totalBooked\", sum(10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1)) as \"tableIncome\" FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status != 'CANCELED' GROUP BY a.tableId ORDER BY `totalBooked` DESC, `a`.`tableName` ASC"
+    fun getSeatData():ArrayList<AdminTableDetails> {
+        val seats: ArrayList<AdminTableDetails> = ArrayList()
+        val query = "SELECT a.tableId, a.tableName, count(b.transactionId) as \"totalBooked\", sum(10000*if(TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)>$maxHours,TIMESTAMPDIFF(hour, b.checkedIn, b.checkedOut)-$maxHoursMin,1)) as \"tableIncome\" FROM tables a JOIN transactions b ON a.tableId = b.tableId WHERE b.status != '${TransactionEnum.CANCELLED}' GROUP BY a.tableId ORDER BY `totalBooked` DESC, `a`.`tableName` ASC"
         try {
             val stmt: Statement = con!!.createStatement()
             val rs: ResultSet = stmt.executeQuery(query)
             while (rs.next()) {
-                val seat = TableDummy(
+                val seat = AdminTableDetails(
                     rs.getString("tableId"),
                     rs.getString("tableName"),
                     "Total Booked: " + rs.getString("totalBooked") + "\nTable Income: Rp" + formatter.format(rs.getInt("tableIncome"))

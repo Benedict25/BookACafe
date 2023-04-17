@@ -1,4 +1,4 @@
-package com.example.bookacafe.view.adminDisabledUser
+package com.example.bookacafe.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,15 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookacafe.controller.AdminControllers
 import com.example.bookacafe.databinding.AdminDisabledUserBinding
-import com.example.bookacafe.model.adminDataDetails.CashierMenuDetail
-import com.example.bookacafe.model.adminDataDetails.MemberDummy
-import com.example.bookacafe.view.cashierUpdateFnBStatus.CashierUpdateNotServedStatus
+import com.example.bookacafe.model.AdminMemberDetails
 import java.util.*
 import kotlin.collections.ArrayList
 
-class DisabledUserMenu: AppCompatActivity(), ListUserAdapter.OnPositiveClickListener {
+class AdminDisabledUserMenu: AppCompatActivity(), AdminListUserAdapter.OnPositiveClickListener {
     private lateinit var binding: AdminDisabledUserBinding
-    private var list = ArrayList<MemberDummy>()
+    private var list = ArrayList<AdminMemberDetails>()
 
     private val mHandler = Handler()
     private lateinit var mTimer: Timer
@@ -51,15 +49,15 @@ class DisabledUserMenu: AppCompatActivity(), ListUserAdapter.OnPositiveClickList
     }
 
     private fun showRecyclerList() {
-        binding.rvUsers.layoutManager = LinearLayoutManager(this@DisabledUserMenu)
-        val listUserAdapter = ListUserAdapter(list,this, this)
+        binding.rvUsers.layoutManager = LinearLayoutManager(this@AdminDisabledUserMenu)
+        val listUserAdapter = AdminListUserAdapter(list,this, this)
         binding.rvUsers.adapter = listUserAdapter
     }
 
     override fun onPositiveClick() {
         finish()
         overridePendingTransition(0, 0)
-        val intent = Intent(this, DisabledUserMenu::class.java)
+        val intent = Intent(this, AdminDisabledUserMenu::class.java)
         startActivity(intent)
         overridePendingTransition(0, 0)
     }

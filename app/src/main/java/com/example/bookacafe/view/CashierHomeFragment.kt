@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,8 +21,6 @@ import com.example.bookacafe.controller.CashierControllers
 import com.example.bookacafe.controller.TableControllers
 import com.example.bookacafe.model.Table
 import com.example.bookacafe.model.TableTypeEnum
-import com.example.bookacafe.view.cashierTransaction.CashierTransaction
-import com.example.bookacafe.view.cashierUpdateFnBStatus.CashierUpdateNotServedStatus
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -201,6 +200,7 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home), View.OnClic
             R.id.btn_table_a2 -> {
                 val transactionId = CashierControllers().getTransactionId(tables[1].tableName)
                 if (CashierControllers().getTableInTransaction(tables[1].tableName)) {
+                    Log.d("table_key_nya", tables[1].tableId)
                     val intent = Intent(context, CashierTransaction::class.java)
                     intent.putExtra("table_key", tables[1].tableName)
                     startActivity(intent)
