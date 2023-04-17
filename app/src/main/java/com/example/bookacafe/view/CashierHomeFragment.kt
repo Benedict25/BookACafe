@@ -1,6 +1,5 @@
 package com.example.bookacafe.view
 
-import ThirdFragment
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -14,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.fragment.app.FragmentManager
 import com.example.bookacafe.R
 import com.example.bookacafe.controller.ActiveUser
 import com.example.bookacafe.controller.CashierControllers
@@ -23,7 +21,6 @@ import com.example.bookacafe.model.Table
 import com.example.bookacafe.model.TableTypeEnum
 import java.util.*
 import kotlin.collections.ArrayList
-
 
 class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home), View.OnClickListener {
     private lateinit var btnTableA1: Button
@@ -85,26 +82,11 @@ class CashierHomeFragment :Fragment(R.layout.fragment_cashier_home), View.OnClic
         buttons.add(btnTableB3)
 
         var btnLogOut: Button = view.findViewById(R.id.buttonLogOut)
-        var clickableImage: ImageButton = view.findViewById(R.id.imageProfile)
 
         btnLogOut.setOnClickListener{
             //nanti set user ke null
             val intent = Intent(context, Login::class.java)
             startActivity(intent)
-        }
-
-        clickableImage.setOnClickListener{
-            val mCategoryFragment = ThirdFragment()
-            val mFragmentManager = parentFragmentManager as FragmentManager
-            mFragmentManager
-                .beginTransaction()
-                .replace(
-                    R.id.fragment_container,
-                    mCategoryFragment,
-                    ThirdFragment::class.java.simpleName
-                )
-                .addToBackStack(null)
-                .commit()
         }
 
         tables = TableControllers().getTableData()

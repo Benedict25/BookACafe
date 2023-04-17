@@ -17,7 +17,7 @@ import com.example.bookacafe.controller.TableControllers
 import com.example.bookacafe.model.Table
 import com.example.bookacafe.model.TableTypeEnum
 
-class TableMenu : Fragment(), View.OnClickListener {
+class TableMenuFragment : Fragment(), View.OnClickListener {
     private lateinit var btnTableA1: Button
     private lateinit var btnTableA2: Button
     private lateinit var btnTableA3: Button
@@ -36,7 +36,7 @@ class TableMenu : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.menu_table, container, false)
+        return inflater.inflate(R.layout.fragment_menu_table, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

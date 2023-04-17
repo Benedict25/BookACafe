@@ -1,18 +1,20 @@
 package com.example.bookacafe.view
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
+import android.view.ViewGroup
 import com.example.bookacafe.R
+import android.widget.*
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bookacafe.controller.MenuControllers
-import com.example.bookacafe.databinding.MenuFnbBinding
+import com.example.bookacafe.databinding.FragmentMenuFnbBinding
 import com.example.bookacafe.model.Menu
 import com.google.android.material.tabs.TabLayout
 
-class MenuFnB : AppCompatActivity(), View.OnClickListener {
-    private lateinit var binding: MenuFnbBinding
+class FnBMenuFragment : Fragment(), View.OnClickListener {
+    private lateinit var binding: FragmentMenuFnbBinding
     private lateinit var searchView: SearchView
     private var tabLayout: TabLayout? = null
     private var menus = ArrayList<Menu>()
@@ -20,17 +22,24 @@ class MenuFnB : AppCompatActivity(), View.OnClickListener {
     private var selectedTab: Int = 0
     private val menuType: Array<String> = arrayOf("FOOD", "BEVERAGE")
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = MenuFnbBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentMenuFnbBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // Show Menus
         getListMenus(selectedTab, "")
         showMenus()
 
         // Search View (per Type)
-        searchView = findViewById(R.id.search_view_menus)
+        searchView = view.findViewById(R.id.search_view_menus)
         for (menu in menus) {
             menuNames.add(menu.name)
         }
@@ -42,7 +51,7 @@ class MenuFnB : AppCompatActivity(), View.OnClickListener {
                     showMenus()
                 } else {
                     Toast.makeText(
-                        this@MenuFnB,
+                        requireContext(),
                         "No menu found.",
                         Toast.LENGTH_LONG
                     ).show()
@@ -58,7 +67,7 @@ class MenuFnB : AppCompatActivity(), View.OnClickListener {
         })
 
         // Tab Layout & View Pager (Genre)
-        tabLayout = findViewById(R.id.tl_menus)
+        tabLayout = view.findViewById(R.id.tl_menus)
 
         tabLayout!!.addTab(tabLayout!!.newTab().setText(menuType[0]))
         tabLayout!!.addTab(tabLayout!!.newTab().setText(menuType[1]))
@@ -97,7 +106,6 @@ class MenuFnB : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
 
     }
-
     private fun getListMenus(selectedTab: Int, inputText: String): ArrayList<Menu> {
         when (selectedTab) {
             0 -> {
@@ -115,7 +123,7 @@ class MenuFnB : AppCompatActivity(), View.OnClickListener {
     }
 
     fun showMenus() {
-        binding.rvMenus.layoutManager = GridLayoutManager(this, 2)
+        binding.rvMenus.layoutManager = GridLayoutManager(requireContext(), 2)
         val listMenuAdapter = ListMenuAdapter(menus)
         binding.rvMenus.adapter = listMenuAdapter
 

@@ -86,7 +86,7 @@
     <string name="total_order">Total Order</string>
     <string name="not_served_menu">Not Served Menu</string>
 
-    <!-- TABLE -->
+    <!-- Table String -->
     <string name="tables">Tables</string>
     <string name="table_text_1">Which table</string>
     <string name="table_text_2">do you want to choose?</string>
@@ -98,7 +98,7 @@
     <string name="table_b2">B2</string>
     <string name="table_b3">B3</string>
 
-    <!-- BOOK -->
+    <!-- Book String -->
     <string name="add_to_cart">Add to Cart</string>
     <string name="books">Books</string>
     <string name="genre">Genre</string>
@@ -111,12 +111,12 @@
     <string name="synopsis_placeholder">{synopsis}</string>
     <string name="status_placeholder">{status}</string>
 
-    <!-- FOOD & BEVERAGE -->
+    <!-- F&B String -->
     <string name="food_beverage">Food and Beverages</string>
     <string name="type">Type</string>
     <string name="name_placeholder">{name}</string>
 
-    <!-- BILL -->
+    <!-- Bill String -->
     <string name="bill">Bill</string>
     <string name="price_placeholder">{price}</string>
     <string name="quantity_placeholder">{quantity}</string>

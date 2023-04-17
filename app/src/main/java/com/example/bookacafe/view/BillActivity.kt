@@ -80,7 +80,7 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
             btnPay.setOnClickListener(this)
         } else {
             finish()
-            val intent = Intent(this, MenuProfile::class.java)
+            val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
     }

@@ -16,10 +16,10 @@ class HomePage : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
         val firstFragment=FirstFragment()
-        val tableFragment=TableMenu()
-        val bookFragment=BookMenu()
-        val fnbFragment=FnBMenu()
-        val cartFragment=MenuCart()
+        val tableFragment=TableMenuFragment()
+        val bookFragment=BookMenuFragment()
+        val fnbFragment=FnBMenuFragment()
+        val cartFragment=CartMenuFragment()
         setCurrentFragment(firstFragment)
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
