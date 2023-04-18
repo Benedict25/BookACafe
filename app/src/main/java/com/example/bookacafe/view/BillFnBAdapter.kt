@@ -16,9 +16,9 @@ class BillFnBAdapter(private val listFnB: ArrayList<Menu>, private val listFnBQu
                 var totalMenuPrice = menu.price * i
 
                 tvBillMenuName.text = menu.name
-                tvBillMenuPrice.text = formatter.format(menu.price)
+                tvBillMenuPrice.text = "Rp"+formatter.format(menu.price)+",-"
                 tvBillMenuAmount.text = "x"+i.toString()
-                tvBillTotalMenuPrice.text = formatter.format(totalMenuPrice)
+                tvBillTotalMenuPrice.text = "Rp"+formatter.format(totalMenuPrice)+",-"
             }
         }
     }
