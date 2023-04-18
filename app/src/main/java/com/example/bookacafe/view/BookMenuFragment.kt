@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,6 +22,10 @@ import com.squareup.picasso.Picasso
 import android.widget.*
 import com.example.bookacafe.databinding.FragmentMenuBookBinding
 import com.google.android.material.tabs.TabLayout
+import com.loopj.android.http.AsyncHttpClient
+import com.loopj.android.http.AsyncHttpResponseHandler
+import cz.msebera.android.httpclient.Header
+import org.json.JSONObject
 
 class BookMenuFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentMenuBookBinding
@@ -150,7 +155,7 @@ class BookMenuFragment : Fragment(), View.OnClickListener {
         dialog.setTitle("Book Detail")
 
         val btnClose = dialog.findViewById(R.id.btn_close) as Button
-        btnClose.setOnClickListener() {
+        btnClose.setOnClickListener {
             dialog.dismiss()
         }
 
@@ -164,8 +169,15 @@ class BookMenuFragment : Fragment(), View.OnClickListener {
         val bookSynopsis = dialog.findViewById(R.id.tv_book_synopsis) as TextView
         bookSynopsis.text = book.synopsis
 
+        var title = book.title
+        title = title.replace(" ", "%20")
+        var author = book.author
+        author = author.replace(" ", "%20")
+
+        getBookSynopsis(title, author)
+
         val btnAddToCart = dialog.findViewById(R.id.btn_add_to_cart) as Button
-        btnAddToCart.setOnClickListener() {
+        btnAddToCart.setOnClickListener {
             showAddToCartDialog(book)
         }
 
@@ -205,5 +217,40 @@ class BookMenuFragment : Fragment(), View.OnClickListener {
             .setPositiveButton("Yes", DialogInterface.OnClickListener(function = positiveButtonClick))
             .setNegativeButton("No", DialogInterface.OnClickListener(function = negativeButtonClick))
         addToCartDialog.show()
+    }
+
+    private fun getBookSynopsis(title: String, author: String) {
+        val client = AsyncHttpClient()
+        val url = "https://www.googleapis.com/books/v1/volumes?q=$title+inauthor:$author&maxResults=1"
+
+        client.get(url, object : AsyncHttpResponseHandler() {
+            override fun onSuccess(statusCode: Int, headers: Array<Header>, responseBody: ByteArray) {
+                val result = String(responseBody)
+                try {
+                    val responseObject = JSONObject(result)
+                    val items = responseObject.getJSONArray("items")
+                    val volumeInfo = items.getJSONObject(0).getJSONObject("volumeInfo")
+                    val synopsis = volumeInfo.optString("description")
+                    Log.d("Synopsis", synopsis)
+                    val bookSynopsis = dialog.findViewById(R.id.tv_book_synopsis) as TextView
+                    if (synopsis != "") {
+                        bookSynopsis.text = synopsis
+                    }
+                } catch (e: Exception) {
+                    Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
+                    e.printStackTrace()
+                }
+            }
+
+            override fun onFailure(statusCode: Int, headers: Array<Header>, responseBody: ByteArray, error: Throwable) {
+                val errorMessage = when (statusCode) {
+                    401 -> "$statusCode : Bad Request"
+                    403 -> "$statusCode : Forbidden"
+                    404 -> "$statusCode : Not Found"
+                    else -> "$statusCode : ${error.message}"
+                }
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }
