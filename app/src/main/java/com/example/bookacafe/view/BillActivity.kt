@@ -60,11 +60,11 @@ class BillActivity : AppCompatActivity(), View.OnClickListener {
 
 
             totalPayment = totalBookPayment + totalTablePayment
-            tvTotalOrder.text = "Total: " + formatter.format(totalPayment)
+            tvTotalOrder.text = "Total: Rp" + formatter.format(totalPayment)+",-"
             tvBillSeatDisplay.text = transaction.table?.tableName
             tvBillSeatName.text = "Kursi "+transaction.table?.tableName
 //            tvBillSeatPrice.text = "Rp "+totalTablePayment.toString()+ ", "+selisihJam.toString()+" hours."
-            tvBillSeatPrice.text = "Rp "+formatter.format(totalTablePayment)+ ", "+selisihJam.toString()+" hours."
+            tvBillSeatPrice.text = "Rp "+formatter.format(totalTablePayment)+ ",- ("+selisihJam.toString()+" hours)"
 
             if (transaction.status == TransactionEnum.PENDING) {
                 btnPay.text = "PENDING..."
